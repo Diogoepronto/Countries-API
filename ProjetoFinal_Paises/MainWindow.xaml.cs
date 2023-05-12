@@ -45,19 +45,19 @@ namespace ProjetoFinal_Paises;
             RegisterSyncfusionLicense();
             InitializeComponent();
 
-        //var languageCodes = CultureInfo.GetCultures(CultureTypes.AllCultures)
-        //                    .Where(c => c.ThreeLetterISOLanguageName != "")
-        //                    .Select(c => c.ThreeLetterISOLanguageName)
-        //                    .Distinct()
-        //                    .ToList();
+            //var languageCodes = CultureInfo.GetCultures(CultureTypes.AllCultures)
+            //                    .Where(c => c.ThreeLetterISOLanguageName != "")
+            //                    .Select(c => c.ThreeLetterISOLanguageName)
+            //                    .Distinct()
+            //                    .ToList();
 
 
-        //listBoxTeste.ItemsSource = languageCodes;
+            //listBoxTeste.ItemsSource = languageCodes;
 
-        apiService = new ApiService();
-        dataService = new DataService();
-        networkService = new NetworkService();
-        dialogService = new DialogService();
+            apiService = new ApiService();
+            dataService = new DataService();
+            networkService = new NetworkService();
+            dialogService = new DialogService();
 
         LoadCountries();
     }
