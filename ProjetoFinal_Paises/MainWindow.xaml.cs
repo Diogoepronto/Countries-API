@@ -19,20 +19,20 @@ using System.DirectoryServices.ActiveDirectory;
 
 namespace ProjetoFinal_Paises;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
-public partial class MainWindow : Window
-{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
     private List<Country> CountryList = new List<Country>();
     private ApiService apiService;
     private DataService dataService;
     private NetworkService networkService;
     private DialogService dialogService;
 
-    public MainWindow()
-    {
-        InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
 
         //var languageCodes = CultureInfo.GetCultures(CultureTypes.AllCultures)
         //                    .Where(c => c.ThreeLetterISOLanguageName != "")
