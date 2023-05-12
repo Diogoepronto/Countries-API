@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ProjetoFinal_Paises.Modelos;
 using System.DirectoryServices.ActiveDirectory;
+using Syncfusion.Licensing;
 
 namespace ProjetoFinal_Paises;
 
@@ -24,14 +25,24 @@ namespace ProjetoFinal_Paises;
     /// </summary>
     public partial class MainWindow : Window
     {
-    private List<Country> CountryList = new List<Country>();
-    private ApiService apiService;
-    private DataService dataService;
-    private NetworkService networkService;
-    private DialogService dialogService;
+        private List<Country> CountryList = new List<Country>();
+        private ApiService apiService;
+        private DataService dataService;
+        private NetworkService networkService;
+        private DialogService dialogService;
 
+        #region Validates License
+
+        public void RegisterSyncfusionLicense()
+        {
+            SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBaFt+QHJqUU1hXk5Hd0BLVGpAblJ3T2ZQdVt5ZDU7a15RRnVfR1xhSHZXckZhUXZXcQ==;Mgo+DSMBPh8sVXJ1S0R+WFpFdEBBXHxAd1p/VWJYdVt5flBPcDwsT3RfQF5jTH9Rd01nXXxceXVSRw==;ORg4AjUWIQA/Gnt2VFhiQlVPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSXtSdERrXXtdcn1WRWE=;MjAyNzA3NUAzMjMxMmUzMjJlMzRoSjNjN2VWSzlkSWpBTG5pNEZhaENjVG9Fcy9LV3k0d3I5aTFTdHRQRG00PQ==;MjAyNzA3NkAzMjMxMmUzMjJlMzRQcGdhUVVvRGF1Mmx2MXhZUXlZTkFvV1pjck92WDlmbmhvSEg3UTNOM3hNPQ==;NRAiBiAaIQQuGjN/V0d+Xk9AfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5Wd0diUXtac3dVQWNd;MjAyNzA3OEAzMjMxMmUzMjJlMzRSTHc3MmN6cnJIZXJaRXhjY3lyeW55aVlKb21VanY1enZPWnZsa2Y1dS9FPQ==;MjAyNzA3OUAzMjMxMmUzMjJlMzRtVkNqZStSMTY1VlhuV0ZhNlRaQU03ZmhySUUyV2lZd3l6V0RWbTU2d2NJPQ==;Mgo+DSMBMAY9C3t2VFhiQlVPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSXtSdERrXXtdc3VTQmE=;MjAyNzA4MUAzMjMxMmUzMjJlMzRBaGpHdzI5ZXJPY0dadmNpbFJzaisrOXR1azRNa0JDR2lIT0FhdzNvK2tnPQ==;MjAyNzA4MkAzMjMxMmUzMjJlMzRuUjd3SWJ0andvUEtBaisvMGRoeHZNYXhTQzJRa0Q1MEhndVdZZkErZmVrPQ==;MjAyNzA4M0AzMjMxMmUzMjJlMzRSTHc3MmN6cnJIZXJaRXhjY3lyeW55aVlKb21VanY1enZPWnZsa2Y1dS9FPQ==");
+        }
+
+        #endregion
+        
         public MainWindow()
         {
+            RegisterSyncfusionLicense();
             InitializeComponent();
 
         //var languageCodes = CultureInfo.GetCultures(CultureTypes.AllCultures)

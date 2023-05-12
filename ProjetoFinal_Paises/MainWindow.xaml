@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetoFinal_Paises"
+        xmlns:syncfusion="clr-namespace:Syncfusion.Windows.Controls;assembly=Syncfusion.Shared.Wpf"
+        xmlns:controls="http://schemas.syncfusion.com/wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -19,6 +21,18 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ListBox x:Name="listBoxTeste" Grid.Column="1" Grid.Row="1"/>
+        
+        <controls:ComboBoxAdv Height="30" Width="200" 
+                                HorizontalAlignment="Center"  
+                                VerticalAlignment="Center" > 
+            <controls:ComboBoxItemAdv Content="Denmark" /> 
+            <controls:ComboBoxItemAdv Content="New Zealand" /> 
+            <controls:ComboBoxItemAdv Content="Canada" /> 
+            <controls:ComboBoxItemAdv Content="Russia" /> 
+            <controls:ComboBoxItemAdv Content="Japan" /> 
+        </controls:ComboBoxAdv>
+        
+
 
     </Grid>
 </Window>
