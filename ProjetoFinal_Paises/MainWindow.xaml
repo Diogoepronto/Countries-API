@@ -5,34 +5,68 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ProjetoFinal_Paises.MainWindow"
     mc:Ignorable="d"
-    Title="MainWindow" Height="800" Width="800">
+    Title="MainWindow" Height="800" Width="1200" Margin="20">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300*" />
             <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="300*" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="300*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="100*" />
-            <RowDefinition Height="23*" />
-            <RowDefinition Height="621*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
-        <ListBox x:Name="listBoxTeste" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" />
 
-        <syncfusion:ComboBoxAdv x:Name="comboBoxAdv"
-                                AllowMultiSelect="True"
-                                Grid.Column="3"
-                                DefaultText="ComboBox Items" Grid.Row="1" Margin="95,28,125,48">
-            <syncfusion:ComboBoxItemAdv Content="Item 1" />
-            <syncfusion:ComboBoxItemAdv Content="Item 2" />
-            <syncfusion:ComboBoxItemAdv Content="Item 3" />
-            <syncfusion:ComboBoxItemAdv Content="Item 4" />
-            <syncfusion:ComboBoxItemAdv Content="Item 5" />
-        </syncfusion:ComboBoxAdv>
+        <ListBox x:Name="ListBoxPaises"
+                 Grid.Column="1"
+                 Grid.Row="1" Grid.RowSpan="5"  />
+
+        <Rectangle x:Name="CountryNames" 
+                   Grid.Column="3" Grid.ColumnSpan="1" 
+                   Grid.Row="1"
+                   Stroke="Black" Margin="10"/>
+
+        <Rectangle x:Name="CountryCodes"
+                   Grid.Column="3"  Grid.ColumnSpan="1" 
+                   Grid.Row="3"
+                   Stroke="Black" Margin="10" />
+
+
+        <Rectangle x:Name="CountryLanguage" 
+                   Grid.Column="5" Grid.ColumnSpan="1" 
+                   Grid.Row="1"
+                   Stroke="Black" Margin="10"/>
+
+        <Rectangle x:Name="CountryGeography"
+                   Grid.Column="5"  Grid.ColumnSpan="1" 
+                   Grid.Row="3"
+                   Stroke="Black" Margin="10" />
+        
+        <Image x:Name="CountryFlag"
+               Grid.Column="7"
+               Grid.Row="1" Source="/Flag_of_Portugal.png"/>
+
+        <!-- <syncfusion:ComboBoxAdv x:Name="comboBoxAdv" -->
+        <!--                         AllowMultiSelect="True" -->
+        <!--                         Grid.Column="3" -->
+        <!--                         DefaultText="ComboBox Items" Grid.Row="1" Margin="95,28,125,48"> -->
+        <!--     <syncfusion:ComboBoxItemAdv Content="Item 1" /> -->
+        <!--     <syncfusion:ComboBoxItemAdv Content="Item 2" /> -->
+        <!--     <syncfusion:ComboBoxItemAdv Content="Item 3" /> -->
+        <!--     <syncfusion:ComboBoxItemAdv Content="Item 4" /> -->
+        <!--     <syncfusion:ComboBoxItemAdv Content="Item 5" /> -->
+        <!-- </syncfusion:ComboBoxAdv> -->
 
     </Grid>
 </Window>

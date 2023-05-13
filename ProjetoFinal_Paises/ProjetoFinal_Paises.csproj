@@ -8,14 +8,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="Serilog" Version="2.12.0"/>
-        <PackageReference Include="Syncfusion.Licensing" Version="21.2.4"/>
-        <PackageReference Include="Syncfusion.Shared.WPF" Version="21.2.4"/>
-        <PackageReference Include="Syncfusion.Tools.WPF" Version="21.2.4"/>
+      <None Remove="Flag_of_Portugal.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Serilog" Version="2.12.0" />
+        <PackageReference Include="Syncfusion.Licensing" Version="21.2.4" />
+        <PackageReference Include="Syncfusion.Shared.WPF" Version="21.2.4" />
+        <PackageReference Include="Syncfusion.Tools.WPF" Version="21.2.4" />
+        <PackageReference Include="System.Text.Json" Version="7.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Flag_of_Portugal.png" />
     </ItemGroup>
 
 </Project>
