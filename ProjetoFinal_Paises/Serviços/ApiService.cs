@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using ProjetoFinal_Paises.Modelos;
 using Newtonsoft.Json;
+using ProjetoFinal_Paises.Modelos;
 
 namespace ProjetoFinal_Paises.Serviços;
 
@@ -22,15 +20,14 @@ public class ApiService
             var result = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
-            {
                 return new Response
                 {
                     IsSuccess = false,
                     Message = result
                 };
-            }
 
-            var countries = JsonConvert.DeserializeObject<List<Country>>(result);
+            var countries =
+                JsonConvert.DeserializeObject<List<Country>>(result);
 
             return new Response
             {

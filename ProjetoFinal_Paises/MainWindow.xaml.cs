@@ -1,73 +1,55 @@
-﻿using ProjetoFinal_Paises.Serviços;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ProjetoFinal_Paises.Modelos;
-using System.DirectoryServices.ActiveDirectory;
-using Syncfusion.Licensing;
+using ProjetoFinal_Paises.Serviços;
 
 namespace ProjetoFinal_Paises;
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+/// <summary>
+///     Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
+{
+    private readonly ApiService apiService;
+    private List<Country> CountryList = new();
+    private DataService dataService;
+    private DialogService dialogService;
+    private readonly NetworkService networkService;
+
+    public MainWindow()
     {
-        private List<Country> CountryList = new List<Country>();
-        private ApiService apiService;
-        private DataService dataService;
-        private NetworkService networkService;
-        private DialogService dialogService;
+        InitializeComponent();
+        // RegistarLicenca();
 
-        #region Validates License
+        RegisterLicense(
+            "Mgo+DSMBaFt+QHJqUU1mQ1BFaV1CX2BZd1lyQmlbfU4QCV5EYF5SRHNeQV1kTXdXcUZiUXY=;Mgo+DSMBPh8sVXJ1S0R+WFpCaV5DQmFJfFBmTGldeFRydkUmHVdTRHRcQlhiSn5UckxnXnxdc30=;ORg4AjUWIQA/Gnt2VFhiQlVPcEBDXHxLflF1VWpTe1l6dldWACFaRnZdQV1mSH1TcUFqXXhddHNc;MjAyOTY4M0AzMjMxMmUzMjJlMzRNL0M4aFNRSElGRWtBdGRPa1lYWFRTYzRTRzJhYnhVYklCUHdEMms5ZVpNPQ==;MjAyOTY4NEAzMjMxMmUzMjJlMzRqZFN3QXA1a0M1c2tqcUZtVlJDUGhrU2Z4RFgzUGMyL0tDd1JxdW1KeHNrPQ==;NRAiBiAaIQQuGjN/V0d+Xk9AfVldXGJWfFN0RnNQdVp3fldEcDwsT3RfQF5jTH9QdkJnUHtZdHRcTw==;MjAyOTY4NkAzMjMxMmUzMjJlMzRsekFIYTBjMEZKWlMrSlFlY2JqYWZnMXlNSlRFM2YzT2huL0h1dXdvZTNFPQ==;MjAyOTY4N0AzMjMxMmUzMjJlMzRqQS9nVVc0T2dObmtIcXFIRzFUNkZ1MUVWQ0U0Qng4VWs2NkNsWi91UC9JPQ==;Mgo+DSMBMAY9C3t2VFhiQlVPcEBDXHxLflF1VWpTe1l6dldWACFaRnZdQV1mSH1TcUFqXXhad3Rc;MjAyOTY4OUAzMjMxMmUzMjJlMzRpamZoc01KaEpqVXZPS3Vkb0U0N000UHI3dUtFRyswemNxeXNBa042eUt3PQ==;MjAyOTY5MEAzMjMxMmUzMjJlMzREaUg4blQvdlNWeUt3bWJKRVRTZDM5TGxPWEwrRVh4dVpZanRtK1M1clFRPQ==;MjAyOTY5MUAzMjMxMmUzMjJlMzRsekFIYTBjMEZKWlMrSlFlY2JqYWZnMXlNSlRFM2YzT2huL0h1dXdvZTNFPQ==");
 
-        public void RegisterSyncfusionLicense()
-        {
-            SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBaFt+QHJqUU1hXk5Hd0BLVGpAblJ3T2ZQdVt5ZDU7a15RRnVfR1xhSHZXckZhUXZXcQ==;Mgo+DSMBPh8sVXJ1S0R+WFpFdEBBXHxAd1p/VWJYdVt5flBPcDwsT3RfQF5jTH9Rd01nXXxceXVSRw==;ORg4AjUWIQA/Gnt2VFhiQlVPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSXtSdERrXXtdcn1WRWE=;MjAyNzA3NUAzMjMxMmUzMjJlMzRoSjNjN2VWSzlkSWpBTG5pNEZhaENjVG9Fcy9LV3k0d3I5aTFTdHRQRG00PQ==;MjAyNzA3NkAzMjMxMmUzMjJlMzRQcGdhUVVvRGF1Mmx2MXhZUXlZTkFvV1pjck92WDlmbmhvSEg3UTNOM3hNPQ==;NRAiBiAaIQQuGjN/V0d+Xk9AfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5Wd0diUXtac3dVQWNd;MjAyNzA3OEAzMjMxMmUzMjJlMzRSTHc3MmN6cnJIZXJaRXhjY3lyeW55aVlKb21VanY1enZPWnZsa2Y1dS9FPQ==;MjAyNzA3OUAzMjMxMmUzMjJlMzRtVkNqZStSMTY1VlhuV0ZhNlRaQU03ZmhySUUyV2lZd3l6V0RWbTU2d2NJPQ==;Mgo+DSMBMAY9C3t2VFhiQlVPd11dXmJWd1p/THNYflR1fV9DaUwxOX1dQl9gSXtSdERrXXtdc3VTQmE=;MjAyNzA4MUAzMjMxMmUzMjJlMzRBaGpHdzI5ZXJPY0dadmNpbFJzaisrOXR1azRNa0JDR2lIT0FhdzNvK2tnPQ==;MjAyNzA4MkAzMjMxMmUzMjJlMzRuUjd3SWJ0andvUEtBaisvMGRoeHZNYXhTQzJRa0Q1MEhndVdZZkErZmVrPQ==;MjAyNzA4M0AzMjMxMmUzMjJlMzRSTHc3MmN6cnJIZXJaRXhjY3lyeW55aVlKb21VanY1enZPWnZsa2Y1dS9FPQ==");
-        }
-
-        #endregion
-        
-        public MainWindow()
-        {
-            RegisterSyncfusionLicense();
-            InitializeComponent();
-
-            //var languageCodes = CultureInfo.GetCultures(CultureTypes.AllCultures)
-            //                    .Where(c => c.ThreeLetterISOLanguageName != "")
-            //                    .Select(c => c.ThreeLetterISOLanguageName)
-            //                    .Distinct()
-            //                    .ToList();
+        //var languageCodes = CultureInfo.GetCultures(CultureTypes.AllCultures)
+        //                    .Where(c => c.ThreeLetterISOLanguageName != "")
+        //                    .Select(c => c.ThreeLetterISOLanguageName)
+        //                    .Distinct()
+        //                    .ToList();
 
 
-            //listBoxTeste.ItemsSource = languageCodes;
+        //listBoxTeste.ItemsSource = languageCodes;
 
-            apiService = new ApiService();
-            dataService = new DataService();
-            networkService = new NetworkService();
-            dialogService = new DialogService();
+        apiService = new ApiService();
+        dataService = new DataService();
+        networkService = new NetworkService();
+        dialogService = new DialogService();
 
         LoadCountries();
     }
+
 
     public async void LoadCountries()
     {
         bool load;
 
         var connection = networkService.CheckConnection();
-        
+
         if (!connection.IsSuccess)
         {
             LoadCountriesLocal();
@@ -82,7 +64,8 @@ namespace ProjetoFinal_Paises;
         listBoxTeste.ItemsSource = CountryList;
         listBoxTeste.DisplayMemberPath = "Name.Common";
 
-        KeyValuePair<string, Currency> keyValuePair = new KeyValuePair<string, Currency>();
+        var keyValuePair =
+            new KeyValuePair<string, Currency>();
 
         //keyValuePair.Value;
         //keyValuePair.Key;
@@ -95,8 +78,10 @@ namespace ProjetoFinal_Paises;
 
     private async Task LoadCountriesApi()
     {
-        var response = await apiService.GetCountries("https://restcountries.com", "/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
+        var response = await apiService.GetCountries(
+            "https://restcountries.com",
+            "/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
 
-        CountryList = (List<Country>)response.Result;
+        CountryList = (List<Country>) response.Result;
     }
 }
