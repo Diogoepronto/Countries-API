@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,8 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Imagens\check.png" />
+    <None Remove="Imagens\cross.png" />
+    <None Remove="Imagens\No_flag.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.3" />
+</ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Imagens\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Imagens\cross.png" />
+    <Resource Include="Imagens\No_flag.svg" />
   </ItemGroup>
 
 </Project>
