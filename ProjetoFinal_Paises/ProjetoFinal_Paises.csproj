@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Resource Include="Flag_of_Portugal.png" />
+      <Resource Include="Imagens\Flag_of_Portugal.png" />
     </ItemGroup>
 
 </Project>
