@@ -55,7 +55,11 @@
         
         <Image x:Name="CountryFlag"
                Grid.Column="7"
-               Grid.Row="1" Source="/Flag_of_Portugal.png"/>
+               Grid.Row="1" Source="Imagens/Flag_of_Portugal.png"/>
+        
+        <WebBrowser x:Name="Maps" 
+            Grid.Column="3" Grid.ColumnSpan="5" 
+            Grid.Row="5" Source="https://goo.gl/maps/138JaXW8EZzRVitY9"/>
 
         <!-- <syncfusion:ComboBoxAdv x:Name="comboBoxAdv" -->
         <!--                         AllowMultiSelect="True" -->
