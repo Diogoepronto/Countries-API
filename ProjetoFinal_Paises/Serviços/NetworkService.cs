@@ -1,11 +1,5 @@
-﻿using ProjetoFinal_Paises.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using ProjetoFinal_Paises.Modelos;
 
 namespace ProjetoFinal_Paises.Serviços;
 
@@ -30,7 +24,7 @@ public class NetworkService
             return new Response
             {
                 IsSuccess = false,
-                Message = "Configure sua ligação à internet."
+                Message = "Configure sua ligação à Internet."
             };
         }
     }

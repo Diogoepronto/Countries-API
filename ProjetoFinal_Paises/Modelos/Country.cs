@@ -1,9 +1,4 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ProjetoFinal_Paises.Modelos;
 
@@ -25,5 +20,4 @@ public class Country
     public Dictionary<string, double> Gini { get; set; }
     public string[] Timezones { get; set; }
     public string[] Continents { get; set; }
-
 }
