@@ -92,7 +92,7 @@ namespace ProjetoFinal_Paises;
     {
         int iteration = 0;
 
-        txtCountryName.Text = countryToDisplay.Name.Common;
+        txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
         imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.Png));
 
         #region CARD NAME
@@ -197,7 +197,8 @@ namespace ProjetoFinal_Paises;
         // ------------------ CARD MISCELLANEOUS ------------------
         txtLanguages.Text = string.Empty;
         txtCurrencies.Text = string.Empty;
-        txtGini.Text = string.Empty;
+        txtGiniYear.Text = string.Empty;
+        txtGiniValue.Text = string.Empty;
 
         // POPULATION
         txtPopulation.Text = countryToDisplay.Population.ToString("N0");
@@ -239,7 +240,8 @@ namespace ProjetoFinal_Paises;
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
-            txtGini.Text += $"{gini.Key}: {gini.Value}";
+            txtGiniYear.Text += $"{gini.Key}: ";
+            txtGiniValue.Text += $"{gini.Value}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
             {
@@ -252,5 +254,27 @@ namespace ProjetoFinal_Paises;
         #endregion
 
 
+    }
+
+    private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        //MessageBox.Show(responsiveGrid.ActualWidth.ToString());
+        if(responsiveGrid.ActualWidth < 600)
+        {
+            responsiveGrid.Columns = 1;
+            return;
+        }
+
+        if(responsiveGrid.ActualWidth > 600 && responsiveGrid.ActualWidth < 1000)
+        {
+            responsiveGrid.Columns = 2;
+            return;
+        }
+
+        if(responsiveGrid.ActualWidth > 1000)
+        {
+            responsiveGrid.Columns = 3;
+            return;
+        }
     }
 }
