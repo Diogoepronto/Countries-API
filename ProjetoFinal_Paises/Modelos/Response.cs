@@ -3,6 +3,6 @@
 public class Response
 {
     public bool IsSuccess { get; init; }
-    public string? Message { get; set; }
+    public string? Message { get; init; }
     public object? Result { get; init; }
 }

@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="ProjetoFinal_Paises.MainWindow"
     mc:Ignorable="d"
-    Title="Countries API" Height="750" Width="1000" WindowStartupLocation="CenterScreen">
+    Title="Countries API" Height="1000" Width="1400" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <SolidColorBrush Color="White" />
     </Window.Background>
@@ -24,7 +24,9 @@
 
         <!--COLUMN COUNTRY LIST-->
         <!--LIST COUNTRIES-->
-        <ListBox x:Name="listBoxPaises" Grid.Column="1" Grid.Row="1" SelectionChanged="listBoxPaises_SelectionChanged"
+        <ListBox x:Name="ListBoxCountries"
+                 Grid.Column="1" Grid.Row="1"
+                 SelectionChanged="ListBoxPaises_SelectionChanged"
                  BorderBrush="{x:Null}">
             <ListBox.Background>
                 <SolidColorBrush Color="White" />
@@ -52,6 +54,7 @@
         </ListBox>
         <!--END COLUMN COUNTRY LIST-->
 
+
         <!--COLUMN COUNTRY DATA-->
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -60,7 +63,8 @@
             </Grid.RowDefinitions>
 
             <!--COLUMN HEADER: NAME AND FLAG-->
-            <Grid Grid.Row="0" Margin="20,0,0,0">
+            <Grid x:Name="SelectedCountryFlag"
+                  Grid.Row="0" Margin="20,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -95,7 +99,7 @@
                 </Border>
 
                 <Border Grid.Row="1"
-                        Grid.ColumnSpan="2"
+                        Grid.ColumnSpan="2" Grid.Column="0"
                         BorderBrush="#eee"
                         BorderThickness="0, 0, 0, 1"
                         Margin="0, 20, 0, 10" />
@@ -425,6 +429,104 @@
                     </StackPanel>
                 </Border>
                 <!--END CARD: MISCELLANEOUS-->
+
+
+                <!--CARD: CONNECTION-->
+                <Border BorderBrush="AliceBlue"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Background="White"
+                        Margin="20,10,0,10"
+                        HorizontalAlignment="Right">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="2"
+                                          Opacity="0.2"
+                                          ShadowDepth="2"
+                                          Direction="270" />
+                    </Border.Effect>
+
+                    <!--DATA-->
+                    <StackPanel Margin="20,10,20,10">
+
+                        <!--TITLE-->
+                        <TextBlock Margin="0,10,0,10"
+                                   Text="Connection Status"
+                                   FontSize="22" />
+
+                        <!--IS SUCCESS-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Is Success"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <Image x:Name="imgIsSuccess"
+                                   Source="/Imagens/Visto_tracado_solido.png"
+                                   Height="20"
+                                   MinWidth="50"
+                                   HorizontalAlignment="Left"
+                                   Cursor="Help" OpacityMask="Black" />
+
+                            <TextBlock x:Name="labelIsSuccess"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--MESSAGE-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Message"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="labelMessage"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--RESULT-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Result"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="labelResult"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!--SET COLOR TO RED-->
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="labelIsSuccess"
+                                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                                    From="Black"
+                                                    To="Red"
+                                                    Duration="0:1:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Border.Triggers>
+                </Border>
+
+                <!--END CARD: CONNECTION-->
 
             </WrapPanel>
 

@@ -6,7 +6,6 @@ public class CountryName
 {
     private string? _common = "N/A";
     private string? _official = "N/A";
-    private Dictionary<string, NativeName>? _nativeName;
 
     public string? Common
     {
@@ -28,9 +27,5 @@ public class CountryName
         }
     }
 
-    public Dictionary<string, NativeName>? NativeName
-    {
-        get => _nativeName;
-        set => _nativeName = value;
-    }
+    public Dictionary<string, NativeName>? NativeName { get; set; }
 }

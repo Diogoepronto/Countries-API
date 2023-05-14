@@ -11,6 +11,10 @@
         <None Remove="Imagens\check.png"/>
         <None Remove="Imagens\cross.png"/>
         <None Remove="Imagens\No_flag.svg"/>
+        <None Remove="Imagens\Triangulo_Solido.png"/>
+        <None Remove="triangulo bordo.png"/>
+        <None Remove="triangulo_solido.png"/>
+        <None Remove="visto traçado solido.png"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -20,11 +24,13 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Resource Include="Imagens\check.png">
+        <Resource Include="Imagens\Check.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Resource>
-        <Resource Include="Imagens\cross.png"/>
+        <Resource Include="Imagens\Cross.png"/>
         <Resource Include="Imagens\No_flag.svg"/>
+        <Resource Include="Imagens\Triangulo_Solido.png"/>
+        <Resource Include="Imagens\Visto_tracado_solido.png"/>
     </ItemGroup>
 
 </Project>

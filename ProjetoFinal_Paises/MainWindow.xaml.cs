@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
@@ -17,10 +18,11 @@ namespace ProjetoFinal_Paises;
 public partial class MainWindow : Window
 {
     private readonly ApiService apiService;
+    private readonly NetworkService networkService;
     private List<Country> CountryList = new();
     private DataService dataService;
     private DialogService dialogService;
-    private readonly NetworkService networkService;
+
 
     public MainWindow()
     {
@@ -34,33 +36,132 @@ public partial class MainWindow : Window
         LoadCountries();
     }
 
+
     public async void LoadCountries()
     {
         bool load;
 
+        // zona the verificação da conexão com a net
         var connection = networkService.CheckConnection();
 
         if (!connection.IsSuccess)
         {
+            // Call the LoadCountriesLocal  method asynchronously
+            // uses a local database
             LoadCountriesLocal();
             load = false;
         }
         else
         {
+            // Call the LoadCountriesApi method asynchronously
             await LoadCountriesApi();
             load = true;
+            load = false;
         }
 
-        listBoxPaises.ItemsSource = CountryList.OrderBy(c => c.Name.Common);
-        listBoxPaises.SelectedItem = "Portugal";
+
+        // Update labels and images
+        UpdateCardConnection(load, connection);
+
+
+        // Update default country
+        UpdateDefaultCountry("Portugal");
+
+
+        // definir a fonte de items do list-box 
+        ListBoxCountries.ItemsSource =
+            CountryList.OrderBy(c => c.Name?.Common);
+
+
+        // atualizar a list-box para apresentar a pais selecionado por defeito
+        UpdateListBoxCountriesWithDefault("Portugal");
+
 
         var keyValuePair = new KeyValuePair<string, Currency>();
     }
+
+
+    private void UpdateListBoxCountriesWithDefault(string portugal)
+    {
+        // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
+        var listBoxItem =
+            ListBoxCountries.ItemContainerGenerator
+                .Items
+                .Cast<Country>()
+                .Select((item, index) => new {item, index})
+                .FirstOrDefault(x => x.item.Name?.Common == "Portugal");
+
+        if (listBoxItem == null) return;
+
+        ListBoxCountries.SelectedItem =
+            ListBoxCountries.Items[listBoxItem.index];
+        ListBoxCountries
+            .UpdateLayout(); // Make sure the list box has finished loading its items
+        ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
+    }
+
+
+    private void UpdateDefaultCountry(string country)
+    {
+        // Find the Country object with the name "Portugal" in the CountryList
+        var selectedCountry =
+            CountryList.FirstOrDefault(c => c.Name?.Common == country);
+
+        if (selectedCountry != null)
+            // Call the DisplayCountryData method with the selected country
+            DisplayCountryData(selectedCountry);
+    }
+
+
+    private void UpdateCardConnection(bool load, Response connection)
+    {
+        if (load)
+        {
+            // label result
+            // labelResult.Text = conexao.Result.ToString();
+            labelResult.Text = "Objeto foi carregado";
+
+
+            // label is success ???
+            labelIsSuccess.Text = connection.IsSuccess.ToString();
+            labelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
+
+
+            // image is success ???
+            imgIsSuccess.Source = new BitmapImage(
+                new Uri("/Imagens/Visto_tracado_solido.png", UriKind.Relative));
+            imgIsSuccess.Width = imgIsSuccess.Height = 30;
+
+
+            MessageBox.Show(connection.Message);
+        }
+        else
+        {
+            // label result
+            // labelResult.Text = conexao.Result.ToString();
+            labelResult.Text = "Objeto não foi carregado";
+
+
+            // label is success ???
+            labelIsSuccess.Text = connection.IsSuccess.ToString();
+            labelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
+
+
+            // image is success ???
+            imgIsSuccess.Source = new BitmapImage(
+                new Uri("/Imagens/Triangulo_Solido.png", UriKind.Relative));
+            imgIsSuccess.Width = imgIsSuccess.Height = 30;
+
+            MessageBox.Show(connection.Message);
+        }
+    }
+
 
     private void LoadCountriesLocal()
     {
         throw new NotImplementedException();
     }
+
 
     private async Task LoadCountriesApi()
     {
@@ -71,13 +172,15 @@ public partial class MainWindow : Window
         CountryList = (List<Country>) response.Result;
     }
 
-    private void listBoxPaises_SelectionChanged(object sender,
-        SelectionChangedEventArgs e)
+
+    private void ListBoxPaises_SelectionChanged(
+        object sender, SelectionChangedEventArgs e)
     {
-        var selectedCountry = (Country) listBoxPaises.SelectedItem;
+        var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
     }
+
 
     public void DisplayCountryData(Country countryToDisplay)
     {
@@ -158,7 +261,9 @@ public partial class MainWindow : Window
 
         // LATITUDE, LONGITUDE
         txtLatLng.Text =
-            $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, {countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
+            string.Format("{0}, {1}",
+                countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US")),
+                countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US")));
 
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
@@ -234,13 +339,10 @@ public partial class MainWindow : Window
 
         iteration = 0;
 
-        // IS UN MEMBER
-        if (countryToDisplay.UnMember)
-            imgUnMember.Source =
-                new BitmapImage(new Uri("Imagens/check.png", UriKind.Relative));
-        else
-            imgUnMember.Source =
-                new BitmapImage(new Uri("Imagens/cross.png", UriKind.Relative));
+        // IS AN UN MEMBER
+        imgUnMember.Source = countryToDisplay.UnMember
+            ? new BitmapImage(new Uri("Imagens/Check.png", UriKind.Relative))
+            : new BitmapImage(new Uri("Imagens/Cross.png", UriKind.Relative));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)

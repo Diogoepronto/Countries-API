@@ -19,6 +19,6 @@ public class Country
     public bool UnMember { get; set; }
     public Dictionary<string, double>? Gini { get; set; }
     public string? Cca3 { get; set; }
-    
+
     public Map? Maps { get; set; }
 }
