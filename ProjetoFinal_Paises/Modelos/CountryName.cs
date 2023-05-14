@@ -4,38 +4,33 @@ namespace ProjetoFinal_Paises.Modelos;
 
 public class CountryName
 {
-    private string _common;
-    private string _official;
+    private string? _common = "N/A";
+    private string? _official = "N/A";
+    private Dictionary<string, NativeName>? _nativeName;
 
-    public string Common 
+    public string? Common
     {
-        get
-        {
-           return _common;
-        }
+        get => _common;
         set
         {
-            if (value == null)
-            {
-                _common = "N/A";
-            }
+            if (value == null) _common = "N/A";
             _common = value;
         }
     }
-    public string Official
+
+    public string? Official
     {
-        get 
-        { 
-            return _official; 
-        }
+        get => _official;
         set
         {
-            if (value == null)
-            {
-                _official = "N/A";
-            }
+            if (value == null) _official = "N/A";
             _official = value;
         }
     }
-    public Dictionary<string, NativeName> NativeName { get; set; }
+
+    public Dictionary<string, NativeName>? NativeName
+    {
+        get => _nativeName;
+        set => _nativeName = value;
+    }
 }

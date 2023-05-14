@@ -1,57 +1,45 @@
-﻿using ProjetoFinal_Paises.Serviços;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ProjetoFinal_Paises.Modelos;
-using System.DirectoryServices.ActiveDirectory;
-using System.Runtime.CompilerServices;
-using System.Windows.Media.Media3D;
-using Syncfusion.Data.Extensions;
-
+using ProjetoFinal_Paises.Serviços;
 
 namespace ProjetoFinal_Paises;
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-    private List<Country> CountryList = new List<Country>();
-    private ApiService apiService;
+/// <summary>
+///     Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
+{
+    private readonly ApiService apiService;
+    private List<Country> CountryList = new();
     private DataService dataService;
-    private NetworkService networkService;
     private DialogService dialogService;
+    private readonly NetworkService networkService;
 
-        public MainWindow()
-        {
-            InitializeComponent();
+    public MainWindow()
+    {
+        InitializeComponent();
 
-            apiService = new ApiService();
-            dataService = new DataService();
-            networkService = new NetworkService();
-            dialogService = new DialogService();
+        apiService = new ApiService();
+        dataService = new DataService();
+        networkService = new NetworkService();
+        dialogService = new DialogService();
 
-            LoadCountries();
-        }
+        LoadCountries();
+    }
 
     public async void LoadCountries()
     {
         bool load;
 
         var connection = networkService.CheckConnection();
-        
+
         if (!connection.IsSuccess)
         {
             LoadCountriesLocal();
@@ -66,7 +54,7 @@ namespace ProjetoFinal_Paises;
         listBoxPaises.ItemsSource = CountryList.OrderBy(c => c.Name.Common);
         listBoxPaises.SelectedItem = "Portugal";
 
-        KeyValuePair<string, Currency> keyValuePair = new KeyValuePair<string, Currency>();
+        var keyValuePair = new KeyValuePair<string, Currency>();
     }
 
     private void LoadCountriesLocal()
@@ -76,26 +64,31 @@ namespace ProjetoFinal_Paises;
 
     private async Task LoadCountriesApi()
     {
-        var response = await apiService.GetCountries("https://restcountries.com", "/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
+        var response = await apiService.GetCountries(
+            "https://restcountries.com",
+            "/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
 
-        CountryList = (List<Country>)response.Result;
+        CountryList = (List<Country>) response.Result;
     }
 
-    private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void listBoxPaises_SelectionChanged(object sender,
+        SelectionChangedEventArgs e)
     {
-        var selectedCountry = (Country)listBoxPaises.SelectedItem;
+        var selectedCountry = (Country) listBoxPaises.SelectedItem;
 
         DisplayCountryData(selectedCountry);
     }
 
     public void DisplayCountryData(Country countryToDisplay)
     {
-        int iteration = 0;
+        var iteration = 0;
 
         txtCountryName.Text = countryToDisplay.Name.Common;
-        imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.Png));
+        imgCountryFlag.Source =
+            new BitmapImage(new Uri(countryToDisplay.Flags.Png));
 
         #region CARD NAME
+
         // ------------------ CARD NAMES ------------------
         txtNameNativeCommon.Text = string.Empty;
         txtNameNativeOfficial.Text = string.Empty;
@@ -107,8 +100,10 @@ namespace ProjetoFinal_Paises;
         // NATIVE OFFICIAL AND COMMON NAME
         foreach (var nativeName in countryToDisplay.Name.NativeName)
         {
-            txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: {nativeName.Value.Common}";
-            txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: {nativeName.Value.Official}";
+            txtNameNativeCommon.Text +=
+                $"{nativeName.Key.ToUpper()}: {nativeName.Value.Common}";
+            txtNameNativeOfficial.Text +=
+                $"{nativeName.Key.ToUpper()}: {nativeName.Value.Official}";
 
             if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
             {
@@ -118,10 +113,13 @@ namespace ProjetoFinal_Paises;
 
             iteration++;
         }
+
         iteration = 0;
+
         #endregion
 
         #region CARD GEOGRAPHY
+
         // ------------------ CARD GEOGRAPHY ------------------
         txtContinent.Text = string.Empty;
         txtCapital.Text = string.Empty;
@@ -129,7 +127,7 @@ namespace ProjetoFinal_Paises;
         txtBorders.Text = string.Empty;
 
         // CONTINENT
-        foreach (string continent in countryToDisplay.Continents)
+        foreach (var continent in countryToDisplay.Continents)
         {
             txtContinent.Text += continent;
 
@@ -138,6 +136,7 @@ namespace ProjetoFinal_Paises;
 
             iteration++;
         }
+
         iteration = 0;
 
         // REGION, SUBREGION
@@ -145,7 +144,7 @@ namespace ProjetoFinal_Paises;
         txtSubregion.Text = countryToDisplay.SubRegion;
 
         // CAPITAL
-        foreach (string capital in countryToDisplay.Capital)
+        foreach (var capital in countryToDisplay.Capital)
         {
             txtCapital.Text += capital;
 
@@ -154,13 +153,15 @@ namespace ProjetoFinal_Paises;
 
             iteration++;
         }
+
         iteration = 0;
 
         // LATITUDE, LONGITUDE
-        txtLatLng.Text = $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, {countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
+        txtLatLng.Text =
+            $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, {countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
 
         // TIMEZONES
-        foreach (string timezone in countryToDisplay.Timezones)
+        foreach (var timezone in countryToDisplay.Timezones)
         {
             txtTimezones.Text += timezone;
 
@@ -169,18 +170,17 @@ namespace ProjetoFinal_Paises;
 
             iteration++;
         }
+
         iteration = 0;
 
         // BORDERS
-        foreach (string border in countryToDisplay.Borders)
+        foreach (var border in countryToDisplay.Borders)
         {
-            string countryName = "";
+            var countryName = "";
 
-            foreach (Country country in CountryList)
-            {
-                if (country.CCA3 == border)
+            foreach (var country in CountryList)
+                if (country.Cca3 == border)
                     countryName = country.Name.Common;
-            }
 
             txtBorders.Text += countryName;
 
@@ -189,11 +189,13 @@ namespace ProjetoFinal_Paises;
 
             iteration++;
         }
+
         iteration = 0;
 
         #endregion
 
         #region CARD MISCELLANEOUS
+
         // ------------------ CARD MISCELLANEOUS ------------------
         txtLanguages.Text = string.Empty;
         txtCurrencies.Text = string.Empty;
@@ -208,33 +210,37 @@ namespace ProjetoFinal_Paises;
             txtLanguages.Text += language.Value;
 
             if (!(iteration == countryToDisplay.Languages.Count() - 1))
-            {
                 txtLanguages.Text += Environment.NewLine;
-            }
 
             iteration++;
         }
+
         iteration = 0;
 
         // CURRENCIES
         foreach (var currency in countryToDisplay.Currencies)
         {
-            txtCurrencies.Text += $"{currency.Value.Name}" + Environment.NewLine + $"{currency.Key.ToUpper()}" + Environment.NewLine + $"{currency.Value.Symbol}";
+            txtCurrencies.Text += $"{currency.Value.Name}" +
+                                  Environment.NewLine +
+                                  $"{currency.Key.ToUpper()}" +
+                                  Environment.NewLine +
+                                  $"{currency.Value.Symbol}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-            {
                 txtCurrencies.Text += Environment.NewLine + Environment.NewLine;
-            }
 
             iteration++;
         }
+
         iteration = 0;
 
         // IS UN MEMBER
-        if (countryToDisplay.UNMember)
-            imgUnMember.Source = new BitmapImage(new Uri("Imagens/check.png", UriKind.Relative));
-        else 
-            imgUnMember.Source = new BitmapImage(new Uri("Imagens/cross.png", UriKind.Relative));
+        if (countryToDisplay.UnMember)
+            imgUnMember.Source =
+                new BitmapImage(new Uri("Imagens/check.png", UriKind.Relative));
+        else
+            imgUnMember.Source =
+                new BitmapImage(new Uri("Imagens/cross.png", UriKind.Relative));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
@@ -242,15 +248,13 @@ namespace ProjetoFinal_Paises;
             txtGini.Text += $"{gini.Key}: {gini.Value}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-            {
                 txtCurrencies.Text += Environment.NewLine;
-            }
 
             iteration++;
         }
+
         iteration = 0;
+
         #endregion
-
-
     }
 }

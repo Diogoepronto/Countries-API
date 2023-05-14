@@ -7,5 +7,5 @@ public class ProgressReportService
 {
     public int Percentage { get; set; } = 0;
 
-    public List<Country> CountriesDownloaded { get; set; } = new List<Country>();
+    public List<Country> CountriesDownloaded { get; set; } = new();
 }
