@@ -59,18 +59,7 @@
         
         <WebBrowser x:Name="Maps" 
             Grid.Column="3" Grid.ColumnSpan="5" 
-            Grid.Row="5" Source="https://goo.gl/maps/138JaXW8EZzRVitY9"/>
-
-        <!-- <syncfusion:ComboBoxAdv x:Name="comboBoxAdv" -->
-        <!--                         AllowMultiSelect="True" -->
-        <!--                         Grid.Column="3" -->
-        <!--                         DefaultText="ComboBox Items" Grid.Row="1" Margin="95,28,125,48"> -->
-        <!--     <syncfusion:ComboBoxItemAdv Content="Item 1" /> -->
-        <!--     <syncfusion:ComboBoxItemAdv Content="Item 2" /> -->
-        <!--     <syncfusion:ComboBoxItemAdv Content="Item 3" /> -->
-        <!--     <syncfusion:ComboBoxItemAdv Content="Item 4" /> -->
-        <!--     <syncfusion:ComboBoxItemAdv Content="Item 5" /> -->
-        <!-- </syncfusion:ComboBoxAdv> -->
+            Grid.Row="5" Source=""/>
 
     </Grid>
 </Window>
