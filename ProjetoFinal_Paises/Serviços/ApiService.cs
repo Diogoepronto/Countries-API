@@ -9,7 +9,8 @@ namespace ProjetoFinal_Paises.Serviços;
 
 public class ApiService
 {
-    public async Task<Response> GetCountries(string urlBase, string controller)
+    public static async Task<Response> GetCountries(
+        string urlBase, string controller)
     {
         // https://restcountries.com/v3.1/all?
         // fields=

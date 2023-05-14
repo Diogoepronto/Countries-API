@@ -19,7 +19,7 @@ public partial class MainWindow : Window
 {
     private readonly ApiService apiService;
     private readonly NetworkService networkService;
-    private List<Country> CountryList = new();
+    private List<Country>? CountryList = new();
     private DataService dataService;
     private DialogService dialogService;
 
@@ -42,7 +42,7 @@ public partial class MainWindow : Window
         bool load;
 
         // zona the verificação da conexão com a net
-        var connection = networkService.CheckConnection();
+        var connection = NetworkService.CheckConnection();
 
         if (!connection.IsSuccess)
         {
@@ -56,7 +56,7 @@ public partial class MainWindow : Window
             // Call the LoadCountriesApi method asynchronously
             await LoadCountriesApi();
             load = true;
-            load = false;
+            // load = false;
         }
 
 
@@ -77,7 +77,7 @@ public partial class MainWindow : Window
         UpdateListBoxCountriesWithDefault("Portugal");
 
 
-        var keyValuePair = new KeyValuePair<string, Currency>();
+        // var keyValuePair = new KeyValuePair<string, Currency>();
     }
 
 
@@ -126,14 +126,12 @@ public partial class MainWindow : Window
             labelIsSuccess.Text = connection.IsSuccess.ToString();
             labelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
 
-
             // image is success ???
             imgIsSuccess.Source = new BitmapImage(
                 new Uri("/Imagens/Visto_tracado_solido.png", UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
 
-
-            MessageBox.Show(connection.Message);
+            // MessageBox.Show(connection.Message);
         }
         else
         {
@@ -141,18 +139,16 @@ public partial class MainWindow : Window
             // labelResult.Text = conexao.Result.ToString();
             labelResult.Text = "Objeto não foi carregado";
 
-
             // label is success ???
             labelIsSuccess.Text = connection.IsSuccess.ToString();
             labelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
-
 
             // image is success ???
             imgIsSuccess.Source = new BitmapImage(
                 new Uri("/Imagens/Triangulo_Solido.png", UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
 
-            MessageBox.Show(connection.Message);
+            // MessageBox.Show(connection.Message);
         }
     }
 
@@ -165,11 +161,16 @@ public partial class MainWindow : Window
 
     private async Task LoadCountriesApi()
     {
-        var response = await apiService.GetCountries(
+        var response = await ApiService.GetCountries(
             "https://restcountries.com",
-            "/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
+            "/v3.1/all" +
+            "?fields=" +
+            "name,capital,currencies,region,subregion,continents,population," +
+            "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
 
-        CountryList = (List<Country>) response.Result;
+        CountryList = (List<Country>) response.Result!;
+
+        Console.WriteLine("Debug zone");
     }
 
 
