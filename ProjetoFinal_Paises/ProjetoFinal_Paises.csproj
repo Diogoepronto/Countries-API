@@ -15,12 +15,24 @@
         <None Remove="triangulo bordo.png"/>
         <None Remove="triangulo_solido.png"/>
         <None Remove="visto traçado solido.png"/>
+        <None Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-        <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.3"/>
+        <PackageReference Include="Serilog" Version="2.12.0"/>
+        <PackageReference Include="System.Memory" Version="4.5.5"/>
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0"/>
+        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0"/>
+        <PackageReference Include="System.Text.Json" Version="7.0.2"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -31,6 +43,18 @@
         <Resource Include="Imagens\No_flag.svg"/>
         <Resource Include="Imagens\Triangulo_Solido.png"/>
         <Resource Include="Imagens\Visto_tracado_solido.png"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="DataBaseService\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Remove="DataBaseService\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Page Remove="DataBaseService\**"/>
     </ItemGroup>
 
 </Project>

@@ -17,21 +17,21 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly ApiService apiService;
-    private readonly NetworkService networkService;
-    private List<Country>? CountryList = new();
-    private DataService dataService;
-    private DialogService dialogService;
+    private readonly ApiService _apiService;
+    private readonly DataService _dataService;
+    private readonly NetworkService _networkService;
+    private List<Country>? _countryList = new();
+    private DialogService _dialogService;
 
 
     public MainWindow()
     {
         InitializeComponent();
 
-        apiService = new ApiService();
-        dataService = new DataService();
-        networkService = new NetworkService();
-        dialogService = new DialogService();
+        _apiService = new ApiService();
+        _dataService = new DataService();
+        _networkService = new NetworkService();
+        _dialogService = new DialogService();
 
         LoadCountries();
     }
@@ -42,7 +42,7 @@ public partial class MainWindow : Window
         bool load;
 
         // zona the verificação da conexão com a net
-        var connection = NetworkService.CheckConnection();
+        var connection = _networkService.CheckConnection();
 
         if (!connection.IsSuccess)
         {
@@ -69,8 +69,9 @@ public partial class MainWindow : Window
 
 
         // definir a fonte de items do list-box 
-        ListBoxCountries.ItemsSource =
-            CountryList.OrderBy(c => c.Name?.Common);
+        if (_countryList != null)
+            ListBoxCountries.ItemsSource =
+                _countryList.OrderBy(c => c.Name?.Common);
 
 
         // atualizar a list-box para apresentar a pais selecionado por defeito
@@ -85,8 +86,7 @@ public partial class MainWindow : Window
     {
         // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
         var listBoxItem =
-            ListBoxCountries.ItemContainerGenerator
-                .Items
+            ListBoxCountries.ItemContainerGenerator.Items
                 .Cast<Country>()
                 .Select((item, index) => new {item, index})
                 .FirstOrDefault(x => x.item.Name?.Common == "Portugal");
@@ -104,8 +104,9 @@ public partial class MainWindow : Window
     private void UpdateDefaultCountry(string country)
     {
         // Find the Country object with the name "Portugal" in the CountryList
+
         var selectedCountry =
-            CountryList.FirstOrDefault(c => c.Name?.Common == country);
+            _countryList?.FirstOrDefault(c => c.Name?.Common == country);
 
         if (selectedCountry != null)
             // Call the DisplayCountryData method with the selected country
@@ -155,12 +156,24 @@ public partial class MainWindow : Window
 
     private void LoadCountriesLocal()
     {
-        throw new NotImplementedException();
+        progressBarCarregamento.Value = 0;
+
+        labelMessage.Text = "A atualizar taxas...";
+
+        var response = _dataService.GetData();
+        _countryList = (List<Country>) response.Result!;
+
+        _dataService.DeleteData();
+        _dataService.SaveData(response.Result!);
     }
 
 
     private async Task LoadCountriesApi()
     {
+        progressBarCarregamento.Value = 0;
+
+        labelMessage.Text = "A atualizar taxas...";
+
         var response = await ApiService.GetCountries(
             "https://restcountries.com",
             "/v3.1/all" +
@@ -168,7 +181,12 @@ public partial class MainWindow : Window
             "name,capital,currencies,region,subregion,continents,population," +
             "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
 
-        CountryList = (List<Country>) response.Result!;
+        _countryList = (List<Country>) response.Result!;
+
+        Console.WriteLine("Debug zone");
+
+        _dataService.DeleteData();
+        _dataService.SaveData(response.Result);
 
         Console.WriteLine("Debug zone");
     }
@@ -187,7 +205,7 @@ public partial class MainWindow : Window
     {
         var iteration = 0;
 
-        txtCountryName.Text = countryToDisplay.Name.Common;
+        TxtCountryName.Text = countryToDisplay.Name.Common;
         imgCountryFlag.Source =
             new BitmapImage(new Uri(countryToDisplay.Flags.Png));
 
@@ -284,7 +302,7 @@ public partial class MainWindow : Window
         {
             var countryName = "";
 
-            foreach (var country in CountryList)
+            foreach (var country in _countryList)
                 if (country.Cca3 == border)
                     countryName = country.Name.Common;
 

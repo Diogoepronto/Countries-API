@@ -16,6 +16,7 @@ public class ApiService
         // fields=
         // name,capital,currencies,region,subregion,continents,population,
         // gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps
+
         try
         {
             var client = new HttpClient();
