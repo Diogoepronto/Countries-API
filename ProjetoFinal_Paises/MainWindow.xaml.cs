@@ -44,6 +44,8 @@ public partial class MainWindow : Window
         // zona the verificação da conexão com a net
         var connection = _networkService.CheckConnection();
 
+        // serve para fazer os teste de conexão a internet
+        // connection.IsSuccess = false;
         if (!connection.IsSuccess)
         {
             // Call the LoadCountriesLocal  method asynchronously

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using ProjetoFinal_Paises.Modelos;
@@ -25,18 +24,13 @@ public class DataService
             _connection = new SqliteConnection(ConnectionString);
             _connection.Open();
 
-            // deixar cair a tabela da base de dados se existir
-            const string sqlCommand1 = "drop table if exists Country_Json;";
-            _command = new SqliteCommand(sqlCommand1, _connection);
-            _command.ExecuteNonQuery();
-
             // recria a tabela na base de dados se não existir
-            const string sqlCommand2 =
+            const string sqlCommand =
                 "CREATE TABLE if not exists Country_Json(" +
                 "[CountryJsonId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "json_data TEXT);";
 
-            _command = new SqliteCommand(sqlCommand2, _connection);
+            _command = new SqliteCommand(sqlCommand, _connection);
             _command.ExecuteNonQuery();
 
             DatabaseCreateTables.DataServiceCreation(
@@ -48,6 +42,10 @@ public class DataService
                 "Conexão a base de dados",
                 "Erro ao abrir a a base de dados e ao criar a tabela\n" +
                 e.Message);
+        }
+        finally
+        {
+            _connection?.Dispose();
         }
     }
 
@@ -72,9 +70,14 @@ public class DataService
             _connection = new SqliteConnection(ConnectionString);
             _connection.Open();
 
+            // deixar cair a tabela da base de dados se existir
+            const string sqlCommand1 = "drop table if exists Country_Json;";
+            _command = new SqliteCommand(sqlCommand1, _connection);
+            _command.ExecuteNonQuery();
+
             foreach (var country in (IEnumerable) countries)
             {
-                var sql =
+                const string sql =
                     "INSERT INTO Country_Json (json_data) VALUES (@json)";
 
                 _command = new SqliteCommand(sql, _connection);
@@ -134,8 +137,7 @@ public class DataService
             // lê cada linha de registos
             var sqliteDataReader = _command.ExecuteReader();
             while (sqliteDataReader.Read())
-                result?.Concat(
-                    new string((string) sqliteDataReader["json_data"]));
+                result += new string((string) sqliteDataReader["json_data"]);
 
             if (result == string.Empty)
             {
@@ -158,8 +160,6 @@ public class DataService
                     Result = countries
                 };
             }
-
-            _connection.Close();
         }
         catch (Exception e)
         {
@@ -173,14 +173,6 @@ public class DataService
         {
             _connection?.Dispose();
         }
-
-
-        return new Response
-        {
-            IsSuccess = false,
-            Message = "A base de dados está vazia...",
-            Result = null
-        };
     }
 
 
@@ -189,6 +181,9 @@ public class DataService
         const string sql = "delete from Country_Json;";
         try
         {
+            _connection = new SqliteConnection(ConnectionString);
+            _connection.Open();
+
             using var command = new SqliteCommand(sql, _connection);
             command.ExecuteNonQuery();
         }
@@ -209,7 +204,7 @@ public class DataService
         {
             IsSuccess = true,
             Message =
-                "A eliminação dos dados base de dados foi executado com exito...",
+                "A eliminação dos dados base de dados foi efetuada com exito...",
             Result = null
         };
     }
