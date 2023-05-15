@@ -28,7 +28,8 @@ public class ApiService
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = result
+                    Message = "Erro ao obter os dados, via API...",
+                    Result = result
                 };
 
             var countries =
@@ -37,6 +38,7 @@ public class ApiService
             return new Response
             {
                 IsSuccess = true,
+                Message = "Dados obtidos com exito, via API...",
                 Result = countries
             };
         }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Data.Sqlite;
@@ -17,70 +19,115 @@ public class DataService
 
         if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
 
-        DatabaseCreateTables.DataServiceCreation(
-            Path, FilePath);
         try
         {
             // abrir conexão com a base de dados
-            _connection = new SqliteConnection("Data Source=" + FilePath);
+            _connection = new SqliteConnection(ConnectionString);
             _connection.Open();
 
             // deixar cair a tabela da base de dados se existir
-            const string sqlCommand_1 = "drop table if exists Country_Json;";
-            _command = new SqliteCommand(sqlCommand_1, _connection);
+            const string sqlCommand1 = "drop table if exists Country_Json;";
+            _command = new SqliteCommand(sqlCommand1, _connection);
             _command.ExecuteNonQuery();
 
-            const string sqlCommand_2 =
+            // recria a tabela na base de dados se não existir
+            const string sqlCommand2 =
                 "CREATE TABLE if not exists Country_Json(" +
                 "[CountryJsonId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "json_data TEXT);";
 
-            _command = new SqliteCommand(sqlCommand_2, _connection);
+            _command = new SqliteCommand(sqlCommand2, _connection);
             _command.ExecuteNonQuery();
+
+            DatabaseCreateTables.DataServiceCreation(
+                _connection, Path, FilePath);
         }
         catch (Exception e)
         {
             DialogService.ShowMessage(
-                "Erro ao abrir a a base de dados e ao criar a tabela",
+                "Conexão a base de dados",
+                "Erro ao abrir a a base de dados e ao criar a tabela\n" +
                 e.Message);
         }
     }
 
 
-    public void SaveData(object? countries)
+    public Response SaveData(object? countries)
     {
-        DatabaseSaveData.SaveData(countries, FilePath);
-        // try
-        // {
-        //     foreach (
-        //         var sql in countries.Select(country =>
-        //             $"insert into Rates (RateId, Code, TaxRate, Name) " +
-        //             $"values(" +
-        //             $"'{rate.RateId}', '{rate.Code}', " +
-        //             $"'{rate.TaxRate}', '{rate.Name}'" +
-        //             $")"))
-        //     {
-        //         _command = new SqliteCommand(sql, _connection);
-        //         _command.ExecuteNonQuery();
-        //     }
-        //
-        //     _connection.Close();
-        // }
-        // catch (Exception e)
-        // {
-        //     DialogService.ShowMessage("Erro", e.Message);
-        // }
+        // DatabaseSaveData.SaveData(_connection, countries);
+
+        if (countries == null)
+            return new Response
+            {
+                IsSuccess = false,
+                Message = "O objeto countries está nulo.",
+                Result = null
+            };
+
+        //Logger.Info("Inserindo dados na tabela Country_Json...");
+        var count = 0;
+
+        try
+        {
+            _connection = new SqliteConnection(ConnectionString);
+            _connection.Open();
+
+            foreach (var country in (IEnumerable) countries)
+            {
+                var sql =
+                    "INSERT INTO Country_Json (json_data) VALUES (@json)";
+
+                _command = new SqliteCommand(sql, _connection);
+
+                _command.Parameters.AddWithValue(
+                    "@json",
+                    JsonConvert.SerializeObject(country));
+
+                _command.ExecuteNonQuery();
+
+                count++;
+            }
+
+            // Logger<>.Info($"Inseridos {count} países na tabela Country_Json.");
+            _connection.Close();
+
+            return new Response
+            {
+                IsSuccess = true,
+                Message =
+                    "Dados inseridos com sucesso na tabela Country_Json!",
+                Result = null
+            };
+        }
+        catch (Exception e)
+        {
+            Debug.WriteLine("Exception caught: " + e.Message);
+            return new Response
+            {
+                IsSuccess = false,
+                Message = "Erro ao inserir dados na tabela Country_Json\n" +
+                          e.Message,
+                Result = null
+            };
+        }
+        finally
+        {
+            _connection?.Dispose();
+        }
     }
 
 
-    public Response? GetData()
+    public Response? ReadData()
     {
-        DatabaseReadData.ReadData();
+        // DatabaseReadData.ReadData(_connection, FilePath);
 
         var result = string.Empty;
 
         try
         {
+            _connection = new SqliteConnection(ConnectionString);
+            _connection.Open();
+
             const string sql = "select json_data from Country_Json;";
             _command = new SqliteCommand(sql, _connection);
 
@@ -89,13 +136,17 @@ public class DataService
             while (sqliteDataReader.Read())
                 result?.Concat(
                     new string((string) sqliteDataReader["json_data"]));
-            // result =
-            //     (string?) result?.Concat(
-            //         (string) sqliteDataReader["json_data"]);
-            //_command.ExecuteNonQuery();
-            _connection.Close();
 
-            if (result != null)
+            if (result == string.Empty)
+            {
+                return new Response
+                {
+                    IsSuccess = false,
+                    Message = "Base de dados vazia...",
+                    Result = null
+                };
+            }
+            else
             {
                 var countries =
                     JsonConvert.DeserializeObject<List<Country>>(result);
@@ -103,18 +154,26 @@ public class DataService
                 return new Response
                 {
                     IsSuccess = true,
+                    Message = "Dados lidos com exito...",
                     Result = countries
                 };
             }
+
+            _connection.Close();
         }
         catch (Exception e)
         {
             DialogService.ShowMessage(
+                "Apagar dados da base de dados",
                 "Erro ao ler os dados na base de dados " +
-                "ProjetoFinalPaises.sqlite",
-                e.Message);
+                "ProjetoFinalPaises.sqlite\n" + e.Message);
             return null;
         }
+        finally
+        {
+            _connection?.Dispose();
+        }
+
 
         return new Response
         {
@@ -125,21 +184,8 @@ public class DataService
     }
 
 
-    public void DeleteData()
+    public Response DeleteData()
     {
-        // try
-        // {
-        //     const string sql = "delete from Country_Json;";
-        //     _command = new SqliteCommand(sql, _connection);
-        //     _command.ExecuteNonQuery();
-        // }
-        // catch (Exception e)
-        // {
-        //     DialogService.ShowMessage(
-        //         "Erro ao apagar os dados na base de dados " +
-        //         "ProjetoFinalPaises.sqlite",
-        //         e.Message);
-        // }
         const string sql = "delete from Country_Json;";
         try
         {
@@ -149,21 +195,31 @@ public class DataService
         catch (Exception e)
         {
             DialogService.ShowMessage(
+                "Apagar dados da base de dados",
                 "Erro ao apagar os dados na base de dados " +
-                "ProjetoFinalPaises.sqlite",
-                e.Message);
+                "ProjetoFinalPaises.sqlite\n" + e.Message);
         }
         finally
         {
             _connection?.Dispose();
         }
+
+
+        return new Response
+        {
+            IsSuccess = true,
+            Message =
+                "A eliminação dos dados base de dados foi executado com exito...",
+            Result = null
+        };
     }
 
     #region Attributes
 
-    private readonly SqliteConnection _connection;
-    private readonly DialogService _dialogService;
+    private DialogService _dialogService;
+    private SqliteConnection _connection;
     private SqliteCommand _command;
+    private const string ConnectionString = "Data Source=" + FilePath;
 
     #endregion
 

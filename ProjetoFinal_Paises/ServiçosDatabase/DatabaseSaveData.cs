@@ -8,7 +8,13 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseSaveData
 {
-    public static void SaveData(object? countries, string filePath)
+    #region Attributes
+
+    private DialogService _dialogService;
+
+    #endregion
+
+    public static void SaveData(SqliteConnection connection, object? countries)
     {
         if (countries == null) return;
 
@@ -19,13 +25,13 @@ public class DatabaseSaveData
                 const string sql =
                     "INSERT INTO Country_Json (json_data) VALUES (@json)";
 
-                _command = new SqliteCommand(sql, _connection);
+                var command = new SqliteCommand(sql, connection);
 
-                _command.Parameters.AddWithValue(
+                command.Parameters.AddWithValue(
                     "@json",
                     JsonConvert.SerializeObject(country));
 
-                _command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
             }
 
 
@@ -41,20 +47,13 @@ public class DatabaseSaveData
             //     _command.ExecuteNonQuery();
             // }
 
-            _connection.Close();
+            //_connection.Close();
         }
         catch (Exception e)
         {
             DialogService.ShowMessage(
-                "Erro ao inserir dados na tabela Country_Json", e.Message);
+                "",
+                "Erro ao inserir dados na tabela Country_Json\n" + e.Message);
         }
     }
-
-    #region Attributes
-
-    private static SqliteConnection _connection;
-    private DialogService _dialogService;
-    private static SqliteCommand _command;
-
-    #endregion
 }

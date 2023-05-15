@@ -95,8 +95,8 @@ public partial class MainWindow : Window
 
         ListBoxCountries.SelectedItem =
             ListBoxCountries.Items[listBoxItem.index];
-        ListBoxCountries
-            .UpdateLayout(); // Make sure the list box has finished loading its items
+        // Make sure the list box has finished loading its items
+        ListBoxCountries.UpdateLayout();
         ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
     }
 
@@ -128,8 +128,11 @@ public partial class MainWindow : Window
             labelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
 
             // image is success ???
-            imgIsSuccess.Source = new BitmapImage(
-                new Uri("/Imagens/Visto_tracado_solido.png", UriKind.Relative));
+            imgIsSuccess.Source =
+                new BitmapImage(
+                    new Uri(
+                        "/Imagens/Visto_tracado_solido.png",
+                        UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
 
             // MessageBox.Show(connection.Message);
@@ -145,8 +148,11 @@ public partial class MainWindow : Window
             labelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
 
             // image is success ???
-            imgIsSuccess.Source = new BitmapImage(
-                new Uri("/Imagens/Triangulo_Solido.png", UriKind.Relative));
+            imgIsSuccess.Source =
+                new BitmapImage(
+                    new Uri(
+                        "/Imagens/Triangulo_Solido.png",
+                        UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
 
             // MessageBox.Show(connection.Message);
@@ -158,13 +164,21 @@ public partial class MainWindow : Window
     {
         progressBarCarregamento.Value = 0;
 
-        labelMessage.Text = "A atualizar taxas...";
+        labelMessage.Text = "Base de dados a carregar...";
 
-        var response = _dataService.GetData();
+        Console.WriteLine("Debug zone");
+
+        var response = _dataService.ReadData();
         _countryList = (List<Country>) response.Result!;
 
-        _dataService.DeleteData();
-        _dataService.SaveData(response.Result!);
+        // _dataService.DeleteData();
+        // _dataService.SaveData(response.Result!);
+
+        progressBarCarregamento.Value = 100;
+
+        labelMessage.Text = "Base de dados totalmente carregada...";
+
+        Console.WriteLine("Debug zone");
     }
 
 
@@ -172,7 +186,7 @@ public partial class MainWindow : Window
     {
         progressBarCarregamento.Value = 0;
 
-        labelMessage.Text = "A atualizar taxas...";
+        labelMessage.Text = "Base de dados a atualizar...";
 
         var response = await ApiService.GetCountries(
             "https://restcountries.com",
@@ -181,12 +195,22 @@ public partial class MainWindow : Window
             "name,capital,currencies,region,subregion,continents,population," +
             "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
 
-        _countryList = (List<Country>) response.Result!;
+        if (response != null)
+        {
+            _countryList = (List<Country>) response.Result;
 
-        Console.WriteLine("Debug zone");
+            Console.WriteLine("Debug zone");
 
-        _dataService.DeleteData();
-        _dataService.SaveData(response.Result);
+            if (response.Result != null)
+            {
+                _dataService.DeleteData();
+                _dataService.SaveData(response.Result);
+            }
+        }
+
+        progressBarCarregamento.Value = 100;
+
+        labelMessage.Text = "Base de dados atualizada com exito...";
 
         Console.WriteLine("Debug zone");
     }

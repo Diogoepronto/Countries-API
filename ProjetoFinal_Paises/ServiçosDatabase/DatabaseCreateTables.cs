@@ -7,23 +7,25 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseCreateTables
 {
-    public static void DataServiceCreation(string Path, string FilePath)
+    public static void DataServiceCreation(
+        SqliteConnection sqliteConnection, string path, string filePath)
     {
         _dialogService = new DialogService();
 
-        if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
+        if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
         try
         {
             // abrir conexão com a base de dados
-            _connection = new SqliteConnection("Data Source=" + FilePath);
+            _connection = new SqliteConnection("Data Source=" + filePath);
             _connection.Open();
 
-            // deizar cair a tabela da base de dados se existir
+            // deixar cair a tabela da base de dados se existir
             const string sqlCommand_1 = "drop table if exists Country_Json;";
             _command = new SqliteCommand(sqlCommand_1, _connection);
             _command.ExecuteNonQuery();
 
+            // deixar cair a tabela da base de dados se existir
             const string sqlCommand_2 =
                 "CREATE TABLE if not exists Country_Json(" +
                 "[CountryJsonId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +

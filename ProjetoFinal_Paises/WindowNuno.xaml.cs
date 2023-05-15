@@ -161,7 +161,7 @@ public partial class WindowNuno : Window
 
         labelMessage.Text = "A atualizar taxas...";
 
-        var response = _dataService.GetData();
+        var response = _dataService.ReadData();
         _countryList = (List<Country>) response.Result!;
 
         _dataService.DeleteData();
