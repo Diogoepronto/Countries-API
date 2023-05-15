@@ -10,13 +10,15 @@
   <ItemGroup>
     <None Remove="Imagens\check.png" />
     <None Remove="Imagens\cross.png" />
+    <None Remove="Imagens\no_flag.png" />
     <None Remove="Imagens\No_flag.svg" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapsui.Wpf" Version="3.0.2" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.3" />
+    <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.4" />
 </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +26,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Imagens\cross.png" />
-    <Resource Include="Imagens\No_flag.svg" />
+    <Resource Include="Imagens\no_flag.png" />
   </ItemGroup>
 
 </Project>

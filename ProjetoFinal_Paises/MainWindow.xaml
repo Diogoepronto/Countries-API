@@ -4,22 +4,82 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetoFinal_Paises"
-        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ProjetoFinal_Paises.MainWindow"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+        x:Class="ProjetoFinal_Paises.MainWindow"
         mc:Ignorable="d"
-        Title="Countries API" Height="750" Width="1000" WindowStartupLocation="CenterScreen" MinWidth="700" MinHeight="600">
+        Title="Countries API" Height="750" Width="1000" WindowStartupLocation="CenterScreen" MinWidth="800" MinHeight="600">
 
-    <!--CUSTOM SCROLLBAR-->
+    <!--CUSTOM STYLES-->
     <Window.Resources>
         <ResourceDictionary>
+            <!--CUSTOM TEXTBOX-->
+            <Style TargetType="TextBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border x:Name="Border" 
+						            BorderBrush="{TemplateBinding BorderBrush}" 
+						            BorderThickness="{TemplateBinding BorderThickness}" 
+						            Background="{TemplateBinding Background}">
+                                <ScrollViewer x:Name="PART_ContentHost" 
+								              Focusable="false" 
+								              HorizontalScrollBarVisibility="Hidden" 
+								              VerticalScrollBarVisibility="Hidden">
+                                </ScrollViewer>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsVisible" Value="true">
+                                    <Setter Property="BorderBrush" 
+                                            TargetName="Border" 
+                                            Value="#AA89BBF3"/>
+                                    <Setter Property="CornerRadius" 
+                                            TargetName="Border" 
+                                            Value="15"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" 
+                                            TargetName="Border" 
+                                            Value="#FF56CCF2"/>
+                                    <Setter Property="CornerRadius"
+                                            TargetName="Border"
+                                            Value="15"/>
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter Property="CornerRadius"
+                                            TargetName="Border"
+                                            Value="15"/>
+                                    <Setter Property="BorderBrush" 
+								            TargetName="Border" 
+								            Value="#FF2F80ED"/>
+                                    <Setter Property="Background" 
+								            TargetName="Border" 
+								            Value="AliceBlue"/>
+
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--END CUSTOM TEXTBOX-->
+
+            <!--CUSTOM SCROLLBAR-->
             <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate>
                             <Grid x:Name="Grid">
-                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" 
-                                           Height="Auto" Fill="Transparent"/>
-                                <Border x:Name="Rectangle1" CornerRadius="4" HorizontalAlignment="Stretch" 
-                                        VerticalAlignment="Stretch" Width="Auto" Height="Auto" 
+                                <Rectangle HorizontalAlignment="Stretch" 
+                                           VerticalAlignment="Stretch" 
+                                           Width="Auto" 
+                                           Height="Auto" 
+                                           Fill="Transparent"/>
+                                <Border x:Name="Rectangle1" 
+                                        CornerRadius="4" 
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch" 
+                                        Width="Auto" 
+                                        Height="Auto" 
                                         Background="{TemplateBinding Background}"/>
                             </Grid>
                             <ControlTemplate.Triggers>
@@ -42,11 +102,19 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="8" Background="AliceBlue">
+                            <Grid x:Name="GridRoot" Width="8">
+                                <Border BorderThickness="1" CornerRadius="4" Background="AliceBlue">
                                 <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true" Focusable="False">
                                     <Track.Thumb>
-                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" 
-                                               Style="{DynamicResource ScrollThumbs}"/>
+                                        <Thumb x:Name="Thumb" 
+                                               Style="{DynamicResource ScrollThumbs}">
+                                            <Thumb.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FF56CCF2"/>
+                                                    <GradientStop Color="#FF2F80ED" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Thumb.Background>
+                                        </Thumb>
                                     </Track.Thumb>
                                     <Track.IncreaseRepeatButton>
                                         <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
@@ -55,6 +123,7 @@
                                         <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/>
                                     </Track.DecreaseRepeatButton>
                                 </Track>
+                            </Border>
                             </Grid>
 
                             <ControlTemplate.Triggers>
@@ -91,10 +160,11 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!--END CUSTOM SCROLLBAR-->
         </ResourceDictionary>
     </Window.Resources>
-    <!--END CUSTOM SCROLLBAR-->
-
+    <!--END CUSTOM STYLES-->
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -108,40 +178,89 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <!--COLUMN COUNTRY LIST-->
-        <!--LIST COUNTRIES-->
-        <ListBox x:Name="listBoxPaises" Grid.Column="1" Grid.Row="1" SelectionChanged="listBoxPaises_SelectionChanged" BorderBrush="{x:Null}">
-            <ListBox.Background>
-                <SolidColorBrush Color="White"/>
-            </ListBox.Background>
-            <!--LIST ITEMS TEMPLATE-->
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" 
-                                Margin="0,10,0,10">
+        <!--MAIN COLUMN LEFT-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                        <Image Source="{Binding Flags.Png}" 
-                               Width="50" 
-                               Height="30">
-                            <Image.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="2" Opacity="0.5" />
-                            </Image.Effect>
-                        </Image>
+            <!--SEARCH BAR-->
+            <Grid Grid.Row="0">
+                <TextBox x:Name="searchBar" 
+                         VerticalAlignment="Center" 
+                         Margin="2,0,18,0" 
+                         Padding="10, 5, 10, 5" 
+                         TextChanged="SearchTermTextBox_TextChanged" 
+                         Background="{x:Null}"/>
+                
+                <Button HorizontalAlignment="Right" 
+                        VerticalContentAlignment="Center" 
+                        Content="✖️" 
+                        Padding="5,0,5,0" 
+                        Margin="0,0,30,0" 
+                        BorderBrush="{x:Null}" 
+                        Background="{x:Null}" 
+                        Width="25" 
+                        Foreground="#AAF38989"/>
 
-                        <TextBlock Text="{Binding Name.Common}" 
-                                   Width="200" 
-                                   Padding="10,0,0,0" 
-                                   VerticalAlignment="Center" 
-                                   FontSize="14" 
-                                   TextWrapping="Wrap"/>
+                <TextBlock IsHitTestVisible="False" 
+                           Text="Enter a country" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Left" 
+                           Margin="16,0,0,0" 
+                           Foreground="LightGray">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=searchBar}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
 
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <!--END COLUMN COUNTRY LIST-->
+            <!--LIST COUNTRIES-->
+            <ListBox x:Name="listBoxCountries" 
+                     Grid.Row="1"
+                     SelectionChanged="listBoxPaises_SelectionChanged" 
+                     BorderBrush="{x:Null}">
+                <ListBox.Background>
+                    <SolidColorBrush Color="White"/>
+                </ListBox.Background>
+                <!--LIST ITEMS TEMPLATE-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel x:Name="listItem" 
+                                    Orientation="Horizontal" 
+                                    Margin="0,10,0,10">
 
-        <!--COLUMN DATA-->
+                            <Image Source="{Binding Flags.Png}" 
+                                   Width="50" 
+                                   Height="30">
+                                <Image.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="2" Opacity="0.5" />
+                                </Image.Effect>
+                            </Image>
+
+                            <TextBlock Text="{Binding Name.Common}" 
+                                       Width="200" 
+                                       Padding="10,0,0,0" 
+                                       VerticalAlignment="Center" 
+                                       FontSize="14" 
+                                       TextWrapping="Wrap"/>
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <!--END MAIN COLUMN LEFT-->
+
+        <!--MAIN COLUMN RIGHT-->
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -179,6 +298,7 @@
                     <Image x:Name="imgCountryFlag" 
                            Grid.Column="1" 
                            Grid.Row="0" 
+                           Source="Imagens/no_flag.png"
                            Width="auto" 
                            Height="150" 
                            VerticalAlignment="Center" 
@@ -201,13 +321,14 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <UniformGrid x:Name="responsiveGrid" 
                                  Grid.Row="0"
                                  SizeChanged="UniformGrid_SizeChanged">
 
                         <!--CARD: NAMES-->
-                        <Border BorderBrush="AliceBlue" 
+                        <Border x:Name="cardBorderNames"
+                            BorderBrush="AliceBlue" 
                             BorderThickness="1" 
                             CornerRadius="10" 
                             Background="White" 
@@ -270,6 +391,7 @@
                                            FontSize="14" 
                                            MinWidth="100" 
                                            TextWrapping="Wrap"/>
+
                                 </StackPanel>
 
                                 <!--NATIVE COMMON NAME-->
@@ -292,7 +414,8 @@
                         <!--END CARD: NAMES-->
 
                         <!--CARD: GEOGRAPHY-->
-                        <Border BorderBrush="AliceBlue" 
+                        <Border x:Name="cardBorderGeography"
+                            BorderBrush="AliceBlue" 
                             BorderThickness="1" 
                             CornerRadius="10" 
                             Background="White" 
@@ -409,7 +532,8 @@
                         <!--END CARD: GEOGRAPHY-->
 
                         <!--CARD: MISCELLANEOUS-->
-                        <Border BorderBrush="AliceBlue" 
+                        <Border x:Name="cardBorderMisc"
+                            BorderBrush="AliceBlue" 
                             BorderThickness="1" 
                             CornerRadius="10" 
                             Background="White" 
@@ -488,7 +612,7 @@
                                                Source="/Imagens/check.png"
                                                Height="15" 
                                                HorizontalAlignment="Left" 
-                                               VerticalAlignment="Center"/>
+                                               VerticalAlignment="Center" Visibility="Hidden"/>
                                 </StackPanel>
 
                                 <!--GINI-->
@@ -500,31 +624,34 @@
                                            FontWeight="Bold" 
                                            FontSize="14" Width="100"/>
 
-                                    <TextBlock x:Name="txtGiniYear" 
+                                    <TextBlock x:Name="txtGini" 
                                            FontSize="14" 
                                            MinWidth="50" 
-                                           TextWrapping="Wrap" FontWeight="Bold"/>
-                                    <TextBlock x:Name="txtGiniValue" 
+                                           TextWrapping="Wrap">
+
+                                        <TextBlock.Inlines>
+                                            <Run x:Name="giniYear" FontWeight="Bold"/>
+                                            <Run x:Name="giniValue"/>
+                                        </TextBlock.Inlines>
+
+                                    </TextBlock>
+
+                                    <!--<TextBlock x:Name="txtGiniValue" 
                                            FontSize="14" 
                                            MinWidth="50" 
-                                           TextWrapping="Wrap"/>
+                                           TextWrapping="Wrap"/>-->
                                 </StackPanel>
 
                             </StackPanel>
                         </Border>
                         <!--END CARD: MISCELLANEOUS-->
                     </UniformGrid>
-                    <syncfusion:SfMap Grid.Row="1">
-                        <syncfusion:SfMap.Layers>
-                            <syncfusion:ShapeFileLayer Uri="Maps.ShapeFiles.world1.shp" >
-                            </syncfusion:ShapeFileLayer>
-                        </syncfusion:SfMap.Layers>
-                    </syncfusion:SfMap>
+
                 </Grid>
             </ScrollViewer>
             <!--END COUNTRY DATA-->
         </Grid>
-        <!--END COLUMN DATA-->
+        <!--END MAIN COLUMN RIGHT-->
 
     </Grid>
 </Window>

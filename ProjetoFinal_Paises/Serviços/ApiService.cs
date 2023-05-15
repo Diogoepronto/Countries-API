@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProjetoFinal_Paises.Modelos;
 using Newtonsoft.Json;
+using System.Collections.ObjectModel;
 
 namespace ProjetoFinal_Paises.Serviços;
 
@@ -30,7 +31,7 @@ public class ApiService
                 };
             }
 
-            var countries = JsonConvert.DeserializeObject<List<Country>>(result);
+            var countries = JsonConvert.DeserializeObject<ObservableCollection<Country>>(result);
 
             return new Response
             {

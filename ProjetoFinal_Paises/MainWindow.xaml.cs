@@ -19,38 +19,51 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Runtime.CompilerServices;
 using System.Windows.Media.Media3D;
 using Syncfusion.Data.Extensions;
-
+using Syncfusion.PMML;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Data;
 
 namespace ProjetoFinal_Paises;
+
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+public partial class MainWindow : Window
+{
+    private ObservableCollection<Country> _countryList = new ObservableCollection<Country>();
+    private ICollectionView _dataView;
+    private ApiService _apiService;
+    private DataService _dataService;
+    private NetworkService _networkService;
+    private DialogService _dialogService;
+
+    public MainWindow()
     {
-    private List<Country> CountryList = new List<Country>();
-    private ApiService apiService;
-    private DataService dataService;
-    private NetworkService networkService;
-    private DialogService dialogService;
+        InitializeComponent();
 
-        public MainWindow()
-        {
-            InitializeComponent();
+        _apiService = new ApiService();
+        _dataService = new DataService();
+        _networkService = new NetworkService();
+        _dialogService = new DialogService();
 
-            apiService = new ApiService();
-            dataService = new DataService();
-            networkService = new NetworkService();
-            dialogService = new DialogService();
+        LoadCountries();
 
-            LoadCountries();
-        }
+        listBoxCountries.DataContext = this;
+    }
+
+    public ObservableCollection<Country> CountryList
+    {
+        get { return _countryList; }
+        set { _countryList = value; }
+    }
 
     public async void LoadCountries()
     {
         bool load;
 
-        var connection = networkService.CheckConnection();
+        var connection = _networkService.CheckConnection();
         
         if (!connection.IsSuccess)
         {
@@ -63,10 +76,13 @@ namespace ProjetoFinal_Paises;
             load = true;
         }
 
-        listBoxPaises.ItemsSource = CountryList.OrderBy(c => c.Name.Common);
-        listBoxPaises.SelectedItem = "Portugal";
+        _dataView = CollectionViewSource.GetDefaultView(CountryList);
+        _dataView.SortDescriptions.Add(new SortDescription("Name.Common", ListSortDirection.Ascending));
 
-        KeyValuePair<string, Currency> keyValuePair = new KeyValuePair<string, Currency>();
+        listBoxCountries.ItemsSource = _dataView;
+
+        Country portugal = CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
+        listBoxCountries.SelectedItem = portugal;
     }
 
     private void LoadCountriesLocal()
@@ -76,14 +92,19 @@ namespace ProjetoFinal_Paises;
 
     private async Task LoadCountriesApi()
     {
-        var response = await apiService.GetCountries("https://restcountries.com", "/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
+        var response = await _apiService.GetCountries("https://restcountries.com", "/v3.1/all");
 
-        CountryList = (List<Country>)response.Result;
+        CountryList = (ObservableCollection<Country>)response.Result;
     }
 
     private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        var selectedCountry = (Country)listBoxPaises.SelectedItem;
+        if(listBoxCountries.SelectedItem == null)
+        {
+            return;
+        }
+
+        var selectedCountry = (Country)listBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
     }
@@ -107,8 +128,14 @@ namespace ProjetoFinal_Paises;
         // NATIVE OFFICIAL AND COMMON NAME
         foreach (var nativeName in countryToDisplay.Name.NativeName)
         {
-            txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: {nativeName.Value.Common}";
-            txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: {nativeName.Value.Official}";
+            if(!(nativeName.Key == "default"))
+            {
+                txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
+                txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
+            }
+            
+            txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
+            txtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
 
             if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
             {
@@ -176,13 +203,20 @@ namespace ProjetoFinal_Paises;
         {
             string countryName = "";
 
-            foreach (Country country in CountryList)
+            if (border == "N/A")
             {
-                if (country.CCA3 == border)
-                    countryName = country.Name.Common;
+                txtBorders.Text += border;
             }
+            else
+            {
+                foreach (Country country in CountryList)
+                {
+                    if (country.CCA3 == border)
+                        countryName = country.Name.Common;
+                }
 
-            txtBorders.Text += countryName;
+                txtBorders.Text += countryName;
+            }
 
             if (!(iteration == countryToDisplay.Borders.Count() - 1))
                 txtBorders.Text += Environment.NewLine;
@@ -197,8 +231,8 @@ namespace ProjetoFinal_Paises;
         // ------------------ CARD MISCELLANEOUS ------------------
         txtLanguages.Text = string.Empty;
         txtCurrencies.Text = string.Empty;
-        txtGiniYear.Text = string.Empty;
-        txtGiniValue.Text = string.Empty;
+        giniYear.Text = string.Empty;
+        giniValue.Text = string.Empty;
 
         // POPULATION
         txtPopulation.Text = countryToDisplay.Population.ToString("N0");
@@ -220,7 +254,14 @@ namespace ProjetoFinal_Paises;
         // CURRENCIES
         foreach (var currency in countryToDisplay.Currencies)
         {
-            txtCurrencies.Text += $"{currency.Value.Name}" + Environment.NewLine + $"{currency.Key.ToUpper()}" + Environment.NewLine + $"{currency.Value.Symbol}";
+            txtCurrencies.Text += $"{currency.Value.Name}";
+
+            if(!(currency.Key == "default"))
+            {
+                txtCurrencies.Text += Environment.NewLine + 
+                                      $"{currency.Key.ToUpper()}" + Environment.NewLine + 
+                                      $"{currency.Value.Symbol}";
+            }
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
             {
@@ -232,6 +273,8 @@ namespace ProjetoFinal_Paises;
         iteration = 0;
 
         // IS UN MEMBER
+        imgUnMember.Visibility = Visibility.Visible;
+
         if (countryToDisplay.UNMember)
             imgUnMember.Source = new BitmapImage(new Uri("Imagens/check.png", UriKind.Relative));
         else 
@@ -240,8 +283,17 @@ namespace ProjetoFinal_Paises;
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
-            txtGiniYear.Text += $"{gini.Key}: ";
-            txtGiniValue.Text += $"{gini.Value}";
+            if(!(gini.Key == "default"))
+            {
+                giniYear.FontWeight = FontWeights.Bold;
+                giniYear.Text += $"{gini.Key}: ";
+            }
+            else
+            {
+                giniYear.FontWeight = FontWeights.Regular;
+            }
+
+            giniValue.Text += $"{gini.Value}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
             {
@@ -258,14 +310,13 @@ namespace ProjetoFinal_Paises;
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        //MessageBox.Show(responsiveGrid.ActualWidth.ToString());
         if(responsiveGrid.ActualWidth < 600)
         {
             responsiveGrid.Columns = 1;
             return;
         }
 
-        if(responsiveGrid.ActualWidth > 600 && responsiveGrid.ActualWidth < 1000)
+        if (responsiveGrid.ActualWidth > 600 && responsiveGrid.ActualWidth < 1000)
         {
             responsiveGrid.Columns = 2;
             return;
@@ -276,5 +327,20 @@ namespace ProjetoFinal_Paises;
             responsiveGrid.Columns = 3;
             return;
         }
+    }
+
+    private void SearchTermTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var textBox = (TextBox)sender;
+        var filter = textBox.Text.ToLower();
+        _dataView.Filter = item =>
+        {
+            if (item is Country country)
+            {
+                return country.Name.Common.ToLower().Contains(filter);
+            }
+            return false;
+        };
+        _dataView.Refresh();
     }
 }
