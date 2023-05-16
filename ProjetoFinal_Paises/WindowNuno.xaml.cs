@@ -43,10 +43,11 @@ public partial class WindowNuno : Window
 
         // zona the verificação da conexão com a net
         var connection = _networkService.CheckConnection();
-
+        connection.IsSuccess = false;
         if (!connection.IsSuccess)
         {
-            // Call the LoadCountriesLocal  method asynchronously
+            // Call the LoadCountriesLocal
+            // method asynchronously
             // uses a local database
             LoadCountriesLocal();
             load = false;
@@ -56,23 +57,19 @@ public partial class WindowNuno : Window
             // Call the LoadCountriesApi method asynchronously
             await LoadCountriesApi();
             load = true;
-            // load = false;
         }
 
 
         // Update labels and images
         UpdateCardConnection(load, connection);
 
-
         // Update default country
         UpdateDefaultCountry("Portugal");
-
 
         // definir a fonte de items do list-box 
         if (_countryList != null)
             ListBoxCountries.ItemsSource =
                 _countryList.OrderBy(c => c.Name?.Common);
-
 
         // atualizar a list-box para apresentar a pais selecionado por defeito
         UpdateListBoxCountriesWithDefault("Portugal");
@@ -147,7 +144,8 @@ public partial class WindowNuno : Window
 
             // image is success ???
             imgIsSuccess.Source = new BitmapImage(
-                new Uri("/Imagens/Triangulo_Solido.png", UriKind.Relative));
+                new Uri("/Imagens/Triangulo_Solido.png",
+                    UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
 
             // MessageBox.Show(connection.Message);
@@ -164,7 +162,7 @@ public partial class WindowNuno : Window
         var response = _dataService.ReadData();
         _countryList = (List<Country>) response.Result!;
 
-        _dataService.DeleteData();
+        // _dataService.DeleteData();
         _dataService.SaveData(response.Result!);
     }
 
@@ -184,7 +182,7 @@ public partial class WindowNuno : Window
 
         _countryList = (List<Country>) response.Result!;
 
-        _dataService.DeleteData();
+        // _dataService.DeleteData();
         _dataService.SaveData(response.Result);
 
         Console.WriteLine("Debug zone");

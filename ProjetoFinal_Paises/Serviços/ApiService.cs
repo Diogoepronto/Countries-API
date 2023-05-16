@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows;
 using Newtonsoft.Json;
 using ProjetoFinal_Paises.Modelos;
 
@@ -35,6 +36,10 @@ public class ApiService
             var countries =
                 JsonConvert.DeserializeObject<List<Country>>(result);
 
+            MessageBox.Show(
+                "variavel result\n" + result.GetType() + "\n" +
+                "variavel countries\n" + countries.GetType());
+
             return new Response
             {
                 IsSuccess = true,
@@ -47,7 +52,8 @@ public class ApiService
             return new Response
             {
                 IsSuccess = false,
-                Message = ex.Message
+                Message = ex.Message,
+                Result = null
             };
         }
     }

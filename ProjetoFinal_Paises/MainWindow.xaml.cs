@@ -45,7 +45,7 @@ public partial class MainWindow : Window
         var connection = _networkService.CheckConnection();
 
         // serve para fazer os teste de conexão a internet
-        // connection.IsSuccess = false;
+        connection.IsSuccess = false;
         if (!connection.IsSuccess)
         {
             // Call the LoadCountriesLocal  method asynchronously
@@ -120,11 +120,6 @@ public partial class MainWindow : Window
     {
         if (load)
         {
-            // label result
-            // labelResult.Text = conexao.Result.ToString();
-            labelResult.Text = "Objeto foi carregado";
-
-
             // label is success ???
             labelIsSuccess.Text = connection.IsSuccess.ToString();
             labelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
@@ -137,14 +132,14 @@ public partial class MainWindow : Window
                         UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
 
+            // label result
+            labelResult.Text = "Objeto foi carregado";
+            labelResult.Text = connection.Result?.ToString();
+
             // MessageBox.Show(connection.Message);
         }
         else
         {
-            // label result
-            // labelResult.Text = conexao.Result.ToString();
-            labelResult.Text = "Objeto não foi carregado";
-
             // label is success ???
             labelIsSuccess.Text = connection.IsSuccess.ToString();
             labelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
@@ -156,6 +151,10 @@ public partial class MainWindow : Window
                         "/Imagens/Triangulo_Solido.png",
                         UriKind.Relative));
             imgIsSuccess.Width = imgIsSuccess.Height = 30;
+
+            // label result
+            labelResult.Text = "Objeto não foi carregado";
+            labelResult.Text = connection.Result?.ToString();
 
             // MessageBox.Show(connection.Message);
         }
@@ -171,7 +170,10 @@ public partial class MainWindow : Window
         Console.WriteLine("Debug zone");
 
         var response = _dataService.ReadData();
-        _countryList = (List<Country>) response.Result!;
+        _countryList = (List<Country>) response?.Result!;
+
+        // Update labels and images
+        UpdateCardConnection(response.IsSuccess, response);
 
         // _dataService.DeleteData();
         // _dataService.SaveData(response.Result!);
@@ -197,18 +199,29 @@ public partial class MainWindow : Window
             "name,capital,currencies,region,subregion,continents,population," +
             "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
 
-        if (response != null)
+        if (response.Result != null)
         {
             _countryList = (List<Country>) response.Result;
+
+            // Update labels and images
+            UpdateCardConnection(response.IsSuccess, response);
 
             Console.WriteLine("Debug zone");
 
             if (response.Result != null)
             {
-                _dataService.DeleteData();
-                _dataService.SaveData(response.Result);
+                //response = _dataService.DeleteData();
+                // Update labels and images
+                UpdateCardConnection(response.IsSuccess, response);
+
+                response = _dataService.SaveData(response.Result);
+                // Update labels and images
+                UpdateCardConnection(response.IsSuccess, response);
             }
         }
+        else
+            // Update labels and images
+            UpdateCardConnection(response.IsSuccess, response);
 
         progressBarCarregamento.Value = 100;
 
