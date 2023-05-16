@@ -45,7 +45,7 @@ public partial class MainWindow : Window
         var connection = _networkService.CheckConnection();
 
         // serve para fazer os teste de conexão a internet
-        connection.IsSuccess = false;
+        // connection.IsSuccess = false;
         if (!connection.IsSuccess)
         {
             // Call the LoadCountriesLocal  method asynchronously
@@ -121,40 +121,40 @@ public partial class MainWindow : Window
         if (load)
         {
             // label is success ???
-            labelIsSuccess.Text = connection.IsSuccess.ToString();
-            labelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
+            LabelIsSuccess.Text = connection.IsSuccess.ToString();
+            LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
 
             // image is success ???
-            imgIsSuccess.Source =
+            ImgIsSuccess.Source =
                 new BitmapImage(
                     new Uri(
                         "/Imagens/Visto_tracado_solido.png",
                         UriKind.Relative));
-            imgIsSuccess.Width = imgIsSuccess.Height = 30;
+            ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
 
             // label result
-            labelResult.Text = "Objeto foi carregado";
-            labelResult.Text = connection.Result?.ToString();
+            LabelResult.Text = "Objeto foi carregado";
+            LabelResult.Text = connection.Result?.ToString();
 
             // MessageBox.Show(connection.Message);
         }
         else
         {
             // label is success ???
-            labelIsSuccess.Text = connection.IsSuccess.ToString();
-            labelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
+            LabelIsSuccess.Text = connection.IsSuccess.ToString();
+            LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
 
             // image is success ???
-            imgIsSuccess.Source =
+            ImgIsSuccess.Source =
                 new BitmapImage(
                     new Uri(
                         "/Imagens/Triangulo_Solido.png",
                         UriKind.Relative));
-            imgIsSuccess.Width = imgIsSuccess.Height = 30;
+            ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
 
             // label result
-            labelResult.Text = "Objeto não foi carregado";
-            labelResult.Text = connection.Result?.ToString();
+            LabelResult.Text = "Objeto não foi carregado";
+            LabelResult.Text = connection.Result?.ToString();
 
             // MessageBox.Show(connection.Message);
         }
@@ -163,9 +163,9 @@ public partial class MainWindow : Window
 
     private void LoadCountriesLocal()
     {
-        progressBarCarregamento.Value = 0;
+        ProgressBarCarregamento.Value = 0;
 
-        labelMessage.Text = "Base de dados a carregar...";
+        LabelMessage.Text = "Base de dados a carregar...";
 
         Console.WriteLine("Debug zone");
 
@@ -178,9 +178,9 @@ public partial class MainWindow : Window
         // _dataService.DeleteData();
         // _dataService.SaveData(response.Result!);
 
-        progressBarCarregamento.Value = 100;
+        ProgressBarCarregamento.Value = 100;
 
-        labelMessage.Text = "Base de dados totalmente carregada...";
+        LabelMessage.Text = "Base de dados totalmente carregada...";
 
         Console.WriteLine("Debug zone");
     }
@@ -188,9 +188,9 @@ public partial class MainWindow : Window
 
     private async Task LoadCountriesApi()
     {
-        progressBarCarregamento.Value = 0;
+        ProgressBarCarregamento.Value = 0;
 
-        labelMessage.Text = "Base de dados a atualizar...";
+        LabelMessage.Text = "Base de dados a atualizar...";
 
         var response = await ApiService.GetCountries(
             "https://restcountries.com",
@@ -221,11 +221,13 @@ public partial class MainWindow : Window
         }
         else
             // Update labels and images
+        {
             UpdateCardConnection(response.IsSuccess, response);
+        }
 
-        progressBarCarregamento.Value = 100;
+        ProgressBarCarregamento.Value = 100;
 
-        labelMessage.Text = "Base de dados atualizada com exito...";
+        LabelMessage.Text = "Base de dados atualizada com exito...";
 
         Console.WriteLine("Debug zone");
     }
@@ -245,31 +247,31 @@ public partial class MainWindow : Window
         var iteration = 0;
 
         TxtCountryName.Text = countryToDisplay.Name.Common;
-        imgCountryFlag.Source =
+        ImgCountryFlag.Source =
             new BitmapImage(new Uri(countryToDisplay.Flags.Png));
 
         #region CARD NAME
 
         // ------------------ CARD NAMES ------------------
-        txtNameNativeCommon.Text = string.Empty;
-        txtNameNativeOfficial.Text = string.Empty;
+        TxtNameNativeCommon.Text = string.Empty;
+        TxtNameNativeOfficial.Text = string.Empty;
 
         // OFFICIAL NAME, COMMON NAME
-        txtNameOfficial.Text = countryToDisplay.Name.Official;
-        txtNameCommon.Text = countryToDisplay.Name.Common;
+        TxtNameOfficial.Text = countryToDisplay.Name.Official;
+        TxtNameCommon.Text = countryToDisplay.Name.Common;
 
         // NATIVE OFFICIAL AND COMMON NAME
         foreach (var nativeName in countryToDisplay.Name.NativeName)
         {
-            txtNameNativeCommon.Text +=
+            TxtNameNativeCommon.Text +=
                 $"{nativeName.Key.ToUpper()}: {nativeName.Value.Common}";
-            txtNameNativeOfficial.Text +=
+            TxtNameNativeOfficial.Text +=
                 $"{nativeName.Key.ToUpper()}: {nativeName.Value.Official}";
 
             if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
             {
-                txtNameNativeCommon.Text += Environment.NewLine;
-                txtNameNativeOfficial.Text += Environment.NewLine;
+                TxtNameNativeCommon.Text += Environment.NewLine;
+                TxtNameNativeOfficial.Text += Environment.NewLine;
             }
 
             iteration++;
@@ -282,18 +284,18 @@ public partial class MainWindow : Window
         #region CARD GEOGRAPHY
 
         // ------------------ CARD GEOGRAPHY ------------------
-        txtContinent.Text = string.Empty;
-        txtCapital.Text = string.Empty;
-        txtTimezones.Text = string.Empty;
-        txtBorders.Text = string.Empty;
+        TxtContinent.Text = string.Empty;
+        TxtCapital.Text = string.Empty;
+        TxtTimezones.Text = string.Empty;
+        TxtBorders.Text = string.Empty;
 
         // CONTINENT
         foreach (var continent in countryToDisplay.Continents)
         {
-            txtContinent.Text += continent;
+            TxtContinent.Text += continent;
 
             if (!(iteration == countryToDisplay.Continents.Count() - 1))
-                txtContinent.Text += Environment.NewLine;
+                TxtContinent.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -301,16 +303,16 @@ public partial class MainWindow : Window
         iteration = 0;
 
         // REGION, SUBREGION
-        txtRegion.Text = countryToDisplay.Region;
-        txtSubregion.Text = countryToDisplay.SubRegion;
+        TxtRegion.Text = countryToDisplay.Region;
+        TxtSubregion.Text = countryToDisplay.SubRegion;
 
         // CAPITAL
         foreach (var capital in countryToDisplay.Capital)
         {
-            txtCapital.Text += capital;
+            TxtCapital.Text += capital;
 
             if (!(iteration == countryToDisplay.Capital.Count() - 1))
-                txtCapital.Text += Environment.NewLine;
+                TxtCapital.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -318,7 +320,7 @@ public partial class MainWindow : Window
         iteration = 0;
 
         // LATITUDE, LONGITUDE
-        txtLatLng.Text =
+        TxtLatLng.Text =
             string.Format("{0}, {1}",
                 countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US")),
                 countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US")));
@@ -326,10 +328,10 @@ public partial class MainWindow : Window
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
         {
-            txtTimezones.Text += timezone;
+            TxtTimezones.Text += timezone;
 
             if (!(iteration == countryToDisplay.Timezones.Count() - 1))
-                txtTimezones.Text += Environment.NewLine;
+                TxtTimezones.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -345,10 +347,10 @@ public partial class MainWindow : Window
                 if (country.Cca3 == border)
                     countryName = country.Name.Common;
 
-            txtBorders.Text += countryName;
+            TxtBorders.Text += countryName;
 
             if (!(iteration == countryToDisplay.Borders.Count() - 1))
-                txtBorders.Text += Environment.NewLine;
+                TxtBorders.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -360,20 +362,20 @@ public partial class MainWindow : Window
         #region CARD MISCELLANEOUS
 
         // ------------------ CARD MISCELLANEOUS ------------------
-        txtLanguages.Text = string.Empty;
-        txtCurrencies.Text = string.Empty;
-        txtGini.Text = string.Empty;
+        TxtLanguages.Text = string.Empty;
+        TxtCurrencies.Text = string.Empty;
+        TxtGini.Text = string.Empty;
 
         // POPULATION
-        txtPopulation.Text = countryToDisplay.Population.ToString("N0");
+        TxtPopulation.Text = countryToDisplay.Population.ToString("N0");
 
         // LANGUAGES
         foreach (var language in countryToDisplay.Languages)
         {
-            txtLanguages.Text += language.Value;
+            TxtLanguages.Text += language.Value;
 
             if (!(iteration == countryToDisplay.Languages.Count() - 1))
-                txtLanguages.Text += Environment.NewLine;
+                TxtLanguages.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -383,14 +385,14 @@ public partial class MainWindow : Window
         // CURRENCIES
         foreach (var currency in countryToDisplay.Currencies)
         {
-            txtCurrencies.Text += $"{currency.Value.Name}" +
+            TxtCurrencies.Text += $"{currency.Value.Name}" +
                                   Environment.NewLine +
                                   $"{currency.Key.ToUpper()}" +
                                   Environment.NewLine +
                                   $"{currency.Value.Symbol}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-                txtCurrencies.Text += Environment.NewLine + Environment.NewLine;
+                TxtCurrencies.Text += Environment.NewLine + Environment.NewLine;
 
             iteration++;
         }
@@ -398,22 +400,20 @@ public partial class MainWindow : Window
         iteration = 0;
 
         // IS AN UN MEMBER
-        imgUnMember.Source = countryToDisplay.UnMember
+        ImgUnMember.Source = countryToDisplay.UnMember
             ? new BitmapImage(new Uri("Imagens/Check.png", UriKind.Relative))
             : new BitmapImage(new Uri("Imagens/Cross.png", UriKind.Relative));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
-            txtGini.Text += $"{gini.Key}: {gini.Value}";
+            TxtGini.Text += $"{gini.Key}: {gini.Value}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-                txtCurrencies.Text += Environment.NewLine;
+                TxtCurrencies.Text += Environment.NewLine;
 
             iteration++;
         }
-
-        iteration = 0;
 
         #endregion
     }

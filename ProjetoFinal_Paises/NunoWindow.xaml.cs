@@ -13,9 +13,9 @@ using ProjetoFinal_Paises.Serviços;
 namespace ProjetoFinal_Paises;
 
 /// <summary>
-///     Interaction logic for WindowNuno.xaml
+///     Interaction logic for NunoWindow.xaml
 /// </summary>
-public partial class WindowNuno : Window
+public partial class NunoWindow : Window
 {
     private readonly ApiService _apiService;
     private readonly DataService _dataService;
@@ -24,7 +24,7 @@ public partial class WindowNuno : Window
     private DialogService _dialogService;
 
 
-    public WindowNuno()
+    public NunoWindow()
     {
         InitializeComponent();
 

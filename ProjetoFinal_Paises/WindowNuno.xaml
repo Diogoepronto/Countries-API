@@ -11,24 +11,24 @@
     <Window.Background>
         <SolidColorBrush Color="White" />
     </Window.Background>
-    <Grid x:Name="Lista_de_Paises" Height="860">
+    <Grid x:Name="ListaDePaises" Height="860">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Esquerda" Width="20" />
-            <ColumnDefinition x:Name="Coluna_da_Lista_de_Paises" Width="300" />
-            <ColumnDefinition x:Name="Separador_Central" Width="20" />
-            <ColumnDefinition x:Name="Coluna_de_Dados" Width="*" />
+            <ColumnDefinition x:Name="ColunaDaListaDePaises" Width="300" />
+            <ColumnDefinition x:Name="SeparadorCentral" Width="20" />
+            <ColumnDefinition x:Name="ColunaDeDados" Width="*" />
             <ColumnDefinition x:Name="Direita" Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Topo" Height="10" />
-            <RowDefinition x:Name="Linha_Pais_Nome_Bandeira" Height="190" />
-            <RowDefinition x:Name="Separador_1" Height="10" />
-            <RowDefinition x:Name="Linha_Pais_Dados" Height="400" />
-            <RowDefinition x:Name="Separador_2" Height="10" />
+            <RowDefinition x:Name="LinhaPaisNomeBandeira" Height="190" />
+            <RowDefinition x:Name="Separador1" Height="10" />
+            <RowDefinition x:Name="LinhaPaisDados" Height="400" />
+            <RowDefinition x:Name="Separador2" Height="10" />
             <RowDefinition Height="*" />
-            <RowDefinition x:Name="Separador_3" Height="10" />
-            <RowDefinition x:Name="Barra_de_Progresso" Height="15" />
-            <RowDefinition x:Name="Barra_de_Estados" Height="15" />
+            <RowDefinition x:Name="Separador3" Height="10" />
+            <RowDefinition x:Name="BarraDeProgresso" Height="15" />
+            <RowDefinition x:Name="BarraDeEstados" Height="15" />
             <RowDefinition x:Name="Fundo" Height="20" />
         </Grid.RowDefinitions>
 
@@ -95,7 +95,7 @@
                     BorderThickness="0"
                     HorizontalAlignment="Right">
 
-                <Image x:Name="imgCountryFlag"
+                <Image x:Name="ImgCountryFlag"
                        Width="auto"
                        Height="150"
                        VerticalAlignment="Center"
@@ -109,7 +109,7 @@
                     BorderThickness="0, 0, 0, 1"
                     Margin="0, 20, 0, 10" />
         </Grid>
-        <WrapPanel x:Name="Data_do_Pais"
+        <WrapPanel x:Name="DataDoPais"
                    Grid.Row="3" Grid.Column="3"
                    Height="auto"
                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
@@ -157,7 +157,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtNameOfficial"
+                        <TextBlock x:Name="TxtNameOfficial"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -173,7 +173,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtNameCommon"
+                        <TextBlock x:Name="TxtNameCommon"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -189,7 +189,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtNameNativeOfficial"
+                        <TextBlock x:Name="TxtNameNativeOfficial"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -205,7 +205,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtNameNativeCommon"
+                        <TextBlock x:Name="TxtNameNativeCommon"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -242,7 +242,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtContinent"
+                        <TextBlock x:Name="TxtContinent"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -256,7 +256,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtRegion"
+                        <TextBlock x:Name="TxtRegion"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -270,7 +270,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtSubregion"
+                        <TextBlock x:Name="TxtSubregion"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -284,7 +284,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtCapital"
+                        <TextBlock x:Name="TxtCapital"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -298,7 +298,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtLatLng"
+                        <TextBlock x:Name="TxtLatLng"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -312,7 +312,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtTimezones"
+                        <TextBlock x:Name="TxtTimezones"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -326,7 +326,7 @@
                                    FontWeight="Bold"
                                    FontSize="14"
                                    MinWidth="130" />
-                        <TextBlock x:Name="txtBorders"
+                        <TextBlock x:Name="TxtBorders"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -364,7 +364,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtPopulation"
+                        <TextBlock x:Name="TxtPopulation"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -380,7 +380,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtLanguages"
+                        <TextBlock x:Name="TxtLanguages"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -396,7 +396,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtCurrencies"
+                        <TextBlock x:Name="TxtCurrencies"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -412,7 +412,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <Image x:Name="imgUnMember"
+                        <Image x:Name="ImgUnMember"
                                Source="/Imagens/Check.png"
                                Height="20"
                                MinWidth="50" HorizontalAlignment="Left" />
@@ -428,7 +428,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="txtGini"
+                        <TextBlock x:Name="TxtGini"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -453,7 +453,7 @@
                     <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="labelIsSuccess"
+                                <ColorAnimation Storyboard.TargetName="LabelIsSuccess"
                                                 Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
                                                 From="Black"
                                                 To="Red"
@@ -480,14 +480,14 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <Image x:Name="imgIsSuccess"
+                        <Image x:Name="ImgIsSuccess"
                                Source="/Imagens/Visto_tracado_solido.png"
                                Height="20"
                                MinWidth="50"
                                HorizontalAlignment="Left"
                                Cursor="Help" OpacityMask="Black" />
 
-                        <TextBlock x:Name="labelIsSuccess"
+                        <TextBlock x:Name="LabelIsSuccess"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -503,7 +503,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="labelMessage"
+                        <TextBlock x:Name="LabelMessage"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -519,7 +519,7 @@
                                    FontSize="14"
                                    MinWidth="130" />
 
-                        <TextBlock x:Name="labelResult"
+                        <TextBlock x:Name="LabelResult"
                                    FontSize="14"
                                    MinWidth="100"
                                    TextWrapping="Wrap" />
@@ -531,12 +531,12 @@
 
         </WrapPanel>
 
-        <ToolBar x:Name="toolBar"
+        <ToolBar x:Name="ToolBar"
                  Grid.Column="1" Grid.ColumnSpan="3"
                  Grid.Row="8"
                  BorderBrush="#FF695D5D" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
 
-        <ProgressBar x:Name="progressBarCarregamento"
+        <ProgressBar x:Name="ProgressBarCarregamento"
                      Grid.Column="1" Grid.ColumnSpan="3"
                      Grid.Row="7"
                      Background="#FF1B72D6" />

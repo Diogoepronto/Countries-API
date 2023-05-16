@@ -50,6 +50,7 @@
 
     <ItemGroup>
         <Compile Remove="DataBaseService\**"/>
+        <Compile Remove="PageNuno.xaml.cs"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -58,6 +59,7 @@
 
     <ItemGroup>
         <Page Remove="DataBaseService\**"/>
+        <Page Remove="PageNuno.xaml"/>
     </ItemGroup>
 
 </Project>

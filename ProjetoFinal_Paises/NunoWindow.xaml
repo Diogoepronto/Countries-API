@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    x:Class="ProjetoFinal_Paises.MainWindow"
+    x:Class="ProjetoFinal_Paises.NunoWindow"
     mc:Ignorable="d"
     Title="Countries API" Height="900" Width="1600" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
     ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.IsSharedSizeScope="True"
