@@ -23,6 +23,8 @@ using Syncfusion.PMML;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Threading;
+using static Mapsui.Providers.ArcGIS.TileInfo;
 
 namespace ProjetoFinal_Paises;
 
@@ -38,9 +40,17 @@ public partial class MainWindow : Window
     private DataService _dataService;
     private NetworkService _networkService;
     private DialogService _dialogService;
+    
+    public ObservableCollection<Country> CountryList
+    {
+        get { return _countryList; }
+        set { _countryList = value; }
+    }
 
     public MainWindow()
     {
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+
         InitializeComponent();
 
         _apiService = new ApiService();
@@ -48,41 +58,39 @@ public partial class MainWindow : Window
         _networkService = new NetworkService();
         _dialogService = new DialogService();
 
-        LoadCountries();
+        InitializeData();
 
         listBoxCountries.DataContext = this;
     }
 
-    public ObservableCollection<Country> CountryList
+    public async void InitializeData()
     {
-        get { return _countryList; }
-        set { _countryList = value; }
-    }
+        bool load = await LoadCountries();
 
-    public async void LoadCountries()
+        InitializeDataView();
+
+        DownloadFlags();
+
+        if (load)
+            txtStatus.Text = string.Format("Country list loaded from server: {0:F}", DateTime.Now);
+        else
+            txtStatus.Text = string.Format("Country list loaded from internal storage: {0:F}", DateTime.Now);
+    }   
+
+    private async Task<bool> LoadCountries()
     {
-        bool load;
-
         var connection = _networkService.CheckConnection();
-        
+
         if (!connection.IsSuccess)
         {
             LoadCountriesLocal();
-            load = false;
+            return false;
         }
         else
         {
             await LoadCountriesApi();
-            load = true;
+            return true;
         }
-
-        _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(new SortDescription("Name.Common", ListSortDirection.Ascending));
-
-        listBoxCountries.ItemsSource = _dataView;
-
-        Country portugal = CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
-        listBoxCountries.SelectedItem = portugal;
     }
 
     private void LoadCountriesLocal()
@@ -92,9 +100,40 @@ public partial class MainWindow : Window
 
     private async Task LoadCountriesApi()
     {
-        var response = await _apiService.GetCountries("https://restcountries.com", "/v3.1/all");
+        var progress = new Progress<int>(percentComplete =>
+        {
+            progressBar.Progress = percentComplete;
+        });
+
+        var response = await _apiService.GetCountries("https://restcountries.com", "/v3.1/all", progress);
 
         CountryList = (ObservableCollection<Country>)response.Result;
+
+        progressBarOverlay.Visibility = Visibility.Hidden;
+    }
+
+    private void InitializeDataView()
+    {
+        _dataView = CollectionViewSource.GetDefaultView(CountryList);
+        _dataView.SortDescriptions.Add(new SortDescription("Name.Common", ListSortDirection.Ascending));
+
+        listBoxCountries.ItemsSource = _dataView;
+
+        Country portugal = CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
+        listBoxCountries.SelectedItem = portugal;
+
+        gridSearchBar.IsEnabled = true;
+    }
+
+    private async void DownloadFlags()
+    {
+        var progress = new Progress<int>(percentComplete =>
+        {
+            txtStatusDownload.Text = $"Downloading flags: {percentComplete}%";
+        });
+
+        var downloadflags = await _dataService.DownloadFlags(CountryList, progress);
+        txtStatusDownload.Text = downloadflags.Message;
     }
 
     private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -304,8 +343,6 @@ public partial class MainWindow : Window
         }
         iteration = 0;
         #endregion
-
-
     }
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -329,9 +366,21 @@ public partial class MainWindow : Window
         }
     }
 
-    private void SearchTermTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
         var textBox = (TextBox)sender;
+
+        // EXIBE OU ESCONDE O BOTÃO DE APAGAR O TEXTO DA CAIXA DE PESQUISA
+        if(textBox.Text.Length == 0)
+        {
+            clearButton.Visibility = Visibility.Hidden;
+        }
+        else
+        {
+            clearButton.Visibility = Visibility.Visible;
+        }
+
+        // APLICA O FILTRO AOS DADOS DO LISTBOX
         var filter = textBox.Text.ToLower();
         _dataView.Filter = item =>
         {
@@ -342,5 +391,11 @@ public partial class MainWindow : Window
             return false;
         };
         _dataView.Refresh();
+    }
+
+    private void clearButton_Click(object sender, RoutedEventArgs e)
+    {
+        searchBar.Text = string.Empty;
+        searchBar.Focus();
     }
 }

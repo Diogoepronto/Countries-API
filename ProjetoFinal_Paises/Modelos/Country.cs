@@ -27,7 +27,6 @@ public class Country
     private Map _maps;
 
     public CountryName Name { get; set; }
-
     public Flag Flags 
     { 
         get; set; 
@@ -61,7 +60,6 @@ public class Country
             _subregion = value;
         }
     }
-
     public string[] Capital
     {
         get
@@ -110,7 +108,6 @@ public class Country
             _languages = value;
         }
     }
-
     public Dictionary<string, Currency> Currencies
     {
         get
@@ -126,9 +123,7 @@ public class Country
             _currencies = value;
         }
     }
-
     public bool UNMember { get; set; }
-
     public Dictionary<string, string> Gini
     {
         get
@@ -144,37 +139,30 @@ public class Country
             _gini = value;
         }
     }
-
     public string CCA3 { get; set; }
     public Map Maps { get; set; }
 
     public Country()
     {
         Name = new CountryName();
-
         Name.NativeName = new Dictionary<string, NativeName>
         {
             { "default", new NativeName { Common = "N/A", Official = "N/A" } }
         };
-
         Flags = new Flag();
-
         Continents = new string[0];
         Capital = new string[0];
         LatLng = new double[2] {0, 0};
         Timezones = new string[0];
         Borders = new string[0];
-
         Languages = new Dictionary<string, string>()
         {
             { "default", "N/A" }
         };
-
         Currencies = new Dictionary<string, Currency>()
         {
             { "default", new Currency { Name = "N/A", Symbol = "N/A" } }
         };
-
         Gini = new Dictionary<string, string>()
         {
             { "default", "N/A" }
