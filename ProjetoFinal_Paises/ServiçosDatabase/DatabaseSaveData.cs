@@ -35,7 +35,7 @@ public class DatabaseSaveData
             }
 
 
-            // antigo codigo
+            // antigo código
             // foreach (
             //     var sql in countries.Select(country =>
             //         "INSERT INTO Country_Json (json_data) VALUES (@json);"))

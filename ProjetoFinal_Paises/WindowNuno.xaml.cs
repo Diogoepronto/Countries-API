@@ -227,7 +227,7 @@ public partial class WindowNuno : Window
 
         ProgressBarCarregamento.Value = 100;
 
-        LabelMessage.Text = "Base de dados atualizada com exito...";
+        LabelMessage.Text = "Base de dados atualizada com êxito...";
 
         Console.WriteLine("Debug zone");
     }

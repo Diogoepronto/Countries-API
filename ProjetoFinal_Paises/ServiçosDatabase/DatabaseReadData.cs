@@ -40,7 +40,7 @@ public class DatabaseReadData
                 return new Response
                 {
                     IsSuccess = true,
-                    Message = "Dados lidos com exito...",
+                    Message = "Dados lidos com êxito...",
                     Result = countries
                 };
             }

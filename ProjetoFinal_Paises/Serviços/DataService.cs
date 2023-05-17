@@ -20,14 +20,14 @@ public class DataService
             .CreateLogger();
 
 
-        // inicializar as variaveis globais
+        // inicializar as variáveis globais
         _connection = new SqliteConnection();
         _command = new SqliteCommand();
         _dialogService = new DialogService();
 
 
-        // cria o diretorio se não existir
-        // diretorio este que ira albergar a base de dados
+        // cria o diretório se não existir
+        // diretório este que ira albergar a base de dados
         if (!Directory.Exists(Caminho)) Directory.CreateDirectory(Caminho);
 
         if (File.Exists(Caminho + Ficheiro + Extensao))
@@ -199,7 +199,7 @@ public class DataService
                 return new Response
                 {
                     IsSuccess = true,
-                    Message = "Dados lidos com exito...",
+                    Message = "Dados lidos com êxito...",
                     Result = countries
                 };
             }
@@ -258,7 +258,7 @@ public class DataService
         {
             IsSuccess = true,
             Message =
-                "A eliminação dos dados base de dados foi efetuada com exito...",
+                "A eliminação dos dados base de dados foi efetuada com êxito...",
             Result = null
         };
     }

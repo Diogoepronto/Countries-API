@@ -5,9 +5,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Class="ProjetoFinal_Paises.NunoWindow"
     mc:Ignorable="d"
-    Title="Countries API" Height="900" Width="1600" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-    ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.IsSharedSizeScope="True"
-    ScrollViewer.CanContentScroll="True" UseLayoutRounding="True">
+    Title="Countries API" Height="900" Width="1400"
+    WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Grid.IsSharedSizeScope="True"
+    ScrollViewer.CanContentScroll="True" UseLayoutRounding="True" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled">
     <Window.Background>
         <SolidColorBrush Color="White" />
     </Window.Background>

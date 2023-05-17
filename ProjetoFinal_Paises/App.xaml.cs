@@ -7,5 +7,5 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class App : Application
 {
-    // Register Syncfusion license
+    // Register Sync-fusion license
 }

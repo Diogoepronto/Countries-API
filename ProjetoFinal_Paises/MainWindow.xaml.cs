@@ -7,8 +7,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
+
 
 namespace ProjetoFinal_Paises;
 
@@ -21,7 +23,7 @@ public partial class MainWindow : Window
     private readonly DataService _dataService;
     private readonly NetworkService _networkService;
     private List<Country>? _countryList = new();
-    private DialogService _dialogService;
+    private readonly DialogService _dialogService;
 
 
     public MainWindow()
@@ -227,7 +229,7 @@ public partial class MainWindow : Window
 
         ProgressBarCarregamento.Value = 100;
 
-        LabelMessage.Text = "Base de dados atualizada com exito...";
+        LabelMessage.Text = "Base de dados atualizada com êxito...";
 
         Console.WriteLine("Debug zone");
     }
@@ -239,6 +241,41 @@ public partial class MainWindow : Window
         var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
+
+        Mapa.Mode = new AerialMode(true);
+        if (selectedCountry.LatLng == null || selectedCountry.LatLng.Length < 2)
+        {
+            MessageBox.Show("Error", "LOCATION NOT FOUND");
+            ResetMap();
+        }
+        else
+        {
+            var latitude = selectedCountry.LatLng[0];
+            var longitude = selectedCountry.LatLng[1];
+            SetMapLocation(latitude, longitude);
+        }
+
+        // Helper method to reset the map center and point location to (0, 0)
+        void ResetMap()
+        {
+            Mapa.Center =
+                new Microsoft.Maps.MapControl.WPF.Location(0, 0);
+            // Mapa.ZoomLevel = 1000;
+            Point.Location = 
+                new Microsoft.Maps.MapControl.WPF.Location(0, 0);
+            PinPais.Focus();
+        }
+
+        // Helper method to set the map center and point location based on latitude and longitude
+        void SetMapLocation(double latitude, double longitude)
+        {
+            Mapa.Center =
+                new Microsoft.Maps.MapControl.WPF.Location(latitude, longitude);
+            // Mapa.ZoomLevel = 1000;
+            Point.Location =
+                new Microsoft.Maps.MapControl.WPF.Location(latitude, longitude);
+            PinPais.Focus();
+        }
     }
 
 

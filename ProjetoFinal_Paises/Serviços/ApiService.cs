@@ -36,14 +36,10 @@ public class ApiService
             var countries =
                 JsonConvert.DeserializeObject<List<Country>>(result);
 
-            MessageBox.Show(
-                "variavel result\n" + result.GetType() + "\n" +
-                "variavel countries\n" + countries.GetType());
-
             return new Response
             {
                 IsSuccess = true,
-                Message = "Dados obtidos com exito, via API...",
+                Message = "Dados obtidos com êxito, via API...",
                 Result = countries
             };
         }

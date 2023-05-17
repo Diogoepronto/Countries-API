@@ -3,20 +3,28 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     x:Class="ProjetoFinal_Paises.MainWindow"
     mc:Ignorable="d"
-    Title="Countries API" Height="900" Width="1600" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight"
-    ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.IsSharedSizeScope="True"
-    ScrollViewer.CanContentScroll="True" UseLayoutRounding="True">
+
+    Title="Countries API" Height="900" Width="1600" WindowStartupLocation="CenterScreen"
+
+    ScrollViewer.HorizontalScrollBarVisibility="Auto"
+    ScrollViewer.CanContentScroll="True"
+    UseLayoutRounding="True" HorizontalAlignment="Left" VerticalAlignment="Top"
+    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+
     <Window.Background>
         <SolidColorBrush Color="White" />
     </Window.Background>
-    <Grid x:Name="ListaDePaises" Height="860">
+    <Grid x:Name="ListaDePaises">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Esquerda" Width="20" />
             <ColumnDefinition x:Name="ColunaDaListaDePaises" Width="300" />
-            <ColumnDefinition x:Name="SeparadorCentral" Width="20" />
-            <ColumnDefinition x:Name="ColunaDeDados" Width="*" />
+            <ColumnDefinition x:Name="SeparadorCentral1" Width="20" />
+            <ColumnDefinition x:Name="ColunaDeDados" Width="850" />
+            <ColumnDefinition x:Name="SeparadorCentral2" Width="20" />
+            <ColumnDefinition x:Name="ColunaMapa" Width="*" />
             <ColumnDefinition x:Name="Direita" Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -41,11 +49,12 @@
             <ListBox.Background>
                 <SolidColorBrush Color="White" />
             </ListBox.Background>
+
             <!--LIST ITEMS TEMPLATE-->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal"
-                                Margin="0,10,0,10">
+                                Margin="5">
 
                         <Image Source="{Binding Flags.Png}"
                                Width="50"
@@ -68,7 +77,7 @@
         <!--COLUMN COUNTRY DATA-->
         <Grid x:Name="SelectedCountryFlag"
               Grid.Column="3"
-              Grid.Row="1">
+              Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -82,10 +91,11 @@
             <TextBlock x:Name="TxtCountryName"
                        Grid.Column="0"
                        Grid.Row="0"
-                       FontSize="72"
+                       FontSize="48"
                        TextWrapping="Wrap"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left" FontFamily="Bradley Hand ITC" />
+                       HorizontalAlignment="Left"
+                       FontFamily="Bradley Hand ITC" />
 
             <!--FLAG-->
             <Border x:Name="CountryFlag"
@@ -107,440 +117,582 @@
                     Grid.ColumnSpan="2" Grid.Column="0"
                     BorderBrush="#eee"
                     BorderThickness="0, 0, 0, 1"
-                    Margin="0, 20, 0, 10" />
+                    Margin="10" />
         </Grid>
-        <WrapPanel x:Name="DataDoPais"
-                   Grid.Row="3" Grid.Column="3"
-                   Height="auto"
-                   ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                   ScrollViewer.CanContentScroll="True" MinWidth="1000" MinHeight="400" Grid.IsSharedSizeScope="True"
-                   UseLayoutRounding="True" HorizontalAlignment="Left" VerticalAlignment="Top" ClipToBounds="True">
 
-            <!--END CARD: NAMES-->
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+            Grid.Row="3" Grid.Column="3" Grid.RowSpan="3">
 
-            <!--END CARD: GEOGRAPHY-->
+            <!--
+            <ScrollViewer.Resources>
+            -->
+            <!-- Estilo da ScrollBar Horizontal -->
+            <!--
+                <Style TargetType="ScrollBar" 
+                       BasedOn="{StaticResource {x:Type ScrollBar}}">
+                    <Setter Property="Background" Value="Wheat"/>
+                    <Setter Property="Foreground" Value="Orange"/>
+                    <Setter Property="Width" Value="2"/>
+                </Style>
+            
+            </ScrollViewer.Resources>
+            -->
 
-            <!--END CARD: MISCELLANEOUS-->
+            <ScrollViewer.Resources>
+                <!-- Style for Horizontal ScrollBar -->
+                <Style TargetType="ScrollBar" x:Key="HorizontalScrollBarStyle"
+                       BasedOn="{StaticResource {x:Type ScrollBar}}">
+                    <Setter Property="Height" Value="15" />
+                    <Setter Property="Width" Value="Auto" />
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Foreground" Value="DarkGray" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Track x:Name="PART_Track" Grid.Row="0">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource ScrollBarButtonStyle}" />
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollBarThumbStyle}" />
+                                        </Track.Thumb>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource ScrollBarButtonStyle}" />
+                                        </Track.IncreaseRepeatButton>
+                                    </Track>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <!-- Style for Vertical ScrollBar -->
+                <Style TargetType="ScrollBar" x:Key="VerticalScrollBarStyle"
+                       BasedOn="{StaticResource {x:Type ScrollBar}}">
+                    <Setter Property="Width" Value="15" />
+                    <Setter Property="Height" Value="Auto" />
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Foreground" Value="DarkGray" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Track x:Name="PART_Track" Grid.Column="0">
+                                        <Track.DecreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource ScrollBarButtonStyle}" />
+                                        </Track.DecreaseRepeatButton>
+                                        <Track.Thumb>
+                                            <Thumb Style="{StaticResource ScrollBarThumbStyle}" />
+                                        </Track.Thumb>
+                                        <Track.IncreaseRepeatButton>
+                                            <RepeatButton Style="{StaticResource ScrollBarButtonStyle}" />
+                                        </Track.IncreaseRepeatButton>
+                                    </Track>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <!-- Style for ScrollBar Thumb -->
+                <Style TargetType="Thumb" x:Key="ScrollBarThumbStyle">
+                    <Setter Property="Background" Value="DarkGray" />
+                    <Setter Property="Width" Value="15" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Thumb}">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <!-- Style for ScrollBar Buttons -->
+                <Style TargetType="RepeatButton" x:Key="ScrollBarButtonStyle">
+                    <Setter Property="Background" Value="LightGray" />
+                    <Setter Property="Width" Value="15" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type RepeatButton}">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ScrollViewer.Resources>
 
 
-            <!--END CARD: CONNECTION-->
+            <WrapPanel x:Name="DadosDoPais"
+                       ScrollViewer.CanContentScroll="True"
+                       UseLayoutRounding="True"
+                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                       ScrollViewer.VerticalScrollBarVisibility="Auto">
 
-            <!--CARD: NAMES-->
-            <Border BorderBrush="AliceBlue"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Background="White"
-                    Padding="5" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="2"
-                                      Opacity="0.2"
-                                      ShadowDepth="2"
-                                      Direction="270" />
-                </Border.Effect>
+                <!--END CARD: NAMES-->
 
-                <!--DATA-->
-                <StackPanel
-                    Margin="20,10,20,10">
+                <!--END CARD: GEOGRAPHY-->
 
-                    <!--TITLE-->
-                    <TextBlock Margin="0,10,0,10"
-                               Text="Names"
-                               FontSize="22" />
+                <!--END CARD: MISCELLANEOUS-->
 
-                    <!--OFFICIAL NAME-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
 
-                        <TextBlock Text="Official"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
+                <!--END CARD: CONNECTION-->
 
-                        <TextBlock x:Name="TxtNameOfficial"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
+                <!--CARD: NAMES-->
+                <Border BorderBrush="AliceBlue"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Background="White"
+                        Padding="5" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="2"
+                                          Opacity="0.2"
+                                          ShadowDepth="2"
+                                          Direction="270" />
+                    </Border.Effect>
+
+                    <!--DATA-->
+                    <StackPanel
+                        Margin="20,10,20,10">
+
+                        <!--TITLE-->
+                        <TextBlock Margin="0,10,0,10"
+                                   Text="Names"
+                                   FontSize="22" />
+
+                        <!--OFFICIAL NAME-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Official"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtNameOfficial"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--COMMON NAME-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Common"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtNameCommon"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--NATIVE OFFICIAL NAME-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Official (Native)"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtNameNativeOfficial"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--NATIVE COMMON NAME-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Common (Native)"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtNameNativeCommon"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <!--CARD: GEOGRAPHY-->
+                <Border BorderBrush="AliceBlue"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Background="White"
+                        Padding="5" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="2"
+                                          Opacity="0.2"
+                                          ShadowDepth="2"
+                                          Direction="270" />
+                    </Border.Effect>
+
+                    <!--DATA-->
+                    <StackPanel Margin="20,10,20,10">
+
+                        <!--TITLE-->
+                        <TextBlock Margin="0,10,0,10"
+                                   Text="Geography"
+                                   FontSize="22" />
+
+                        <!--CONTINENT-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Continent"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtContinent"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--REGION-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Region"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtRegion"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--SUBREGION-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Subregion"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtSubregion"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--CAPITAL-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Capital"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtCapital"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--LATITUDE LONGITUDE-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Lat/Lng"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtLatLng"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--TIMEZONES-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Timezones"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtTimezones"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--LAND BORDERS-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+                            <TextBlock Text="Land Borders"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+                            <TextBlock x:Name="TxtBorders"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+                <!--CARD: MISCELLANEOUS-->
+                <Border BorderBrush="AliceBlue"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Background="White" Padding="5" Margin="5" HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="2"
+                                          Opacity="0.2"
+                                          ShadowDepth="2"
+                                          Direction="270" />
+                    </Border.Effect>
+
+                    <!--DATA-->
+                    <StackPanel Margin="20,10,20,10">
+
+                        <!--TITLE-->
+                        <TextBlock Margin="0,10,0,10"
+                                   Text="Miscellaneous"
+                                   FontSize="22" />
+
+                        <!--POPULATION-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Population"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtPopulation"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--LANGUAGES-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Languages"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtLanguages"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--CURRENCIES-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Currencies"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtCurrencies"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--UNITED NATIONS MEMBER-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="UN Member"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <Image x:Name="ImgUnMember"
+                                   Source="/Imagens/Check.png"
+                                   Height="20"
+                                   MinWidth="50" HorizontalAlignment="Left" />
+                        </StackPanel>
+
+                        <!--GINI-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Gini"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="TxtGini"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                    </StackPanel>
+                </Border>
+                <!--CARD: CONNECTION-->
+                <Border BorderBrush="AliceBlue"
+                        BorderThickness="1"
+                        CornerRadius="10"
+                        Background="White" Padding="5" Margin="5" HorizontalAlignment="Left"
+                        VerticalAlignment="Top">
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="2"
+                                          Opacity="0.2"
+                                          ShadowDepth="2"
+                                          Direction="270" />
+                    </Border.Effect>
+
+                    <!--SET COLOR TO RED-->
+                    <Border.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="LabelIsSuccess"
+                                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                                    From="Black"
+                                                    To="Red"
+                                                    Duration="0:1:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Border.Triggers>
+                    <!--DATA-->
+                    <StackPanel Margin="20,10,20,10">
+
+                        <!--TITLE-->
+                        <TextBlock Margin="0,10,0,10"
+                                   Text="Connection Status"
+                                   FontSize="22" />
+
+                        <!--IS SUCCESS-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Is Success"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <Image x:Name="ImgIsSuccess"
+                                   Source="/Imagens/Visto_tracado_solido.png"
+                                   Height="20"
+                                   MinWidth="50"
+                                   HorizontalAlignment="Left"
+                                   Cursor="Help" OpacityMask="Black" />
+
+                            <TextBlock x:Name="LabelIsSuccess"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--MESSAGE-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Message"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="LabelMessage"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <!--RESULT-->
+                        <StackPanel Margin="0,5,0,5"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Result"
+                                       FontWeight="Bold"
+                                       FontSize="14"
+                                       MinWidth="130" />
+
+                            <TextBlock x:Name="LabelResult"
+                                       FontSize="14"
+                                       MinWidth="100"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+
                     </StackPanel>
 
-                    <!--COMMON NAME-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
+                </Border>
 
-                        <TextBlock Text="Common"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
+            </WrapPanel>
+        </ScrollViewer>
+        <!--END COLUMN COUNTRY DATA-->
 
-                        <TextBlock x:Name="TxtNameCommon"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--NATIVE OFFICIAL NAME-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Official (Native)"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="TxtNameNativeOfficial"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--NATIVE COMMON NAME-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Common (Native)"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="TxtNameNativeCommon"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-            <!--CARD: GEOGRAPHY-->
-            <Border BorderBrush="AliceBlue"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Background="White"
-                    Padding="5" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="2"
-                                      Opacity="0.2"
-                                      ShadowDepth="2"
-                                      Direction="270" />
-                </Border.Effect>
-
-                <!--DATA-->
-                <StackPanel Margin="20,10,20,10">
-
-                    <!--TITLE-->
-                    <TextBlock Margin="0,10,0,10"
-                               Text="Geography"
-                               FontSize="22" />
-
-                    <!--CONTINENT-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Continent"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtContinent"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--REGION-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Region"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtRegion"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--SUBREGION-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Subregion"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtSubregion"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--CAPITAL-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Capital"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtCapital"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--LATITUDE LONGITUDE-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Lat/Lng"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtLatLng"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--TIMEZONES-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Timezones"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtTimezones"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--LAND BORDERS-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-                        <TextBlock Text="Land Borders"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-                        <TextBlock x:Name="TxtBorders"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                </StackPanel>
-            </Border>
-            <!--CARD: MISCELLANEOUS-->
-            <Border BorderBrush="AliceBlue"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Background="White" Padding="5" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="2"
-                                      Opacity="0.2"
-                                      ShadowDepth="2"
-                                      Direction="270" />
-                </Border.Effect>
-
-                <!--DATA-->
-                <StackPanel Margin="20,10,20,10">
-
-                    <!--TITLE-->
-                    <TextBlock Margin="0,10,0,10"
-                               Text="Miscellaneous"
-                               FontSize="22" />
-
-                    <!--POPULATION-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Population"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="TxtPopulation"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--LANGUAGES-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Languages"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="TxtLanguages"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--CURRENCIES-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Currencies"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="TxtCurrencies"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--UNITED NATIONS MEMBER-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="UN Member"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <Image x:Name="ImgUnMember"
-                               Source="/Imagens/Check.png"
-                               Height="20"
-                               MinWidth="50" HorizontalAlignment="Left" />
-                    </StackPanel>
-
-                    <!--GINI-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Gini"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="TxtGini"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                </StackPanel>
-            </Border>
-            <!--CARD: CONNECTION-->
-            <Border BorderBrush="AliceBlue"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Background="White" Padding="5" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="2"
-                                      Opacity="0.2"
-                                      ShadowDepth="2"
-                                      Direction="270" />
-                </Border.Effect>
-
-                <!--SET COLOR TO RED-->
-                <Border.Triggers>
-                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetName="LabelIsSuccess"
-                                                Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
-                                                From="Black"
-                                                To="Red"
-                                                Duration="0:1:0" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Border.Triggers>
-                <!--DATA-->
-                <StackPanel Margin="20,10,20,10">
-
-                    <!--TITLE-->
-                    <TextBlock Margin="0,10,0,10"
-                               Text="Connection Status"
-                               FontSize="22" />
-
-                    <!--IS SUCCESS-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Is Success"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <Image x:Name="ImgIsSuccess"
-                               Source="/Imagens/Visto_tracado_solido.png"
-                               Height="20"
-                               MinWidth="50"
-                               HorizontalAlignment="Left"
-                               Cursor="Help" OpacityMask="Black" />
-
-                        <TextBlock x:Name="LabelIsSuccess"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--MESSAGE-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Message"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="LabelMessage"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <!--RESULT-->
-                    <StackPanel Margin="0,5,0,5"
-                                HorizontalAlignment="Left"
-                                Orientation="Horizontal">
-
-                        <TextBlock Text="Result"
-                                   FontWeight="Bold"
-                                   FontSize="14"
-                                   MinWidth="130" />
-
-                        <TextBlock x:Name="LabelResult"
-                                   FontSize="14"
-                                   MinWidth="100"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                </StackPanel>
-
-            </Border>
-
-        </WrapPanel>
 
         <ToolBar x:Name="ToolBar"
-                 Grid.Column="1" Grid.ColumnSpan="3"
+                 Grid.Column="1" Grid.ColumnSpan="5"
                  Grid.Row="8"
                  BorderBrush="#FF695D5D" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
 
         <ProgressBar x:Name="ProgressBarCarregamento"
-                     Grid.Column="1" Grid.ColumnSpan="3"
+                     Grid.Column="1" Grid.ColumnSpan="5"
                      Grid.Row="7"
                      Background="#FF1B72D6" />
-        <!--END COLUMN COUNTRY DATA-->
+
+
+        <!--MAP-->
+        <m:Map x:Name="Mapa"
+               CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
+               ZoomLevel="5"
+               Grid.Column="5"
+               Grid.Row="3" Grid.RowSpan="3">
+
+            <!-- The map mode defines the appearance of the map. -->
+            <m:Map.Mode>
+                <m:AerialMode />
+            </m:Map.Mode>
+
+            <!-- The map layer contains the push-pin. -->
+            <m:MapLayer x:Name="PinPais" Height="500">
+                <m:Pushpin x:Name="Point" />
+            </m:MapLayer>
+        </m:Map>
+
+        <!-- Other controls and elements in your window -->
+
 
     </Grid>
 </Window>
