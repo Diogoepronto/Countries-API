@@ -16,6 +16,9 @@
         <None Remove="triangulo_solido.png" />
         <None Remove="visto traçado solido.png" />
         <None Remove="DataBaseService\**" />
+        <None Update="Data\ProjetoFinal_Paises.sqlite">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>

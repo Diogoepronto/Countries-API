@@ -17,7 +17,7 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class JorgeWindow : Window
 {
     // private readonly ApiService _apiService;
     // private readonly DataService _dataService;
@@ -25,7 +25,7 @@ public partial class MainWindow : Window
     // private readonly NetworkService _networkService;
     // internal List<Country> CountryList;
 
-    public MainWindow()
+    public JorgeWindow()
     {
         InitializeComponent();
 

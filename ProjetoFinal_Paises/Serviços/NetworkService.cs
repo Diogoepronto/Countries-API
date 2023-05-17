@@ -5,7 +5,7 @@ namespace ProjetoFinal_Paises.Serviços;
 
 public class NetworkService
 {
-    public Response CheckConnection()
+    public static Response CheckConnection()
     {
         var client = new WebClient();
 

@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Windows;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
 using ProjetoFinal_Paises.Modelos;
+using ProjetoFinal_Paises.ServiçosDatabase;
 using Serilog;
 
 namespace ProjetoFinal_Paises.Serviços;
@@ -30,14 +32,15 @@ public class DataService
         // diretório este que ira albergar a base de dados
         if (!Directory.Exists(Caminho)) Directory.CreateDirectory(Caminho);
 
-        if (File.Exists(Caminho + Ficheiro + Extensao))
-        {
-            const string oldFileName = $"{Caminho}{Ficheiro}{Extensao}";
-            var newFileName =
-                $"{Caminho}{Ficheiro}_{DateTime.Now:yyyyMMddHHmmss}{Extensao}";
+        CopiarFicheiroExistente();
+        EliminarFicheirosExtra10();
 
-            File.Copy(oldFileName, newFileName);
-        }
+
+        // _connection = new SqliteConnection(ConnectionString);
+        // _connection.Open();
+        // // create any necessary tables in the database
+        // DatabaseCreateTables.DataServiceCreation(_connection, Caminho);
+
 
         try
         {
@@ -53,16 +56,16 @@ public class DataService
 
             _command = new SqliteCommand(createTableCommand, _connection);
             _command.ExecuteNonQuery();
-
-            // create any necessary tables in the database
-            // DatabaseCreateTables.DataServiceCreation(_connection, Caminho, FilePath);
         }
         catch (Exception e)
         {
+            // Obtém o nome da classe atual
+            var nomeClasse = Application.Current.MainWindow?.GetType().Name;
+
             DialogService.ShowMessage(
                 "Conexão à base de dados",
-                "Erro ao abrir a base de dados " +
-                "e criar a(s) tabela(s)\n" + e.Message);
+                "Erro ao abrir a base de dados e criar " +
+                "a(s) tabela(s)\n" + nomeClasse + "\n" + e.Message);
         }
         finally
         {
@@ -71,8 +74,42 @@ public class DataService
         }
     }
 
+    private void EliminarFicheirosExtra10()
+    {
+        // Obtém todos os arquivos no diretório
+        var arquivos = Directory.GetFiles(Caminho);
 
-    public Response SaveData(object? countries)
+        // Verifica se há mais de 10 arquivos
+        if (arquivos.Length <= 10) return;
+
+        // Ordena os arquivos pela data de modificação,
+        // do mais antigo para o mais recente
+        Array.Sort(arquivos, (a, b)
+            => File.GetLastWriteTime(a).CompareTo(File.GetLastWriteTime(b)));
+
+        // Obtém o número de arquivos a serem excluídos
+        var numExcluir = arquivos.Length - 10;
+
+        // Exclui os arquivos mais antigos
+        for (var i = 0; i < numExcluir; i++)
+        {
+            File.Delete(arquivos[i]);
+        }
+    }
+
+    private void CopiarFicheiroExistente()
+    {
+        if (!File.Exists(Caminho + Ficheiro + Extensao)) return;
+
+        const string oldFileName = $"{Caminho}{Ficheiro}{Extensao}";
+        var newFileName =
+            $"{Caminho}{Ficheiro}_{DateTime.Now:yyyyMMddHHmmss}{Extensao}";
+
+        File.Copy(oldFileName, newFileName);
+    }
+
+
+    public static Response SaveData(object? countries)
     {
         // DatabaseSaveData.SaveData(_connection, countries);
 
@@ -141,13 +178,13 @@ public class DataService
         }
         finally
         {
-            _connection.Close();
-            _connection.Dispose();
+            _connection?.Close();
+            _connection?.Dispose();
         }
     }
 
 
-    public Response? ReadData()
+    public static Response? ReadData()
     {
         // DatabaseReadData.ReadData(_connection, FilePath);
 
@@ -180,7 +217,7 @@ public class DataService
             if (result.Length == 0)
             {
                 Log.Information(
-                    "No data found in the Country_Json table.");
+                    "No data found in the Country_Json table");
                 return new Response
                 {
                     IsSuccess = false,
@@ -192,7 +229,7 @@ public class DataService
             {
                 Log.Information(
                     "Successfully retrieved data " +
-                    "from the Country_Json table.");
+                    "from the Country_Json table");
                 var countries =
                     JsonConvert.DeserializeObject<List<Country>>(result);
 
@@ -215,13 +252,13 @@ public class DataService
         }
         finally
         {
-            _connection.Close();
-            _connection.Dispose();
+            _connection?.Close();
+            _connection?.Dispose();
         }
     }
 
 
-    public Response DeleteData()
+    public static Response DeleteData()
     {
         const string sql = "delete " +
                            "from Country_Json " +
@@ -237,7 +274,7 @@ public class DataService
             using var command = new SqliteCommand(sql, _connection);
             command.ExecuteNonQuery();
 
-            Log.Information("Data deletion completed.");
+            Log.Information("Data deletion completed");
         }
         catch (Exception e)
         {
@@ -249,8 +286,8 @@ public class DataService
         }
         finally
         {
-            _connection.Close();
-            _connection.Dispose();
+            _connection?.Close();
+            _connection?.Dispose();
         }
 
 
@@ -265,9 +302,9 @@ public class DataService
 
     #region Attributes
 
-    private DialogService _dialogService;
-    private SqliteConnection _connection;
-    private SqliteCommand _command;
+    private static SqliteConnection? _connection;
+    private static SqliteCommand? _command;
+    private static DialogService? _dialogService;
 
     private const string ConnectionString =
         "Data Source=" + Caminho + Ficheiro + Extensao;

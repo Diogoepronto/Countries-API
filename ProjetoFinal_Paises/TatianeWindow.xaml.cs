@@ -7,63 +7,67 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
+using ProjetoFinal_Paises.ServiçosMapas;
 
 namespace ProjetoFinal_Paises;
 
 /// <summary>
-///     Interaction logic for WindowNuno.xaml
+///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class WindowNuno : Window
+public partial class TatianeWindow : Window
 {
-    private readonly ApiService _apiService;
-    private readonly DataService _dataService;
-    private readonly NetworkService _networkService;
-    private List<Country>? _countryList = new();
-    private DialogService _dialogService;
+    // private readonly ApiService _apiService;
+    // private readonly DataService _dataService;
+    // private readonly DialogService _dialogService;
+    // private readonly NetworkService _networkService;
+    // internal List<Country> CountryList;
 
-
-    public WindowNuno()
+    public TatianeWindow()
     {
         InitializeComponent();
 
-        _apiService = new ApiService();
-        _dataService = new DataService();
-        _networkService = new NetworkService();
-        _dialogService = new DialogService();
+        // _apiService = new ApiService();
+        // _dataService = new DataService();
+        // _networkService = new NetworkService();
+        // _dialogService = new DialogService();
+        // CountryList = new();
 
         LoadCountries();
     }
 
 
-    public async void LoadCountries()
+    private async void LoadCountries()
     {
         bool load;
 
-        // zona the verificação da conexão com a net
-        var connection = _networkService.CheckConnection();
+        ServiçosAPI.CarregarAPI.LoadCountries();
 
-        // serve para fazer os teste de conexão a internet
-        connection.IsSuccess = false;
-        if (!connection.IsSuccess)
-        {
-            // Call the LoadCountriesLocal  method asynchronously
-            // uses a local database
-            LoadCountriesLocal();
-            load = false;
-        }
-        else
-        {
-            // Call the LoadCountriesApi method asynchronously
-            await LoadCountriesApi();
-            load = true;
-            // load = false;
-        }
+        // // zona the verificação da conexão com a net
+        // var connection = NetworkService.CheckConnection();
+        //
+        // // serve para fazer os teste de conexão a Internet
+        // // connection.IsSuccess = false;
+        // if (!connection.IsSuccess)
+        // {
+        //     // Call the LoadCountriesLocal  method asynchronously
+        //     // uses a local database
+        //     ServiçosAPI.CarregarAPI.LoadCountriesLocal();
+        //     load = false;
+        // }
+        // else
+        // {
+        //     // Call the LoadCountriesApi method asynchronously
+        //     await ServiçosAPI.CarregarAPI.LoadCountriesApi();
+        //     load = true;
+        //     // load = false;
+        // }
 
 
         // Update labels and images
-        UpdateCardConnection(load, connection);
+        // UpdateCardConnection(load, connection);
 
 
         // Update default country
@@ -71,27 +75,24 @@ public partial class WindowNuno : Window
 
 
         // definir a fonte de items do list-box 
-        if (_countryList != null)
+        if (CountriesList.Countries != null)
             ListBoxCountries.ItemsSource =
-                _countryList.OrderBy(c => c.Name?.Common);
+                CountriesList.Countries.OrderBy(c => c.Name?.Common);
 
 
         // atualizar a list-box para apresentar a pais selecionado por defeito
         UpdateListBoxCountriesWithDefault("Portugal");
-
-
-        // var keyValuePair = new KeyValuePair<string, Currency>();
     }
 
 
-    private void UpdateListBoxCountriesWithDefault(string portugal)
+    private void UpdateListBoxCountriesWithDefault(string country)
     {
         // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
         var listBoxItem =
             ListBoxCountries.ItemContainerGenerator.Items
                 .Cast<Country>()
                 .Select((item, index) => new {item, index})
-                .FirstOrDefault(x => x.item.Name?.Common == "Portugal");
+                .FirstOrDefault(x => x.item.Name?.Common == country);
 
         if (listBoxItem == null) return;
 
@@ -108,7 +109,8 @@ public partial class WindowNuno : Window
         // Find the Country object with the name "Portugal" in the CountryList
 
         var selectedCountry =
-            _countryList?.FirstOrDefault(c => c.Name?.Common == country);
+            CountriesList.Countries?
+                .FirstOrDefault(c => c.Name?.Common == country);
 
         if (selectedCountry != null)
             // Call the DisplayCountryData method with the selected country
@@ -116,7 +118,7 @@ public partial class WindowNuno : Window
     }
 
 
-    private void UpdateCardConnection(bool load, Response connection)
+    internal void UpdateCardConnection(bool load, Response connection)
     {
         if (load)
         {
@@ -161,88 +163,127 @@ public partial class WindowNuno : Window
     }
 
 
-    private void LoadCountriesLocal()
-    {
-        ProgressBarCarregamento.Value = 0;
-
-        LabelMessage.Text = "Base de dados a carregar...";
-
-        Console.WriteLine("Debug zone");
-
-        var response = _dataService.ReadData();
-        _countryList = (List<Country>) response?.Result!;
-
-        // Update labels and images
-        UpdateCardConnection(response.IsSuccess, response);
-
-        // _dataService.DeleteData();
-        // _dataService.SaveData(response.Result!);
-
-        ProgressBarCarregamento.Value = 100;
-
-        LabelMessage.Text = "Base de dados totalmente carregada...";
-
-        Console.WriteLine("Debug zone");
-    }
-
-
-    private async Task LoadCountriesApi()
-    {
-        ProgressBarCarregamento.Value = 0;
-
-        LabelMessage.Text = "Base de dados a atualizar...";
-
-        var response = await ApiService.GetCountries(
-            "https://restcountries.com",
-            "/v3.1/all" +
-            "?fields=" +
-            "name,capital,currencies,region,subregion,continents,population," +
-            "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
-
-        if (response.Result != null)
-        {
-            _countryList = (List<Country>) response.Result;
-
-            // Update labels and images
-            UpdateCardConnection(response.IsSuccess, response);
-
-            Console.WriteLine("Debug zone");
-
-            if (response.Result != null)
-            {
-                //response = _dataService.DeleteData();
-                // Update labels and images
-                UpdateCardConnection(response.IsSuccess, response);
-
-                response = _dataService.SaveData(response.Result);
-                // Update labels and images
-                UpdateCardConnection(response.IsSuccess, response);
-            }
-        }
-        else
-            // Update labels and images
-        {
-            UpdateCardConnection(response.IsSuccess, response);
-        }
-
-        ProgressBarCarregamento.Value = 100;
-
-        LabelMessage.Text = "Base de dados atualizada com êxito...";
-
-        Console.WriteLine("Debug zone");
-    }
-
-
-    private void ListBoxPaises_SelectionChanged(
+    internal async void ListBoxPaises_SelectionChanged(
         object sender, SelectionChangedEventArgs e)
     {
         var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
+        CoordenadasPais.MapaPais_SelectionChanged(selectedCountry);
+
+        MapaPais_SelectionChanged(selectedCountry);
+    }
+
+    private void MapaPais_SelectionChanged(Country selectedCountry)
+    {
+        Mapa.Mode = new AerialMode(true);
+        if (selectedCountry.LatLng == null || selectedCountry.LatLng.Length < 2)
+        {
+            MessageBox.Show("Error", "LOCATION NOT FOUND");
+            ResetMap();
+        }
+        else
+        {
+            var latitude = selectedCountry.LatLng[0];
+            var longitude = selectedCountry.LatLng[1];
+            SetMapLocation(latitude, longitude);
+            SetMapPushpin();
+        }
+
+        // Helper method to reset the map center and point location to (0, 0)
+        void ResetMap()
+        {
+            Mapa.Center =
+                new Location(0, 0);
+            Mapa.ZoomLevel = 20;
+
+            PinCapital.Location =
+                new Location(0, 0);
+            CamadaPinCapital.Focus();
+        }
+
+        // Helper method to set the map center and
+        // point location based on latitude and longitude
+        void SetMapLocation(double latitude, double longitude)
+        {
+            Mapa.Center =
+                new Location(latitude, longitude);
+            Mapa.ZoomLevel = 5;
+        }
+
+
+        // Helper method to set the map center and
+        // point location based on latitude and longitude
+        async Task SetMapPushpin()
+        {
+            if (selectedCountry.Capital == null)
+            {
+                // MessageBox.Show("Error", "CAPITAL NOT FOUND");
+                ResetMap();
+            }
+            else
+            {
+                var country = selectedCountry.Name?.Common;
+                var capital = selectedCountry.Capital[0];
+
+                capital = capital switch
+                {
+                    "Washington, D.C." => "Washington",
+                    _ => capital
+                };
+
+                if (selectedCountry.Borders is {Length: 0}) Mapa.ZoomLevel = 8;
+
+                Mapa.ZoomLevel = country switch
+                {
+                    "Russia" => 1,
+                    "Antarctica" => 1,
+
+                    "Australia" => 3,
+                    "United States" => 3,
+
+                    "Ukraine" => 4,
+
+                    "Vanuatu" => 7,
+                    "Tuvalu" => 7,
+                    "Solomon Island" => 7,
+                    "Timor-Leste" => 7,
+
+                    "Andorra" => 9,
+                    "Vatican City" => 8,
+
+                    _ => Mapa.ZoomLevel
+                };
+
+                var location =
+                    await CoordenadasCapital.GetLocationFromAddress(
+                        country, capital);
+
+                // var latitude = location.Result.Point.Latitude;
+                // var longitude = location.Result.Point.Longitude;
+                var latitude = location.Point.Latitude;
+                var longitude = location.Point.Longitude;
+
+                if (location != null || latitude == 0 || longitude == 0)
+                {
+                    // Define a origem do posicionamento
+                    // para a parte inferior do pino
+                    PinCapital.PositionOrigin = PositionOrigin.BottomCenter;
+                    PinCapital.Location = new Location(latitude, longitude);
+
+                    CamadaPinCapital.Focus();
+                }
+                else
+                {
+                    // MessageBox.Show("Error", "LOCATION NOT FOUND");
+                    ResetMap();
+                }
+            }
+        }
     }
 
 
-    public void DisplayCountryData(Country countryToDisplay)
+    internal void DisplayCountryData(Country countryToDisplay)
     {
         var iteration = 0;
 
@@ -343,7 +384,7 @@ public partial class WindowNuno : Window
         {
             var countryName = "";
 
-            foreach (var country in _countryList)
+            foreach (var country in CountriesList.Countries)
                 if (country.Cca3 == border)
                     countryName = country.Name.Common;
 
