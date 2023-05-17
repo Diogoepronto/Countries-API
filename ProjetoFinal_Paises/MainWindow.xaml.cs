@@ -25,6 +25,10 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Threading;
 using static Mapsui.Providers.ArcGIS.TileInfo;
+using System.IO;
+using System.Reflection;
+using Microsoft.Win32;
+using Syncfusion.Windows.Tools.Controls;
 
 namespace ProjetoFinal_Paises;
 
@@ -65,13 +69,13 @@ public partial class MainWindow : Window
 
     public async void InitializeData()
     {
-        bool load = await LoadCountries();
+        bool isConnected = await LoadCountries();
 
         InitializeDataView();
 
         DownloadFlags();
 
-        if (load)
+        if (isConnected)
             txtStatus.Text = string.Format("Country list loaded from server: {0:F}", DateTime.Now);
         else
             txtStatus.Text = string.Format("Country list loaded from internal storage: {0:F}", DateTime.Now);
@@ -103,12 +107,30 @@ public partial class MainWindow : Window
         var progress = new Progress<int>(percentComplete =>
         {
             progressBar.Progress = percentComplete;
+
+            switch(percentComplete)
+            {
+                case 25:
+                    txtProgressStep.Text = "Downloading countries data";
+                    break;
+                case 50:
+                    txtProgressStep.Text = "Serializing data";
+                    break;
+                case 75:
+                    txtProgressStep.Text = "Deserializing objects";
+                    break;
+                case 100:
+                    txtProgressStep.Text = "Loading complete";
+                    break;
+            }
         });
 
-        var response = await _apiService.GetCountries("https://restcountries.com", "/v3.1/all", progress);
+        var response = await _apiService.GetCountries("https://restcountries.com", "v3.1/all", progress);
 
         CountryList = (ObservableCollection<Country>)response.Result;
 
+        await Task.Delay(100);
+        txtProgressStep.Visibility = Visibility.Hidden;
         progressBarOverlay.Visibility = Visibility.Hidden;
     }
 
@@ -133,7 +155,10 @@ public partial class MainWindow : Window
         });
 
         var downloadflags = await _dataService.DownloadFlags(CountryList, progress);
-        txtStatusDownload.Text = downloadflags.Message;
+        txtStatusDownload.Text = downloadflags.Message;     
+        
+        await Task.Delay(10000);
+        txtStatusDownload.Text = string.Empty;
     }
 
     private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -152,13 +177,35 @@ public partial class MainWindow : Window
     {
         int iteration = 0;
 
+        #region COUNTRY NAME AND FLAG
         txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
-        imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.Png));
 
-        #region CARD NAME
+        try
+        {
+            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{countryToDisplay.CCA3}.png";
+
+            if (File.Exists(flagPath))
+                imgCountryFlag.Source = new BitmapImage(new Uri(flagPath));
+            else
+            {
+                if (_networkService.CheckConnection().IsSuccess)
+                    imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.Png));
+                else
+                    imgCountryFlag.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/no_flag.png"));
+            }
+
+        }
+        catch (Exception ex)
+        {
+            _dialogService.ShowMessage("Erro", ex.Message);
+        }
+
+        #endregion
+
+        #region CARD NAMES
         // ------------------ CARD NAMES ------------------
-        txtNameNativeCommon.Text = string.Empty;
         txtNameNativeOfficial.Text = string.Empty;
+        txtNameNativeCommon.Text = string.Empty;
 
         // OFFICIAL NAME, COMMON NAME
         txtNameOfficial.Text = countryToDisplay.Name.Official;
@@ -169,17 +216,17 @@ public partial class MainWindow : Window
         {
             if(!(nativeName.Key == "default"))
             {
-                txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
                 txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
+                txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
             }
             
-            txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
             txtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
+            txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
 
             if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
             {
-                txtNameNativeCommon.Text += Environment.NewLine;
                 txtNameNativeOfficial.Text += Environment.NewLine;
+                txtNameNativeCommon.Text += Environment.NewLine;
             }
 
             iteration++;
@@ -315,9 +362,9 @@ public partial class MainWindow : Window
         imgUnMember.Visibility = Visibility.Visible;
 
         if (countryToDisplay.UNMember)
-            imgUnMember.Source = new BitmapImage(new Uri("Imagens/check.png", UriKind.Relative));
+            imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/check.png"));
         else 
-            imgUnMember.Source = new BitmapImage(new Uri("Imagens/cross.png", UriKind.Relative));
+            imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/cross.png"));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)

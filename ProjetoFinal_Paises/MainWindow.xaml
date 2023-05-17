@@ -7,7 +7,13 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         x:Class="ProjetoFinal_Paises.MainWindow"
         mc:Ignorable="d"
-        Title="Countries API" Height="750" Width="1400" WindowStartupLocation="CenterScreen" MinWidth="800" MinHeight="600">
+    
+        Title="Countries API" 
+        Height="750" 
+        MinHeight="600"
+        Width="1400" 
+        MinWidth="800" 
+        WindowStartupLocation="CenterScreen" >
 
     <!--#region CUSTOM STYLES -->
     <Window.Resources>        
@@ -16,7 +22,7 @@
             <Style TargetType="Button" x:Key="ClearSearchButton">
                 <Setter Property="OverridesDefaultStyle" Value="True" />
                 <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Foreground" Value="DeepPink"/>
+                <Setter Property="Foreground" Value="#FFE32227"/>
 
                 <Setter Property="Template">
                     <Setter.Value>
@@ -37,7 +43,7 @@
                                 <Trigger Property="IsMouseOver" Value="true">
                                     <Setter Property="BorderBrush" 
                                             TargetName="Border" 
-                                            Value="DeepPink"/>
+                                            Value="#FFE32227"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>
 
@@ -217,22 +223,42 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-
+        
+        <!--PROGRESS BAR-->
         <Border x:Name="progressBarOverlay" Grid.ColumnSpan="4" Grid.RowSpan="3" Panel.ZIndex="10" Background="#EEFFFFFF">
-            <syncfusion:SfCircularProgressBar x:Name="progressBar" Width="300"/>
+            <syncfusion:SfCircularProgressBar x:Name="progressBar" Width="300" GapWidth="-1">
+                <syncfusion:SfCircularProgressBar.ProgressColor>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF56CCF2"/>
+                        <GradientStop Color="#FF2F80ED" Offset="1"/>
+                    </LinearGradientBrush>
+                </syncfusion:SfCircularProgressBar.ProgressColor>
+            </syncfusion:SfCircularProgressBar>
         </Border>
+        <TextBlock x:Name="txtProgressStep" 
+                   Grid.ColumnSpan="4" 
+                   Grid.RowSpan="3" 
+                   Panel.ZIndex="11"
+                   Text="Loading Countries" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="0,150,0,0" 
+                   FontSize="48" 
+                   Foreground="#FF007CEE"/>
 
+        <!--STATUS MESSAGES-->
         <TextBlock x:Name="txtStatusDownload"
                    Grid.Row="3"
                    Grid.Column="1"
                    Grid.ColumnSpan="4"
-                   Text="" Foreground="#FF666666"/>
+                   Text="" Foreground="#FF999999"/>
 
         <TextBlock x:Name="txtStatus"
                    Grid.Row="3"
                    Grid.Column="2"
                    Text="" 
-                   HorizontalAlignment="Right" Foreground="#FF666666"/>
+                   HorizontalAlignment="Right" 
+                   Foreground="#FF999999"/>
 
         <!--#region MAIN COLUMN LEFT -->
         <Grid Grid.Row="1" Grid.Column="1">
@@ -260,7 +286,9 @@
                         Style="{StaticResource ClearSearchButton}" 
                         Visibility="Hidden" 
                         VerticalAlignment="Center" 
-                        Cursor="Hand" TabIndex="2" Click="clearButton_Click"/>
+                        Cursor="Hand" 
+                        TabIndex="2" 
+                        Click="clearButton_Click"/>
 
                 <TextBlock IsHitTestVisible="False" 
                            Text="Enter a country" 
@@ -306,7 +334,7 @@
                                 </Image.Effect>
                             </Image>
 
-                            <TextBlock Text="{Binding Name.Common}" 
+                            <TextBlock Text="{Binding Name.Common}"
                                        Width="200" 
                                        Padding="10,0,0,0" 
                                        VerticalAlignment="Center" 
@@ -360,7 +388,7 @@
                     <Image x:Name="imgCountryFlag" 
                            Grid.Column="1" 
                            Grid.Row="0" 
-                           Source="Imagens/no_flag.png"
+                           Source="/Imagens/no_flag.png"
                            Width="auto" 
                            Height="150" 
                            VerticalAlignment="Center" 
@@ -377,7 +405,7 @@
             <!--#endregion-->
 
             <!--#region COUNTRY DATA -->
-            <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2">
+            <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>

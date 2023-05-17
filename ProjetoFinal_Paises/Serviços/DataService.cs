@@ -19,10 +19,10 @@ public class DataService
 
     public async Task<Response> DownloadFlags(ObservableCollection<Country> countryList, IProgress<int> progress)
     {
-        if (!Directory.Exists("Flags"))
-            Directory.CreateDirectory("Flags");
+        string flagsFolder= @"Flags";
 
-        var path = @"Flags\";
+        if (!Directory.Exists(flagsFolder))
+            Directory.CreateDirectory(flagsFolder);
 
         try
         {
@@ -30,18 +30,19 @@ public class DataService
 
             var httpClient = new HttpClient();
 
-            foreach(var country in countryList)
+            foreach (var country in countryList)
             {
                 string flagFile = $"{country.CCA3}.png";
-                string filePath = Path.Combine(path, flagFile);
+                string filePath = Path.Combine(flagsFolder, flagFile);
 
                 if (!File.Exists(filePath))
                 {
                     var stream = await httpClient.GetStreamAsync(country.Flags.Png);
-                    using(var fileStream = File.Create(filePath))
+                    using (var fileStream = File.Create(filePath))
                     {
                         stream.CopyTo(fileStream);
                         flagsDownloaded++;
+
 
                         int percentageComplete = flagsDownloaded * 100 / countryList.Count;
 
@@ -49,9 +50,10 @@ public class DataService
 
                     }
                 }
+                country.Flags.LocalImage = Directory.GetCurrentDirectory() + @"/Flags/" + $"{country.CCA3}.png";
             }
 
-            if(flagsDownloaded > 0)
+            if (flagsDownloaded > 0)
             {
                 return new Response
                 {
@@ -64,7 +66,7 @@ public class DataService
                 return new Response
                 {
                     IsSuccess = true,
-                    Message = "Every flag was already stored."
+                    Message = "Every flag is already in the internal storage."
                 };
             }
         }

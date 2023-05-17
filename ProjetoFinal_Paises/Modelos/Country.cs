@@ -27,11 +27,37 @@ public class Country
     private Map _maps;
 
     public CountryName Name { get; set; }
-    public Flag Flags 
-    { 
-        get; set; 
+    public string CCA3
+    {
+        get
+        {
+            if (_cca3 == null || _cca3.Length == 0)
+                return "N/A";
+
+            return _cca3;
+        }
+        set
+        {
+            _cca3 = value;
+        }
     }
-    public string[] Continents { get; set; }
+    public Flag Flags { get; set; }
+    public string[] Continents
+    {
+        get
+        {
+            if (_continents.Length == 0)
+            {
+                return new string[1] { "N/A" };
+            }
+            return _continents;
+        }
+
+        set
+        {
+            _continents = value;
+        }
+    }
     public string Region
     {
         get
@@ -75,7 +101,22 @@ public class Country
         }
     }
     public double[] LatLng { get; set; }
-    public string[] Timezones { get; set; }
+    public string[] Timezones
+    {
+        get
+        {
+            if (_timezones.Length == 0)
+            {
+                return new string[1] { "N/A" };
+            }
+            return _timezones;
+        }
+
+        set
+        {
+            _timezones = value;
+        }
+    }
     public string[] Borders
     {
         get
@@ -139,7 +180,6 @@ public class Country
             _gini = value;
         }
     }
-    public string CCA3 { get; set; }
     public Map Maps { get; set; }
 
     public Country()
@@ -149,7 +189,7 @@ public class Country
         {
             { "default", new NativeName { Common = "N/A", Official = "N/A" } }
         };
-        Flags = new Flag();
+        Flags = new Flag(this);
         Continents = new string[0];
         Capital = new string[0];
         LatLng = new double[2] {0, 0};

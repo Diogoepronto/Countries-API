@@ -25,13 +25,12 @@ public class ApiService
         {
             var client = new HttpClient();
             
-            progress.Report(10);
             client.BaseAddress = new Uri(urlBase);
-            
+
             progress.Report(25);
             var response = await client.GetAsync(controller, HttpCompletionOption.ResponseHeadersRead);
             
-            progress.Report(60);
+            progress.Report(50);
             var result = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
@@ -43,11 +42,10 @@ public class ApiService
                 };
             }
 
-            progress.Report(70);
+            progress.Report(75);
             var countries = JsonConvert.DeserializeObject<ObservableCollection<Country>>(result);
 
-            progress.Report(90);
-
+            progress.Report(100);
             return new Response
             {
                 IsSuccess = true,

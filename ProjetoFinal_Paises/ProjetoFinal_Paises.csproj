@@ -5,6 +5,8 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <PackageIcon>appIcon.png</PackageIcon>
+    <ApplicationIcon>Imagens\appIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +14,10 @@
     <None Remove="Imagens\cross.png" />
     <None Remove="Imagens\no_flag.png" />
     <None Remove="Imagens\No_flag.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Imagens\appIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,10 +29,19 @@
 
   <ItemGroup>
     <Resource Include="Imagens\check.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
     <Resource Include="Imagens\cross.png" />
-    <Resource Include="Imagens\no_flag.png" />
+    <Resource Include="Imagens\no_flag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Imagens\appIcon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
