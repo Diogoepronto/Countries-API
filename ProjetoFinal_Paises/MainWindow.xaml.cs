@@ -29,13 +29,18 @@ using System.IO;
 using System.Reflection;
 using Microsoft.Win32;
 using Syncfusion.Windows.Tools.Controls;
+using Newtonsoft.Json;
+using System.Net.NetworkInformation;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
+using System.Net.Http;
 
 namespace ProjetoFinal_Paises;
 
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
 public partial class MainWindow : Window
 {
     private ObservableCollection<Country> _countryList = new ObservableCollection<Country>();
@@ -62,10 +67,14 @@ public partial class MainWindow : Window
         _networkService = new NetworkService();
         _dialogService = new DialogService();
 
+        NetworkService.AvailabilityChanged += new NetworkStatusChangedHandler(DoAvailabilityChanged);
+
         InitializeData();
 
         listBoxCountries.DataContext = this;
     }
+
+    #region INITIALIZE APPLICATION
 
     public async void InitializeData()
     {
@@ -74,18 +83,20 @@ public partial class MainWindow : Window
         InitializeDataView();
 
         DownloadFlags();
-
+        
         if (isConnected)
-            txtStatus.Text = string.Format("Country list loaded from server: {0:F}", DateTime.Now);
+            txtStatus.Text = string.Format($"Country list loaded from server: {DateTime.Now:g}");
         else
-            txtStatus.Text = string.Format("Country list loaded from internal storage: {0:F}", DateTime.Now);
-    }   
+            txtStatus.Text = string.Format($"Country list loaded from internal storage: {DateTime.Now:g}");
+    }
+
+    #endregion
+
+    #region LOAD COUNTRY DATA
 
     private async Task<bool> LoadCountries()
     {
-        var connection = _networkService.CheckConnection();
-
-        if (!connection.IsSuccess)
+        if (!NetworkService.IsNetworkAvailable())
         {
             LoadCountriesLocal();
             return false;
@@ -99,7 +110,15 @@ public partial class MainWindow : Window
 
     private void LoadCountriesLocal()
     {
-        throw new NotImplementedException();
+        CountryList = (ObservableCollection<Country>)DataService.ReadData().Result;
+
+        progressBar.Progress = 100;
+        txtProgressStep.Text = "Loading complete";
+
+        Thread.Sleep(100);
+
+        txtProgressStep.Visibility = Visibility.Hidden;
+        progressBarOverlay.Visibility = Visibility.Hidden;
     }
 
     private async Task LoadCountriesApi()
@@ -129,10 +148,20 @@ public partial class MainWindow : Window
 
         CountryList = (ObservableCollection<Country>)response.Result;
 
+        foreach(Country country in CountryList)        
+            country.Flags.LocalImage = Directory.GetCurrentDirectory() + @"/Flags/" + $"{country.CCA3}.png";
+
         await Task.Delay(100);
         txtProgressStep.Visibility = Visibility.Hidden;
         progressBarOverlay.Visibility = Visibility.Hidden;
+
+        DataService.DeleteData();
+        DataService.SaveData(CountryList);
     }
+
+    #endregion
+
+    #region INITIALIZE UI
 
     private void InitializeDataView()
     {
@@ -147,6 +176,10 @@ public partial class MainWindow : Window
         gridSearchBar.IsEnabled = true;
     }
 
+    #endregion
+
+    #region MANAGE LOCAL DATA
+
     private async void DownloadFlags()
     {
         var progress = new Progress<int>(percentComplete =>
@@ -155,55 +188,37 @@ public partial class MainWindow : Window
         });
 
         var downloadflags = await _dataService.DownloadFlags(CountryList, progress);
-        txtStatusDownload.Text = downloadflags.Message;     
         
-        await Task.Delay(10000);
+        txtStatusDownload.Text = downloadflags.Message;
+
+        _dataView.Refresh();
+
+        await Task.Delay(8000);
         txtStatusDownload.Text = string.Empty;
     }
 
-    private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if(listBoxCountries.SelectedItem == null)
-        {
-            return;
-        }
+    #endregion
 
-        var selectedCountry = (Country)listBoxCountries.SelectedItem;
-
-        DisplayCountryData(selectedCountry);
-    }
+    #region DISPLAY COUNTRY DATA
 
     public void DisplayCountryData(Country countryToDisplay)
     {
+        DisplayCountryHeader(countryToDisplay);
+        DisplayCountryNames(countryToDisplay);
+        DisplayCountryGeography(countryToDisplay);
+        DisplayCountryMisc(countryToDisplay);
+    }
+
+    public void DisplayCountryHeader(Country countryToDisplay)
+    {
+        txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
+        imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.FlagToDisplay));
+    }
+
+    public void DisplayCountryNames(Country countryToDisplay)
+    {
         int iteration = 0;
 
-        #region COUNTRY NAME AND FLAG
-        txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
-
-        try
-        {
-            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{countryToDisplay.CCA3}.png";
-
-            if (File.Exists(flagPath))
-                imgCountryFlag.Source = new BitmapImage(new Uri(flagPath));
-            else
-            {
-                if (_networkService.CheckConnection().IsSuccess)
-                    imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.Png));
-                else
-                    imgCountryFlag.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/no_flag.png"));
-            }
-
-        }
-        catch (Exception ex)
-        {
-            _dialogService.ShowMessage("Erro", ex.Message);
-        }
-
-        #endregion
-
-        #region CARD NAMES
-        // ------------------ CARD NAMES ------------------
         txtNameNativeOfficial.Text = string.Empty;
         txtNameNativeCommon.Text = string.Empty;
 
@@ -214,12 +229,12 @@ public partial class MainWindow : Window
         // NATIVE OFFICIAL AND COMMON NAME
         foreach (var nativeName in countryToDisplay.Name.NativeName)
         {
-            if(!(nativeName.Key == "default"))
+            if (!(nativeName.Key == "default"))
             {
                 txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
                 txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
             }
-            
+
             txtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
             txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
 
@@ -231,11 +246,12 @@ public partial class MainWindow : Window
 
             iteration++;
         }
-        iteration = 0;
-        #endregion
+    }
 
-        #region CARD GEOGRAPHY
-        // ------------------ CARD GEOGRAPHY ------------------
+    public void DisplayCountryGeography(Country countryToDisplay)
+    {
+        int iteration = 0;
+
         txtContinent.Text = string.Empty;
         txtCapital.Text = string.Empty;
         txtTimezones.Text = string.Empty;
@@ -309,12 +325,12 @@ public partial class MainWindow : Window
 
             iteration++;
         }
-        iteration = 0;
+    }
 
-        #endregion
+    public void DisplayCountryMisc(Country countryToDisplay)
+    {
+        int iteration = 0;
 
-        #region CARD MISCELLANEOUS
-        // ------------------ CARD MISCELLANEOUS ------------------
         txtLanguages.Text = string.Empty;
         txtCurrencies.Text = string.Empty;
         giniYear.Text = string.Empty;
@@ -342,10 +358,10 @@ public partial class MainWindow : Window
         {
             txtCurrencies.Text += $"{currency.Value.Name}";
 
-            if(!(currency.Key == "default"))
+            if (!(currency.Key == "default"))
             {
-                txtCurrencies.Text += Environment.NewLine + 
-                                      $"{currency.Key.ToUpper()}" + Environment.NewLine + 
+                txtCurrencies.Text += Environment.NewLine +
+                                      $"{currency.Key.ToUpper()}" + Environment.NewLine +
                                       $"{currency.Value.Symbol}";
             }
 
@@ -363,13 +379,13 @@ public partial class MainWindow : Window
 
         if (countryToDisplay.UNMember)
             imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/check.png"));
-        else 
+        else
             imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/cross.png"));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
-            if(!(gini.Key == "default"))
+            if (!(gini.Key == "default"))
             {
                 giniYear.FontWeight = FontWeights.Bold;
                 giniYear.Text += $"{gini.Key}: ";
@@ -388,13 +404,27 @@ public partial class MainWindow : Window
 
             iteration++;
         }
-        iteration = 0;
-        #endregion
     }
+
+    private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if(listBoxCountries.SelectedItem == null)
+        {
+            return;
+        }
+
+        var selectedCountry = (Country)listBoxCountries.SelectedItem;
+
+        DisplayCountryData(selectedCountry);
+    }
+
+    #endregion
+
+    #region AUXILIARY METHODS
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if(responsiveGrid.ActualWidth < 600)
+        if (responsiveGrid.ActualWidth < 600)
         {
             responsiveGrid.Columns = 1;
             return;
@@ -406,7 +436,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        if(responsiveGrid.ActualWidth > 1000)
+        if (responsiveGrid.ActualWidth > 1000)
         {
             responsiveGrid.Columns = 3;
             return;
@@ -418,7 +448,7 @@ public partial class MainWindow : Window
         var textBox = (TextBox)sender;
 
         // EXIBE OU ESCONDE O BOTÃO DE APAGAR O TEXTO DA CAIXA DE PESQUISA
-        if(textBox.Text.Length == 0)
+        if (textBox.Text.Length == 0)
         {
             clearButton.Visibility = Visibility.Hidden;
         }
@@ -444,5 +474,65 @@ public partial class MainWindow : Window
     {
         searchBar.Text = string.Empty;
         searchBar.Focus();
+    }
+
+    // NETWORK CHECKING METHOD
+
+    void DoAvailabilityChanged(object sender, NetworkStatusChangedArgs e)
+    {
+        ReportAvailability();
+    }
+
+    /// <summary>
+    /// Report the current network availability.
+    /// </summary>
+
+    private void ReportAvailability()
+    {
+        string[] flagsDownloaded = Directory.GetFiles(@"Flags");
+
+        if (NetworkService.IsAvailable && flagsDownloaded.Length != CountryList.Count)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                txtStatusDownload.Text = string.Empty;
+
+                DownloadFlags();
+            });
+        }
+        else
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                txtStatusDownload.Text = "No internet connection";
+            });
+        }
+    }
+
+    #endregion
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        //string json = JsonConvert.SerializeObject(CountryList, Formatting.Indented);
+
+
+        //string filePath = @"teste.txt";
+
+        //try
+        //{
+        //    // Create a new text file and open it for writing
+        //    using (StreamWriter writer = new StreamWriter(filePath))
+        //    {
+        //        writer.WriteLine(json); // Write content to the file
+        //    }
+
+        //    MessageBox.Show("Funcionou?");
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine("An error occurred: " + ex.Message);
+        //}
+
+        MessageBox.Show(NetworkService.IsNetworkAvailable().ToString());
     }
 }

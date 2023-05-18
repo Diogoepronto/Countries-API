@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoFinal_Paises.Serviços;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,17 +13,13 @@ public class Flag
     private string _png;
     private string _svg;
     private string _alt;
-    private Country _country;
+    private string _localImage;
+    private static Country _country;
 
     public string Png 
     {
         get
         {
-            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{_country.CCA3}.png";
-
-            if (File.Exists(flagPath))
-                return flagPath;
-
             if (_png == null || _png.Length == 0)
                 return "pack://application:,,,/Imagens/no_flag.png";
 
@@ -61,7 +58,25 @@ public class Flag
             _alt = value;
         }
     }
-    public string LocalImage { get; set; }
+    public string LocalImage { get; set; } = "pack://application:,,,/Imagens/no_flag.png";
+    public string FlagToDisplay
+    {
+        get
+        {
+            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{_country.CCA3}.png";
+
+            if (File.Exists(flagPath))
+                return LocalImage;
+
+            if(!NetworkService.IsAvailable)
+                return "pack://application:,,,/Imagens/no_flag.png";
+
+            if (Png == null || Png.Length == 0)
+                return "pack://application:,,,/Imagens/no_flag.png";
+
+            return Png;
+        }
+    }
 
     public Flag(Country country)
     {

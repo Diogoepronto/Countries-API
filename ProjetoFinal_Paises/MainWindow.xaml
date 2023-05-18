@@ -246,6 +246,11 @@
                    FontSize="48" 
                    Foreground="#FF007CEE"/>
 
+        <!--DEBBUG BUTTON-->
+        <Button Grid.Column="1"
+                Grid.Row="0"
+                Content="Debbug" Click="Button_Click"/>
+
         <!--STATUS MESSAGES-->
         <TextBlock x:Name="txtStatusDownload"
                    Grid.Row="3"
@@ -326,7 +331,7 @@
                                     Orientation="Horizontal" 
                                     Margin="0,10,0,10">
 
-                            <Image Source="{Binding Flags.Png}" 
+                            <Image Source="{Binding Flags.FlagToDisplay}" 
                                    Width="50" 
                                    Height="30">
                                 <Image.Effect>
