@@ -1,19 +1,13 @@
-﻿using ProjetoFinal_Paises.Serviços;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
 using System.DirectoryServices.ActiveDirectory;
 using System.Runtime.CompilerServices;
@@ -29,6 +23,8 @@ using System.IO;
 using System.Reflection;
 using Microsoft.Win32;
 using Syncfusion.Windows.Tools.Controls;
+using ProjetoFinal_Paises.Serviços;
+using ProjetoFinal_Paises.ServiçosMapas;
 
 namespace ProjetoFinal_Paises;
 
@@ -50,6 +46,16 @@ public partial class MainWindow : Window
         get { return _countryList; }
         set { _countryList = value; }
     }
+/// <summary>
+///     Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
+{
+    // private readonly ApiService _apiService;
+    // private readonly DataService _dataService;
+    // private readonly DialogService _dialogService;
+    // private readonly NetworkService _networkService;
+    // internal List<Country> CountryList;
 
     public MainWindow()
     {

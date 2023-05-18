@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,6 +9,9 @@ namespace ProjetoFinal_Paises.Modelos;
 
 public class Flag
 {
+    public string? Png { get; set; }
+    public string? Svg { get; set; }
+    public string? Alt { get; set; }
     private string _png;
     private string _svg;
     private string _alt;

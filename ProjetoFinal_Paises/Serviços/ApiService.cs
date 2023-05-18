@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using ProjetoFinal_Paises.Modelos;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
@@ -12,14 +9,22 @@ using Syncfusion.UI.Xaml.ProgressBar;
 using System.Windows;
 using Syncfusion.Data.Extensions;
 using System.IO;
+using ProjetoFinal_Paises.Modelos;
 
 namespace ProjetoFinal_Paises.Serviços;
 
 public class ApiService
 {
     public async Task<Response> GetCountries(string urlBase, string controller, IProgress<int> progress)
+    public static async Task<Response> GetCountries(
+        string urlBase, string controller)
     {
         //https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps
+
+        // https://restcountries.com/v3.1/all?
+        // fields=
+        // name,capital,currencies,region,subregion,continents,population,
+        // gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps
 
         try
         {
@@ -34,21 +39,23 @@ public class ApiService
             var result = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
-            {
                 return new Response
                 {
                     IsSuccess = false,
-                    Message = result
+                    Message = "Erro ao obter os dados, via API...",
+                    Result = result
                 };
-            }
 
             progress.Report(75);
             var countries = JsonConvert.DeserializeObject<ObservableCollection<Country>>(result);
+            var countries =
+                JsonConvert.DeserializeObject<List<Country>>(result);
 
             progress.Report(100);
             return new Response
             {
                 IsSuccess = true,
+                Message = "Dados obtidos com êxito, via API...",
                 Result = countries
             };
         }
@@ -57,7 +64,8 @@ public class ApiService
             return new Response
             {
                 IsSuccess = false,
-                Message = ex.Message
+                Message = ex.Message,
+                Result = null
             };
         }
     }
