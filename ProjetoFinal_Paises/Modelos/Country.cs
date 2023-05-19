@@ -1,15 +1,44 @@
-using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Modelos;
 
 public class Country
 {
+    #region Construtor
+
+    public Country()
+    {
+        Name = new CountryName();
+        Name.NativeName = new Dictionary<string, NativeName>
+        {
+            {"default", new NativeName {Common = "N/A", Official = "N/A"}}
+        };
+        Flags = new Flag(this);
+        Continents = new string[0];
+        Capital = new string[0];
+        LatLng = new double[2] {0, 0};
+        Timezones = new string[0];
+        Borders = new string[0];
+        Languages = new Dictionary<string, string>
+        {
+            {"default", "N/A"}
+        };
+        Currencies = new Dictionary<string, Currency>
+        {
+            {"default", new Currency {Name = "N/A", Symbol = "N/A"}}
+        };
+        Gini = new Dictionary<string, string>
+        {
+            {"default", "N/A"}
+        };
+        Maps = new Map();
+    }
+
+    #endregion
+
+    #region Atributos
+
     private Flag _flags;
     private string[] _continents;
     private string _region;
@@ -26,7 +55,16 @@ public class Country
     private string _cca3;
     private Map _maps;
 
-    public CountryName Name { get; set; }
+    #endregion
+
+
+    #region Propriedades
+
+    public CountryName? Name { get; set; }
+
+    public int Population { get; set; }
+
+
     public string CCA3
     {
         get
@@ -36,28 +74,23 @@ public class Country
 
             return _cca3;
         }
-        set
-        {
-            _cca3 = value;
-        }
+        set => _cca3 = value;
     }
+
     public Flag Flags { get; set; }
+
     public string[] Continents
     {
         get
         {
-            if (_continents.Length == 0)
-            {
-                return new string[1] { "N/A" };
-            }
+            if (_continents.Length == 0) return new string[1] {"N/A"};
+
             return _continents;
         }
 
-        set
-        {
-            _continents = value;
-        }
+        set => _continents = value;
     }
+
     public string Region
     {
         get
@@ -67,82 +100,59 @@ public class Country
 
             return _region;
         }
-        set
-        {
-            _region = value;
-        }
+        set => _region = value;
     }
+
     public string SubRegion
     {
         get
         {
-            if(_subregion == null || _subregion.Length == 0)
+            if (_subregion == null || _subregion.Length == 0)
                 return "N/A";
 
             return _subregion;
         }
-        set
-        {
-            _subregion = value;
-        }
+        set => _subregion = value;
     }
+
     public string[] Capital
     {
         get
         {
             if (_capital.Length == 0)
-                return new string[1] { "N/A" };
+                return new string[1] {"N/A"};
 
             return _capital;
         }
-        set
-        {
-            _capital = value;
-        }
+        set => _capital = value;
     }
+
     public double[] LatLng { get; set; }
+
     public string[] Timezones
     {
         get
         {
-            if (_timezones.Length == 0)
-            {
-                return new string[1] { "N/A" };
-            }
+            if (_timezones.Length == 0) return new string[1] {"N/A"};
+
             return _timezones;
         }
 
-        set
-        {
-            _timezones = value;
-        }
+        set => _timezones = value;
     }
+
     public string[] Borders
     {
         get
         {
-            if(_borders.Length == 0)
-            {
-                return new string[1] { "N/A" };
-            }
+            if (_borders.Length == 0) return new string[1] {"N/A"};
+
             return _borders;
         }
 
-        set
-        {
-            _borders = value;
-        }
+        set => _borders = value;
     }
-    public CountryName? Name { get; set; }
-    public Flag? Flags { get; set; }
-    public string[]? Continents { get; set; }
-    public string? Region { get; set; }
-    public string SubRegion { get; set; } = "N/A";
-    public string[]? Capital { get; set; }
-    public double[] LatLng { get; set; } = new double[2];
-    public string[]? Timezones { get; set; }
-    public string[]? Borders { get; set; }
-    public int Population { get; set; }
+
     public Dictionary<string, string> Languages
     {
         get
@@ -153,11 +163,9 @@ public class Country
             return _languages;
         }
 
-        set
-        {
-            _languages = value;
-        }
+        set => _languages = value;
     }
+
     public Dictionary<string, Currency> Currencies
     {
         get
@@ -168,12 +176,11 @@ public class Country
             return _currencies;
         }
 
-        set
-        {
-            _currencies = value;
-        }
+        set => _currencies = value;
     }
+
     public bool UNMember { get; set; }
+
     public Dictionary<string, string> Gini
     {
         get
@@ -184,44 +191,11 @@ public class Country
             return _gini;
         }
 
-        set
-        {
-            _gini = value;
-        }
+        set => _gini = value;
     }
-    public Map Maps { get; set; }
-    public Dictionary<string, string>? Languages { get; set; }
-    public Dictionary<string, Currency>? Currencies { get; set; }
-    public bool UnMember { get; set; }
-    public Dictionary<string, double>? Gini { get; set; }
-    public string? Cca3 { get; set; }
 
-    public Country()
-    {
-        Name = new CountryName();
-        Name.NativeName = new Dictionary<string, NativeName>
-        {
-            { "default", new NativeName { Common = "N/A", Official = "N/A" } }
-        };
-        Flags = new Flag(this);
-        Continents = new string[0];
-        Capital = new string[0];
-        LatLng = new double[2] {0, 0};
-        Timezones = new string[0];
-        Borders = new string[0];
-        Languages = new Dictionary<string, string>()
-        {
-            { "default", "N/A" }
-        };
-        Currencies = new Dictionary<string, Currency>()
-        {
-            { "default", new Currency { Name = "N/A", Symbol = "N/A" } }
-        };
-        Gini = new Dictionary<string, string>()
-        {
-            { "default", "N/A" }
-        };
-        Maps = new Map();
-    }
+
     public Map? Maps { get; set; }
+
+    #endregion
 }

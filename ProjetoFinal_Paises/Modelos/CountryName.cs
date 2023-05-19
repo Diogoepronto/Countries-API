@@ -1,14 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjetoFinal_Paises.Modelos;
 
 public class CountryName
 {
+    #region Atributos
+
     private string _common;
     private string _official;
-    private Dictionary<string, NativeName> _nativeName = new Dictionary<string, NativeName>();
-    private string? _common = "N/A";
-    private string? _official = "N/A";
+
+    private Dictionary<string, NativeName> _nativeName = new();
+
+    #endregion
+
+
+    #region Propriedades
 
     public string? Common
     {
@@ -17,9 +24,8 @@ public class CountryName
             if (_common == null || _common.Length == 0)
                 return "N/A";
 
-           return _common;
+            return _common;
         }
-        get => _common;
         set
         {
             if (value == null) _common = "N/A";
@@ -29,20 +35,20 @@ public class CountryName
 
     public string? Official
     {
-        get 
+        get
         {
             if (_official == null || _official.Length == 0)
                 return "N/A";
 
-            return _official; 
+            return _official;
         }
-        get => _official;
         set
         {
             if (value == null) _official = "N/A";
             _official = value;
         }
     }
+
     public Dictionary<string, NativeName> NativeName
     {
         get
@@ -53,12 +59,8 @@ public class CountryName
             return _nativeName;
         }
 
-        set
-        {
-            _nativeName = value;
-        }
+        set => _nativeName = value;
     }
-}
 
-    public Dictionary<string, NativeName>? NativeName { get; set; }
+    #endregion
 }

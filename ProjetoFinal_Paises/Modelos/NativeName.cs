@@ -1,18 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjetoFinal_Paises.Modelos;
+﻿namespace ProjetoFinal_Paises.Modelos;
 
 public class NativeName
 {
-    public string Common { get; set; }
-    public string Official { get; set; }
+    #region Atributos
+
     private string _common = null!;
     private string? _official;
+
+    #endregion
+
+    #region Propriedades
 
     public string Common
     {
@@ -29,4 +26,6 @@ public class NativeName
             _official = value;
         }
     }
+
+    #endregion
 }

@@ -514,8 +514,7 @@
                            PositionOrigin="BottomCenter"
                            Location="{Binding SelectedCountry.LatLng}"
                            BorderThickness="0"
-                           BorderBrush="Black">
-                </m:Pushpin>
+                           BorderBrush="Black" />
             </m:MapLayer>
         </m:Map>
         <!--MAP END-->

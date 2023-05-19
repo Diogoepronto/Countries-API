@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
 
 namespace ProjetoFinal_Paises.ServiçosMapas;
@@ -14,7 +13,7 @@ public class CoordenadasPais
         // inicializar as variaveis para retorna os valores pedidos
         CoordenadasMapa coordenadasMapa = new();
         CoordenadasMapa coordenadasPushPin = new();
-        CoordenadasMapaList.CoordenadasMapasLista = new()
+        CoordenadasMapaList.CoordenadasMapasLista = new List<CoordenadasMapa>
         {
             Capacity = 2
         };
@@ -48,7 +47,7 @@ public class CoordenadasPais
         {
             coordenadasMapa.Latitude = latitude;
             coordenadasMapa.Longitude = longitude;
-            coordenadasMapa.Coordinates = new double[] {latitude, longitude};
+            coordenadasMapa.Coordinates = new[] {latitude, longitude};
             coordenadasMapa.ZoomLevel = 5;
         }
 
@@ -113,7 +112,7 @@ public class CoordenadasPais
                         coordenadasPushPin.Latitude = latitude;
                         coordenadasPushPin.Longitude = longitude;
                         coordenadasPushPin.Coordinates =
-                            new double[] {latitude, longitude};
+                            new[] {latitude, longitude};
                     }
                     else
                     {

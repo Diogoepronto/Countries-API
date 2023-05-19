@@ -1,4 +1,8 @@
-﻿            <!-- The map layer contains the push-pin. -->
+﻿
+
+------------------------------------------------------------------------------------------------------------------------
+
+            <!-- The map layer contains the push-pin. -->
             <m:MapLayer x:Name="CamadaPinCapital">
                 <m:Pushpin x:Name="PinCapital"
                            PositionOrigin="BottomCenter"
@@ -27,3 +31,6 @@
             </m:MapLayer>
         </m:Map>
         <!--MAP END-->
+
+
+

@@ -1,27 +1,27 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Modelos;
 
 public class Flag
 {
-    public string? Png { get; set; }
-    public string? Svg { get; set; }
-    public string? Alt { get; set; }
+    #region Atributos
+
     private string _png;
     private string _svg;
     private string _alt;
-    private Country _country;
+    private readonly Country _country;
 
-    public string Png 
+    #endregion
+
+
+    #region Propriedades
+
+    public string Png
     {
         get
         {
-            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{_country.CCA3}.png";
+            var flagPath = Directory.GetCurrentDirectory() + @"/Flags/" +
+                           $"{_country.CCA3}.png";
 
             if (File.Exists(flagPath))
                 return flagPath;
@@ -31,11 +31,9 @@ public class Flag
 
             return _png;
         }
-        set
-        {
-            _png = value;
-        } 
+        set => _png = value;
     }
+
     public string Svg
     {
         get
@@ -45,11 +43,9 @@ public class Flag
 
             return _svg;
         }
-        set
-        {
-            _svg = value;
-        }
+        set => _svg = value;
     }
+
     public string Alt
     {
         get
@@ -59,15 +55,15 @@ public class Flag
 
             return _alt;
         }
-        set
-        {
-            _alt = value;
-        }
+        set => _alt = value;
     }
+
     public string LocalImage { get; set; }
 
     public Flag(Country country)
     {
         _country = country;
     }
+
+    #endregion
 }

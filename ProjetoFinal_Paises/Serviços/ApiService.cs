@@ -1,26 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using Syncfusion.UI.Xaml.ProgressBar;
-using System.Windows;
-using Syncfusion.Data.Extensions;
-using System.IO;
 using ProjetoFinal_Paises.Modelos;
 
 namespace ProjetoFinal_Paises.Serviços;
 
 public class ApiService
 {
-    public async Task<Response> GetCountries(string urlBase, string controller, IProgress<int> progress)
     public static async Task<Response> GetCountries(
-        string urlBase, string controller)
+        string urlBase, string controller, IProgress<int> progress)
     {
-        //https://restcountries.com/v3.1/all?fields=name,capital,currencies,region,subregion,continents,population,gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps
-
         // https://restcountries.com/v3.1/all?
         // fields=
         // name,capital,currencies,region,subregion,continents,population,
@@ -29,12 +20,13 @@ public class ApiService
         try
         {
             var client = new HttpClient();
-            
+
             client.BaseAddress = new Uri(urlBase);
 
             progress.Report(25);
-            var response = await client.GetAsync(controller, HttpCompletionOption.ResponseHeadersRead);
-            
+            var response = await client.GetAsync(controller,
+                HttpCompletionOption.ResponseHeadersRead);
+
             progress.Report(50);
             var result = await response.Content.ReadAsStringAsync();
 
@@ -47,16 +39,16 @@ public class ApiService
                 };
 
             progress.Report(75);
-            var countries = JsonConvert.DeserializeObject<ObservableCollection<Country>>(result);
-            var countries =
-                JsonConvert.DeserializeObject<List<Country>>(result);
+            CountriesList.Countries =
+                JsonConvert
+                    .DeserializeObject<ObservableCollection<Country>>(result);
 
             progress.Report(100);
             return new Response
             {
                 IsSuccess = true,
                 Message = "Dados obtidos com êxito, via API...",
-                Result = countries
+                Result = CountriesList.Countries
             };
         }
         catch (Exception ex)

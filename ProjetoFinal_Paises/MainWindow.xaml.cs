@@ -1,106 +1,80 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
-using System.DirectoryServices.ActiveDirectory;
-using System.Runtime.CompilerServices;
-using System.Windows.Media.Media3D;
-using Syncfusion.Data.Extensions;
-using Syncfusion.PMML;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Threading;
-using static Mapsui.Providers.ArcGIS.TileInfo;
-using System.IO;
-using System.Reflection;
-using Microsoft.Win32;
-using Syncfusion.Windows.Tools.Controls;
 using ProjetoFinal_Paises.Serviços;
-using ProjetoFinal_Paises.ServiçosMapas;
+using Syncfusion.Licensing;
 
 namespace ProjetoFinal_Paises;
 
-
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-public partial class MainWindow : Window
-{
-    private ObservableCollection<Country> _countryList = new ObservableCollection<Country>();
-    private ICollectionView _dataView;
-    private ApiService _apiService;
-    private DataService _dataService;
-    private NetworkService _networkService;
-    private DialogService _dialogService;
-    
-    public ObservableCollection<Country> CountryList
-    {
-        get { return _countryList; }
-        set { _countryList = value; }
-    }
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
-    // private readonly ApiService _apiService;
-    // private readonly DataService _dataService;
-    // private readonly DialogService _dialogService;
-    // private readonly NetworkService _networkService;
-    // internal List<Country> CountryList;
+    #region Atributos
+
+    private ICollectionView _dataView;
+
+    #endregion
+
 
     public MainWindow()
     {
-        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        SyncfusionLicenseProvider.RegisterLicense(
+            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
 
         InitializeComponent();
 
-        _apiService = new ApiService();
-        _dataService = new DataService();
-        _networkService = new NetworkService();
-        _dialogService = new DialogService();
-
         InitializeData();
 
-        listBoxCountries.DataContext = this;
+        ListBoxCountries.DataContext = this;
     }
 
-    public async void InitializeData()
+
+    #region Propriedades
+
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
+
+    #endregion
+
+
+    private async void InitializeData()
     {
-        bool isConnected = await LoadCountries();
+        var isConnected = await LoadCountries();
 
         InitializeDataView();
 
         DownloadFlags();
 
         if (isConnected)
-            txtStatus.Text = string.Format("Country list loaded from server: {0:F}", DateTime.Now);
+            TxtStatus.Text =
+                $"Country list loaded from server: {DateTime.Now:F}";
         else
-            txtStatus.Text = string.Format("Country list loaded from internal storage: {0:F}", DateTime.Now);
-    }   
+            TxtStatus.Text =
+                $"Country list loaded from internal storage: {DateTime.Now:F}";
+    }
 
     private async Task<bool> LoadCountries()
     {
-        var connection = _networkService.CheckConnection();
+        var connection = NetworkService.CheckConnection();
 
         if (!connection.IsSuccess)
         {
             LoadCountriesLocal();
             return false;
         }
-        else
-        {
-            await LoadCountriesApi();
-            return true;
-        }
+
+        await LoadCountriesApi();
+        return true;
     }
 
     private void LoadCountriesLocal()
@@ -110,337 +84,353 @@ public partial class MainWindow : Window
 
     private async Task LoadCountriesApi()
     {
-        var progress = new Progress<int>(percentComplete =>
-        {
-            progressBar.Progress = percentComplete;
-
-            switch(percentComplete)
+        var progress = new Progress<int>(
+            percentComplete =>
             {
-                case 25:
-                    txtProgressStep.Text = "Downloading countries data";
-                    break;
-                case 50:
-                    txtProgressStep.Text = "Serializing data";
-                    break;
-                case 75:
-                    txtProgressStep.Text = "Deserializing objects";
-                    break;
-                case 100:
-                    txtProgressStep.Text = "Loading complete";
-                    break;
-            }
-        });
+                ProgressBar.Progress = percentComplete;
 
-        var response = await _apiService.GetCountries("https://restcountries.com", "v3.1/all", progress);
+                TxtProgressStep.Text = percentComplete switch
+                {
+                    25 => "Downloading countries data",
+                    50 => "Serializing data",
+                    75 => "Deserializing objects",
+                    100 => "Loading complete",
+                    _ => TxtProgressStep.Text
+                };
+            });
 
-        CountryList = (ObservableCollection<Country>)response.Result;
+        var response =
+            await ApiService.GetCountries(
+                "https://restcountries.com",
+                "v3.1/all", progress);
+
+        CountryList = (ObservableCollection<Country>) response.Result;
 
         await Task.Delay(100);
-        txtProgressStep.Visibility = Visibility.Hidden;
-        progressBarOverlay.Visibility = Visibility.Hidden;
+
+        TxtProgressStep.Visibility = Visibility.Hidden;
+        ProgressBarOverlay.Visibility = Visibility.Hidden;
     }
 
     private void InitializeDataView()
     {
         _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(new SortDescription("Name.Common", ListSortDirection.Ascending));
+        _dataView.SortDescriptions.Add(
+            new SortDescription(
+                "Name.Common", ListSortDirection.Ascending));
 
-        listBoxCountries.ItemsSource = _dataView;
+        ListBoxCountries.ItemsSource = _dataView;
 
-        Country portugal = CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
-        listBoxCountries.SelectedItem = portugal;
+        var portugal =
+            CountryList
+                .FirstOrDefault(c => c.Name?.Common == "Portugal");
+        ListBoxCountries.SelectedItem = portugal;
 
-        gridSearchBar.IsEnabled = true;
+        GridSearchBar.IsEnabled = true;
     }
 
     private async void DownloadFlags()
     {
-        var progress = new Progress<int>(percentComplete =>
-        {
-            txtStatusDownload.Text = $"Downloading flags: {percentComplete}%";
-        });
+        var progress = new Progress<int>(
+            percentComplete =>
+            {
+                TxtStatusDownload.Text =
+                    $"Downloading flags: {percentComplete}%";
+            });
 
-        var downloadflags = await _dataService.DownloadFlags(CountryList, progress);
-        txtStatusDownload.Text = downloadflags.Message;     
-        
+        var downloadFlags =
+            await DataService.DownloadFlags(CountryList, progress);
+        TxtStatusDownload.Text = downloadFlags.Message;
+
         await Task.Delay(10000);
-        txtStatusDownload.Text = string.Empty;
+        TxtStatusDownload.Text = string.Empty;
     }
 
-    private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void listBoxPaises_SelectionChanged(object sender,
+        SelectionChangedEventArgs e)
     {
-        if(listBoxCountries.SelectedItem == null)
-        {
-            return;
-        }
+        if (ListBoxCountries.SelectedItem == null) return;
 
-        var selectedCountry = (Country)listBoxCountries.SelectedItem;
+        var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
     }
 
-    public void DisplayCountryData(Country countryToDisplay)
+    private void DisplayCountryData(Country countryToDisplay)
     {
-        int iteration = 0;
+        var iteration = 0;
 
         #region COUNTRY NAME AND FLAG
-        txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
+
+        TxtCountryName.Text = countryToDisplay.Name?.Common?.ToUpper();
 
         try
         {
-            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{countryToDisplay.CCA3}.png";
+            var flagPath =
+                $"{Directory.GetCurrentDirectory()}" +
+                $"/Flags/{countryToDisplay.CCA3}.png";
 
             if (File.Exists(flagPath))
-                imgCountryFlag.Source = new BitmapImage(new Uri(flagPath));
+            {
+                ImgCountryFlag.Source = new BitmapImage(new Uri(flagPath));
+            }
             else
             {
-                if (_networkService.CheckConnection().IsSuccess)
-                    imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.Png));
+                if (NetworkService.CheckConnection().IsSuccess)
+                    ImgCountryFlag.Source =
+                        new BitmapImage(new Uri(countryToDisplay.Flags.Png));
                 else
-                    imgCountryFlag.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/no_flag.png"));
+                    ImgCountryFlag.Source = new BitmapImage(
+                        new Uri("pack://application:,,,/Imagens/no_flag.png"));
             }
-
         }
         catch (Exception ex)
         {
-            _dialogService.ShowMessage("Erro", ex.Message);
+            DialogService.ShowMessage("Erro", ex.Message);
         }
 
         #endregion
 
         #region CARD NAMES
+
         // ------------------ CARD NAMES ------------------
-        txtNameNativeOfficial.Text = string.Empty;
-        txtNameNativeCommon.Text = string.Empty;
+        TxtNameNativeOfficial.Text = string.Empty;
+        TxtNameNativeCommon.Text = string.Empty;
 
         // OFFICIAL NAME, COMMON NAME
-        txtNameOfficial.Text = countryToDisplay.Name.Official;
-        txtNameCommon.Text = countryToDisplay.Name.Common;
+        TxtNameOfficial.Text = countryToDisplay.Name.Official;
+        TxtNameCommon.Text = countryToDisplay.Name.Common;
 
         // NATIVE OFFICIAL AND COMMON NAME
-        foreach (var nativeName in countryToDisplay.Name.NativeName)
+        foreach (
+            var nativeName
+            in countryToDisplay.Name.NativeName)
         {
-            if(!(nativeName.Key == "default"))
+            if (!(nativeName.Key == "default"))
             {
-                txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
-                txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
+                TxtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
+                TxtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
             }
-            
-            txtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
-            txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
 
-            if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
+            TxtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
+            TxtNameNativeCommon.Text += $"{nativeName.Value.Common}";
+
+            if (iteration != countryToDisplay.Name.NativeName.Count - 1)
             {
-                txtNameNativeOfficial.Text += Environment.NewLine;
-                txtNameNativeCommon.Text += Environment.NewLine;
+                TxtNameNativeOfficial.Text += Environment.NewLine;
+                TxtNameNativeCommon.Text += Environment.NewLine;
             }
 
             iteration++;
         }
+
         iteration = 0;
+
         #endregion
 
         #region CARD GEOGRAPHY
+
         // ------------------ CARD GEOGRAPHY ------------------
-        txtContinent.Text = string.Empty;
-        txtCapital.Text = string.Empty;
-        txtTimezones.Text = string.Empty;
-        txtBorders.Text = string.Empty;
+        TxtContinent.Text = string.Empty;
+        TxtCapital.Text = string.Empty;
+        TxtTimezones.Text = string.Empty;
+        TxtBorders.Text = string.Empty;
 
         // CONTINENT
-        foreach (string continent in countryToDisplay.Continents)
+        foreach (var continent in countryToDisplay.Continents)
         {
-            txtContinent.Text += continent;
+            TxtContinent.Text += continent;
 
-            if (!(iteration == countryToDisplay.Continents.Count() - 1))
-                txtContinent.Text += Environment.NewLine;
+            if (iteration != countryToDisplay.Continents.Length - 1)
+                TxtContinent.Text += Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
 
         // REGION, SUBREGION
-        txtRegion.Text = countryToDisplay.Region;
-        txtSubregion.Text = countryToDisplay.SubRegion;
+        TxtRegion.Text = countryToDisplay.Region;
+        TxtSubregion.Text = countryToDisplay.SubRegion;
 
         // CAPITAL
-        foreach (string capital in countryToDisplay.Capital)
+        foreach (var capital in countryToDisplay.Capital)
         {
-            txtCapital.Text += capital;
+            TxtCapital.Text += capital;
 
-            if (!(iteration == countryToDisplay.Capital.Count() - 1))
-                txtCapital.Text += Environment.NewLine;
+            if (iteration != countryToDisplay.Capital.Length - 1)
+                TxtCapital.Text += Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
 
         // LATITUDE, LONGITUDE
-        txtLatLng.Text = $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, {countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
+        TxtLatLng.Text =
+            $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, " +
+            $"{countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
 
         // TIMEZONES
-        foreach (string timezone in countryToDisplay.Timezones)
+        foreach (var timezone in countryToDisplay.Timezones)
         {
-            txtTimezones.Text += timezone;
+            TxtTimezones.Text += timezone;
 
-            if (!(iteration == countryToDisplay.Timezones.Count() - 1))
-                txtTimezones.Text += Environment.NewLine;
+            if (iteration != countryToDisplay.Timezones.Length - 1)
+                TxtTimezones.Text += Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
 
         // BORDERS
-        foreach (string border in countryToDisplay.Borders)
+        foreach (var border in countryToDisplay.Borders)
         {
-            string countryName = "";
+            var countryName = "";
 
             if (border == "N/A")
             {
-                txtBorders.Text += border;
+                TxtBorders.Text += border;
             }
             else
             {
-                foreach (Country country in CountryList)
-                {
+                foreach (var country in CountryList)
                     if (country.CCA3 == border)
                         countryName = country.Name.Common;
-                }
 
-                txtBorders.Text += countryName;
+                TxtBorders.Text += countryName;
             }
 
-            if (!(iteration == countryToDisplay.Borders.Count() - 1))
-                txtBorders.Text += Environment.NewLine;
+            if (iteration != countryToDisplay.Borders.Length - 1)
+                TxtBorders.Text += Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
 
         #endregion
 
         #region CARD MISCELLANEOUS
+
         // ------------------ CARD MISCELLANEOUS ------------------
-        txtLanguages.Text = string.Empty;
-        txtCurrencies.Text = string.Empty;
-        giniYear.Text = string.Empty;
-        giniValue.Text = string.Empty;
+        TxtLanguages.Text = string.Empty;
+        TxtCurrencies.Text = string.Empty;
+        GiniYear.Text = string.Empty;
+        GiniValue.Text = string.Empty;
 
         // POPULATION
-        txtPopulation.Text = countryToDisplay.Population.ToString("N0");
+        TxtPopulation.Text = countryToDisplay.Population.ToString("N0");
 
         // LANGUAGES
-        foreach (var language in countryToDisplay.Languages)
+        foreach (var language
+                 in countryToDisplay.Languages)
         {
-            txtLanguages.Text += language.Value;
+            TxtLanguages.Text += language.Value;
 
-            if (!(iteration == countryToDisplay.Languages.Count() - 1))
-            {
-                txtLanguages.Text += Environment.NewLine;
-            }
+            if (iteration != countryToDisplay.Languages.Count - 1)
+                TxtLanguages.Text += Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
 
         // CURRENCIES
-        foreach (var currency in countryToDisplay.Currencies)
+        foreach (var currency
+                 in countryToDisplay.Currencies)
         {
-            txtCurrencies.Text += $"{currency.Value.Name}";
+            TxtCurrencies.Text += $"{currency.Value.Name}";
 
-            if(!(currency.Key == "default"))
-            {
-                txtCurrencies.Text += Environment.NewLine + 
-                                      $"{currency.Key.ToUpper()}" + Environment.NewLine + 
+            if (currency.Key != "default")
+                TxtCurrencies.Text += Environment.NewLine +
+                                      $"{currency.Key.ToUpper()}" +
+                                      Environment.NewLine +
                                       $"{currency.Value.Symbol}";
-            }
 
-            if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-            {
-                txtCurrencies.Text += Environment.NewLine + Environment.NewLine;
-            }
+            if (iteration != countryToDisplay.Currencies.Count - 1)
+                TxtCurrencies.Text += Environment.NewLine + Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
 
         // IS UN MEMBER
-        imgUnMember.Visibility = Visibility.Visible;
+        ImgUnMember.Visibility = Visibility.Visible;
 
         if (countryToDisplay.UNMember)
-            imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/check.png"));
-        else 
-            imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/cross.png"));
+            ImgUnMember.Source =
+                new BitmapImage(
+                    new Uri("pack://application:,,,/Imagens/check.png"));
+        else
+            ImgUnMember.Source =
+                new BitmapImage(
+                    new Uri("pack://application:,,,/Imagens/cross.png"));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
-            if(!(gini.Key == "default"))
+            if (!(gini.Key == "default"))
             {
-                giniYear.FontWeight = FontWeights.Bold;
-                giniYear.Text += $"{gini.Key}: ";
+                GiniYear.FontWeight = FontWeights.Bold;
+                GiniYear.Text += $"{gini.Key}: ";
             }
             else
             {
-                giniYear.FontWeight = FontWeights.Regular;
+                GiniYear.FontWeight = FontWeights.Regular;
             }
 
-            giniValue.Text += $"{gini.Value}";
+            GiniValue.Text += $"{gini.Value}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-            {
-                txtCurrencies.Text += Environment.NewLine;
-            }
+                TxtCurrencies.Text += Environment.NewLine;
 
             iteration++;
         }
+
         iteration = 0;
+
         #endregion
     }
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if(responsiveGrid.ActualWidth < 600)
+        if (ResponsiveGrid.ActualWidth < 600)
         {
-            responsiveGrid.Columns = 1;
+            ResponsiveGrid.Columns = 1;
             return;
         }
 
-        if (responsiveGrid.ActualWidth > 600 && responsiveGrid.ActualWidth < 1000)
+        if (ResponsiveGrid.ActualWidth > 600 &&
+            ResponsiveGrid.ActualWidth < 1000)
         {
-            responsiveGrid.Columns = 2;
+            ResponsiveGrid.Columns = 2;
             return;
         }
 
-        if(responsiveGrid.ActualWidth > 1000)
-        {
-            responsiveGrid.Columns = 3;
-            return;
-        }
+        if (ResponsiveGrid.ActualWidth > 1000) ResponsiveGrid.Columns = 3;
     }
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var textBox = (TextBox)sender;
+        var textBox = (TextBox) sender;
 
         // EXIBE OU ESCONDE O BOTÃO DE APAGAR O TEXTO DA CAIXA DE PESQUISA
-        if(textBox.Text.Length == 0)
-        {
-            clearButton.Visibility = Visibility.Hidden;
-        }
+        if (textBox.Text.Length == 0)
+            ClearButton.Visibility = Visibility.Hidden;
         else
-        {
-            clearButton.Visibility = Visibility.Visible;
-        }
+            ClearButton.Visibility = Visibility.Visible;
 
         // APLICA O FILTRO AOS DADOS DO LISTBOX
         var filter = textBox.Text.ToLower();
         _dataView.Filter = item =>
         {
             if (item is Country country)
-            {
-                return country.Name.Common.ToLower().Contains(filter);
-            }
+                return country.Name?.Common != null &&
+                       country.Name.Common.ToLower().Contains(filter);
+
             return false;
         };
         _dataView.Refresh();
@@ -448,7 +438,7 @@ public partial class MainWindow : Window
 
     private void clearButton_Click(object sender, RoutedEventArgs e)
     {
-        searchBar.Text = string.Empty;
-        searchBar.Focus();
+        SearchBar.Text = string.Empty;
+        SearchBar.Focus();
     }
 }

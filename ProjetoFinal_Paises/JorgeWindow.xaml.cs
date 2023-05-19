@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
-using ProjetoFinal_Paises.Serviços;
+using ProjetoFinal_Paises.ServiçosAPI;
 using ProjetoFinal_Paises.ServiçosMapas;
 
 namespace ProjetoFinal_Paises;
@@ -19,21 +18,9 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class JorgeWindow : Window
 {
-    // private readonly ApiService _apiService;
-    // private readonly DataService _dataService;
-    // private readonly DialogService _dialogService;
-    // private readonly NetworkService _networkService;
-    // internal List<Country> CountryList;
-
     public JorgeWindow()
     {
         InitializeComponent();
-
-        // _apiService = new ApiService();
-        // _dataService = new DataService();
-        // _networkService = new NetworkService();
-        // _dialogService = new DialogService();
-        // CountryList = new();
 
         LoadCountries();
     }
@@ -43,32 +30,7 @@ public partial class JorgeWindow : Window
     {
         bool load;
 
-        ServiçosAPI.CarregarAPI.LoadCountries();
-
-        // // zona the verificação da conexão com a net
-        // var connection = NetworkService.CheckConnection();
-        //
-        // // serve para fazer os teste de conexão a Internet
-        // // connection.IsSuccess = false;
-        // if (!connection.IsSuccess)
-        // {
-        //     // Call the LoadCountriesLocal  method asynchronously
-        //     // uses a local database
-        //     ServiçosAPI.CarregarAPI.LoadCountriesLocal();
-        //     load = false;
-        // }
-        // else
-        // {
-        //     // Call the LoadCountriesApi method asynchronously
-        //     await ServiçosAPI.CarregarAPI.LoadCountriesApi();
-        //     load = true;
-        //     // load = false;
-        // }
-
-
-        // Update labels and images
-        // UpdateCardConnection(load, connection);
-
+        CarregarAPI.LoadCountries();
 
         // Update default country
         UpdateDefaultCountry("Portugal");
@@ -174,10 +136,10 @@ public partial class JorgeWindow : Window
         MapaPais_SelectionChanged(selectedCountry);
     }
 
-    private void MapaPais_SelectionChanged(Country selectedCountry)
+    private async Task MapaPais_SelectionChanged(Country? selectedCountry)
     {
         Mapa.Mode = new AerialMode(true);
-        if (selectedCountry.LatLng == null || selectedCountry.LatLng.Length < 2)
+        if (selectedCountry != null && selectedCountry.LatLng.Length < 2)
         {
             MessageBox.Show("Error", "LOCATION NOT FOUND");
             ResetMap();
@@ -187,7 +149,7 @@ public partial class JorgeWindow : Window
             var latitude = selectedCountry.LatLng[0];
             var longitude = selectedCountry.LatLng[1];
             SetMapLocation(latitude, longitude);
-            SetMapPushpin();
+            await SetMapPushpin();
         }
 
         // Helper method to reset the map center and point location to (0, 0)
@@ -219,6 +181,7 @@ public partial class JorgeWindow : Window
             if (selectedCountry.Capital == null)
             {
                 // MessageBox.Show("Error", "CAPITAL NOT FOUND");
+                LabelMessage.Text = "CAPITAL NOT FOUND";
                 ResetMap();
             }
             else
@@ -276,6 +239,7 @@ public partial class JorgeWindow : Window
                 else
                 {
                     // MessageBox.Show("Error", "LOCATION NOT FOUND");
+                    LabelMessage.Text = "LOCATION NOT FOUND";
                     ResetMap();
                 }
             }
@@ -335,7 +299,7 @@ public partial class JorgeWindow : Window
         {
             TxtContinent.Text += continent;
 
-            if (!(iteration == countryToDisplay.Continents.Count() - 1))
+            if (iteration != countryToDisplay.Continents.Length - 1)
                 TxtContinent.Text += Environment.NewLine;
 
             iteration++;
@@ -352,7 +316,7 @@ public partial class JorgeWindow : Window
         {
             TxtCapital.Text += capital;
 
-            if (!(iteration == countryToDisplay.Capital.Count() - 1))
+            if (iteration != countryToDisplay.Capital.Length - 1)
                 TxtCapital.Text += Environment.NewLine;
 
             iteration++;
@@ -363,15 +327,17 @@ public partial class JorgeWindow : Window
         // LATITUDE, LONGITUDE
         TxtLatLng.Text =
             string.Format("{0}, {1}",
-                countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US")),
-                countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US")));
+                countryToDisplay.LatLng[0].ToString(
+                    new CultureInfo("en-US")),
+                countryToDisplay.LatLng[1].ToString(
+                    new CultureInfo("en-US")));
 
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
         {
             TxtTimezones.Text += timezone;
 
-            if (!(iteration == countryToDisplay.Timezones.Count() - 1))
+            if (iteration != countryToDisplay.Timezones.Length - 1)
                 TxtTimezones.Text += Environment.NewLine;
 
             iteration++;
@@ -385,12 +351,12 @@ public partial class JorgeWindow : Window
             var countryName = "";
 
             foreach (var country in CountriesList.Countries)
-                if (country.Cca3 == border)
-                    countryName = country.Name.Common;
+                if (country.CCA3 == border)
+                    countryName = country.Name?.Common;
 
             TxtBorders.Text += countryName;
 
-            if (!(iteration == countryToDisplay.Borders.Count() - 1))
+            if (iteration != countryToDisplay.Borders.Length - 1)
                 TxtBorders.Text += Environment.NewLine;
 
             iteration++;
@@ -408,14 +374,17 @@ public partial class JorgeWindow : Window
         TxtGini.Text = string.Empty;
 
         // POPULATION
-        TxtPopulation.Text = countryToDisplay.Population.ToString("N0");
+        TxtPopulation.Text =
+            countryToDisplay.Population.ToString("N0");
 
         // LANGUAGES
-        foreach (var language in countryToDisplay.Languages)
+        foreach (
+            var language
+            in countryToDisplay.Languages)
         {
             TxtLanguages.Text += language.Value;
 
-            if (!(iteration == countryToDisplay.Languages.Count() - 1))
+            if (iteration != countryToDisplay.Languages.Count - 1)
                 TxtLanguages.Text += Environment.NewLine;
 
             iteration++;
@@ -424,7 +393,9 @@ public partial class JorgeWindow : Window
         iteration = 0;
 
         // CURRENCIES
-        foreach (var currency in countryToDisplay.Currencies)
+        foreach (
+            var currency
+            in countryToDisplay.Currencies)
         {
             TxtCurrencies.Text += $"{currency.Value.Name}" +
                                   Environment.NewLine +
@@ -432,8 +403,9 @@ public partial class JorgeWindow : Window
                                   Environment.NewLine +
                                   $"{currency.Value.Symbol}";
 
-            if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-                TxtCurrencies.Text += Environment.NewLine + Environment.NewLine;
+            if (iteration != countryToDisplay.Currencies.Count - 1)
+                TxtCurrencies.Text +=
+                    Environment.NewLine + Environment.NewLine;
 
             iteration++;
         }
@@ -441,16 +413,18 @@ public partial class JorgeWindow : Window
         iteration = 0;
 
         // IS AN UN MEMBER
-        ImgUnMember.Source = countryToDisplay.UnMember
-            ? new BitmapImage(new Uri("Imagens/Check.png", UriKind.Relative))
-            : new BitmapImage(new Uri("Imagens/Cross.png", UriKind.Relative));
+        ImgUnMember.Source = countryToDisplay.UNMember
+            ? new BitmapImage(
+                new Uri("Imagens/Check.png", UriKind.Relative))
+            : new BitmapImage(
+                new Uri("Imagens/Cross.png", UriKind.Relative));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
             TxtGini.Text += $"{gini.Key}: {gini.Value}";
 
-            if (!(iteration == countryToDisplay.Currencies.Count() - 1))
+            if (iteration != countryToDisplay.Currencies.Count - 1)
                 TxtCurrencies.Text += Environment.NewLine;
 
             iteration++;

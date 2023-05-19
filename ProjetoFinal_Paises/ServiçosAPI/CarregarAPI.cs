@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
@@ -32,19 +31,6 @@ public class CarregarAPI
             await LoadCountriesApi();
             load = true;
         }
-
-
-        // Update labels and images
-        // ProjetoFinal_Paises.MainWindow.UpdateCardConnection(load, connection);
-
-
-        // Update default country
-        // ProjetoFinal_Paises.MainWindow.UpdateDefaultCountry("Portugal");
-
-
-        // atualizar a list-box para apresentar a pais selecionado por defeito
-        // ProjetoFinal_Paises.MainWindow.UpdateListBoxCountriesWithDefault(
-        //     "Portugal");
     }
 
 
@@ -53,11 +39,8 @@ public class CarregarAPI
         Console.WriteLine("Debug zone");
 
         var response = DataService.ReadData();
-        CountriesList.Countries = (List<Country>) response?.Result!;
-
-        // Update labels and images
-        // ProjetoFinal_Paises.MainWindow.UpdateCardConnection(
-        //     response != null && response.IsSuccess, response);
+        CountriesList.Countries =
+            (ObservableCollection<Country>) response?.Result!;
 
         Console.WriteLine("Debug zone");
     }
@@ -65,19 +48,27 @@ public class CarregarAPI
 
     internal static async Task LoadCountriesApi()
     {
+        var progress = new Progress<int>();
+
         var response = await ApiService.GetCountries(
             "https://restcountries.com",
             "/v3.1/all" +
             "?fields=" +
             "name,capital,currencies,region,subregion,continents,population," +
-            "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps");
+            "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps",
+            progress);
+
+        response = await ApiService.GetCountries(
+            "https://restcountries.com",
+            "v3.1/all", progress);
 
 
         // implementar a base de dados local se a api vier nula ou vazia
         if (response.Result != null ||
             !ReferenceEquals(response.Result, string.Empty))
         {
-            CountriesList.Countries = (List<Country>) response.Result;
+            CountriesList.Countries =
+                (ObservableCollection<Country>) response.Result;
 
 
             Console.WriteLine("Debug zone");
