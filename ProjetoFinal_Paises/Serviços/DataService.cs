@@ -16,204 +16,6 @@ namespace ProjetoFinal_Paises.Serviços;
 
 public class DataService
 {
-    private SqliteCommand command;
-    private SqliteConnection connection;
-    private DialogService dialogService;
-    #region Attributes
-
-    private static SqliteConnection? _connection;
-    private static SqliteCommand? _command;
-    private static DialogService _dialogService;
-
-    #endregion
-
-
-    #region Properties
-
-    private const string ConnectionString = "Data Source=" + Caminho + Ficheiro + Extensao;
-    private const string Caminho = @"Data\";
-    private const string Ficheiro = "CountriesDB";
-    private const string Extensao = ".sqlite";
-
-    #endregion
-
-    // CONSTRUCTOR
-    public DataService()
-    {
-        _connection = new SqliteConnection();
-        _command = new SqliteCommand();
-        _dialogService = new DialogService();
-
-        if (!Directory.Exists(Caminho))
-            Directory.CreateDirectory(Caminho);
-
-        try
-        {
-            _connection = new SqliteConnection(ConnectionString);
-            _connection.Open();
-
-            const string createTableCommand =
-                "CREATE TABLE IF NOT EXISTS Country_Json(" +
-                    "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," + //Substituir este campo pelo CCA3
-                    "json_data TEXT);";
-
-            _command = new SqliteCommand(createTableCommand, _connection);
-            _command.ExecuteNonQuery();
-        }
-        catch (Exception ex)
-        {
-            _dialogService.ShowMessage(
-                "Error",
-                "Failure in connecting to the database" + Environment.NewLine +
-                ex.Message);
-        }
-        finally
-        {
-            _connection.Close();
-            _connection.Dispose();
-        }
-    }
-
-    public static Response SaveData(ObservableCollection<Country> countries)
-    {
-        if (countries == null)
-            return new Response
-            {
-                IsSuccess = false,
-                Message = "The countries list is null"
-            };
-
-        try
-        {
-            _connection = new SqliteConnection(ConnectionString);
-            _connection.Open();
-
-            foreach (var country in countries)
-            {
-                const string sqlCommand = "INSERT INTO Country_Json (Country_Cca3, json_data) VALUES (@cca3, @json)";
-
-                _command = new SqliteCommand(sqlCommand, _connection);
-
-                _command.Parameters.AddWithValue("@cca3", country.CCA3);
-                _command.Parameters.AddWithValue("@json", JsonConvert.SerializeObject(country));
-
-                _command.ExecuteNonQuery();
-            }
-            return new Response
-            {
-                IsSuccess = true,
-                Message = "Data inserted into the database succesfully."
-            };
-        }
-        catch (Exception e)
-        {
-            return new Response
-            {
-                IsSuccess = false,
-                Message = "Failure inserting data into the database" + Environment.NewLine +
-                          e.Message
-            };
-        }
-        finally
-        {
-            _connection?.Close();
-            _connection?.Dispose();
-        }
-    }
-
-
-    public static Response ReadData()
-    {
-        try
-        {
-            _connection = new SqliteConnection(ConnectionString);
-            _connection.Open();
-
-            const string sqlCommand = "SELECT json_data FROM Country_Json;";
-
-            _command = new SqliteCommand(sqlCommand, _connection);
-
-            var sqliteDataReader = _command.ExecuteReader();
-
-            var result = "[";
-
-            while (sqliteDataReader.Read())
-            {
-                result += new string((string)sqliteDataReader["json_data"] + ",");
-            }
-            result += "]";
-
-            if (result.Length > 0)
-            {
-                var countries = JsonConvert.DeserializeObject<ObservableCollection<Country>>(result);
-
-                return new Response
-                {
-                    IsSuccess = true,
-                    Message = "Data read succsesful",
-                    Result = countries
-                };
-            }
-            else
-            {
-                return new Response
-                {
-                    IsSuccess = false,
-                    Message = "The database is empty",
-                    Result = null
-                };
-            }
-        }
-        catch (Exception ex)
-        {
-            _dialogService.ShowMessage(
-                "Error",
-                "Database Read Failure" + Environment.NewLine +
-                ex.Message);
-
-            return null;
-        }
-        finally
-        {
-            _connection?.Close();
-            _connection?.Dispose();
-        }
-    }
-
-
-    public static Response DeleteData()
-    {
-        const string sqlCommand = "DELETE FROM Country_Json;";
-
-        try
-        {
-            _connection = new SqliteConnection(ConnectionString);
-            _connection.Open();
-
-            using var command = new SqliteCommand(sqlCommand, _connection);
-            command.ExecuteNonQuery();
-        }
-        catch (Exception ex)
-        {
-            _dialogService.ShowMessage(
-                "Error",
-                "Database delete failure" + Environment.NewLine +
-                ex.Message);
-        }
-        finally
-        {
-            _connection?.Close();
-            _connection?.Dispose();
-        }
-
-
-        return new Response
-        {
-            IsSuccess = true,
-            Message = "The database was deleted succesfully"
-        };
-    }
-
     public DataService()
     {
         // criação de um log para armazenar dados
@@ -223,23 +25,18 @@ public class DataService
 
 
         // inicializar as variáveis globais
-        _connection = new SqliteConnection();
         _command = new SqliteCommand();
+        _connection = new SqliteConnection();
         _dialogService = new DialogService();
 
 
         // cria o diretório se não existir
         // diretório este que ira albergar a base de dados
-        if (!Directory.Exists(Caminho)) Directory.CreateDirectory(Caminho);
+        if (!Directory.Exists(Caminho))
+            Directory.CreateDirectory(Caminho);
 
         CopiarFicheiroExistente();
-        EliminarFicheirosExtra10();
-
-
-        // _connection = new SqliteConnection(ConnectionString);
-        // _connection.Open();
-        // // create any necessary tables in the database
-        // DatabaseCreateTables.DataServiceCreation(_connection, Caminho);
+        EliminarFicheirosExtra();
 
 
         try
@@ -248,11 +45,11 @@ public class DataService
             _connection.Open();
 
             // create the table if it doesn't exist
+            //Substituir este campo pelo CCA3
             const string createTableCommand =
                 "CREATE TABLE IF NOT EXISTS Country_Json(" +
-                "[CountryJsonId] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                "json_data TEXT" +
-                ");";
+                "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," +
+                "json_data TEXT);";
 
             _command = new SqliteCommand(createTableCommand, _connection);
             _command.ExecuteNonQuery();
@@ -277,7 +74,7 @@ public class DataService
     public static async Task<Response> DownloadFlags(
         ObservableCollection<Country>? countryList, IProgress<int> progress)
     {
-        var flagsFolder = @"Flags";
+        const string flagsFolder = "Flags";
 
         if (!Directory.Exists(flagsFolder))
             Directory.CreateDirectory(flagsFolder);
@@ -285,37 +82,37 @@ public class DataService
         try
         {
             var flagsDownloaded = 0;
-            string[] flagsInFolder= Directory.GetFiles(flagsFolder);
-
-            int flagsDownloaded = 0;
 
             var httpClient = new HttpClient();
 
-            foreach (var country in countryList)
-            {
-                var flagFile = $"{country.CCA3}.png";
-                var filePath = Path.Combine(flagsFolder, flagFile);
-
-                if (!File.Exists(filePath))
+            if (countryList != null)
+                foreach (var country in countryList)
                 {
-                    var stream =
-                        await httpClient.GetStreamAsync(country.Flags.Png);
-                    using (var fileStream = File.Create(filePath))
+                    var flagFile = $"{country.CCA3}.png";
+                    var filePath = Path.Combine(flagsFolder, flagFile);
+
+                    if (!File.Exists(filePath))
                     {
-                        stream.CopyTo(fileStream);
-                        flagsDownloaded++;
+                        var stream =
+                            await httpClient.GetStreamAsync(country.Flags.Png);
+                        using (var fileStream = File.Create(filePath))
+                        {
+                            stream.CopyTo(fileStream);
+                            flagsDownloaded++;
 
 
-                        var percentageComplete =
-                            flagsDownloaded * 100 / countryList.Count;
+                            var percentageComplete =
+                                flagsDownloaded * 100 / countryList.Count;
 
-                        progress.Report(percentageComplete);
+                            progress.Report(percentageComplete);
+                        }
                     }
+
+                    country.Flags.LocalImage =
+                        Directory.GetCurrentDirectory() +
+                        @"/Flags/" + $"{country.CCA3}.png";
                 }
 
-                country.Flags.LocalImage = Directory.GetCurrentDirectory() +
-                                           @"/Flags/" + $"{country.CCA3}.png";
-            }
 
             if (flagsDownloaded > 0)
                 return new Response
@@ -323,6 +120,8 @@ public class DataService
                     IsSuccess = true,
                     Message = $"Flags downloaded: {flagsDownloaded}"
                 };
+
+
             return new Response
             {
                 IsSuccess = true,
@@ -339,7 +138,7 @@ public class DataService
         }
     }
 
-    private void EliminarFicheirosExtra10()
+    private void EliminarFicheirosExtra()
     {
         // Obtém todos os arquivos no diretório
         var arquivos = Directory.GetFiles(Caminho);
@@ -349,8 +148,10 @@ public class DataService
 
         // Ordena os arquivos pela data de modificação,
         // do mais antigo para o mais recente
-        Array.Sort(arquivos, (a, b)
-            => File.GetLastWriteTime(a).CompareTo(File.GetLastWriteTime(b)));
+        Array.Sort(
+            arquivos, (a, b)
+                => File.GetLastWriteTime(a)
+                    .CompareTo(File.GetLastWriteTime(b)));
 
         // Obtém o número de arquivos a serem excluídos
         var numExcluir = arquivos.Length - 10;
@@ -361,17 +162,17 @@ public class DataService
 
     private void CopiarFicheiroExistente()
     {
-        if (!File.Exists(Caminho + Ficheiro + Extensao)) return;
+        if (!File.Exists(DbFilePath)) return;
 
-        const string oldFileName = $"{Caminho}{Ficheiro}{Extensao}";
+        const string oldFileName = $"{DbFilePath}";
         var newFileName =
-            $"{Caminho}{Ficheiro}_{DateTime.Now:yyyyMMddHHmmss}{Extensao}";
+            $"{Caminho}{FicheiroDb}_{DateTime.Now:yyyyMMddHHmmss}{Extensao}";
 
         File.Copy(oldFileName, newFileName);
     }
 
 
-    public static Response SaveData(object? countries)
+    public static Response SaveData(ObservableCollection<Country> countries)
     {
         // DatabaseSaveData.SaveData(_connection, countries);
 
@@ -392,25 +193,18 @@ public class DataService
             _connection = new SqliteConnection(ConnectionString);
             _connection.Open();
 
-            // deixar cair a tabela da base de dados se existir
-            // const string sqlCommand1 = "drop table if exists Country_Json;";
-            // _command = new SqliteCommand(sqlCommand1, _connection);
-            // _command.ExecuteNonQuery();
-
-            foreach (var country in (IEnumerable) countries)
+            foreach (var country in countries)
             {
-                const string sql =
-                    "INSERT INTO Country_Json (json_data) VALUES (@json)";
+                const string sqlCommand =
+                    "INSERT INTO Country_Json (Country_Cca3, json_data) VALUES (@cca3, @json)";
 
-                _command = new SqliteCommand(sql, _connection);
+                _command = new SqliteCommand(sqlCommand, _connection);
 
-                _command.Parameters.AddWithValue(
-                    "@json",
+                _command.Parameters.AddWithValue("@cca3", country.CCA3);
+                _command.Parameters.AddWithValue("@json",
                     JsonConvert.SerializeObject(country));
 
                 _command.ExecuteNonQuery();
-
-                count++;
             }
 
             Log.Information(
@@ -448,8 +242,6 @@ public class DataService
 
     public static Response? ReadData()
     {
-        // DatabaseReadData.ReadData(_connection, FilePath);
-
         try
         {
             _connection = new SqliteConnection(ConnectionString);
@@ -464,19 +256,15 @@ public class DataService
             // lê cada linha de registos
             var sqliteDataReader = _command.ExecuteReader();
 
-            // var result = Array.Empty<string>();
-            // var result = String.Empty;
-            var result = "[";
 
+            // variavel para guardar os dados lidos da base de dados
+            var result = "[";
             while (sqliteDataReader.Read())
-                // result.Append(new string((string) sqliteDataReader["json_data"]));
-                // var temp = JsonConvert.SerializeObject(sqliteDataReader["json_data"]);
                 result +=
                     new string((string) sqliteDataReader["json_data"] + ",");
-            // result += temp;
             result += "]";
 
-            if (result.Length == 0)
+            if (result.Length != 0)
             {
                 Log.Information(
                     "No data found in the Country_Json table");
@@ -564,12 +352,13 @@ public class DataService
 
     #region Attributes
 
-    private static SqliteConnection? _connection;
-    private static SqliteCommand? _command;
-    private static DialogService? _dialogService;
+    private static DialogService? _dialogService = new();
+    private static SqliteCommand? _command = new();
+    private static SqliteConnection? _connection = new();
 
-    private const string ConnectionString =
-        "Data Source=" + Caminho + Ficheiro + Extensao;
+    // private DialogService dialogService = new();
+    // private SqliteCommand command = new();
+    // private SqliteConnection connection = new();
 
     #endregion
 
@@ -577,9 +366,14 @@ public class DataService
     #region Properties
 
     private const string Caminho = "Data\\";
-    private const string Ficheiro = "ProjetoFinal_Paises";
+    private const string FicheiroDb = "CountriesDB";
+    private const string FicheiroLog = "ProjetoFinal_Paises";
     private const string Extensao = ".sqlite";
-    private const string LogFilePath = Caminho + "ProjetoFinal_Paises.log.txt";
+
+    internal const string DbFilePath = Caminho + FicheiroDb + Extensao;
+    internal const string LogFilePath = Caminho + FicheiroLog + ".log";
+
+    internal const string ConnectionString = "Data Source=" + DbFilePath;
 
     #endregion
 }

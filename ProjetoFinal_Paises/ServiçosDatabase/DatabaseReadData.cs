@@ -9,40 +9,47 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseReadData
 {
-    #region Attributes
-
-    private DialogService _dialogService;
-
-    #endregion
-
-    public static Response? ReadData(
-        SqliteConnection connection, string filePath)
+    public static Response? ReadData(string filePath)
     {
-        var result = string.Empty;
-
         try
         {
-            const string sql = "select json_data from Country_Json;";
-            var _command = new SqliteCommand(sql, connection);
-
-            // lê cada linha de registos
-            var sqliteDataReader = _command.ExecuteReader();
-            while (sqliteDataReader.Read())
-                result += new string((string) sqliteDataReader["json_data"]);
-            //_command.ExecuteNonQuery();
-            // _connection.Close();
-
-            if (result != null)
+            using (SqliteConnection connection =
+                   new(DataService.ConnectionString))
             {
-                var countries =
-                    JsonConvert.DeserializeObject<List<Country>>(result);
+                connection.Open();
 
-                return new Response
+                const string sql = "select json_data from Country_Json;";
+                var command = new SqliteCommand(sql, connection);
+
+                // lê cada linha de registos
+                var sqliteDataReader = command.ExecuteReader();
+
+                // variavel para guardar os dados lidos da base de dados
+                var result = "[";
+                while (sqliteDataReader.Read())
+                    result +=
+                        new string(
+                            (string) sqliteDataReader["json_data"] + ",");
+                result += "]";
+
+                sqliteDataReader.Close();
+                sqliteDataReader.Dispose();
+
+                if (result.Length != 0)
                 {
-                    IsSuccess = true,
-                    Message = "Dados lidos com êxito...",
-                    Result = countries
-                };
+                    var countries =
+                        JsonConvert.DeserializeObject<List<Country>>(result);
+
+                    return new Response
+                    {
+                        IsSuccess = true,
+                        Message = "Dados lidos com êxito...",
+                        Result = countries
+                    };
+                }
+
+                connection.Close();
+                connection.Dispose();
             }
         }
         catch (Exception e)
@@ -52,10 +59,6 @@ public class DatabaseReadData
                 "Erro ao ler os dados da base de dados " +
                 "ProjetoFinalPaises.sqlite\n" + e.Message);
             return null;
-        }
-        finally
-        {
-            connection?.Dispose();
         }
 
 

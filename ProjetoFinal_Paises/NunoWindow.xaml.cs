@@ -30,7 +30,7 @@ public partial class NunoWindow : Window
     {
         bool load;
 
-        CarregarAPI.LoadCountries();
+        CarregarApi.LoadCountries();
 
         // Update default country
         UpdateDefaultCountry("Portugal");
@@ -60,6 +60,7 @@ public partial class NunoWindow : Window
 
         ListBoxCountries.SelectedItem =
             ListBoxCountries.Items[listBoxItem.index];
+
         // Make sure the list box has finished loading its items
         ListBoxCountries.UpdateLayout();
         ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
@@ -178,13 +179,6 @@ public partial class NunoWindow : Window
         // point location based on latitude and longitude
         async Task SetMapPushpin()
         {
-            if (selectedCountry.Capital == null)
-            {
-                // MessageBox.Show("Error", "CAPITAL NOT FOUND");
-                LabelMessage.Text = "CAPITAL NOT FOUND";
-                ResetMap();
-            }
-            else
             {
                 var country = selectedCountry.Name?.Common;
                 var capital = selectedCountry.Capital[0];

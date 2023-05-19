@@ -22,14 +22,6 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class DiogoWindow : Window
 {
-    #region Atributos
-
-    private ICollectionView _dataView;
-    private string _appDirectory = Directory.GetCurrentDirectory();
-
-    #endregion
-
-
     public DiogoWindow()
     {
         SyncfusionLicenseProvider.RegisterLicense(
@@ -120,17 +112,20 @@ public partial class DiogoWindow : Window
 
     private void InitializeDataView()
     {
-        _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(
-            new SortDescription("Name.Common",
-                ListSortDirection.Ascending));
+        if (CountryList != null)
+        {
+            _dataView = CollectionViewSource.GetDefaultView(CountryList);
+            _dataView.SortDescriptions.Add(
+                new SortDescription("Name.Common",
+                    ListSortDirection.Ascending));
 
-        ListBoxCountries.ItemsSource = _dataView;
+            ListBoxCountries.ItemsSource = _dataView;
 
-        var portugal =
-            CountryList
-                .FirstOrDefault(c => c.Name?.Common == "Portugal");
-        ListBoxCountries.SelectedItem = portugal;
+            var portugal =
+                CountryList
+                    .FirstOrDefault(c => c.Name?.Common == "Portugal");
+            ListBoxCountries.SelectedItem = portugal;
+        }
 
         GridSearchBar.IsEnabled = true;
     }
@@ -223,7 +218,7 @@ public partial class DiogoWindow : Window
                 };
 
                 // if (selectedCountry.Borders is {Length: 0}) Mapa.ZoomLevel = 20;
-                if (selectedCountry.Borders[0]=="N/A") Mapa.ZoomLevel = 10;
+                if (selectedCountry.Borders[0] == "N/A") Mapa.ZoomLevel = 10;
 
                 Mapa.ZoomLevel = country switch
                 {
@@ -571,4 +566,11 @@ public partial class DiogoWindow : Window
         Console.WriteLine("Debug point");
         // throw new NotImplementedException();
     }
+
+    #region Atributos
+
+    private ICollectionView _dataView;
+    private readonly string _appDirectory = Directory.GetCurrentDirectory();
+
+    #endregion
 }

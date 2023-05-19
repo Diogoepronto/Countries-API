@@ -1,59 +1,110 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
+using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
+using Serilog;
 
 namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseSaveData
 {
-    #region Attributes
-
-    private DialogService _dialogService;
-
-    #endregion
-
-    public static void SaveData(SqliteConnection connection, object? countries)
+    public static Response SaveData(ObservableCollection<Country>? countries)
     {
-        if (countries == null) return;
+        if (countries == null)
+            return new Response
+            {
+                IsSuccess = false,
+                Message = "The countries list is null",
+                Result = null
+            };
+
+        Log.ForContext<DataService>()
+            .Information("DataInsertion");
+        Log.Information(
+            "Inserindo dados na tabela Country_Json...");
+        var count = 0;
 
         try
         {
-            foreach (var country in (IEnumerable) countries)
+            using (SqliteConnection connection =
+                   new(DataService.ConnectionString))
             {
-                const string sql =
-                    "INSERT INTO Country_Json (json_data) VALUES (@json)";
+                connection.Open();
 
-                var command = new SqliteCommand(sql, connection);
 
-                command.Parameters.AddWithValue(
-                    "@json",
-                    JsonConvert.SerializeObject(country));
-
+                // deixar cair a tabela da base de dados se existir
+                const string dropTableCommand =
+                    "drop table if exists Country_Json;";
+                var command = new SqliteCommand(dropTableCommand, connection);
                 command.ExecuteNonQuery();
+
+
+                // create the table if it doesn't exist
+                //Substituir este campo pelo CCA3
+                const string createTableCommand =
+                    "CREATE TABLE IF NOT EXISTS Country_Json(" +
+                    "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," +
+                    "json_data TEXT);";
+                command = new SqliteCommand(createTableCommand, connection);
+                command.ExecuteNonQuery();
+
+
+                foreach (var country in countries)
+                {
+                    const string insertIntoCountryJson =
+                        "INSERT INTO Country_Json " +
+                        "(Country_Cca3, json_data) VALUES (@cca3, @json)";
+                    command = new SqliteCommand(
+                        insertIntoCountryJson, connection);
+
+                    command.Parameters.AddWithValue(
+                        "@cca3",
+                        country.CCA3);
+                    command.Parameters.AddWithValue(
+                        "@json",
+                        JsonConvert.SerializeObject(country));
+
+                    command.ExecuteNonQuery();
+
+                    Log.Information(
+                        "Country {Country} " +
+                        "inserted into the database",
+                        country.CCA3);
+
+                    count++;
+                }
+
+
+                Log.Information(
+                    "Inserted {Count} " +
+                    "countries into the Country_Json table", count);
+
+                connection.Close();
+                connection.Dispose();
+
+
+                return new Response
+                {
+                    IsSuccess = true,
+                    Message = "Data inserted into the database successfully."
+                };
             }
-
-
-            // antigo código
-            // foreach (
-            //     var sql in countries.Select(country =>
-            //         "INSERT INTO Country_Json (json_data) VALUES (@json);"))
-            // {
-            //     _command = new SqliteCommand(sql, _connection);
-            //     _command.Parameters.AddWithValue(
-            //         "@json",
-            //         JsonConvert.SerializeObject(country));
-            //     _command.ExecuteNonQuery();
-            // }
-
-            //_connection.Close();
         }
         catch (Exception e)
         {
-            DialogService.ShowMessage(
-                "",
-                "Erro ao inserir dados na tabela Country_Json\n" + e.Message);
+            Log.Error(e, "Error occurred during data insertion");
+            Debug.WriteLine("Exception caught: " + e.Message);
+            return new Response
+            {
+                IsSuccess = false,
+                Message = "Erro ao inserir dados na tabela Country_Json\n" +
+                          e.Message,
+                Result = null
+            };
         }
     }
 }

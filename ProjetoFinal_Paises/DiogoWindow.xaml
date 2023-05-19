@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:ProjetoFinal_Paises"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     x:Class="ProjetoFinal_Paises.DiogoWindow"
@@ -64,8 +63,7 @@
                                 <ScrollViewer x:Name="PART_ContentHost"
                                               Focusable="false"
                                               HorizontalScrollBarVisibility="Hidden"
-                                              VerticalScrollBarVisibility="Hidden">
-                                </ScrollViewer>
+                                              VerticalScrollBarVisibility="Hidden" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsVisible" Value="true">
@@ -137,77 +135,6 @@
             </Style>
 
             <!--SCROLLBARS-->
-            <Style
-                x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-                <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-                <Setter Property="Foreground" Value="#AA89BBF3" />
-                <Setter Property="Background" Value="DarkGray" />
-                <Setter Property="Width" Value="10" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ScrollBar}">
-                            <Grid x:Name="GridRoot" Width="8">
-                                <Border BorderThickness="1" CornerRadius="4" Background="AliceBlue">
-                                    <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="true"
-                                           Focusable="False">
-                                        <Track.Thumb>
-                                            <Thumb x:Name="Thumb"
-                                                   Style="{DynamicResource ScrollThumbs}">
-                                                <Thumb.Background>
-                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                        <GradientStop Color="#FF56CCF2" />
-                                                        <GradientStop Color="#FF2F80ED" Offset="1" />
-                                                    </LinearGradientBrush>
-                                                </Thumb.Background>
-                                            </Thumb>
-                                        </Track.Thumb>
-                                        <Track.IncreaseRepeatButton>
-                                            <RepeatButton x:Name="PageUp" Command="ScrollBar.PageDownCommand"
-                                                          Opacity="0" Focusable="False" />
-                                        </Track.IncreaseRepeatButton>
-                                        <Track.DecreaseRepeatButton>
-                                            <RepeatButton x:Name="PageDown" Command="ScrollBar.PageUpCommand"
-                                                          Opacity="0" Focusable="False" />
-                                        </Track.DecreaseRepeatButton>
-                                    </Track>
-                                </Border>
-                            </Grid>
-
-                            <ControlTemplate.Triggers>
-                                <Trigger SourceName="Thumb" Property="IsMouseOver" Value="true">
-                                    <Setter Value="{DynamicResource ButtonSelectBrush}"
-                                            TargetName="Thumb" Property="Background" />
-                                </Trigger>
-                                <Trigger SourceName="Thumb" Property="IsDragging" Value="true">
-                                    <Setter Value="{DynamicResource DarkBrush}" TargetName="Thumb"
-                                            Property="Background" />
-                                </Trigger>
-
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
-                                </Trigger>
-                                <Trigger Property="Orientation" Value="Horizontal">
-                                    <Setter TargetName="GridRoot" Property="LayoutTransform">
-                                        <Setter.Value>
-                                            <RotateTransform Angle="-90" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter TargetName="PART_Track" Property="LayoutTransform">
-                                        <Setter.Value>
-                                            <RotateTransform Angle="-90" />
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Setter Property="Width" Value="Auto" />
-                                    <Setter Property="Height" Value="12" />
-                                    <Setter TargetName="Thumb" Property="Tag" Value="Horizontal" />
-                                    <Setter TargetName="PageDown" Property="Command" Value="ScrollBar.PageLeftCommand" />
-                                    <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
             <!--#endregion-->
 
         </ResourceDictionary>
@@ -398,8 +325,6 @@
                         HorizontalAlignment="Right">
 
                     <Image x:Name="ImgCountryFlag"
-                           Grid.Column="1"
-                           Grid.Row="0"
                            Source="/Imagens/no_flag.png"
                            Width="auto"
                            Height="150"
@@ -833,7 +758,7 @@
                              CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
                              ZoomLevel="10"
                              Grid.Column="0"
-                             Grid.Row="1" Grid.RowSpan="1">
+                             Grid.Row="1">
 
                         <!-- The map mode defines the appearance of the map. -->
                         <wpf:Map.Mode>

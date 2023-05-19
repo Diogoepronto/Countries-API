@@ -1,71 +1,89 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
+using ProjetoFinal_Paises.ServiçosDatabase;
+using Serilog;
 
 namespace ProjetoFinal_Paises.ServiçosAPI;
 
-public class CarregarAPI
+public class CarregarApi
 {
     internal static async void LoadCountries()
     {
-        bool load;
-
         // zona the verificação da conexão com a net
         var connection = NetworkService.CheckConnection();
 
         // serve para fazer os teste de conexão a Internet
         // connection.IsSuccess = false;
         if (!connection.IsSuccess)
-        {
-            // Call the LoadCountriesLocal
-            // method asynchronously
-            // uses a local database
+            // Call the LoadCountriesLocal method asynchronously
             LoadCountriesLocal();
-            load = false;
-        }
         else
-        {
             // Call the LoadCountriesApi method asynchronously
             await LoadCountriesApi();
-            load = true;
-        }
     }
 
 
-    public static void LoadCountriesLocal()
+    private static Response LoadCountriesLocal()
     {
         Console.WriteLine("Debug zone");
 
         var response = DataService.ReadData();
-        CountriesList.Countries =
-            (ObservableCollection<Country>) response?.Result!;
 
-        Console.WriteLine("Debug zone");
+        if (response != null)
+        {
+            CountriesList.Countries =
+                (ObservableCollection<Country>) response.Result;
+
+            return new Response
+            {
+                IsSuccess = true,
+                Message = "Dados lidos com sucesso, da tabela Country_Json\n" +
+                          "base de dados local" + DataService.DbFilePath,
+                Result = CountriesList.Countries
+            };
+        }
+
+        Log.Error("Error occurred during data reading");
+        Debug.WriteLine("Exception caught: ");
+        return new Response
+        {
+            IsSuccess = false,
+            Message = "Erro ao ler os dados na tabela Country_Json\n" +
+                      "Verifique se a tabela existe e se tem dados",
+            Result = null
+        };
     }
 
 
-    internal static async Task LoadCountriesApi()
+    private static async Task LoadCountriesApi()
     {
         var progress = new Progress<int>();
 
-        var response = await ApiService.GetCountries(
-            "https://restcountries.com",
-            "/v3.1/all" +
-            "?fields=" +
-            "name,capital,currencies,region,subregion,continents,population," +
-            "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps",
-            progress);
+        // var response = await ApiService.GetCountries(
+        //     "https://restcountries.com",
+        //     "/v3.1/all" +
+        //     "?fields=" +
+        //     "name,capital,currencies,region,subregion,continents,population," +
+        //     "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps",
+        //     progress);
 
-        response = await ApiService.GetCountries(
+        var response = await ApiService.GetCountries(
             "https://restcountries.com",
             "v3.1/all", progress);
 
 
         // implementar a base de dados local se a api vier nula ou vazia
-        if (response.Result != null ||
-            !ReferenceEquals(response.Result, string.Empty))
+        if (response.Result == null)
+        {
+            // implementar a base de dados local se a api vier nula ou vazia 
+            LoadCountriesLocal();
+        }
+        else if (response.Result != null ||
+                 !ReferenceEquals(response.Result, string.Empty))
         {
             CountriesList.Countries =
                 (ObservableCollection<Country>) response.Result;
@@ -74,7 +92,9 @@ public class CarregarAPI
             Console.WriteLine("Debug zone");
 
             response = DataService.DeleteData();
-            response = DataService.SaveData(response.Result);
+            response =
+                DatabaseSaveData.SaveData(
+                    (ObservableCollection<Country>) response.Result);
         }
         else
         {

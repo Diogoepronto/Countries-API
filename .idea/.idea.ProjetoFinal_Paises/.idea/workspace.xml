@@ -7,39 +7,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="versão beta, integrada com a branchNuno, falta corrigir alguns bugs">
+    <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.1.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.2.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/CheckConnectivity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises.sln.DotSettings" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises.sln.DotSettings" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/Flag_of_Portugal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/Triangulo_Solido.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/Visto_tracado_solido.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/no_flag.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CoordenadasMapa.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CoordenadasMapa.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountriesList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountriesList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/PageNuno.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/PageNuno.xaml.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/RepositorioCodigoXAML.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/RepositorioCodigoXAML.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkStatusChangedArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkStatusChangedArgs.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseReadData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseReadData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,15 +47,26 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/DiogoWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/DiogoWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Modelos/Flag.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/JorgeWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -82,7 +83,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230518_0019",
+    "com.google.cloudcode.ide_session_index": "20230519_0001",
     "git-widget-placeholder": "BranchTatiane",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
@@ -120,6 +121,9 @@
       </method>
     </configuration>
   </component>
+  <component name="ShelveChangesManager">
+    <option name="remove_strategy" value="true" />
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -137,8 +141,16 @@
       <workItem from="1684435376812" duration="2079000" />
       <workItem from="1684441537305" duration="417000" />
       <workItem from="1684441989057" duration="2840000" />
-      <workItem from="1684447328677" duration="10721000" />
+      <workItem from="1684447328677" duration="11909000" />
     </task>
+    <task id="LOCAL-00001" summary="versão beta, integrada com a branchNuno, falta corrigir alguns bugs">
+      <created>1684461264504</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1684461264504</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,26 +179,26 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
-          <line>493</line>
+          <line>488</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="373" containingFunctionPresentation="Method 'DisplayCountryData'">
             <startOffsets>
-              <option value="14453" />
+              <option value="14396" />
             </startOffsets>
             <endOffsets>
-              <option value="14486" />
+              <option value="14429" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
-          <line>87</line>
+          <line>79</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="87" containingFunctionPresentation="Method 'LoadCountriesLocal'">
             <startOffsets>
-              <option value="2031" />
+              <option value="1883" />
             </startOffsets>
             <endOffsets>
-              <option value="2071" />
+              <option value="1923" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />

@@ -30,7 +30,7 @@ public partial class TatianeWindow : Window
     {
         bool load;
 
-        CarregarAPI.LoadCountries();
+        CarregarApi.LoadCountries();
 
         // Update default country
         UpdateDefaultCountry("Portugal");
