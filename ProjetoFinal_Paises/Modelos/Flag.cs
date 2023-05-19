@@ -1,4 +1,10 @@
+using ProjetoFinal_Paises.Serviços;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Modelos;
 
@@ -15,8 +21,10 @@ public class Flag
 
 
     #region Propriedades
+    private string _localImage;
+    private static Country _country;
 
-    public string Png
+    public string Png 
     {
         get
         {
@@ -43,9 +51,11 @@ public class Flag
 
             return _svg;
         }
-        set => _svg = value;
+        set
+        {
+            _svg = value;
+        }
     }
-
     public string Alt
     {
         get
@@ -55,10 +65,30 @@ public class Flag
 
             return _alt;
         }
-        set => _alt = value;
+        set
+        {
+            _alt = value;
+        }
     }
+    public string LocalImage { get; set; } = "pack://application:,,,/Imagens/no_flag.png";
+    public string FlagToDisplay
+    {
+        get
+        {
+            string flagPath = Directory.GetCurrentDirectory() + @"/Flags/" + $"{_country.CCA3}.png";
 
-    public string LocalImage { get; set; }
+            if (File.Exists(flagPath))
+                return LocalImage;
+
+            if(!NetworkService.IsAvailable)
+                return "pack://application:,,,/Imagens/no_flag.png";
+
+            if (Png == null || Png.Length == 0)
+                return "pack://application:,,,/Imagens/no_flag.png";
+
+            return Png;
+        }
+    }
 
     public Flag(Country country)
     {

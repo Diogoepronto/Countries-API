@@ -1,436 +1,470 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using ProjetoFinal_Paises.Serviços;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using ProjetoFinal_Paises.Modelos;
-using ProjetoFinal_Paises.Serviços;
-using Syncfusion.Licensing;
+using System.DirectoryServices.ActiveDirectory;
+using System.Runtime.CompilerServices;
+using System.Windows.Media.Media3D;
+using Syncfusion.Data.Extensions;
+using Syncfusion.PMML;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Threading;
+using static Mapsui.Providers.ArcGIS.TileInfo;
+using System.IO;
+using System.Reflection;
+using Microsoft.Win32;
+using Syncfusion.Windows.Tools.Controls;
+using Newtonsoft.Json;
+using System.Net.NetworkInformation;
+using System.Diagnostics.Metrics;
+using System.Diagnostics;
+using System.Net.Http;
 
 namespace ProjetoFinal_Paises;
 
+
 /// <summary>
-///     Interaction logic for MainWindow.xaml
+/// Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
-    #region Atributos
-
+    private ObservableCollection<Country> _countryList = new ObservableCollection<Country>();
     private ICollectionView _dataView;
-
-    #endregion
-
+    private ApiService _apiService;
+    private DataService _dataService;
+    private NetworkService _networkService;
+    private DialogService _dialogService;
+    
+    public ObservableCollection<Country> CountryList
+    {
+        get { return _countryList; }
+        set { _countryList = value; }
+    }
 
     public MainWindow()
     {
-        SyncfusionLicenseProvider.RegisterLicense(
-            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
 
         InitializeComponent();
 
+        _apiService = new ApiService();
+        _dataService = new DataService();
+        _networkService = new NetworkService();
+        _dialogService = new DialogService();
+
+        NetworkService.AvailabilityChanged += new NetworkStatusChangedHandler(DoAvailabilityChanged);
+
         InitializeData();
 
-        ListBoxCountries.DataContext = this;
+        listBoxCountries.DataContext = this;
     }
 
+    #region INITIALIZE APPLICATION
 
-    #region Propriedades
-
-    public ObservableCollection<Country>? CountryList { get; set; } = new();
-
-    #endregion
-
-
-    private async void InitializeData()
+    public async void InitializeData()
     {
-        var isConnected = await LoadCountries();
+        bool isConnected = await LoadCountries();
 
         InitializeDataView();
 
         DownloadFlags();
-
+        
         if (isConnected)
-            TxtStatus.Text =
-                $"Country list loaded from server: {DateTime.Now:F}";
+            txtStatus.Text = string.Format($"Country list loaded from server: {DateTime.Now:g}");
         else
-            TxtStatus.Text =
-                $"Country list loaded from internal storage: {DateTime.Now:F}";
+            txtStatus.Text = string.Format($"Country list loaded from internal storage: {DateTime.Now:g}");
     }
+
+    #endregion
+
+    #region LOAD COUNTRY DATA
 
     private async Task<bool> LoadCountries()
     {
-        var connection = NetworkService.CheckConnection();
-
-        if (!connection.IsSuccess)
+        if (!NetworkService.IsNetworkAvailable())
         {
             LoadCountriesLocal();
             return false;
         }
-
-        await LoadCountriesApi();
-        return true;
+        else
+        {
+            await LoadCountriesApi();
+            return true;
+        }
     }
 
     private void LoadCountriesLocal()
     {
-        throw new NotImplementedException();
+        CountryList = (ObservableCollection<Country>)DataService.ReadData().Result;
+
+        progressBar.Progress = 100;
+        txtProgressStep.Text = "Loading complete";
+
+        Thread.Sleep(100);
+
+        txtProgressStep.Visibility = Visibility.Hidden;
+        progressBarOverlay.Visibility = Visibility.Hidden;
     }
 
     private async Task LoadCountriesApi()
     {
-        var progress = new Progress<int>(
-            percentComplete =>
+        var progress = new Progress<int>(percentComplete =>
+        {
+            progressBar.Progress = percentComplete;
+
+            switch(percentComplete)
             {
-                ProgressBar.Progress = percentComplete;
+                case 25:
+                    txtProgressStep.Text = "Downloading countries data";
+                    break;
+                case 50:
+                    txtProgressStep.Text = "Serializing data";
+                    break;
+                case 75:
+                    txtProgressStep.Text = "Deserializing objects";
+                    break;
+                case 100:
+                    txtProgressStep.Text = "Loading complete";
+                    break;
+            }
+        });
 
-                TxtProgressStep.Text = percentComplete switch
-                {
-                    25 => "Downloading countries data",
-                    50 => "Serializing data",
-                    75 => "Deserializing objects",
-                    100 => "Loading complete",
-                    _ => TxtProgressStep.Text
-                };
-            });
+        var response = await _apiService.GetCountries("https://restcountries.com", "v3.1/all", progress);
 
-        var response =
-            await ApiService.GetCountries(
-                "https://restcountries.com",
-                "v3.1/all", progress);
+        CountryList = (ObservableCollection<Country>)response.Result;
 
-        CountryList = (ObservableCollection<Country>) response.Result;
+        foreach(Country country in CountryList)        
+            country.Flags.LocalImage = Directory.GetCurrentDirectory() + @"/Flags/" + $"{country.CCA3}.png";
 
         await Task.Delay(100);
+        txtProgressStep.Visibility = Visibility.Hidden;
+        progressBarOverlay.Visibility = Visibility.Hidden;
 
-        TxtProgressStep.Visibility = Visibility.Hidden;
-        ProgressBarOverlay.Visibility = Visibility.Hidden;
+        DataService.DeleteData();
+        DataService.SaveData(CountryList);
     }
+
+    #endregion
+
+    #region INITIALIZE UI
 
     private void InitializeDataView()
     {
         _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(
-            new SortDescription(
-                "Name.Common", ListSortDirection.Ascending));
+        _dataView.SortDescriptions.Add(new SortDescription("Name.Common", ListSortDirection.Ascending));
 
-        ListBoxCountries.ItemsSource = _dataView;
+        listBoxCountries.ItemsSource = _dataView;
 
-        var portugal =
-            CountryList
-                .FirstOrDefault(c => c.Name?.Common == "Portugal");
-        ListBoxCountries.SelectedItem = portugal;
+        Country portugal = CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
+        listBoxCountries.SelectedItem = portugal;
 
-        GridSearchBar.IsEnabled = true;
+        gridSearchBar.IsEnabled = true;
     }
+
+    #endregion
+
+    #region MANAGE LOCAL DATA
 
     private async void DownloadFlags()
     {
-        var progress = new Progress<int>(
-            percentComplete =>
-            {
-                TxtStatusDownload.Text =
-                    $"Downloading flags: {percentComplete}%";
-            });
+        var progress = new Progress<int>(percentComplete =>
+        {
+            txtStatusDownload.Text = $"Downloading flags: {percentComplete}%";
+        });
 
-        var downloadFlags =
-            await DataService.DownloadFlags(CountryList, progress);
-        TxtStatusDownload.Text = downloadFlags.Message;
+        var downloadflags = await _dataService.DownloadFlags(CountryList, progress);
+        
+        txtStatusDownload.Text = downloadflags.Message;
 
-        await Task.Delay(10000);
-        TxtStatusDownload.Text = string.Empty;
+        _dataView.Refresh();
+
+        await Task.Delay(8000);
+        txtStatusDownload.Text = string.Empty;
     }
 
-    private void listBoxPaises_SelectionChanged(object sender,
-        SelectionChangedEventArgs e)
+    #endregion
+
+    #region DISPLAY COUNTRY DATA
+
+    public void DisplayCountryData(Country countryToDisplay)
     {
-        if (ListBoxCountries.SelectedItem == null) return;
-
-        var selectedCountry = (Country) ListBoxCountries.SelectedItem;
-
-        DisplayCountryData(selectedCountry);
+        DisplayCountryHeader(countryToDisplay);
+        DisplayCountryNames(countryToDisplay);
+        DisplayCountryGeography(countryToDisplay);
+        DisplayCountryMisc(countryToDisplay);
     }
 
-    private void DisplayCountryData(Country countryToDisplay)
+    public void DisplayCountryHeader(Country countryToDisplay)
     {
-        var iteration = 0;
+        txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
+        imgCountryFlag.Source = new BitmapImage(new Uri(countryToDisplay.Flags.FlagToDisplay));
+    }
 
-        #region COUNTRY NAME AND FLAG
+    public void DisplayCountryNames(Country countryToDisplay)
+    {
+        int iteration = 0;
 
-        TxtCountryName.Text = countryToDisplay.Name?.Common?.ToUpper();
-
-        try
-        {
-            var flagPath =
-                $"{Directory.GetCurrentDirectory()}" +
-                $"/Flags/{countryToDisplay.CCA3}.png";
-
-            if (File.Exists(flagPath))
-            {
-                ImgCountryFlag.Source = new BitmapImage(new Uri(flagPath));
-            }
-            else
-            {
-                if (NetworkService.CheckConnection().IsSuccess)
-                    ImgCountryFlag.Source =
-                        new BitmapImage(new Uri(countryToDisplay.Flags.Png));
-                else
-                    ImgCountryFlag.Source = new BitmapImage(
-                        new Uri("pack://application:,,,/Imagens/no_flag.png"));
-            }
-        }
-        catch (Exception ex)
-        {
-            DialogService.ShowMessage("Erro", ex.Message);
-        }
-
-        #endregion
-
-        #region CARD NAMES
-
-        // ------------------ CARD NAMES ------------------
-        TxtNameNativeOfficial.Text = string.Empty;
-        TxtNameNativeCommon.Text = string.Empty;
+        txtNameNativeOfficial.Text = string.Empty;
+        txtNameNativeCommon.Text = string.Empty;
 
         // OFFICIAL NAME, COMMON NAME
-        TxtNameOfficial.Text = countryToDisplay.Name.Official;
-        TxtNameCommon.Text = countryToDisplay.Name.Common;
+        txtNameOfficial.Text = countryToDisplay.Name.Official;
+        txtNameCommon.Text = countryToDisplay.Name.Common;
 
         // NATIVE OFFICIAL AND COMMON NAME
-        foreach (
-            var nativeName
-            in countryToDisplay.Name.NativeName)
+        foreach (var nativeName in countryToDisplay.Name.NativeName)
         {
             if (!(nativeName.Key == "default"))
             {
-                TxtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
-                TxtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
+                txtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
+                txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
             }
 
-            TxtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
-            TxtNameNativeCommon.Text += $"{nativeName.Value.Common}";
+            txtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
+            txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
 
-            if (iteration != countryToDisplay.Name.NativeName.Count - 1)
+            if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
             {
-                TxtNameNativeOfficial.Text += Environment.NewLine;
-                TxtNameNativeCommon.Text += Environment.NewLine;
+                txtNameNativeOfficial.Text += Environment.NewLine;
+                txtNameNativeCommon.Text += Environment.NewLine;
             }
 
             iteration++;
         }
+    }
 
-        iteration = 0;
+    public void DisplayCountryGeography(Country countryToDisplay)
+    {
+        int iteration = 0;
 
-        #endregion
-
-        #region CARD GEOGRAPHY
-
-        // ------------------ CARD GEOGRAPHY ------------------
-        TxtContinent.Text = string.Empty;
-        TxtCapital.Text = string.Empty;
-        TxtTimezones.Text = string.Empty;
-        TxtBorders.Text = string.Empty;
+        txtContinent.Text = string.Empty;
+        txtCapital.Text = string.Empty;
+        txtTimezones.Text = string.Empty;
+        txtBorders.Text = string.Empty;
 
         // CONTINENT
-        foreach (var continent in countryToDisplay.Continents)
+        foreach (string continent in countryToDisplay.Continents)
         {
-            TxtContinent.Text += continent;
+            txtContinent.Text += continent;
 
-            if (iteration != countryToDisplay.Continents.Length - 1)
-                TxtContinent.Text += Environment.NewLine;
+            if (!(iteration == countryToDisplay.Continents.Count() - 1))
+                txtContinent.Text += Environment.NewLine;
 
             iteration++;
         }
-
         iteration = 0;
 
         // REGION, SUBREGION
-        TxtRegion.Text = countryToDisplay.Region;
-        TxtSubregion.Text = countryToDisplay.SubRegion;
+        txtRegion.Text = countryToDisplay.Region;
+        txtSubregion.Text = countryToDisplay.SubRegion;
 
         // CAPITAL
-        foreach (var capital in countryToDisplay.Capital)
+        foreach (string capital in countryToDisplay.Capital)
         {
-            TxtCapital.Text += capital;
+            txtCapital.Text += capital;
 
-            if (iteration != countryToDisplay.Capital.Length - 1)
-                TxtCapital.Text += Environment.NewLine;
+            if (!(iteration == countryToDisplay.Capital.Count() - 1))
+                txtCapital.Text += Environment.NewLine;
 
             iteration++;
         }
-
         iteration = 0;
 
         // LATITUDE, LONGITUDE
-        TxtLatLng.Text =
-            $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, " +
-            $"{countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
+        txtLatLng.Text = $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, {countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
 
         // TIMEZONES
-        foreach (var timezone in countryToDisplay.Timezones)
+        foreach (string timezone in countryToDisplay.Timezones)
         {
-            TxtTimezones.Text += timezone;
+            txtTimezones.Text += timezone;
 
-            if (iteration != countryToDisplay.Timezones.Length - 1)
-                TxtTimezones.Text += Environment.NewLine;
+            if (!(iteration == countryToDisplay.Timezones.Count() - 1))
+                txtTimezones.Text += Environment.NewLine;
 
             iteration++;
         }
-
         iteration = 0;
 
         // BORDERS
-        foreach (var border in countryToDisplay.Borders)
+        foreach (string border in countryToDisplay.Borders)
         {
-            var countryName = "";
+            string countryName = "";
 
             if (border == "N/A")
             {
-                TxtBorders.Text += border;
+                txtBorders.Text += border;
             }
             else
             {
-                foreach (var country in CountryList)
+                foreach (Country country in CountryList)
+                {
                     if (country.CCA3 == border)
                         countryName = country.Name.Common;
+                }
 
-                TxtBorders.Text += countryName;
+                txtBorders.Text += countryName;
             }
 
-            if (iteration != countryToDisplay.Borders.Length - 1)
-                TxtBorders.Text += Environment.NewLine;
+            if (!(iteration == countryToDisplay.Borders.Count() - 1))
+                txtBorders.Text += Environment.NewLine;
 
             iteration++;
         }
+    }
 
-        iteration = 0;
+    public void DisplayCountryMisc(Country countryToDisplay)
+    {
+        int iteration = 0;
 
-        #endregion
-
-        #region CARD MISCELLANEOUS
-
-        // ------------------ CARD MISCELLANEOUS ------------------
-        TxtLanguages.Text = string.Empty;
-        TxtCurrencies.Text = string.Empty;
-        GiniYear.Text = string.Empty;
-        GiniValue.Text = string.Empty;
+        txtLanguages.Text = string.Empty;
+        txtCurrencies.Text = string.Empty;
+        giniYear.Text = string.Empty;
+        giniValue.Text = string.Empty;
 
         // POPULATION
-        TxtPopulation.Text = countryToDisplay.Population.ToString("N0");
+        txtPopulation.Text = countryToDisplay.Population.ToString("N0");
 
         // LANGUAGES
-        foreach (var language
-                 in countryToDisplay.Languages)
+        foreach (var language in countryToDisplay.Languages)
         {
-            TxtLanguages.Text += language.Value;
+            txtLanguages.Text += language.Value;
 
-            if (iteration != countryToDisplay.Languages.Count - 1)
-                TxtLanguages.Text += Environment.NewLine;
+            if (!(iteration == countryToDisplay.Languages.Count() - 1))
+            {
+                txtLanguages.Text += Environment.NewLine;
+            }
 
             iteration++;
         }
-
         iteration = 0;
 
         // CURRENCIES
-        foreach (var currency
-                 in countryToDisplay.Currencies)
+        foreach (var currency in countryToDisplay.Currencies)
         {
-            TxtCurrencies.Text += $"{currency.Value.Name}";
+            txtCurrencies.Text += $"{currency.Value.Name}";
 
-            if (currency.Key != "default")
-                TxtCurrencies.Text += Environment.NewLine +
-                                      $"{currency.Key.ToUpper()}" +
-                                      Environment.NewLine +
+            if (!(currency.Key == "default"))
+            {
+                txtCurrencies.Text += Environment.NewLine +
+                                      $"{currency.Key.ToUpper()}" + Environment.NewLine +
                                       $"{currency.Value.Symbol}";
+            }
 
-            if (iteration != countryToDisplay.Currencies.Count - 1)
-                TxtCurrencies.Text += Environment.NewLine + Environment.NewLine;
+            if (!(iteration == countryToDisplay.Currencies.Count() - 1))
+            {
+                txtCurrencies.Text += Environment.NewLine + Environment.NewLine;
+            }
 
             iteration++;
         }
-
         iteration = 0;
 
         // IS UN MEMBER
-        ImgUnMember.Visibility = Visibility.Visible;
+        imgUnMember.Visibility = Visibility.Visible;
 
         if (countryToDisplay.UNMember)
-            ImgUnMember.Source =
-                new BitmapImage(
-                    new Uri("pack://application:,,,/Imagens/check.png"));
+            imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/check.png"));
         else
-            ImgUnMember.Source =
-                new BitmapImage(
-                    new Uri("pack://application:,,,/Imagens/cross.png"));
+            imgUnMember.Source = new BitmapImage(new Uri("pack://application:,,,/Imagens/cross.png"));
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
             if (!(gini.Key == "default"))
             {
-                GiniYear.FontWeight = FontWeights.Bold;
-                GiniYear.Text += $"{gini.Key}: ";
+                giniYear.FontWeight = FontWeights.Bold;
+                giniYear.Text += $"{gini.Key}: ";
             }
             else
             {
-                GiniYear.FontWeight = FontWeights.Regular;
+                giniYear.FontWeight = FontWeights.Regular;
             }
 
-            GiniValue.Text += $"{gini.Value}";
+            giniValue.Text += $"{gini.Value}";
 
             if (!(iteration == countryToDisplay.Currencies.Count() - 1))
-                TxtCurrencies.Text += Environment.NewLine;
+            {
+                txtCurrencies.Text += Environment.NewLine;
+            }
 
             iteration++;
         }
-
-        iteration = 0;
-
-        #endregion
     }
+
+    private void listBoxPaises_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if(listBoxCountries.SelectedItem == null)
+        {
+            return;
+        }
+
+        var selectedCountry = (Country)listBoxCountries.SelectedItem;
+
+        DisplayCountryData(selectedCountry);
+    }
+
+    #endregion
+
+    #region AUXILIARY METHODS
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (ResponsiveGrid.ActualWidth < 600)
+        if (responsiveGrid.ActualWidth < 600)
         {
-            ResponsiveGrid.Columns = 1;
+            responsiveGrid.Columns = 1;
             return;
         }
 
-        if (ResponsiveGrid.ActualWidth > 600 &&
-            ResponsiveGrid.ActualWidth < 1000)
+        if (responsiveGrid.ActualWidth > 600 && responsiveGrid.ActualWidth < 1000)
         {
-            ResponsiveGrid.Columns = 2;
+            responsiveGrid.Columns = 2;
             return;
         }
 
-        if (ResponsiveGrid.ActualWidth > 1000) ResponsiveGrid.Columns = 3;
+        if (responsiveGrid.ActualWidth > 1000)
+        {
+            responsiveGrid.Columns = 3;
+            return;
+        }
     }
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var textBox = (TextBox) sender;
+        var textBox = (TextBox)sender;
 
         // EXIBE OU ESCONDE O BOTÃO DE APAGAR O TEXTO DA CAIXA DE PESQUISA
         if (textBox.Text.Length == 0)
-            ClearButton.Visibility = Visibility.Hidden;
+        {
+            clearButton.Visibility = Visibility.Hidden;
+        }
         else
-            ClearButton.Visibility = Visibility.Visible;
+        {
+            clearButton.Visibility = Visibility.Visible;
+        }
 
         // APLICA O FILTRO AOS DADOS DO LISTBOX
         var filter = textBox.Text.ToLower();
         _dataView.Filter = item =>
         {
             if (item is Country country)
-                return country.Name?.Common != null &&
-                       country.Name.Common.ToLower().Contains(filter);
-
+            {
+                return country.Name.Common.ToLower().Contains(filter);
+            }
             return false;
         };
         _dataView.Refresh();
@@ -438,7 +472,67 @@ public partial class MainWindow : Window
 
     private void clearButton_Click(object sender, RoutedEventArgs e)
     {
-        SearchBar.Text = string.Empty;
-        SearchBar.Focus();
+        searchBar.Text = string.Empty;
+        searchBar.Focus();
+    }
+
+    // NETWORK CHECKING METHOD
+
+    void DoAvailabilityChanged(object sender, NetworkStatusChangedArgs e)
+    {
+        ReportAvailability();
+    }
+
+    /// <summary>
+    /// Report the current network availability.
+    /// </summary>
+
+    private void ReportAvailability()
+    {
+        string[] flagsDownloaded = Directory.GetFiles(@"Flags");
+
+        if (NetworkService.IsAvailable && flagsDownloaded.Length != CountryList.Count)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                txtStatusDownload.Text = string.Empty;
+
+                DownloadFlags();
+            });
+        }
+        else
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                txtStatusDownload.Text = "No internet connection";
+            });
+        }
+    }
+
+    #endregion
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        //string json = JsonConvert.SerializeObject(CountryList, Formatting.Indented);
+
+
+        //string filePath = @"teste.txt";
+
+        //try
+        //{
+        //    // Create a new text file and open it for writing
+        //    using (StreamWriter writer = new StreamWriter(filePath))
+        //    {
+        //        writer.WriteLine(json); // Write content to the file
+        //    }
+
+        //    MessageBox.Show("Funcionou?");
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine("An error occurred: " + ex.Message);
+        //}
+
+        MessageBox.Show(NetworkService.IsNetworkAvailable().ToString());
     }
 }
