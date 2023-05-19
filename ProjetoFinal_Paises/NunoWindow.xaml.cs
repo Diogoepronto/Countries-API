@@ -28,8 +28,6 @@ public partial class NunoWindow : Window
 
     private async void LoadCountries()
     {
-        bool load;
-
         CarregarApi.LoadCountries();
 
         // Update default country

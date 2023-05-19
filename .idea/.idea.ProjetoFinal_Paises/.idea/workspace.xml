@@ -7,30 +7,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.1.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.2.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/CheckConnectivity.cs" afterDir="false" />
+    <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="integrações dos diversos ramos completo">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CoordenadasMapa.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CoordenadasMapa.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkStatusChangedArgs.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/NetworkStatusChangedArgs.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseReadData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseReadData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,19 +31,27 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/40d9c6632ca3993dcb82583ffa755fbbed8ad19f1b37a7654b7ffaff24b6c/Uri.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4138e5aef0caa29695feada628cd62fde03efda596e63275b9e7f8d27c7398b2/XamlWriter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6f8a2341df3e576facbaa45c2a22f64e4ba768bca92144adfb35fc3a31ed/WpfXamlLoader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9c4e53eb4b7fb18feb2fb64a58835a80e49c86ea1ba3e3eb196d408c30429f/ClrObjectRuntime.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b26c3ab2885ae1e2397c50e3e6819ad88ed89adf3f8ee61523986ef3a4fbcf/Application.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fa9a244a677f598313c8a51657303a8c5b25759eb04ec7ad72ac8a84e5cfb41/XamlObjectWriter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/DiogoWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/DiogoWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Modelos/Flag.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
@@ -150,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684461264504</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="integrações dos diversos ramos completo">
+      <created>1684525503624</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1684525503624</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +171,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="versão beta, integrada com a branchNuno, falta corrigir alguns bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="versão beta, integrada com a branchNuno, falta corrigir alguns bugs" />
+    <MESSAGE value="integrações dos diversos ramos completo" />
+    <option name="LAST_COMMIT_MESSAGE" value="integrações dos diversos ramos completo" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -179,29 +180,185 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
-          <line>488</line>
+          <line>498</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="373" containingFunctionPresentation="Method 'DisplayCountryData'">
             <startOffsets>
-              <option value="14396" />
+              <option value="14618" />
             </startOffsets>
             <endOffsets>
-              <option value="14429" />
+              <option value="14651" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
-          <line>79</line>
+          <line>89</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="87" containingFunctionPresentation="Method 'LoadCountriesLocal'">
             <startOffsets>
-              <option value="1883" />
+              <option value="2105" />
             </startOffsets>
             <endOffsets>
-              <option value="1923" />
+              <option value="2145" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs</url>
+          <line>43</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow.xaml.cs" initialLine="43" containingFunctionPresentation="Method 'LoadCountries'">
+            <startOffsets>
+              <option value="1063" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1109" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs</url>
+          <line>16</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosAPI\CarregarAPI.cs" initialLine="16" containingFunctionPresentation="Method 'LoadCountries'">
+            <startOffsets>
+              <option value="424" />
+            </startOffsets>
+            <endOffsets>
+              <option value="474" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs</url>
+          <line>63</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosAPI\CarregarAPI.cs" initialLine="63" containingFunctionPresentation="Method 'LoadCountriesApi'">
+            <startOffsets>
+              <option value="1852" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1887" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs</url>
+          <line>104</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosAPI\CarregarAPI.cs" initialLine="104" containingFunctionPresentation="Method 'LoadCountriesApi'">
+            <startOffsets>
+              <option value="3234" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3266" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs</url>
+          <line>31</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosAPI\CarregarAPI.cs" initialLine="31" containingFunctionPresentation="Method 'LoadCountriesLocal'">
+            <startOffsets>
+              <option value="895" />
+            </startOffsets>
+            <endOffsets>
+              <option value="927" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
+          <line>21</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="21" containingFunctionPresentation="Method 'GetCountries'">
+            <startOffsets>
+              <option value="610" />
+            </startOffsets>
+            <endOffsets>
+              <option value="640" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
+          <line>46</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="46" containingFunctionPresentation="Method 'GetCountries'">
+            <startOffsets>
+              <option value="1439" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1471" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
+          <line>25</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="25" containingFunctionPresentation="Method 'GetCountries'">
+            <startOffsets>
+              <option value="706" />
+            </startOffsets>
+            <endOffsets>
+              <option value="726" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
+          <line>29</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="29" containingFunctionPresentation="Method 'GetCountries'">
+            <startOffsets>
+              <option value="860" />
+            </startOffsets>
+            <endOffsets>
+              <option value="880" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
+          <line>40</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="40" containingFunctionPresentation="Method 'GetCountries'">
+            <startOffsets>
+              <option value="1227" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1247" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
+          <line>49</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="49" containingFunctionPresentation="Method 'GetCountries'">
+            <startOffsets>
+              <option value="1486" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1507" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs</url>
+          <line>16</line>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosDatabase\DatabaseSaveData.cs" initialLine="16" containingFunctionPresentation="Method 'SaveData'">
+            <startOffsets>
+              <option value="415" />
+            </startOffsets>
+            <endOffsets>
+              <option value="437" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

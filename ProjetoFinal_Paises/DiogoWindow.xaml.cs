@@ -32,6 +32,16 @@ public partial class DiogoWindow : Window
         InitializeData();
 
         ListBoxCountries.DataContext = this;
+        
+        Mapa.IsHitTestVisible = false;
+
+        Loaded += YourWindowName_Loaded;
+    }
+
+
+    private void YourWindowName_Loaded(object sender, RoutedEventArgs e)
+    {
+        WindowState = WindowState.Maximized;
     }
 
 

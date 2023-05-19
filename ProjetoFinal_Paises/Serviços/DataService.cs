@@ -310,9 +310,7 @@ public class DataService
 
     public static Response DeleteData()
     {
-        const string sql = "delete " +
-                           "from Country_Json " +
-                           "where CountryJsonId > 0;";
+        const string sql = "delete from Country_Json;";
         try
         {
             _connection = new SqliteConnection(ConnectionString);

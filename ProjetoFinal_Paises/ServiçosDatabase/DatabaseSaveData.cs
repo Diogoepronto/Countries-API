@@ -12,7 +12,7 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseSaveData
 {
-    public static Response SaveData(ObservableCollection<Country>? countries)
+    public static Response SaveData(ObservableCollection<Country> countries)
     {
         if (countries == null)
             return new Response

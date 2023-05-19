@@ -43,6 +43,10 @@ public class ApiService
                 JsonConvert
                     .DeserializeObject<ObservableCollection<Country>>(result);
 
+            progress.Report(80);
+            Console.WriteLine("Debug zone");
+
+
             progress.Report(100);
             return new Response
             {

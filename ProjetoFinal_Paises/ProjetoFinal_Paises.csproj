@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <PackageIcon>appIcon.png</PackageIcon>
-        <ApplicationIcon>Imagens\appIcon.ico</ApplicationIcon>
+        <ApplicationIcon>Imagens\appIcon.2.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Imagens\check.png" />
@@ -21,9 +21,7 @@
         <None Update="Data\ProjetoFinal_Paises.sqlite">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="Imagens\appIcon.ico">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
+        <None Remove="Imagens\appIcon.ico" />
     </ItemGroup>
 
     <ItemGroup>
