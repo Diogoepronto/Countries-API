@@ -8,6 +8,9 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseCreateTables
 {
+
+    private static DialogService? _dialogService;
+    
     public static void DataServiceCreation(string path)
     {
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
@@ -47,7 +50,7 @@ public class DatabaseCreateTables
             // Obtém o nome da classe atual
             var nomeClasse = Application.Current.MainWindow?.GetType().Name;
 
-            DialogService.ShowMessage(
+            _dialogService.ShowMessage(
                 "Erro ao abrir a a base de dados e ao criar a tabela\n" +
                 nomeClasse,
                 e.Message);

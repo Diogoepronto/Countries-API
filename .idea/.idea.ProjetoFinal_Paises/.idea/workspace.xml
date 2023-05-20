@@ -8,11 +8,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow3.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow3.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataServiceDiogo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_2.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_2.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_3.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_3.xaml.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DialogService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DialogService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseReadData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseReadData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +51,21 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b26c3ab2885ae1e2397c50e3e6819ad88ed89adf3f8ee61523986ef3a4fbcf/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fa9a244a677f598313c8a51657303a8c5b25759eb04ec7ad72ac8a84e5cfb41/XamlObjectWriter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/App.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/JorgeWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/TatianeWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectId" id="2PyHf4tj3YmLnOBuVaKS9DGS1Ms" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -65,7 +78,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230520_0001",
+    "com.google.cloudcode.ide_session_index": "20230520_0007",
     "git-widget-placeholder": "BranchTatiane",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
@@ -124,7 +137,10 @@
       <workItem from="1684441537305" duration="417000" />
       <workItem from="1684441989057" duration="2840000" />
       <workItem from="1684447328677" duration="11909000" />
-      <workItem from="1684577847046" duration="1119000" />
+      <workItem from="1684577847046" duration="3513000" />
+      <workItem from="1684583395755" duration="1519000" />
+      <workItem from="1684585866690" duration="3579000" />
+      <workItem from="1684590103369" duration="333000" />
     </task>
     <task id="LOCAL-00001" summary="versão beta, integrada com a branchNuno, falta corrigir alguns bugs">
       <created>1684461264504</created>
@@ -154,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684551719766</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- adicionei as bandeiras dentro do ProjetoFinal_Paises.csproj, e configurei para serem copiadas para a compilação e assim ficarem disponiveis.&#10;- Criei uma janela inicial para abrir as outras janelas">
+      <created>1684582283434</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1684582283434</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,26 +201,27 @@
     <MESSAGE value="integrações dos diversos ramos completo" />
     <MESSAGE value="mais pequenas atualizações" />
     <MESSAGE value="falta alterar cores e verificar alguns pais e o uso do pushpin" />
-    <option name="LAST_COMMIT_MESSAGE" value="falta alterar cores e verificar alguns pais e o uso do pushpin" />
+    <MESSAGE value="- adicionei as bandeiras dentro do ProjetoFinal_Paises.csproj, e configurei para serem copiadas para a compilação e assim ficarem disponiveis.&#10;- Criei uma janela inicial para abrir as outras janelas" />
+    <option name="LAST_COMMIT_MESSAGE" value="- adicionei as bandeiras dentro do ProjetoFinal_Paises.csproj, e configurei para serem copiadas para a compilação e assim ficarem disponiveis.&#10;- Criei uma janela inicial para abrir as outras janelas" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs</url>
-          <line>500</line>
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.cs</url>
+          <line>508</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="373" containingFunctionPresentation="Method 'DisplayCountryData'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs</url>
-          <line>91</line>
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.cs</url>
+          <line>90</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="87" containingFunctionPresentation="Method 'LoadCountriesLocal'" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_2.xaml.cs</url>
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.cs</url>
           <line>50</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow.xaml.cs" initialLine="43" containingFunctionPresentation="Method 'LoadCountries'" />
           <option name="timeStamp" value="3" />

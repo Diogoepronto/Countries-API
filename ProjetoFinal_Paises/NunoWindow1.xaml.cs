@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,9 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class NunoWindow_1 : Window
+public partial class NunoWindow1 : Window
 {
-    public NunoWindow_1()
+    public NunoWindow1()
     {
         // chaves que já não funcionam
         // Diogo
@@ -42,6 +43,11 @@ public partial class NunoWindow_1 : Window
         Loaded += YourWindowName_Loaded;
     }
 
+    #region Atributos
+
+    private static DialogService? _dialogService;
+
+    #endregion
 
     #region Propriedades
 
@@ -64,15 +70,12 @@ public partial class NunoWindow_1 : Window
 
         DownloadFlags();
 
-        if (isConnected)
-            TxtStatus.Text =
-                string.Format("Country list loaded from server: {0:F}",
-                    DateTime.Now);
-        else
-            TxtStatus.Text =
-                string.Format(
-                    "Country list loaded from internal storage: {0:F}",
-                    DateTime.Now);
+        TxtStatus.Text =
+            string.Format(
+                isConnected
+                    ? "Country list loaded from server: {0:F}"
+                    : "Country list loaded from internal storage: {0:F}",
+                DateTime.Now);
     }
 
     private async Task<bool> LoadCountries()
@@ -91,8 +94,17 @@ public partial class NunoWindow_1 : Window
 
     private void LoadCountriesLocal()
     {
-        Console.WriteLine("LoadCountriesLocal");
-        // throw new NotImplementedException();
+        CountryList =
+            (ObservableCollection<Country>)
+            DataService.ReadData().Result;
+
+        ProgressBar.Progress = 100;
+        TxtProgressStep.Text = "Loading complete";
+
+        Thread.Sleep(100);
+
+        TxtProgressStep.Visibility = Visibility.Hidden;
+        ProgressBarOverlay.Visibility = Visibility.Hidden;
     }
 
     private async Task LoadCountriesApi()
@@ -168,6 +180,7 @@ public partial class NunoWindow_1 : Window
         var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
+
         await MapaPais_SelectionChanged(selectedCountry);
     }
 
@@ -274,7 +287,7 @@ public partial class NunoWindow_1 : Window
                 var latitude = location.Point.Latitude;
                 var longitude = location.Point.Longitude;
 
-                if (location != null || latitude == 0 || longitude == 0)
+                if (latitude == 0 || longitude == 0)
                 {
                     // Define a origem do posicionamento
                     // para a parte inferior do pino
@@ -331,7 +344,7 @@ public partial class NunoWindow_1 : Window
         }
         catch (Exception ex)
         {
-            DialogService.ShowMessage("Erro", ex.Message);
+            _dialogService.ShowMessage("Erro", ex.Message);
         }
 
         #endregion

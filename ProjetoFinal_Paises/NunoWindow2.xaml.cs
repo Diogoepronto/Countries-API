@@ -17,9 +17,9 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for NunoWindow_2.xaml
 /// </summary>
-public partial class NunoWindow_2 : Window
+public partial class NunoWindow2 : Window
 {
-    public NunoWindow_2()
+    public NunoWindow2()
     {
         // chaves que já não funcionam
         // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");

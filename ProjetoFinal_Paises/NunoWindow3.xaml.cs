@@ -19,11 +19,11 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class NunoWindow_3 : Window
+public partial class NunoWindow3 : Window
 {
     private ICollectionView _dataView;
 
-    public NunoWindow_3()
+    public NunoWindow3()
     {
         // chaves que já não funcionam
         // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
@@ -121,26 +121,6 @@ public partial class NunoWindow_3 : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        //string json = JsonConvert.SerializeObject(CountryList, Formatting.Indented);
-
-
-        //string filePath = @"teste.txt";
-
-        //try
-        //{
-        //    // Create a new text file and open it for writing
-        //    using (StreamWriter writer = new StreamWriter(filePath))
-        //    {
-        //        writer.WriteLine(json); // Write content to the file
-        //    }
-
-        //    MessageBox.Show("Funcionou?");
-        //}
-        //catch (Exception ex)
-        //{
-        //    Console.WriteLine("An error occurred: " + ex.Message);
-        //}
-
         MessageBox.Show(
             NetworkService.IsNetworkAvailable().ToString());
     }
@@ -197,14 +177,16 @@ public partial class NunoWindow_3 : Window
         });
 
         var response =
-            await ApiService.GetCountries("https://restcountries.com",
+            await ApiService.GetCountries(
+                "https://restcountries.com",
                 "v3.1/all", progress);
 
         CountryList = (ObservableCollection<Country>) response.Result;
 
         foreach (var country in CountryList)
-            country.Flags.LocalImage = Directory.GetCurrentDirectory() +
-                                       @"/Flags/" + $"{country.CCA3}.png";
+            country.Flags.LocalImage =
+                Directory.GetCurrentDirectory() +
+                @"/Flags/" + $"{country.CCA3}.png";
 
         await Task.Delay(100);
         txtProgressStep.Visibility = Visibility.Hidden;

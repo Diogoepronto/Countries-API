@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
-    x:Class="ProjetoFinal_Paises.NunoWindow_1"
+    x:Class="ProjetoFinal_Paises.NunoWindow1"
     mc:Ignorable="d"
 
     Title="Countries API"

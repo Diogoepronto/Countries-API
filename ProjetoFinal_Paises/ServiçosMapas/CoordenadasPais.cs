@@ -70,6 +70,7 @@ public class CoordenadasPais
 
                 capital = capital switch
                 {
+                    "Washington DC" => "Washington",
                     "Washington, D.C." => "Washington",
                     _ => capital
                 };
@@ -79,21 +80,30 @@ public class CoordenadasPais
 
                 coordenadasMapa.ZoomLevel = country switch
                 {
-                    "Russia" => 1,
-                    "Antarctica" => 1,
+                    "Russia" => 2,
+                    "Antarctica" => 2,
+                    "United States Minor Outlying Islands" => 2,
 
-                    "Australia" => 3,
-                    "United States" => 3,
-
+                    "Australia" => 4,
+                    "United States" => 4,
+                    "Brazil" => 4,
                     "Ukraine" => 4,
+
+                    "Malaysia" => 5,
+
+                    "Madagascar" => 6,
 
                     "Vanuatu" => 7,
                     "Tuvalu" => 7,
                     "Solomon Island" => 7,
                     "Timor-Leste" => 7,
 
-                    "Andorra" => 9,
+                    "Cyprus" => 8,
+                    "Liechtenstein" => 8,
+                    "Luxembourg" => 8,
                     "Vatican City" => 8,
+
+                    "Andorra" => 9,
 
                     _ => coordenadasMapa.ZoomLevel
                 };

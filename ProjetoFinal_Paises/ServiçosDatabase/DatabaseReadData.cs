@@ -8,7 +8,12 @@ using ProjetoFinal_Paises.Serviços;
 namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseReadData
+
 {
+
+    private static DialogService? _dialogService;
+    
+    
     public static Response? ReadData(string filePath)
     {
         try
@@ -54,7 +59,7 @@ public class DatabaseReadData
         }
         catch (Exception e)
         {
-            DialogService.ShowMessage(
+            _dialogService.ShowMessage(
                 "Apagar dados da base de dados",
                 "Erro ao ler os dados da base de dados " +
                 "ProjetoFinalPaises.sqlite\n" + e.Message);
