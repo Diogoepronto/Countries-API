@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <PackageIcon>appIcon.png</PackageIcon>
-        <ApplicationIcon>Imagens\globe.ico</ApplicationIcon>
+        <ApplicationIcon>Imagens\globe.1.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
         <None Remove="Imagens\check.png" />
@@ -71,6 +71,9 @@
         <Content Include="Imagens\cross.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Content Include="Imagens\globe.ico">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Content Include="Imagens\no_flag.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -84,9 +87,6 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Remove="Imagens\appIcon.2.ico" />
-        <Content Include="Imagens\appIcon.2.ico">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
         <None Remove="Imagens\do-not-take-flash-photographs-svgrepo-com.png" />
         <Content Include="Imagens\do-not-take-flash-photographs-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -96,9 +96,6 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Remove="Imagens\globe.ico" />
-        <Content Include="Imagens\globe.ico">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
         <None Remove="Imagens\missing-image-svgrepo-com.png" />
         <Content Include="Imagens\missing-image-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1148,6 +1145,98 @@
         <None Remove="Flags\ZWE.png" />
         <Content Include="Flags\ZWE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\6771594_earth_globe_map_world_icon.ico" />
+        <Content Include="Imagens\6771594_earth_globe_map_world_icon.ico">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\action-unavailable-svgrepo-com.svg" />
+        <Content Include="Imagens\action-unavailable-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\action-unavailable-symbolic-svgrepo-com.svg" />
+        <Content Include="Imagens\action-unavailable-symbolic-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\do-not-take-flash-photographs-svgrepo-com.svg" />
+        <Content Include="Imagens\do-not-take-flash-photographs-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\do-not-take-photographs-svgrepo-com.svg" />
+        <Content Include="Imagens\do-not-take-photographs-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\globe.1.ico" />
+        <Content Include="Imagens\globe.1.ico">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\globe.1.png" />
+        <Content Include="Imagens\globe.1.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\missing-image-svgrepo-com.svg" />
+        <Content Include="Imagens\missing-image-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\not-available-circle-svgrepo-com.svg" />
+        <Content Include="Imagens\not-available-circle-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\unavailable-svgrepo-com.svg" />
+        <Content Include="Imagens\unavailable-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\unavailable-svgrepo-com (1).svg" />
+        <Content Include="Imagens\unavailable-svgrepo-com (1).svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\unavailable-svgrepo-com (2).svg" />
+        <Content Include="Imagens\unavailable-svgrepo-com (2).svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\unavailable-svgrepo-com (3).svg" />
+        <Content Include="Imagens\unavailable-svgrepo-com (3).svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\unblock-svgrepo-com.svg" />
+        <Content Include="Imagens\unblock-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-aeroplane-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-aeroplane-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-global-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-global-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-global-svgrepo-com (1).svg" />
+        <Content Include="Imagens\worldwide-global-svgrepo-com (1).svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-internet-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-internet-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-location-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-location-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-maps-and-location-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-maps-and-location-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-search-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-search-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-shipping-and-delivery-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-shipping-and-delivery-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Imagens\worldwide-world-svgrepo-com.svg" />
+        <Content Include="Imagens\worldwide-world-svgrepo-com.svg">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
 

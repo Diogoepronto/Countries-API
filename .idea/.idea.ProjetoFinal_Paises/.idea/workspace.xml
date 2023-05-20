@@ -8,14 +8,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-symbolic-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-flash-photographs-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-photographs-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.1.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/missing-image-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/not-available-circle-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (1).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (2).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (3).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unblock-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-aeroplane-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com (1).svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-internet-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-location-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-maps-and-location-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-search-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-shipping-and-delivery-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-world-svgrepo-com.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/LicinioWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/LicinioWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.2.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/6771594_earth_globe_map_world_icon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,53 +241,25 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs</url>
           <line>343</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="343" containingFunctionPresentation="Method 'DisplayCountryData'">
-            <startOffsets>
-              <option value="9873" />
-            </startOffsets>
-            <endOffsets>
-              <option value="9919" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="343" containingFunctionPresentation="Method 'DisplayCountryData'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs</url>
           <line>124</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="124" containingFunctionPresentation="Method 'MostrarMapaPais_Selecionado'">
-            <startOffsets>
-              <option value="3291" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3324" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="124" containingFunctionPresentation="Method 'MostrarMapaPais_Selecionado'" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs</url>
           <line>164</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="164" containingFunctionPresentation="Local function 'SetMapPushpin'">
-            <startOffsets>
-              <option value="4529" />
-            </startOffsets>
-            <endOffsets>
-              <option value="4565" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="164" containingFunctionPresentation="Local function 'SetMapPushpin'" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs</url>
           <line>263</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow1.xaml.cs" initialLine="263" containingFunctionPresentation="Method 'LoadCountries'">
-            <startOffsets>
-              <option value="7612" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7613" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow1.xaml.cs" initialLine="263" containingFunctionPresentation="Method 'LoadCountries'" />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
