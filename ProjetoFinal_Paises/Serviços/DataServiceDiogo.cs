@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
@@ -14,24 +11,6 @@ namespace ProjetoFinal_Paises.Serviços;
 
 public class DataServiceDiogo
 {
-    #region Attributes
-
-    private static DialogService? _dialogService;
-    private static SqliteCommand? _command;
-    private static SqliteConnection? _connection;
-
-    #endregion
-
-
-    #region Properties
-
-    private const string ConnectionString = "Data Source=" + Caminho + Ficheiro + Extensao;
-    private const string Caminho = @"Data\";
-    private const string Ficheiro = "CountriesDB";
-    private const string Extensao = ".sqlite";
-
-    #endregion
-
     // CONSTRUCTOR
     public DataServiceDiogo()
     {
@@ -49,8 +28,8 @@ public class DataServiceDiogo
 
             const string createTableCommand =
                 "CREATE TABLE IF NOT EXISTS Country_Json(" +
-                    "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," + //Substituir este campo pelo CCA3
-                    "json_data TEXT);";
+                "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," + //Substituir este campo pelo CCA3
+                "json_data TEXT);";
 
             _command = new SqliteCommand(createTableCommand, _connection);
             _command.ExecuteNonQuery();
@@ -85,15 +64,18 @@ public class DataServiceDiogo
 
             foreach (var country in countries)
             {
-                const string sqlCommand = "INSERT INTO Country_Json (Country_Cca3, json_data) VALUES (@cca3, @json)";
+                const string sqlCommand =
+                    "INSERT INTO Country_Json (Country_Cca3, json_data) VALUES (@cca3, @json)";
 
                 _command = new SqliteCommand(sqlCommand, _connection);
 
                 _command.Parameters.AddWithValue("@cca3", country.CCA3);
-                _command.Parameters.AddWithValue("@json", JsonConvert.SerializeObject(country));
+                _command.Parameters.AddWithValue("@json",
+                    JsonConvert.SerializeObject(country));
 
                 _command.ExecuteNonQuery();
             }
+
             return new Response
             {
                 IsSuccess = true,
@@ -105,7 +87,8 @@ public class DataServiceDiogo
             return new Response
             {
                 IsSuccess = false,
-                Message = "Failure inserting data into the database" + Environment.NewLine +
+                Message = "Failure inserting data into the database" +
+                          Environment.NewLine +
                           e.Message
             };
         }
@@ -133,14 +116,16 @@ public class DataServiceDiogo
             var result = "[";
 
             while (sqliteDataReader.Read())
-            {
-                result += new string((string)sqliteDataReader["json_data"] + ",");
-            }
+                result +=
+                    new string((string) sqliteDataReader["json_data"] + ",");
             result += "]";
 
             if (result.Length > 0)
             {
-                var countries = JsonConvert.DeserializeObject<ObservableCollection<Country>>(result);
+                var countries =
+                    JsonConvert
+                        .DeserializeObject<ObservableCollection<Country>>(
+                            result);
 
                 return new Response
                 {
@@ -209,59 +194,59 @@ public class DataServiceDiogo
         };
     }
 
-    public async Task<Response> DownloadFlags(ObservableCollection<Country> countryList, IProgress<int> progress)
+    public async Task<Response> DownloadFlags(
+        ObservableCollection<Country> countryList, IProgress<int> progress)
     {
-        string flagsFolder= @"Flags";
+        var flagsFolder = @"Flags";
 
         if (!Directory.Exists(flagsFolder))
             Directory.CreateDirectory(flagsFolder);
 
         try
         {
-            string[] flagsInFolder= Directory.GetFiles(flagsFolder);
+            var flagsInFolder = Directory.GetFiles(flagsFolder);
 
-            int flagsDownloaded = 0;
+            var flagsDownloaded = 0;
 
             var httpClient = new HttpClient();
 
             foreach (var country in countryList)
             {
-                string flagFile = $"{country.CCA3}.png";
-                string filePath = Path.Combine(flagsFolder, flagFile);
+                var flagFile = $"{country.CCA3}.png";
+                var filePath = Path.Combine(flagsFolder, flagFile);
 
                 if (!File.Exists(filePath))
                 {
-                    var stream = await httpClient.GetStreamAsync(country.Flags.Png);
+                    var stream =
+                        await httpClient.GetStreamAsync(country.Flags.Png);
                     using (var fileStream = File.Create(filePath))
                     {
                         stream.CopyTo(fileStream);
                         flagsDownloaded++;
 
-                        int percentageComplete = flagsDownloaded * 100 / (countryList.Count - flagsInFolder.Length);
+                        var percentageComplete = flagsDownloaded * 100 /
+                                                 (countryList.Count -
+                                                  flagsInFolder.Length);
 
                         progress.Report(percentageComplete);
-
                     }
                 }
-                country.Flags.LocalImage = Directory.GetCurrentDirectory() + @"/Flags/" + $"{country.CCA3}.png";
+
+                country.Flags.LocalImage = Directory.GetCurrentDirectory() +
+                                           @"/Flags/" + $"{country.CCA3}.png";
             }
 
             if (flagsDownloaded > 0)
-            {
                 return new Response
                 {
                     IsSuccess = true,
                     Message = $"Flags downloaded: {flagsDownloaded}"
                 };
-            }
-            else
+            return new Response
             {
-                return new Response
-                {
-                    IsSuccess = true,
-                    Message = "Every flag is already in the internal storage."
-                };
-            }
+                IsSuccess = true,
+                Message = "Every flag is already in the internal storage."
+            };
         }
         catch (Exception ex)
         {
@@ -272,4 +257,24 @@ public class DataServiceDiogo
             };
         }
     }
+
+    #region Attributes
+
+    private static DialogService? _dialogService;
+    private static SqliteCommand? _command;
+    private static SqliteConnection? _connection;
+
+    #endregion
+
+
+    #region Properties
+
+    private const string ConnectionString =
+        "Data Source=" + Caminho + Ficheiro + Extensao;
+
+    private const string Caminho = @"Data\";
+    private const string Ficheiro = "CountriesDB";
+    private const string Extensao = ".sqlite";
+
+    #endregion
 }

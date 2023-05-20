@@ -13,6 +13,7 @@
     Width="1400" MinWidth="800"
     WindowStartupLocation="CenterScreen">
 
+
     <!--#region CUSTOM STYLES -->
     <Window.Resources>
         <ResourceDictionary>
@@ -112,6 +113,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <!--#endregion-->
+
 
     <!--#region WINDOW STRUCTURE -->
     <Grid UseLayoutRounding="False">
@@ -732,6 +734,8 @@
             <!--#endregion-->
         </Grid>
         <!--#endregion-->
+
+
         <!--MAP-->
         <wpf:Map x:Name="Mapa"
                  CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"

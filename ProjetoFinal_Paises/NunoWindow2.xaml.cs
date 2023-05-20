@@ -35,7 +35,9 @@ public partial class NunoWindow2 : Window
 
     private async void LoadCountries()
     {
-        CarregarApi.LoadCountries();
+        // CarregarApi.LoadCountries();
+        var carregarApi = new CarregarApi();
+        await carregarApi.LoadCountries();
 
         // Update default country
         UpdateDefaultCountry("Portugal");

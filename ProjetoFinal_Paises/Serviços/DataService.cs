@@ -124,7 +124,7 @@ public class DataService
     }
 
 
-    public static async Task<Response> DownloadFlags(
+    public async Task<Response> DownloadFlags(
         ObservableCollection<Country>? countryList, IProgress<int> progress)
     {
         const string flagsFolder = "Flags";
@@ -340,25 +340,23 @@ public class DataService
                             Result = null
                         };
                     }
-                    else
+
+                    Log.Information(
+                        "Successfully retrieved data " +
+                        "from the Country_Json table");
+
+                    var countries =
+                        JsonConvert
+                            .DeserializeObject<
+                                ObservableCollection<Country>>(
+                                result);
+
+                    return new Response
                     {
-                        Log.Information(
-                            "Successfully retrieved data " +
-                            "from the Country_Json table");
-
-                        var countries =
-                            JsonConvert
-                                .DeserializeObject<
-                                    ObservableCollection<Country>>(
-                                    result);
-
-                        return new Response
-                        {
-                            IsSuccess = true,
-                            Message = "Dados lidos com êxito...",
-                            Result = countries
-                        };
-                    }
+                        IsSuccess = true,
+                        Message = "Dados lidos com êxito...",
+                        Result = countries
+                    };
                 }
             }
         }
@@ -416,9 +414,9 @@ public class DataService
 
     #region Attributes
 
-    private static DialogService _dialogService = new();
     private static SqliteCommand _command = new();
     private static SqliteConnection _connection = new();
+    private static DialogService _dialogService = new();
 
     #endregion
 

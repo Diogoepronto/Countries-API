@@ -8,9 +8,8 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 
 public class DatabaseCreateTables
 {
-
     private static DialogService? _dialogService;
-    
+
     public static void DataServiceCreation(string path)
     {
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);

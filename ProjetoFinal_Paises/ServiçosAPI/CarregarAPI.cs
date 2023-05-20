@@ -11,7 +11,11 @@ namespace ProjetoFinal_Paises.ServiçosAPI;
 
 public class CarregarApi
 {
-    internal static async void LoadCountries()
+    private readonly ApiService _apiService = new();
+    private DataService _dataService = new();
+
+
+    internal async Task LoadCountries()
     {
         // zona the verificação da conexão com a net
         var connection = NetworkService.CheckConnection();
@@ -59,7 +63,7 @@ public class CarregarApi
     }
 
 
-    private static async Task LoadCountriesApi()
+    private async Task LoadCountriesApi()
     {
         var progress = new Progress<int>();
 
@@ -71,7 +75,7 @@ public class CarregarApi
         //     "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps",
         //     progress);
 
-        var response = await ApiService.GetCountries(
+        var response = await _apiService.GetCountries(
             "https://restcountries.com",
             "v3.1/all", progress);
 

@@ -26,8 +26,9 @@ public class Flag
     {
         get
         {
-            return _svg =
-                $"{_appDirectory}/do-not-take-flash-photographs-svgrepo-com.png";
+            // return _png =
+            //     Directory.GetCurrentDirectory() + "/Imagens/" +
+            //     "do-not-take-flash-photographs-svgrepo-com.png";
             var flagPath =
                 Directory.GetCurrentDirectory() + $"/Flags/{_country.CCA3}.png";
 
@@ -38,9 +39,7 @@ public class Flag
                 ? Directory.GetCurrentDirectory() + "/Imagens/no_flag.png"
                 : _png;
         }
-        //set => _png = value;
-        set => _png =
-            $"{_appDirectory}/do-not-take-flash-photographs-svgrepo-com.png";
+        set => _png = value;
     }
 
     public string Svg

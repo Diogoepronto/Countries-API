@@ -19,26 +19,26 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class NunoWindow3 : Window
+public partial class MainWindow : Window
 {
-    private ApiService _apiService;
-    private DataService _dataService;
-    private ICollectionView _dataView;
+    private readonly ApiService _apiService;
 
-    public NunoWindow3()
+    private readonly DataService _dataService;
+    private ICollectionView _dataView;
+    private DialogService _dialogService;
+    private NetworkService _networkService;
+
+    public MainWindow()
     {
-        // chaves que já não funcionam
-        // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
-        // SyncfusionLicenseProvider.RegisterLicense("MjEyMzAxNUAzMjMxMmUzMjJlMzVEaWdKUkVWVVpkd3lyZjEzanZtM3FYeW41eUxhZDRRZkpTMGxXMzgxcWRFPQ==");
         SyncfusionLicenseProvider.RegisterLicense(
-            "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
+            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
 
         InitializeComponent();
 
-        // _apiService = new ApiService();
-        // _dataService = new DataService();
-        // _networkService = new NetworkService();
-        // _dialogService = new DialogService();
+        _apiService = new ApiService();
+        _dataService = new DataService();
+        _networkService = new NetworkService();
+        _dialogService = new DialogService();
 
         NetworkService.AvailabilityChanged +=
             DoAvailabilityChanged;
@@ -47,10 +47,6 @@ public partial class NunoWindow3 : Window
 
         listBoxCountries.DataContext = this;
     }
-    // private ApiService _apiService;
-    // private DataService _dataService;
-    // private DialogService _dialogService;
-    // private NetworkService _networkService;
 
     public ObservableCollection<Country> CountryList { get; set; } = new();
 
@@ -67,13 +63,11 @@ public partial class NunoWindow3 : Window
         if (isConnected)
             txtStatus.Text =
                 string.Format(
-                    $"Country list loaded from server: " +
-                    $"{DateTime.Now:g}");
+                    $"Country list loaded from server: {DateTime.Now:g}");
         else
             txtStatus.Text =
                 string.Format(
-                    $"Country list loaded from internal storage: " +
-                    $"{DateTime.Now:g}");
+                    $"Country list loaded from internal storage: {DateTime.Now:g}");
     }
 
     #endregion
@@ -83,9 +77,8 @@ public partial class NunoWindow3 : Window
     private void InitializeDataView()
     {
         _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(
-            new SortDescription("Name.Common",
-                ListSortDirection.Ascending));
+        _dataView.SortDescriptions.Add(new SortDescription("Name.Common",
+            ListSortDirection.Ascending));
 
         listBoxCountries.ItemsSource = _dataView;
 
@@ -123,8 +116,7 @@ public partial class NunoWindow3 : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show(
-            NetworkService.IsNetworkAvailable().ToString());
+        MessageBox.Show(NetworkService.IsNetworkAvailable().ToString());
     }
 
     #region LOAD COUNTRY DATA

@@ -9,40 +9,40 @@
         <ApplicationIcon>Imagens\appIcon.2.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
-        <None Remove="Imagens\check.png" />
-        <None Remove="Imagens\cross.png" />
-        <None Remove="Imagens\No_flag.svg" />
-        <None Remove="Imagens\no_flag.png" />
-        <None Remove="Imagens\Triangulo_Solido.png" />
-        <None Remove="triangulo bordo.png" />
-        <None Remove="triangulo_solido.png" />
-        <None Remove="visto traçado solido.png" />
-        <None Remove="DataBaseService\**" />
-        <None Remove="Imagens\appIcon.ico" />
-        <None Remove="Imagens\appIcon.1.ico" />
+        <None Remove="Imagens\check.png"/>
+        <None Remove="Imagens\cross.png"/>
+        <None Remove="Imagens\No_flag.svg"/>
+        <None Remove="Imagens\no_flag.png"/>
+        <None Remove="Imagens\Triangulo_Solido.png"/>
+        <None Remove="triangulo bordo.png"/>
+        <None Remove="triangulo_solido.png"/>
+        <None Remove="visto traçado solido.png"/>
+        <None Remove="DataBaseService\**"/>
+        <None Remove="Imagens\appIcon.ico"/>
+        <None Remove="Imagens\appIcon.1.ico"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapsui.Wpf" Version="3.0.2" />
-        <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.5" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
-        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
-        <PackageReference Include="Serilog" Version="2.12.0" />
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-        <PackageReference Include="System.Memory" Version="4.5.5" />
-        <PackageReference Include="System.Text.Json" Version="7.0.2" />
-        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+        <PackageReference Include="Mapsui.Wpf" Version="3.0.2"/>
+        <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.5"/>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3"/>
+        <PackageReference Include="Serilog" Version="2.12.0"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0"/>
+        <PackageReference Include="System.Memory" Version="4.5.5"/>
+        <PackageReference Include="System.Text.Json" Version="7.0.2"/>
+        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0"/>
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -53,15 +53,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="DataBaseService\**" />
+        <Compile Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="DataBaseService\**" />
+        <EmbeddedResource Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Page Remove="DataBaseService\**" />
+        <Page Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -74,1078 +74,1078 @@
         <Content Include="Imagens\no_flag.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Include="obj\Debug\net6.0-windows\ProjetoFinal_Paises_MarkupCompile.cache" />
-        <None Remove="Imagens\action-unavailable-svgrepo-com.png" />
+        <Content Include="obj\Debug\net6.0-windows\ProjetoFinal_Paises_MarkupCompile.cache"/>
+        <None Remove="Imagens\action-unavailable-svgrepo-com.png"/>
         <Content Include="Imagens\action-unavailable-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\action-unavailable-symbolic-svgrepo-com.png" />
+        <None Remove="Imagens\action-unavailable-symbolic-svgrepo-com.png"/>
         <Content Include="Imagens\action-unavailable-symbolic-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\appIcon.2.ico" />
+        <None Remove="Imagens\appIcon.2.ico"/>
         <Content Include="Imagens\appIcon.2.ico">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\do-not-take-flash-photographs-svgrepo-com.png" />
+        <None Remove="Imagens\do-not-take-flash-photographs-svgrepo-com.png"/>
         <Content Include="Imagens\do-not-take-flash-photographs-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\do-not-take-photographs-svgrepo-com.png" />
+        <None Remove="Imagens\do-not-take-photographs-svgrepo-com.png"/>
         <Content Include="Imagens\do-not-take-photographs-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\globe.ico" />
+        <None Remove="Imagens\globe.ico"/>
         <Content Include="Imagens\globe.ico">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\missing-image-svgrepo-com.png" />
+        <None Remove="Imagens\missing-image-svgrepo-com.png"/>
         <Content Include="Imagens\missing-image-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\not-available-circle-svgrepo-com.png" />
+        <None Remove="Imagens\not-available-circle-svgrepo-com.png"/>
         <Content Include="Imagens\not-available-circle-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\unavailable-svgrepo-com.png" />
+        <None Remove="Imagens\unavailable-svgrepo-com.png"/>
         <Content Include="Imagens\unavailable-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\unavailable-svgrepo-com (1).png" />
+        <None Remove="Imagens\unavailable-svgrepo-com (1).png"/>
         <Content Include="Imagens\unavailable-svgrepo-com (1).png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\unavailable-svgrepo-com (2).png" />
+        <None Remove="Imagens\unavailable-svgrepo-com (2).png"/>
         <Content Include="Imagens\unavailable-svgrepo-com (2).png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\unavailable-svgrepo-com (3).png" />
+        <None Remove="Imagens\unavailable-svgrepo-com (3).png"/>
         <Content Include="Imagens\unavailable-svgrepo-com (3).png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Imagens\unblock-svgrepo-com.png" />
+        <None Remove="Imagens\unblock-svgrepo-com.png"/>
         <Content Include="Imagens\unblock-svgrepo-com.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Data\CountriesDB.sqlite" />
-        <Content Include="Data\CountriesDB.sqlite" />
-        <None Remove="Data\CreateTablesScript.sql" />
+        <None Remove="Data\CountriesDB.sqlite"/>
+        <Content Include="Data\CountriesDB.sqlite"/>
+        <None Remove="Data\CreateTablesScript.sql"/>
         <Content Include="Data\CreateTablesScript.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Data\DropCreateTablesScript.sql" />
+        <None Remove="Data\DropCreateTablesScript.sql"/>
         <Content Include="Data\DropCreateTablesScript.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Data\DropTablesScript.sql" />
+        <None Remove="Data\DropTablesScript.sql"/>
         <Content Include="Data\DropTablesScript.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Data\ProjetoFinal_Paises.sqlite" />
+        <None Remove="Data\ProjetoFinal_Paises.sqlite"/>
         <Content Include="Data\ProjetoFinal_Paises.sqlite">
             <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </Content>
-        <None Remove="Data\TruncateTablesScript.sql" />
+        <None Remove="Data\TruncateTablesScript.sql"/>
         <Content Include="Data\TruncateTablesScript.sql">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ABW.png" />
+        <None Remove="Flags\ABW.png"/>
         <Content Include="Flags\ABW.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AFG.png" />
+        <None Remove="Flags\AFG.png"/>
         <Content Include="Flags\AFG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AGO.png" />
+        <None Remove="Flags\AGO.png"/>
         <Content Include="Flags\AGO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AIA.png" />
+        <None Remove="Flags\AIA.png"/>
         <Content Include="Flags\AIA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ALA.png" />
+        <None Remove="Flags\ALA.png"/>
         <Content Include="Flags\ALA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ALB.png" />
+        <None Remove="Flags\ALB.png"/>
         <Content Include="Flags\ALB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AND.png" />
+        <None Remove="Flags\AND.png"/>
         <Content Include="Flags\AND.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ARE.png" />
+        <None Remove="Flags\ARE.png"/>
         <Content Include="Flags\ARE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ARG.png" />
+        <None Remove="Flags\ARG.png"/>
         <Content Include="Flags\ARG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ARM.png" />
+        <None Remove="Flags\ARM.png"/>
         <Content Include="Flags\ARM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ASM.png" />
+        <None Remove="Flags\ASM.png"/>
         <Content Include="Flags\ASM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ATA.png" />
+        <None Remove="Flags\ATA.png"/>
         <Content Include="Flags\ATA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ATF.png" />
+        <None Remove="Flags\ATF.png"/>
         <Content Include="Flags\ATF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ATG.png" />
+        <None Remove="Flags\ATG.png"/>
         <Content Include="Flags\ATG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AUS.png" />
+        <None Remove="Flags\AUS.png"/>
         <Content Include="Flags\AUS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AUT.png" />
+        <None Remove="Flags\AUT.png"/>
         <Content Include="Flags\AUT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\AZE.png" />
+        <None Remove="Flags\AZE.png"/>
         <Content Include="Flags\AZE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BDI.png" />
+        <None Remove="Flags\BDI.png"/>
         <Content Include="Flags\BDI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BEL.png" />
+        <None Remove="Flags\BEL.png"/>
         <Content Include="Flags\BEL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BEN.png" />
+        <None Remove="Flags\BEN.png"/>
         <Content Include="Flags\BEN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BES.png" />
+        <None Remove="Flags\BES.png"/>
         <Content Include="Flags\BES.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BFA.png" />
+        <None Remove="Flags\BFA.png"/>
         <Content Include="Flags\BFA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BGD.png" />
+        <None Remove="Flags\BGD.png"/>
         <Content Include="Flags\BGD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BGR.png" />
+        <None Remove="Flags\BGR.png"/>
         <Content Include="Flags\BGR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BHR.png" />
+        <None Remove="Flags\BHR.png"/>
         <Content Include="Flags\BHR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BHS.png" />
+        <None Remove="Flags\BHS.png"/>
         <Content Include="Flags\BHS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BIH.png" />
+        <None Remove="Flags\BIH.png"/>
         <Content Include="Flags\BIH.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BLM.png" />
+        <None Remove="Flags\BLM.png"/>
         <Content Include="Flags\BLM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BLR.png" />
+        <None Remove="Flags\BLR.png"/>
         <Content Include="Flags\BLR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BLZ.png" />
+        <None Remove="Flags\BLZ.png"/>
         <Content Include="Flags\BLZ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BMU.png" />
+        <None Remove="Flags\BMU.png"/>
         <Content Include="Flags\BMU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BOL.png" />
+        <None Remove="Flags\BOL.png"/>
         <Content Include="Flags\BOL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BRA.png" />
+        <None Remove="Flags\BRA.png"/>
         <Content Include="Flags\BRA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BRB.png" />
+        <None Remove="Flags\BRB.png"/>
         <Content Include="Flags\BRB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BRN.png" />
+        <None Remove="Flags\BRN.png"/>
         <Content Include="Flags\BRN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BTN.png" />
+        <None Remove="Flags\BTN.png"/>
         <Content Include="Flags\BTN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BVT.png" />
+        <None Remove="Flags\BVT.png"/>
         <Content Include="Flags\BVT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\BWA.png" />
+        <None Remove="Flags\BWA.png"/>
         <Content Include="Flags\BWA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CAF.png" />
+        <None Remove="Flags\CAF.png"/>
         <Content Include="Flags\CAF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CAN.png" />
+        <None Remove="Flags\CAN.png"/>
         <Content Include="Flags\CAN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CCK.png" />
+        <None Remove="Flags\CCK.png"/>
         <Content Include="Flags\CCK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CHE.png" />
+        <None Remove="Flags\CHE.png"/>
         <Content Include="Flags\CHE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CHL.png" />
+        <None Remove="Flags\CHL.png"/>
         <Content Include="Flags\CHL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CHN.png" />
+        <None Remove="Flags\CHN.png"/>
         <Content Include="Flags\CHN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CIV.png" />
+        <None Remove="Flags\CIV.png"/>
         <Content Include="Flags\CIV.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CMR.png" />
+        <None Remove="Flags\CMR.png"/>
         <Content Include="Flags\CMR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\COD.png" />
+        <None Remove="Flags\COD.png"/>
         <Content Include="Flags\COD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\COG.png" />
+        <None Remove="Flags\COG.png"/>
         <Content Include="Flags\COG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\COK.png" />
+        <None Remove="Flags\COK.png"/>
         <Content Include="Flags\COK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\COL.png" />
+        <None Remove="Flags\COL.png"/>
         <Content Include="Flags\COL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\COM.png" />
+        <None Remove="Flags\COM.png"/>
         <Content Include="Flags\COM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CPV.png" />
+        <None Remove="Flags\CPV.png"/>
         <Content Include="Flags\CPV.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CRI.png" />
+        <None Remove="Flags\CRI.png"/>
         <Content Include="Flags\CRI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CUB.png" />
+        <None Remove="Flags\CUB.png"/>
         <Content Include="Flags\CUB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CUW.png" />
+        <None Remove="Flags\CUW.png"/>
         <Content Include="Flags\CUW.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CXR.png" />
+        <None Remove="Flags\CXR.png"/>
         <Content Include="Flags\CXR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CYM.png" />
+        <None Remove="Flags\CYM.png"/>
         <Content Include="Flags\CYM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CYP.png" />
+        <None Remove="Flags\CYP.png"/>
         <Content Include="Flags\CYP.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\CZE.png" />
+        <None Remove="Flags\CZE.png"/>
         <Content Include="Flags\CZE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\DEU.png" />
+        <None Remove="Flags\DEU.png"/>
         <Content Include="Flags\DEU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\DJI.png" />
+        <None Remove="Flags\DJI.png"/>
         <Content Include="Flags\DJI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\DMA.png" />
+        <None Remove="Flags\DMA.png"/>
         <Content Include="Flags\DMA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\DNK.png" />
+        <None Remove="Flags\DNK.png"/>
         <Content Include="Flags\DNK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\DOM.png" />
+        <None Remove="Flags\DOM.png"/>
         <Content Include="Flags\DOM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\DZA.png" />
+        <None Remove="Flags\DZA.png"/>
         <Content Include="Flags\DZA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ECU.png" />
+        <None Remove="Flags\ECU.png"/>
         <Content Include="Flags\ECU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\EGY.png" />
+        <None Remove="Flags\EGY.png"/>
         <Content Include="Flags\EGY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ERI.png" />
+        <None Remove="Flags\ERI.png"/>
         <Content Include="Flags\ERI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ESH.png" />
+        <None Remove="Flags\ESH.png"/>
         <Content Include="Flags\ESH.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ESP.png" />
+        <None Remove="Flags\ESP.png"/>
         <Content Include="Flags\ESP.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\EST.png" />
+        <None Remove="Flags\EST.png"/>
         <Content Include="Flags\EST.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ETH.png" />
+        <None Remove="Flags\ETH.png"/>
         <Content Include="Flags\ETH.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\FIN.png" />
+        <None Remove="Flags\FIN.png"/>
         <Content Include="Flags\FIN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\FJI.png" />
+        <None Remove="Flags\FJI.png"/>
         <Content Include="Flags\FJI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\FLK.png" />
+        <None Remove="Flags\FLK.png"/>
         <Content Include="Flags\FLK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\FRA.png" />
+        <None Remove="Flags\FRA.png"/>
         <Content Include="Flags\FRA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\FRO.png" />
+        <None Remove="Flags\FRO.png"/>
         <Content Include="Flags\FRO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\FSM.png" />
+        <None Remove="Flags\FSM.png"/>
         <Content Include="Flags\FSM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GAB.png" />
+        <None Remove="Flags\GAB.png"/>
         <Content Include="Flags\GAB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GBR.png" />
+        <None Remove="Flags\GBR.png"/>
         <Content Include="Flags\GBR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GEO.png" />
+        <None Remove="Flags\GEO.png"/>
         <Content Include="Flags\GEO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GGY.png" />
+        <None Remove="Flags\GGY.png"/>
         <Content Include="Flags\GGY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GHA.png" />
+        <None Remove="Flags\GHA.png"/>
         <Content Include="Flags\GHA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GIB.png" />
+        <None Remove="Flags\GIB.png"/>
         <Content Include="Flags\GIB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GIN.png" />
+        <None Remove="Flags\GIN.png"/>
         <Content Include="Flags\GIN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GLP.png" />
+        <None Remove="Flags\GLP.png"/>
         <Content Include="Flags\GLP.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GMB.png" />
+        <None Remove="Flags\GMB.png"/>
         <Content Include="Flags\GMB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GNB.png" />
+        <None Remove="Flags\GNB.png"/>
         <Content Include="Flags\GNB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GNQ.png" />
+        <None Remove="Flags\GNQ.png"/>
         <Content Include="Flags\GNQ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GRC.png" />
+        <None Remove="Flags\GRC.png"/>
         <Content Include="Flags\GRC.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GRD.png" />
+        <None Remove="Flags\GRD.png"/>
         <Content Include="Flags\GRD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GRL.png" />
+        <None Remove="Flags\GRL.png"/>
         <Content Include="Flags\GRL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GTM.png" />
+        <None Remove="Flags\GTM.png"/>
         <Content Include="Flags\GTM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GUF.png" />
+        <None Remove="Flags\GUF.png"/>
         <Content Include="Flags\GUF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GUM.png" />
+        <None Remove="Flags\GUM.png"/>
         <Content Include="Flags\GUM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\GUY.png" />
+        <None Remove="Flags\GUY.png"/>
         <Content Include="Flags\GUY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\HKG.png" />
+        <None Remove="Flags\HKG.png"/>
         <Content Include="Flags\HKG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\HMD.png" />
+        <None Remove="Flags\HMD.png"/>
         <Content Include="Flags\HMD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\HND.png" />
+        <None Remove="Flags\HND.png"/>
         <Content Include="Flags\HND.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\HRV.png" />
+        <None Remove="Flags\HRV.png"/>
         <Content Include="Flags\HRV.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\HTI.png" />
+        <None Remove="Flags\HTI.png"/>
         <Content Include="Flags\HTI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\HUN.png" />
+        <None Remove="Flags\HUN.png"/>
         <Content Include="Flags\HUN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IDN.png" />
+        <None Remove="Flags\IDN.png"/>
         <Content Include="Flags\IDN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IMN.png" />
+        <None Remove="Flags\IMN.png"/>
         <Content Include="Flags\IMN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IND.png" />
+        <None Remove="Flags\IND.png"/>
         <Content Include="Flags\IND.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IOT.png" />
+        <None Remove="Flags\IOT.png"/>
         <Content Include="Flags\IOT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IRL.png" />
+        <None Remove="Flags\IRL.png"/>
         <Content Include="Flags\IRL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IRN.png" />
+        <None Remove="Flags\IRN.png"/>
         <Content Include="Flags\IRN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\IRQ.png" />
+        <None Remove="Flags\IRQ.png"/>
         <Content Include="Flags\IRQ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ISL.png" />
+        <None Remove="Flags\ISL.png"/>
         <Content Include="Flags\ISL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ISR.png" />
+        <None Remove="Flags\ISR.png"/>
         <Content Include="Flags\ISR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ITA.png" />
+        <None Remove="Flags\ITA.png"/>
         <Content Include="Flags\ITA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\JAM.png" />
+        <None Remove="Flags\JAM.png"/>
         <Content Include="Flags\JAM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\JEY.png" />
+        <None Remove="Flags\JEY.png"/>
         <Content Include="Flags\JEY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\JOR.png" />
+        <None Remove="Flags\JOR.png"/>
         <Content Include="Flags\JOR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\JPN.png" />
+        <None Remove="Flags\JPN.png"/>
         <Content Include="Flags\JPN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KAZ.png" />
+        <None Remove="Flags\KAZ.png"/>
         <Content Include="Flags\KAZ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KEN.png" />
+        <None Remove="Flags\KEN.png"/>
         <Content Include="Flags\KEN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KGZ.png" />
+        <None Remove="Flags\KGZ.png"/>
         <Content Include="Flags\KGZ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KHM.png" />
+        <None Remove="Flags\KHM.png"/>
         <Content Include="Flags\KHM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KIR.png" />
+        <None Remove="Flags\KIR.png"/>
         <Content Include="Flags\KIR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KNA.png" />
+        <None Remove="Flags\KNA.png"/>
         <Content Include="Flags\KNA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KOR.png" />
+        <None Remove="Flags\KOR.png"/>
         <Content Include="Flags\KOR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\KWT.png" />
+        <None Remove="Flags\KWT.png"/>
         <Content Include="Flags\KWT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LAO.png" />
+        <None Remove="Flags\LAO.png"/>
         <Content Include="Flags\LAO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LBN.png" />
+        <None Remove="Flags\LBN.png"/>
         <Content Include="Flags\LBN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LBR.png" />
+        <None Remove="Flags\LBR.png"/>
         <Content Include="Flags\LBR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LBY.png" />
+        <None Remove="Flags\LBY.png"/>
         <Content Include="Flags\LBY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LCA.png" />
+        <None Remove="Flags\LCA.png"/>
         <Content Include="Flags\LCA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LIE.png" />
+        <None Remove="Flags\LIE.png"/>
         <Content Include="Flags\LIE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LKA.png" />
+        <None Remove="Flags\LKA.png"/>
         <Content Include="Flags\LKA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LSO.png" />
+        <None Remove="Flags\LSO.png"/>
         <Content Include="Flags\LSO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LTU.png" />
+        <None Remove="Flags\LTU.png"/>
         <Content Include="Flags\LTU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LUX.png" />
+        <None Remove="Flags\LUX.png"/>
         <Content Include="Flags\LUX.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\LVA.png" />
+        <None Remove="Flags\LVA.png"/>
         <Content Include="Flags\LVA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MAC.png" />
+        <None Remove="Flags\MAC.png"/>
         <Content Include="Flags\MAC.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MAF.png" />
+        <None Remove="Flags\MAF.png"/>
         <Content Include="Flags\MAF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MAR.png" />
+        <None Remove="Flags\MAR.png"/>
         <Content Include="Flags\MAR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MCO.png" />
+        <None Remove="Flags\MCO.png"/>
         <Content Include="Flags\MCO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MDA.png" />
+        <None Remove="Flags\MDA.png"/>
         <Content Include="Flags\MDA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MDG.png" />
+        <None Remove="Flags\MDG.png"/>
         <Content Include="Flags\MDG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MDV.png" />
+        <None Remove="Flags\MDV.png"/>
         <Content Include="Flags\MDV.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MEX.png" />
+        <None Remove="Flags\MEX.png"/>
         <Content Include="Flags\MEX.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MHL.png" />
+        <None Remove="Flags\MHL.png"/>
         <Content Include="Flags\MHL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MKD.png" />
+        <None Remove="Flags\MKD.png"/>
         <Content Include="Flags\MKD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MLI.png" />
+        <None Remove="Flags\MLI.png"/>
         <Content Include="Flags\MLI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MLT.png" />
+        <None Remove="Flags\MLT.png"/>
         <Content Include="Flags\MLT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MMR.png" />
+        <None Remove="Flags\MMR.png"/>
         <Content Include="Flags\MMR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MNE.png" />
+        <None Remove="Flags\MNE.png"/>
         <Content Include="Flags\MNE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MNG.png" />
+        <None Remove="Flags\MNG.png"/>
         <Content Include="Flags\MNG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MNP.png" />
+        <None Remove="Flags\MNP.png"/>
         <Content Include="Flags\MNP.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MOZ.png" />
+        <None Remove="Flags\MOZ.png"/>
         <Content Include="Flags\MOZ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MRT.png" />
+        <None Remove="Flags\MRT.png"/>
         <Content Include="Flags\MRT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MSR.png" />
+        <None Remove="Flags\MSR.png"/>
         <Content Include="Flags\MSR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MTQ.png" />
+        <None Remove="Flags\MTQ.png"/>
         <Content Include="Flags\MTQ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MUS.png" />
+        <None Remove="Flags\MUS.png"/>
         <Content Include="Flags\MUS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MWI.png" />
+        <None Remove="Flags\MWI.png"/>
         <Content Include="Flags\MWI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MYS.png" />
+        <None Remove="Flags\MYS.png"/>
         <Content Include="Flags\MYS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\MYT.png" />
+        <None Remove="Flags\MYT.png"/>
         <Content Include="Flags\MYT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NAM.png" />
+        <None Remove="Flags\NAM.png"/>
         <Content Include="Flags\NAM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NCL.png" />
+        <None Remove="Flags\NCL.png"/>
         <Content Include="Flags\NCL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NER.png" />
+        <None Remove="Flags\NER.png"/>
         <Content Include="Flags\NER.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NFK.png" />
+        <None Remove="Flags\NFK.png"/>
         <Content Include="Flags\NFK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NGA.png" />
+        <None Remove="Flags\NGA.png"/>
         <Content Include="Flags\NGA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NIC.png" />
+        <None Remove="Flags\NIC.png"/>
         <Content Include="Flags\NIC.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NIU.png" />
+        <None Remove="Flags\NIU.png"/>
         <Content Include="Flags\NIU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NLD.png" />
+        <None Remove="Flags\NLD.png"/>
         <Content Include="Flags\NLD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NOR.png" />
+        <None Remove="Flags\NOR.png"/>
         <Content Include="Flags\NOR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NPL.png" />
+        <None Remove="Flags\NPL.png"/>
         <Content Include="Flags\NPL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NRU.png" />
+        <None Remove="Flags\NRU.png"/>
         <Content Include="Flags\NRU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\NZL.png" />
+        <None Remove="Flags\NZL.png"/>
         <Content Include="Flags\NZL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\OMN.png" />
+        <None Remove="Flags\OMN.png"/>
         <Content Include="Flags\OMN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PAK.png" />
+        <None Remove="Flags\PAK.png"/>
         <Content Include="Flags\PAK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PAN.png" />
+        <None Remove="Flags\PAN.png"/>
         <Content Include="Flags\PAN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PCN.png" />
+        <None Remove="Flags\PCN.png"/>
         <Content Include="Flags\PCN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PER.png" />
+        <None Remove="Flags\PER.png"/>
         <Content Include="Flags\PER.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PHL.png" />
+        <None Remove="Flags\PHL.png"/>
         <Content Include="Flags\PHL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PLW.png" />
+        <None Remove="Flags\PLW.png"/>
         <Content Include="Flags\PLW.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PNG.png" />
+        <None Remove="Flags\PNG.png"/>
         <Content Include="Flags\PNG.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\POL.png" />
+        <None Remove="Flags\POL.png"/>
         <Content Include="Flags\POL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PRI.png" />
+        <None Remove="Flags\PRI.png"/>
         <Content Include="Flags\PRI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PRK.png" />
+        <None Remove="Flags\PRK.png"/>
         <Content Include="Flags\PRK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PRT.png" />
+        <None Remove="Flags\PRT.png"/>
         <Content Include="Flags\PRT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PRY.png" />
+        <None Remove="Flags\PRY.png"/>
         <Content Include="Flags\PRY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PSE.png" />
+        <None Remove="Flags\PSE.png"/>
         <Content Include="Flags\PSE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\PYF.png" />
+        <None Remove="Flags\PYF.png"/>
         <Content Include="Flags\PYF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\QAT.png" />
+        <None Remove="Flags\QAT.png"/>
         <Content Include="Flags\QAT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\REU.png" />
+        <None Remove="Flags\REU.png"/>
         <Content Include="Flags\REU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ROU.png" />
+        <None Remove="Flags\ROU.png"/>
         <Content Include="Flags\ROU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\RUS.png" />
+        <None Remove="Flags\RUS.png"/>
         <Content Include="Flags\RUS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\RWA.png" />
+        <None Remove="Flags\RWA.png"/>
         <Content Include="Flags\RWA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SAU.png" />
+        <None Remove="Flags\SAU.png"/>
         <Content Include="Flags\SAU.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SDN.png" />
+        <None Remove="Flags\SDN.png"/>
         <Content Include="Flags\SDN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SEN.png" />
+        <None Remove="Flags\SEN.png"/>
         <Content Include="Flags\SEN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SGP.png" />
+        <None Remove="Flags\SGP.png"/>
         <Content Include="Flags\SGP.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SGS.png" />
+        <None Remove="Flags\SGS.png"/>
         <Content Include="Flags\SGS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SHN.png" />
+        <None Remove="Flags\SHN.png"/>
         <Content Include="Flags\SHN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SJM.png" />
+        <None Remove="Flags\SJM.png"/>
         <Content Include="Flags\SJM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SLB.png" />
+        <None Remove="Flags\SLB.png"/>
         <Content Include="Flags\SLB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SLE.png" />
+        <None Remove="Flags\SLE.png"/>
         <Content Include="Flags\SLE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SLV.png" />
+        <None Remove="Flags\SLV.png"/>
         <Content Include="Flags\SLV.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SMR.png" />
+        <None Remove="Flags\SMR.png"/>
         <Content Include="Flags\SMR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SOM.png" />
+        <None Remove="Flags\SOM.png"/>
         <Content Include="Flags\SOM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SPM.png" />
+        <None Remove="Flags\SPM.png"/>
         <Content Include="Flags\SPM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SRB.png" />
+        <None Remove="Flags\SRB.png"/>
         <Content Include="Flags\SRB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SSD.png" />
+        <None Remove="Flags\SSD.png"/>
         <Content Include="Flags\SSD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\STP.png" />
+        <None Remove="Flags\STP.png"/>
         <Content Include="Flags\STP.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SUR.png" />
+        <None Remove="Flags\SUR.png"/>
         <Content Include="Flags\SUR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SVK.png" />
+        <None Remove="Flags\SVK.png"/>
         <Content Include="Flags\SVK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SVN.png" />
+        <None Remove="Flags\SVN.png"/>
         <Content Include="Flags\SVN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SWE.png" />
+        <None Remove="Flags\SWE.png"/>
         <Content Include="Flags\SWE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SWZ.png" />
+        <None Remove="Flags\SWZ.png"/>
         <Content Include="Flags\SWZ.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SXM.png" />
+        <None Remove="Flags\SXM.png"/>
         <Content Include="Flags\SXM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SYC.png" />
+        <None Remove="Flags\SYC.png"/>
         <Content Include="Flags\SYC.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\SYR.png" />
+        <None Remove="Flags\SYR.png"/>
         <Content Include="Flags\SYR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TCA.png" />
+        <None Remove="Flags\TCA.png"/>
         <Content Include="Flags\TCA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TCD.png" />
+        <None Remove="Flags\TCD.png"/>
         <Content Include="Flags\TCD.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TGO.png" />
+        <None Remove="Flags\TGO.png"/>
         <Content Include="Flags\TGO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\THA.png" />
+        <None Remove="Flags\THA.png"/>
         <Content Include="Flags\THA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TJK.png" />
+        <None Remove="Flags\TJK.png"/>
         <Content Include="Flags\TJK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TKL.png" />
+        <None Remove="Flags\TKL.png"/>
         <Content Include="Flags\TKL.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TKM.png" />
+        <None Remove="Flags\TKM.png"/>
         <Content Include="Flags\TKM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TLS.png" />
+        <None Remove="Flags\TLS.png"/>
         <Content Include="Flags\TLS.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TON.png" />
+        <None Remove="Flags\TON.png"/>
         <Content Include="Flags\TON.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TTO.png" />
+        <None Remove="Flags\TTO.png"/>
         <Content Include="Flags\TTO.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TUN.png" />
+        <None Remove="Flags\TUN.png"/>
         <Content Include="Flags\TUN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TUR.png" />
+        <None Remove="Flags\TUR.png"/>
         <Content Include="Flags\TUR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TUV.png" />
+        <None Remove="Flags\TUV.png"/>
         <Content Include="Flags\TUV.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TWN.png" />
+        <None Remove="Flags\TWN.png"/>
         <Content Include="Flags\TWN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\TZA.png" />
+        <None Remove="Flags\TZA.png"/>
         <Content Include="Flags\TZA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\UGA.png" />
+        <None Remove="Flags\UGA.png"/>
         <Content Include="Flags\UGA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\UKR.png" />
+        <None Remove="Flags\UKR.png"/>
         <Content Include="Flags\UKR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\UMI.png" />
+        <None Remove="Flags\UMI.png"/>
         <Content Include="Flags\UMI.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\UNK.png" />
+        <None Remove="Flags\UNK.png"/>
         <Content Include="Flags\UNK.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\URY.png" />
+        <None Remove="Flags\URY.png"/>
         <Content Include="Flags\URY.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\USA.png" />
+        <None Remove="Flags\USA.png"/>
         <Content Include="Flags\USA.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\UZB.png" />
+        <None Remove="Flags\UZB.png"/>
         <Content Include="Flags\UZB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VAT.png" />
+        <None Remove="Flags\VAT.png"/>
         <Content Include="Flags\VAT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VCT.png" />
+        <None Remove="Flags\VCT.png"/>
         <Content Include="Flags\VCT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VEN.png" />
+        <None Remove="Flags\VEN.png"/>
         <Content Include="Flags\VEN.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VGB.png" />
+        <None Remove="Flags\VGB.png"/>
         <Content Include="Flags\VGB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VIR.png" />
+        <None Remove="Flags\VIR.png"/>
         <Content Include="Flags\VIR.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VNM.png" />
+        <None Remove="Flags\VNM.png"/>
         <Content Include="Flags\VNM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\VUT.png" />
+        <None Remove="Flags\VUT.png"/>
         <Content Include="Flags\VUT.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\WLF.png" />
+        <None Remove="Flags\WLF.png"/>
         <Content Include="Flags\WLF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\WSM.png" />
+        <None Remove="Flags\WSM.png"/>
         <Content Include="Flags\WSM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\YEM.png" />
+        <None Remove="Flags\YEM.png"/>
         <Content Include="Flags\YEM.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ZAF.png" />
+        <None Remove="Flags\ZAF.png"/>
         <Content Include="Flags\ZAF.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ZMB.png" />
+        <None Remove="Flags\ZMB.png"/>
         <Content Include="Flags\ZMB.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <None Remove="Flags\ZWE.png" />
+        <None Remove="Flags\ZWE.png"/>
         <Content Include="Flags\ZWE.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>

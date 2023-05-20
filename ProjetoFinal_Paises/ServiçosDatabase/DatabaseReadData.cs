@@ -10,10 +10,9 @@ namespace ProjetoFinal_Paises.ServiçosDatabase;
 public class DatabaseReadData
 
 {
-
     private static DialogService? _dialogService;
-    
-    
+
+
     public static Response? ReadData(string filePath)
     {
         try

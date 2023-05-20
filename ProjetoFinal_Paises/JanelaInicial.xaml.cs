@@ -22,62 +22,81 @@ public partial class JanelaInicial : Window
     private void ButtonJorge_Click(object sender, RoutedEventArgs e)
     {
         JorgeWindow jorgeWindow = new();
-        this.Hide();
+        Hide();
         jorgeWindow.ShowDialog();
         jorgeWindow.Close();
-        this.ShowDialog();
+        ShowDialog();
     }
 
     private void ButtonTatiane_Click(object sender, RoutedEventArgs e)
     {
         TatianeWindow tatianeWindow = new();
-        this.Hide();
+        Hide();
         tatianeWindow.ShowDialog();
         tatianeWindow.Close();
-        this.ShowDialog();
+        ShowDialog();
     }
 
     private void ButtonRuben_Click(object sender, RoutedEventArgs e)
     {
-        RubenWindow rubenWindow = new();
-        this.Hide();
-        rubenWindow.ShowDialog();
-        rubenWindow.Close();
-        this.ShowDialog();
+        // RubenWindow rubenWindow = new();
+        // Hide();
+        // rubenWindow.ShowDialog();
+        // rubenWindow.Close();
+        // ShowDialog();
     }
 
     private void ButtonLicinio_Click(object sender, RoutedEventArgs e)
     {
+        LicinioWindow licinioWindow = new();
+        Hide();
+        licinioWindow.ShowDialog();
+        licinioWindow.Close();
+        ShowDialog();
     }
 
     private void ButtonNuno_1_Click(object sender, RoutedEventArgs e)
     {
         NunoWindow1 nunoWindow1 = new();
-        this.Hide();
+        Hide();
         nunoWindow1.ShowDialog();
         nunoWindow1.Close();
-        this.ShowDialog();
+        ShowDialog();
     }
 
     private void ButtonNuno_2_Click(object sender, RoutedEventArgs e)
     {
         NunoWindow2 nunoWindow2 = new();
-        this.Hide();
+        Hide();
         nunoWindow2.ShowDialog();
         nunoWindow2.Close();
-        this.ShowDialog();
+        ShowDialog();
     }
 
     private void ButtonNuno_3_Click(object sender, RoutedEventArgs e)
     {
         NunoWindow3 nunoWindow3 = new();
-        this.Hide();
+        Hide();
         nunoWindow3.ShowDialog();
         nunoWindow3.Close();
-        this.ShowDialog();
+        ShowDialog();
     }
 
     private void ButtonNuno_4_Click(object sender, RoutedEventArgs e)
+    {
+    }
+
+    private void ButtonMainWindow1_OnClick(object sender, RoutedEventArgs e)
+    {
+        MainWindow mainWindow = new();
+        Hide();
+        mainWindow.ShowDialog();
+        mainWindow.Close();
+        ShowDialog();
+    }
+
+
+    private void ButtonMainWindow2_OnClick(object sender, RoutedEventArgs e)
     {
     }
 }

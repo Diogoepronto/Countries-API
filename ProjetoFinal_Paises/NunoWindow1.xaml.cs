@@ -23,6 +23,12 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class NunoWindow1 : Window
 {
+    #region Atributos
+
+    private static DialogService? _dialogService;
+
+    #endregion
+
     public NunoWindow1()
     {
         // chaves que já não funcionam
@@ -42,12 +48,6 @@ public partial class NunoWindow1 : Window
 
         Loaded += YourWindowName_Loaded;
     }
-
-    #region Atributos
-
-    private static DialogService? _dialogService;
-
-    #endregion
 
     #region Propriedades
 
@@ -125,7 +125,8 @@ public partial class NunoWindow1 : Window
             });
 
         var response =
-            await ApiService.GetCountries("https://restcountries.com",
+            await _apiService.GetCountries(
+                "https://restcountries.com",
                 "v3.1/all", progress);
 
         CountryList = (ObservableCollection<Country>) response.Result;
@@ -165,7 +166,7 @@ public partial class NunoWindow1 : Window
         });
 
         var downloadflags =
-            await DataService.DownloadFlags(CountryList, progress);
+            await _dataService.DownloadFlags(CountryList, progress);
         TxtStatusDownload.Text = downloadflags.Message;
 
         await Task.Delay(10000);
@@ -608,6 +609,8 @@ public partial class NunoWindow1 : Window
 
     private ICollectionView _dataView;
     private readonly string _appDirectory = Directory.GetCurrentDirectory();
+    private ApiService _apiService;
+    private DataService _dataService;
 
     #endregion
 }
