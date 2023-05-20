@@ -222,7 +222,7 @@ public partial class JorgeWindow : Window
                 var latitude = location.Point.Latitude;
                 var longitude = location.Point.Longitude;
 
-                if (latitude == 0 || longitude == 0)
+                if (latitude != 0 || longitude != 0)
                 {
                     // Define a origem do posicionamento
                     // para a parte inferior do pino
