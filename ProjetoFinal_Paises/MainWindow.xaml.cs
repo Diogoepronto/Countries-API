@@ -21,11 +21,12 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class MainWindow : Window
 {
-    // private readonly ApiService _apiService;
-    // private readonly DataService _dataService;
+    private ApiService _apiService;
+    private DataService _dataService;
+    private DialogService _dialogService;
+    private NetworkService _networkService;
+
     private ICollectionView _dataView;
-    // private DialogService _dialogService;
-    // private NetworkService _networkService;
 
     public MainWindow()
     {
@@ -37,19 +38,20 @@ public partial class MainWindow : Window
 
         InitializeComponent();
 
-        // _apiService = new ApiService();
-        // _dataService = new DataService();
-        // _networkService = new NetworkService();
-        // _dialogService = new DialogService();
+        _apiService = new ApiService();
+        _dataService = new DataService();
+        _networkService = new NetworkService();
+        _dialogService = new DialogService();
 
-        NetworkService.AvailabilityChanged += DoAvailabilityChanged;
+        NetworkService.AvailabilityChanged +=
+            DoAvailabilityChanged;
 
         InitializeData();
 
         listBoxCountries.DataContext = this;
     }
 
-    public ObservableCollection<Country>? CountryList { get; set; } = new();
+    public ObservableCollection<Country> CountryList { get; set; } = new();
 
     #region INITIALIZE APPLICATION
 
@@ -192,8 +194,7 @@ public partial class MainWindow : Window
         });
 
         var response =
-            await ApiService.GetCountries(
-                "https://restcountries.com",
+            await ApiService.GetCountries("https://restcountries.com",
                 "v3.1/all", progress);
 
         CountryList = (ObservableCollection<Country>) response.Result;
@@ -450,7 +451,10 @@ public partial class MainWindow : Window
             return;
         }
 
-        if (responsiveGrid.ActualWidth > 1000) responsiveGrid.Columns = 3;
+        if (responsiveGrid.ActualWidth > 1000)
+        {
+            responsiveGrid.Columns = 3;
+        }
     }
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -469,6 +473,7 @@ public partial class MainWindow : Window
         {
             if (item is Country country)
                 return country.Name.Common.ToLower().Contains(filter);
+
             return false;
         };
         _dataView.Refresh();

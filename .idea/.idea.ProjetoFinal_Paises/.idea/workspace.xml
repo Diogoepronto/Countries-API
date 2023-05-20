@@ -8,27 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="mais pequenas atualizações">
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-symbolic-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-flash-photographs-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-photographs-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/missing-image-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/not-available-circle-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (2).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (3).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unblock-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB.sqlite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CreateTablesScript.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/DropCreateTablesScript.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/DropTablesScript.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/TruncateTablesScript.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_2.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_2.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,27 +47,17 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b26c3ab2885ae1e2397c50e3e6819ad88ed89adf3f8ee61523986ef3a4fbcf/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fa9a244a677f598313c8a51657303a8c5b25759eb04ec7ad72ac8a84e5cfb41/XamlObjectWriter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/DiogoWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/DiogoWindow.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/App.xaml" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Modelos/Flag.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://diff.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/App.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/TatianeWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -85,29 +69,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230519_0001",
-    "git-widget-placeholder": "BranchTatiane",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20230519_0001&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;BranchTatiane&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\nunov\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\nunov\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\nunov\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\nunov\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\nunov\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\nunov\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ProjetoFinal_Paises" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -201,40 +185,26 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs</url>
           <line>500</line>
-          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="373" containingFunctionPresentation="Method 'DisplayCountryData'">
-            <startOffsets>
-              <option value="14940" />
-            </startOffsets>
-            <endOffsets>
-              <option value="14973" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="373" containingFunctionPresentation="Method 'DisplayCountryData'" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_1.xaml.cs</url>
           <line>91</line>
-          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="87" containingFunctionPresentation="Method 'LoadCountriesLocal'">
-            <startOffsets>
-              <option value="2427" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2467" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="87" containingFunctionPresentation="Method 'LoadCountriesLocal'" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs</url>
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow_2.xaml.cs</url>
           <line>50</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow.xaml.cs" initialLine="43" containingFunctionPresentation="Method 'LoadCountries'">
             <startOffsets>
-              <option value="1579" />
+              <option value="1589" />
             </startOffsets>
             <endOffsets>
-              <option value="1625" />
+              <option value="1635" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />
@@ -371,13 +341,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs</url>
-          <line>16</line>
+          <line>15</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosDatabase\DatabaseSaveData.cs" initialLine="16" containingFunctionPresentation="Method 'SaveData'">
             <startOffsets>
-              <option value="415" />
+              <option value="389" />
             </startOffsets>
             <endOffsets>
-              <option value="437" />
+              <option value="411" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="17" />

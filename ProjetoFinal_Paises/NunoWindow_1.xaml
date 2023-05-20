@@ -3,622 +3,757 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     x:Class="ProjetoFinal_Paises.NunoWindow_1"
     mc:Ignorable="d"
 
-    Title="CountriesList API" Height="900" Width="1600" WindowStartupLocation="CenterScreen"
+    Title="Countries API"
+    Height="750" MinHeight="600"
+    Width="1400" MinWidth="800"
+    WindowStartupLocation="CenterScreen">
 
-    ScrollViewer.HorizontalScrollBarVisibility="Auto"
-    ScrollViewer.CanContentScroll="True"
-    UseLayoutRounding="True" HorizontalAlignment="Left" VerticalAlignment="Top"
-    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+    <!--#region CUSTOM STYLES -->
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--#region CUSTOM CLEAR BUTTON -->
+            <Style TargetType="Button" x:Key="ClearSearchButton">
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="#FFE32227" />
 
-    <Window.Background>
-        <SolidColorBrush Color="White" />
-    </Window.Background>
-    <Grid x:Name="ListaDePaises">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Border"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="20"
+                                    SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="MyContentPresenter"
+                                                  Content="{TemplateBinding Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush"
+                                            TargetName="Border"
+                                            Value="#FFE32227" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region CUSTOM TEXTBOX -->
+            <Style TargetType="TextBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border x:Name="Border"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="{TemplateBinding Background}">
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsVisible" Value="true">
+                                    <Setter Property="BorderBrush"
+                                            TargetName="Border"
+                                            Value="#AA89BBF3" />
+
+                                    <Setter Property="CornerRadius"
+                                            TargetName="Border"
+                                            Value="15" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush"
+                                            TargetName="Border"
+                                            Value="#FF56CCF2" />
+
+                                    <Setter Property="CornerRadius"
+                                            TargetName="Border"
+                                            Value="15" />
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter Property="CornerRadius"
+                                            TargetName="Border"
+                                            Value="15" />
+
+                                    <Setter Property="BorderBrush"
+                                            TargetName="Border"
+                                            Value="#FF2F80ED" />
+
+                                    <Setter Property="Background"
+                                            TargetName="Border"
+                                            Value="AliceBlue" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--#endregion-->
+
+            <!--#region CUSTOM SCROLLBAR -->
+
+            <!--SCROLLBARS-->
+            <!--#endregion-->
+
+        </ResourceDictionary>
+    </Window.Resources>
+    <!--#endregion-->
+
+    <!--#region WINDOW STRUCTURE -->
+    <Grid UseLayoutRounding="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="Esquerda" Width="20" />
-            <ColumnDefinition x:Name="ColunaDaListaDePaises" Width="300" />
-            <ColumnDefinition x:Name="SeparadorCentral1" Width="20" />
-            <ColumnDefinition x:Name="ColunaDeDados" Width="850" />
-            <ColumnDefinition x:Name="SeparadorCentral2" Width="20" />
-            <ColumnDefinition x:Name="ColunaMapa" Width="*" />
-            <ColumnDefinition x:Name="Direita" Width="20" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="33*" />
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition x:Name="Topo" Height="10" />
-            <RowDefinition x:Name="LinhaPaisNomeBandeira" Height="190" />
-            <RowDefinition x:Name="Separador1" Height="10" />
-            <RowDefinition x:Name="LinhaPaisDados" Height="400" />
-            <RowDefinition x:Name="Separador2" Height="10" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="*" />
-            <RowDefinition x:Name="Separador3" Height="10" />
-            <RowDefinition x:Name="BarraDeProgresso" Height="15" />
-            <RowDefinition x:Name="BarraDeEstados" Height="15" />
-            <RowDefinition x:Name="Fundo" Height="20" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
-        <!--COLUMN COUNTRY LIST-->
-        <!--LIST COUNTRIES-->
-        <ListBox x:Name="ListBoxCountries"
-                 Grid.Column="1" Grid.Row="1"
-                 SelectionChanged="ListBoxPaises_SelectionChanged"
-                 BorderBrush="{x:Null}" Grid.RowSpan="5"
-                 HorizontalContentAlignment="Center">
-            <ListBox.Background>
-                <SolidColorBrush Color="White" />
-            </ListBox.Background>
+        <!--PROGRESS BAR-->
+        <Border
+            x:Name="ProgressBarOverlay"
+            Grid.Column="0" Grid.ColumnSpan="5"
+            Grid.Row="0" Grid.RowSpan="3"
+            Panel.ZIndex="10" Background="#EEFFFFFF">
+            <syncfusion:SfCircularProgressBar x:Name="ProgressBar" Width="300" GapWidth="-1" d:IsHidden="True">
+                <syncfusion:SfCircularProgressBar.ProgressColor>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF56CCF2" />
+                        <GradientStop Color="#FF2F80ED" Offset="1" />
+                    </LinearGradientBrush>
+                </syncfusion:SfCircularProgressBar.ProgressColor>
+            </syncfusion:SfCircularProgressBar>
+        </Border>
+        <TextBlock x:Name="TxtProgressStep"
+                   Grid.Column="2"
+                   Grid.Row="1"
+                   Panel.ZIndex="11"
+                   Text="Loading Countries"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="187,130,0,0"
+                   FontSize="48"
+                   Foreground="#FF007CEE" Height="64" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" d:IsHidden="True" />
 
-            <!--LIST ITEMS TEMPLATE-->
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal"
-                                Margin="5">
+        <!--DEBUG BUTTON-->
+        <Button Grid.Column="1"
+                Grid.Row="0"
+                Content="Debug" Click="Button_Click" />
 
-                        <Image Source="{Binding Flags.Png}"
-                               Width="50"
-                               Height="30" />
+        <!--STATUS MESSAGES-->
+        <TextBlock x:Name="TxtStatusDownload"
+                   Grid.Row="2"
+                   Grid.Column="1" Grid.ColumnSpan="4"
+                   Text="" Foreground="#FF999999" />
 
-                        <TextBlock Text="{Binding Name.Common}"
-                                   Width="200"
-                                   Padding="10,0,0,0"
-                                   VerticalAlignment="Center"
-                                   FontSize="14"
-                                   TextWrapping="Wrap" />
+        <TextBlock x:Name="TxtStatus"
+                   Grid.Row="2"
+                   Grid.Column="4"
+                   Text=""
+                   HorizontalAlignment="Left"
+                   Foreground="#FF999999" Width="0" />
 
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <!--END COLUMN COUNTRY LIST-->
-
-
-        <!--COLUMN COUNTRY DATA-->
-        <Grid x:Name="SelectedCountryFlag"
-              Grid.Column="3"
-              Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <!--#region MAIN COLUMN LEFT -->
+        <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--NAME-->
-            <TextBlock x:Name="TxtCountryName"
-                       Grid.Column="0"
-                       Grid.Row="0"
-                       FontSize="48"
-                       TextWrapping="Wrap"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
-                       FontFamily="Bradley Hand ITC" />
+            <!--#region SEARCHBAR -->
+            <Grid x:Name="GridSearchBar" Grid.Row="0" IsEnabled="False">
+                <TextBox x:Name="SearchBar"
+                         VerticalAlignment="Center"
+                         Margin="2,0,18,0"
+                         Padding="10, 5, 10, 5"
+                         TextChanged="searchBar_TextChanged"
+                         Background="{x:Null}" TabIndex="1" />
 
-            <!--FLAG-->
-            <Border x:Name="CountryFlag"
-                    Grid.Column="1"
-                    Grid.Row="0"
-                    BorderBrush="#eee"
-                    BorderThickness="0"
-                    HorizontalAlignment="Right">
+                <Button x:Name="ClearButton"
+                        HorizontalAlignment="Right"
+                        VerticalContentAlignment="Center"
+                        Content="✖️"
+                        Margin="0,0,30,0"
+                        Width="20"
+                        Height="20"
+                        Style="{StaticResource ClearSearchButton}"
+                        Visibility="Hidden"
+                        VerticalAlignment="Center"
+                        Cursor="Hand"
+                        TabIndex="2"
+                        Click="clearButton_Click" />
 
-                <Image x:Name="ImgCountryFlag"
-                       Width="auto"
-                       Height="150"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Right" />
+                <TextBlock IsHitTestVisible="False"
+                           Text="Enter a country"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="16,0,0,0"
+                           Foreground="LightGray">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=SearchBar}" Value="">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            <!--#endregion-->
 
-            </Border>
+            <!--#region LIST COUNTRIES -->
+            <ListBox x:Name="ListBoxCountries"
+                     Grid.Row="1"
+                     SelectionChanged="listBoxPaises_SelectionChanged"
+                     BorderBrush="{x:Null}">
+                <ListBox.Background>
+                    <SolidColorBrush Color="White" />
+                </ListBox.Background>
 
-            <Border Grid.Row="1"
-                    Grid.ColumnSpan="2" Grid.Column="0"
-                    BorderBrush="#eee"
-                    BorderThickness="0, 0, 0, 1"
-                    Margin="10" />
+                <!--LIST ITEMS TEMPLATE-->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel x:Name="listItem"
+                                    Orientation="Horizontal"
+                                    Margin="0,10,0,10">
+
+                            <Image Source="{Binding Flags.FlagToDisplay}"
+                                   Width="50"
+                                   Height="30">
+                                <Image.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="2" Opacity="0.5" />
+                                </Image.Effect>
+                            </Image>
+
+                            <TextBlock Text="{Binding Name.Common}"
+                                       Width="200"
+                                       Padding="10,0,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="14"
+                                       TextWrapping="Wrap" />
+
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!--#endregion-->
+
         </Grid>
+        <!--#endregion-->
 
-        <ScrollViewer
-            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
-            Grid.Row="3" Grid.Column="3" Grid.RowSpan="3">
+        <!--#region MAIN COLUMN RIGHT -->
+        <Grid Grid.Row="1" Grid.Column="2" Margin="0,0,15,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <!--
-            <ScrollViewer.Resources>
-            -->
-            <!-- Estilo da ScrollBar Horizontal -->
-            <!--
-                <Style TargetType="ScrollBar" 
-                       BasedOn="{StaticResource {x:Type ScrollBar}}">
-                    <Setter Property="Background" Value="Wheat"/>
-                    <Setter Property="Foreground" Value="Orange"/>
-                    <Setter Property="Width" Value="2"/>
-                </Style>
-            
-            </ScrollViewer.Resources>
-            -->
+            <!--#region COLUMN HEADER: NAME AND FLAG -->
+            <Grid Grid.Row="0" Margin="20,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
 
-            <ScrollViewer.Resources>
-                <!-- Style for Horizontal ScrollBar -->
+                <!--NAME-->
+                <TextBlock x:Name="TxtCountryName"
+                           Text="COUNTRY NAME"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           FontSize="32"
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left" />
 
-                <!-- Style for Vertical ScrollBar -->
-
-                <!-- Style for ScrollBar Thumb -->
-
-                <!-- Style for ScrollBar Buttons -->
-            </ScrollViewer.Resources>
-
-
-            <WrapPanel x:Name="DadosDoPais"
-                       ScrollViewer.CanContentScroll="True"
-                       UseLayoutRounding="True"
-                       ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                       ScrollViewer.VerticalScrollBarVisibility="Auto">
-
-                <!--END CARD: NAMES-->
-
-                <!--END CARD: GEOGRAPHY-->
-
-                <!--END CARD: MISCELLANEOUS-->
-
-
-                <!--END CARD: CONNECTION-->
-
-                <!--CARD: NAMES-->
-                <Border BorderBrush="AliceBlue"
+                <!--FLAG-->
+                <Border Grid.Row="0"
+                        Grid.Column="1"
+                        BorderBrush="#eee"
                         BorderThickness="1"
-                        CornerRadius="10"
-                        Background="White" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="2"
-                                          Opacity="0.2"
-                                          ShadowDepth="2"
-                                          Direction="270" />
-                    </Border.Effect>
+                        HorizontalAlignment="Right">
 
-                    <!--DATA-->
-                    <StackPanel
-                        Margin="20,10,20,10">
+                    <Image x:Name="ImgCountryFlag"
+                           Source="/Imagens/no_flag.png"
+                           Width="auto"
+                           Height="150"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right" />
 
-                        <!--TITLE-->
-                        <TextBlock Margin="0,10,0,10"
-                                   Text="Names"
-                                   FontSize="22" />
-
-                        <!--OFFICIAL NAME-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Official"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtNameOfficial"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--COMMON NAME-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Common"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtNameCommon"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--NATIVE OFFICIAL NAME-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Official (Native)"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtNameNativeOfficial"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--NATIVE COMMON NAME-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Common (Native)"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtNameNativeCommon"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-                <!--CARD: GEOGRAPHY-->
-                <Border BorderBrush="AliceBlue"
-                        BorderThickness="1"
-                        CornerRadius="10"
-                        Background="White" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="2"
-                                          Opacity="0.2"
-                                          ShadowDepth="2"
-                                          Direction="270" />
-                    </Border.Effect>
-
-                    <!--DATA-->
-                    <StackPanel Margin="20,10,20,10">
-
-                        <!--TITLE-->
-                        <TextBlock Margin="0,10,0,10"
-                                   Text="Geography"
-                                   FontSize="22" />
-
-                        <!--CONTINENT-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Continent"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtContinent"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--REGION-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Region"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtRegion"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--SUBREGION-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Subregion"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtSubregion"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--CAPITAL-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Capital"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtCapital"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--LATITUDE LONGITUDE-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Lat/Lng"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtLatLng"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--TIMEZONES-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Timezones"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtTimezones"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--LAND BORDERS-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Land Borders"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-                            <TextBlock x:Name="TxtBorders"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                    </StackPanel>
-                </Border>
-                <!--CARD: MISCELLANEOUS-->
-                <Border BorderBrush="AliceBlue"
-                        BorderThickness="1"
-                        CornerRadius="10"
-                        Background="White" Margin="5" HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-                    <Border.Effect>
-                        <DropShadowEffect BlurRadius="2"
-                                          Opacity="0.2"
-                                          ShadowDepth="2"
-                                          Direction="270" />
-                    </Border.Effect>
-
-                    <!--DATA-->
-                    <StackPanel Margin="20,10,20,10">
-
-                        <!--TITLE-->
-                        <TextBlock Margin="0,10,0,10"
-                                   Text="Miscellaneous"
-                                   FontSize="22" />
-
-                        <!--POPULATION-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Population"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtPopulation"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--LANGUAGES-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Languages"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtLanguages"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--CURRENCIES-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Currencies"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtCurrencies"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                        <!--UNITED NATIONS MEMBER-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="UN Member"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <Image x:Name="ImgUnMember"
-                                   Source="/Imagens/Check.png"
-                                   Height="20"
-                                   MinWidth="50" HorizontalAlignment="Left" />
-                        </StackPanel>
-
-                        <!--GINI-->
-                        <StackPanel Margin="0,5,0,5"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-
-                            <TextBlock Text="Gini"
-                                       FontWeight="Bold"
-                                       FontSize="14"
-                                       MinWidth="130" />
-
-                            <TextBlock x:Name="TxtGini"
-                                       FontSize="14"
-                                       MinWidth="100"
-                                       TextWrapping="Wrap" />
-                        </StackPanel>
-
-                    </StackPanel>
                 </Border>
 
-                <!--CARD: CONNECTION-->
+                <Separator Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           Margin="0, 20, 0, 10"
+                           Background="#FFEEEEEE" />
 
-            </WrapPanel>
-        </ScrollViewer>
-        <!--END COLUMN COUNTRY DATA-->
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region COUNTRY DATA -->
+            <ScrollViewer
+                Grid.Row="1" Grid.ColumnSpan="2"
+                VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <UniformGrid x:Name="ResponsiveGrid"
+                                 Grid.Row="0"
+                                 SizeChanged="UniformGrid_SizeChanged">
+
+                        <!--#region CARD: NAMES -->
+                        <Border x:Name="CardBorderNames"
+                                BorderBrush="AliceBlue"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Background="White"
+                                Margin="20,10,0,10">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="2"
+                                                  Opacity="0.2"
+                                                  ShadowDepth="2"
+                                                  Direction="270" />
+                            </Border.Effect>
+
+                            <!--DATA-->
+                            <Grid Margin="20,10,20,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <!--TITLE-->
+                                <TextBlock Grid.Row="0"
+                                           Text="Names"
+                                           FontSize="22" />
+
+                                <Separator Grid.Row="1"
+                                           Background="#FFEEEEEE"
+                                           Margin="0,10,0,10" />
+
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="130" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <!--OFFICIAL NAME-->
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="0"
+                                               Text="Official"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="1"
+                                               x:Name="TxtNameOfficial"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--COMMON NAME-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="0"
+                                               Text="Common"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               x:Name="TxtNameCommon"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--NATIVE OFFICIAL NAME-->
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="0"
+                                               Text="Official (Native)"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="1"
+                                               x:Name="TxtNameNativeOfficial"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--NATIVE COMMON NAME-->
+
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="0"
+                                               Text="Common (Native)"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="1"
+                                               x:Name="TxtNameNativeCommon"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region CARD: GEOGRAPHY -->
+                        <Border x:Name="CardBorderGeography"
+                                BorderBrush="AliceBlue"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Background="White"
+                                Margin="20,10,0,10">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="2"
+                                                  Opacity="0.2"
+                                                  ShadowDepth="2"
+                                                  Direction="270" />
+                            </Border.Effect>
+
+                            <Grid Margin="20,10,20,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <!--TITLE-->
+                                <TextBlock Grid.Row="0"
+                                           Text="Geography"
+                                           FontSize="22" />
+
+                                <Separator Grid.Row="1"
+                                           Background="#FFEEEEEE"
+                                           Margin="0,10,0,10" />
+
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="110" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!--CONTINENT-->
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="0"
+                                               Text="Continent"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="1"
+                                               x:Name="TxtContinent"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--REGION-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="0"
+                                               Text="Region"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               x:Name="TxtRegion"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--SUBREGION-->
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="0"
+                                               Text="Subregion"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="1"
+                                               x:Name="TxtSubregion"
+                                               FontSize="14"
+                                               MinWidth="100"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--CAPITAL-->
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="0"
+                                               Text="Capital"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="1"
+                                               x:Name="TxtCapital"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--LATITUDE LONGITUDE-->
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="0"
+                                               Text="Lat/Lng"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="1"
+                                               x:Name="TxtLatLng"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--TIMEZONES-->
+                                    <TextBlock Grid.Row="5"
+                                               Grid.Column="0"
+                                               Text="Timezones"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="5"
+                                               Grid.Column="1"
+                                               x:Name="TxtTimezones"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--LAND BORDERS-->
+                                    <TextBlock Grid.Row="6"
+                                               Grid.Column="0"
+                                               Text="Land Borders"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="6"
+                                               Grid.Column="1"
+                                               x:Name="TxtBorders"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
 
 
-        <ToolBar x:Name="ToolBar"
-                 Grid.Column="1" Grid.ColumnSpan="5"
-                 Grid.Row="8"
-                 BorderBrush="#FF695D5D" ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+                        <!--#endregion-->
 
-        <ProgressBar x:Name="ProgressBarCarregamento"
-                     Grid.Column="1" Grid.ColumnSpan="5"
-                     Grid.Row="7"
-                     Background="#FF1B72D6" />
+                        <!--#region CARD: MISCELLANEOUS -->
+                        <Border x:Name="CardBorderMisc"
+                                BorderBrush="AliceBlue"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Background="White"
+                                Margin="20,10,0,10">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="2"
+                                                  Opacity="0.2"
+                                                  ShadowDepth="2"
+                                                  Direction="270" />
+                            </Border.Effect>
 
+                            <Grid Margin="20,10,20,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
 
+                                <!--TITLE-->
+                                <TextBlock Grid.Row="0"
+                                           Text="Miscellaneous"
+                                           FontSize="22" />
+
+                                <Separator Grid.Row="1"
+                                           Background="#FFEEEEEE"
+                                           Margin="0,10,0,10" />
+
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!--POPULATION-->
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="0"
+                                               Text="Population"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <TextBlock Grid.Row="0"
+                                               Grid.Column="1"
+                                               x:Name="TxtPopulation"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <!--LANGUAGES-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="0"
+                                               Text="Languages"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               x:Name="TxtLanguages"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <!--CURRENCIES-->
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="0"
+                                               Text="Currencies"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <TextBlock Grid.Row="2"
+                                               Grid.Column="1"
+                                               x:Name="TxtCurrencies"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <!--UNITED NATIONS MEMBER-->
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="0"
+                                               Text="UN Member"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <Image Grid.Row="3"
+                                           Grid.Column="1"
+                                           x:Name="ImgUnMember"
+                                           Source="/Imagens/check.png"
+                                           Height="15"
+                                           HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           Visibility="Hidden"
+                                           Margin="0, 5, 0, 5" />
+
+                                    <!--GINI-->
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="0"
+                                               Text="Gini"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0, 5, 0, 5" />
+
+                                    <TextBlock Grid.Row="4"
+                                               Grid.Column="1"
+                                               x:Name="TxtGini"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0, 5, 0, 5">
+
+                                        <TextBlock.Inlines>
+                                            <Run x:Name="GiniYear" FontWeight="Bold" />
+                                            <Run x:Name="GiniValue" />
+                                        </TextBlock.Inlines>
+
+                                    </TextBlock>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                    </UniformGrid>
+                </Grid>
+            </ScrollViewer>
+            <!--#endregion-->
+        </Grid>
+        <!--#endregion-->
         <!--MAP-->
-        <m:Map x:Name="Mapa"
-               CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
-               ZoomLevel="5"
-               Grid.Column="5"
-               Grid.Row="1" Grid.RowSpan="3">
+        <wpf:Map x:Name="Mapa"
+                             CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
+                             ZoomLevel="10"
+                             Grid.Column="3"
+                             Grid.Row="1">
 
             <!-- The map mode defines the appearance of the map. -->
-            <m:Map.Mode>
-                <m:AerialMode />
-            </m:Map.Mode>
-
+            <wpf:Map.Mode>
+                <wpf:AerialMode />
+            </wpf:Map.Mode>
 
             <!-- The map layer contains the push-pin. -->
-            <m:MapLayer x:Name="CamadaPinCapital">
-                <m:Pushpin x:Name="PinCapital"
-                           PositionOrigin="BottomCenter"
-                           Location="{Binding SelectedCountry.LatLng}"
-                           BorderThickness="0"
-                           BorderBrush="Black" />
-            </m:MapLayer>
-        </m:Map>
+
+            <wpf:Pushpin x:Name="PinCapital"
+                                     PositionOrigin="BottomCenter"
+                                     BorderThickness="0"
+                                     BorderBrush="Black" />
+
+        </wpf:Map>
         <!--MAP END-->
 
-
-        <!--CARD: CONNECTION-->
-        <Border
-            BorderBrush="AliceBlue"
-            Grid.Column="5" Grid.Row="5" Margin="5"
-            BorderThickness="1"
-            CornerRadius="10"
-            Background="White">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="2"
-                                  Opacity="0.2"
-                                  ShadowDepth="2"
-                                  Direction="270" />
-            </Border.Effect>
-
-            <!--SET COLOR TO RED-->
-            <Border.Triggers>
-                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetName="LabelIsSuccess"
-                                            Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
-                                            From="Black"
-                                            To="Red"
-                                            Duration="0:1:0" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Border.Triggers>
-            <!--DATA-->
-            <StackPanel Margin="20,10,20,10">
-
-                <!--TITLE-->
-                <TextBlock Margin="0,10,0,10"
-                           Text="Connection Status"
-                           FontSize="22" />
-
-                <!--IS SUCCESS-->
-                <StackPanel Margin="0,5,0,5"
-                            HorizontalAlignment="Left"
-                            Orientation="Horizontal">
-
-                    <TextBlock Text="Is Success"
-                               FontWeight="Bold"
-                               FontSize="14"
-                               MinWidth="130" />
-
-                    <Image x:Name="ImgIsSuccess"
-                           Source="/Imagens/Visto_tracado_solido.png"
-                           Height="20"
-                           MinWidth="50"
-                           HorizontalAlignment="Left"
-                           Cursor="Help" OpacityMask="Black" />
-
-                    <TextBlock x:Name="LabelIsSuccess"
-                               FontSize="14"
-                               MinWidth="100"
-                               TextWrapping="Wrap" />
-                </StackPanel>
-
-                <!--MESSAGE-->
-                <StackPanel Margin="0,5,0,5"
-                            HorizontalAlignment="Left"
-                            Orientation="Horizontal">
-
-                    <TextBlock Text="Message"
-                               FontWeight="Bold"
-                               FontSize="14"
-                               MinWidth="130" />
-
-                    <TextBlock x:Name="LabelMessage"
-                               FontSize="14"
-                               MinWidth="100"
-                               TextWrapping="Wrap" />
-                </StackPanel>
-
-                <!--RESULT-->
-                <StackPanel Margin="5"
-                            HorizontalAlignment="Left"
-                            Orientation="Horizontal">
-
-                    <TextBlock Text="Result"
-                               FontWeight="Bold"
-                               FontSize="14"
-                               MinWidth="130" />
-
-                    <TextBlock x:Name="LabelResult"
-                               FontSize="14"
-                               MinWidth="100"
-                               TextWrapping="Wrap" />
-                </StackPanel>
-
-            </StackPanel>
-
-        </Border>
-        <!--CARD: CONNECTION - END -->
-
-
-        <!-- Other controls and elements in your window -->
-
-
     </Grid>
+    <!--#endregion-->
+
 </Window>
