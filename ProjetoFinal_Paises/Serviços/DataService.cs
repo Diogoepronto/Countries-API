@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -263,7 +262,7 @@ public class DataService
                     new string((string) sqliteDataReader["json_data"] + ",");
             result += "]";
 
-            if (result.Length != 0)
+            if (result.Length < 5)
             {
                 Log.Information(
                     "No data found in the Country_Json table");
@@ -280,7 +279,9 @@ public class DataService
                     "Successfully retrieved data " +
                     "from the Country_Json table");
                 var countries =
-                    JsonConvert.DeserializeObject<List<Country>>(result);
+                    JsonConvert
+                        .DeserializeObject<ObservableCollection<Country>>(
+                            result);
 
                 return new Response
                 {

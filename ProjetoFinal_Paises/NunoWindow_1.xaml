@@ -119,7 +119,7 @@
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="33*" />
-            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="20*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -152,7 +152,8 @@
                    VerticalAlignment="Top"
                    Margin="187,130,0,0"
                    FontSize="48"
-                   Foreground="#FF007CEE" Height="64" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" d:IsHidden="True" />
+                   Foreground="#FF007CEE" Height="64"
+                   d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" d:IsHidden="True" />
 
         <!--DEBUG BUTTON-->
         <Button Grid.Column="1"
@@ -733,10 +734,10 @@
         <!--#endregion-->
         <!--MAP-->
         <wpf:Map x:Name="Mapa"
-                             CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
-                             ZoomLevel="10"
-                             Grid.Column="3"
-                             Grid.Row="1">
+                 CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
+                 ZoomLevel="10"
+                 Grid.Column="3"
+                 Grid.Row="1">
 
             <!-- The map mode defines the appearance of the map. -->
             <wpf:Map.Mode>
@@ -746,9 +747,9 @@
             <!-- The map layer contains the push-pin. -->
 
             <wpf:Pushpin x:Name="PinCapital"
-                                     PositionOrigin="BottomCenter"
-                                     BorderThickness="0"
-                                     BorderBrush="Black" />
+                         PositionOrigin="BottomCenter"
+                         BorderThickness="0"
+                         BorderBrush="Black" />
 
         </wpf:Map>
         <!--MAP END-->

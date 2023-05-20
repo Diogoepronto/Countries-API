@@ -4,7 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-    x:Class="ProjetoFinal_Paises.MainWindow"
+    x:Class="ProjetoFinal_Paises.NunoWindow_3"
     mc:Ignorable="d"
 
     Title="Countries API"
@@ -106,34 +106,6 @@
             <!--#endregion-->
 
             <!--#region CUSTOM SCROLLBAR -->
-            <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Grid x:Name="Grid">
-                                <Rectangle HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           Width="Auto"
-                                           Height="Auto"
-                                           Fill="Transparent" />
-                                <Border x:Name="Rectangle1"
-                                        CornerRadius="4"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Width="Auto"
-                                        Height="Auto"
-                                        Background="{TemplateBinding Background}" />
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="Tag" Value="Horizontal">
-                                    <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
-                                    <Setter TargetName="Rectangle1" Property="Height" Value="7" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
             <!--SCROLLBARS-->
             <!--#endregion-->
@@ -147,23 +119,29 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="370*" />
-            <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="200*"/>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="200*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
-            <RowDefinition Height="95*" />
-            <RowDefinition Height="252*"/>
+            <RowDefinition Height="100*" />
+            <RowDefinition Height="250*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
         <!--PROGRESS BAR-->
-        <Border x:Name="progressBarOverlay" Grid.ColumnSpan="6" Grid.RowSpan="3"
-                Background="#EEFFFFFF" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" d:IsHidden="True">
-            <syncfusion:SfCircularProgressBar x:Name="progressBar" GapWidth="-1" MinHeight="0" VerticalContentAlignment="Stretch" Width="400" Height="400">
+        <Border x:Name="progressBarOverlay"
+                Grid.Column="0" Grid.ColumnSpan="6"
+                Grid.Row="0" Grid.RowSpan="3"
+                Background="#EEFFFFFF"
+                d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"
+                d:IsHidden="False">
+            <syncfusion:SfCircularProgressBar
+                x:Name="progressBar" GapWidth="-1" MinHeight="0"
+                VerticalContentAlignment="Stretch" Width="400" Height="400">
                 <syncfusion:SfCircularProgressBar.ProgressColor>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF56CCF2" />
@@ -175,7 +153,8 @@
         <TextBlock x:Name="txtProgressStep"
                    Text="Loading Countries"
                    FontSize="48"
-                   Foreground="#FF007CEE" Grid.Column="1" Grid.Row="1" TextAlignment="Center" Grid.RowSpan="2" Grid.ColumnSpan="5" Margin="0,60,0,0" d:IsHidden="True" />
+                   Foreground="#FF007CEE" Grid.Column="1" Grid.Row="1" TextAlignment="Center" Grid.RowSpan="2"
+                   Grid.ColumnSpan="5" Margin="0,60,0,0" d:IsHidden="True" />
 
         <!--DEBBUG BUTTON-->
         <Button Grid.Column="1"

@@ -19,16 +19,11 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class NunoWindow_3 : Window
 {
-    private ApiService _apiService;
-    private DataService _dataService;
-    private DialogService _dialogService;
-    private NetworkService _networkService;
-
     private ICollectionView _dataView;
 
-    public MainWindow()
+    public NunoWindow_3()
     {
         // chaves que já não funcionam
         // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
@@ -38,10 +33,10 @@ public partial class MainWindow : Window
 
         InitializeComponent();
 
-        _apiService = new ApiService();
-        _dataService = new DataService();
-        _networkService = new NetworkService();
-        _dialogService = new DialogService();
+        // _apiService = new ApiService();
+        // _dataService = new DataService();
+        // _networkService = new NetworkService();
+        // _dialogService = new DialogService();
 
         NetworkService.AvailabilityChanged +=
             DoAvailabilityChanged;
@@ -50,6 +45,10 @@ public partial class MainWindow : Window
 
         listBoxCountries.DataContext = this;
     }
+    // private ApiService _apiService;
+    // private DataService _dataService;
+    // private DialogService _dialogService;
+    // private NetworkService _networkService;
 
     public ObservableCollection<Country> CountryList { get; set; } = new();
 
@@ -66,11 +65,13 @@ public partial class MainWindow : Window
         if (isConnected)
             txtStatus.Text =
                 string.Format(
-                    $"Country list loaded from server: {DateTime.Now:g}");
+                    $"Country list loaded from server: " +
+                    $"{DateTime.Now:g}");
         else
             txtStatus.Text =
                 string.Format(
-                    $"Country list loaded from internal storage: {DateTime.Now:g}");
+                    $"Country list loaded from internal storage: " +
+                    $"{DateTime.Now:g}");
     }
 
     #endregion
@@ -80,8 +81,9 @@ public partial class MainWindow : Window
     private void InitializeDataView()
     {
         _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(new SortDescription("Name.Common",
-            ListSortDirection.Ascending));
+        _dataView.SortDescriptions.Add(
+            new SortDescription("Name.Common",
+                ListSortDirection.Ascending));
 
         listBoxCountries.ItemsSource = _dataView;
 
@@ -139,7 +141,8 @@ public partial class MainWindow : Window
         //    Console.WriteLine("An error occurred: " + ex.Message);
         //}
 
-        MessageBox.Show(NetworkService.IsNetworkAvailable().ToString());
+        MessageBox.Show(
+            NetworkService.IsNetworkAvailable().ToString());
     }
 
     #region LOAD COUNTRY DATA
@@ -451,10 +454,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        if (responsiveGrid.ActualWidth > 1000)
-        {
-            responsiveGrid.Columns = 3;
-        }
+        if (responsiveGrid.ActualWidth > 1000) responsiveGrid.Columns = 3;
     }
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
