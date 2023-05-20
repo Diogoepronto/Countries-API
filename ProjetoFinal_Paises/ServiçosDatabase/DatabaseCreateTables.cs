@@ -19,7 +19,7 @@ public class DatabaseCreateTables
                    new(DataService.ConnectionString))
             {
                 connection.Open();
-                
+
                 // deixar cair a tabela da base de dados se existir
                 const string dropTableCommand =
                     "drop table if exists Country_Json;";

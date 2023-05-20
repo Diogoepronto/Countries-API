@@ -7,15 +7,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="integrações dos diversos ramos completo">
+    <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="mais pequenas atualizações">
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-symbolic-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-flash-photographs-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-photographs-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/missing-image-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/not-available-circle-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (2).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (3).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unblock-svgrepo-com.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseSaveData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/RubenWindow.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +62,7 @@
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/DataService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -150,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684525503624</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="mais pequenas atualizações">
+      <created>1684538027128</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684538027129</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,7 +193,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="versão beta, integrada com a branchNuno, falta corrigir alguns bugs" />
     <MESSAGE value="integrações dos diversos ramos completo" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrações dos diversos ramos completo" />
+    <MESSAGE value="mais pequenas atualizações" />
+    <option name="LAST_COMMIT_MESSAGE" value="mais pequenas atualizações" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -180,39 +202,39 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
-          <line>498</line>
+          <line>500</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="373" containingFunctionPresentation="Method 'DisplayCountryData'">
             <startOffsets>
-              <option value="14618" />
+              <option value="14940" />
             </startOffsets>
             <endOffsets>
-              <option value="14651" />
+              <option value="14973" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/DiogoWindow.xaml.cs</url>
-          <line>89</line>
+          <line>91</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\DiogoWindow.xaml.cs" initialLine="87" containingFunctionPresentation="Method 'LoadCountriesLocal'">
             <startOffsets>
-              <option value="2105" />
+              <option value="2427" />
             </startOffsets>
             <endOffsets>
-              <option value="2145" />
+              <option value="2467" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow.xaml.cs</url>
-          <line>43</line>
+          <line>50</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow.xaml.cs" initialLine="43" containingFunctionPresentation="Method 'LoadCountries'">
             <startOffsets>
-              <option value="1063" />
+              <option value="1579" />
             </startOffsets>
             <endOffsets>
-              <option value="1109" />
+              <option value="1625" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />

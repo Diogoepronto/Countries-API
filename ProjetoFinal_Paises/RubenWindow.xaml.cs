@@ -10,6 +10,7 @@ using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.ServiçosAPI;
 using ProjetoFinal_Paises.ServiçosMapas;
+using Syncfusion.Licensing;
 
 namespace ProjetoFinal_Paises;
 
@@ -20,6 +21,12 @@ public partial class RubenWindow : Window
 {
     public RubenWindow()
     {
+        // chaves que já não funcionam
+        // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        // SyncfusionLicenseProvider.RegisterLicense("MjEyMzAxNUAzMjMxMmUzMjJlMzVEaWdKUkVWVVpkd3lyZjEzanZtM3FYeW41eUxhZDRRZkpTMGxXMzgxcWRFPQ==");
+        SyncfusionLicenseProvider.RegisterLicense(
+            "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
+
         InitializeComponent();
 
         LoadCountries();

@@ -29,8 +29,11 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
+        // chaves que já não funcionam
+        // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        // SyncfusionLicenseProvider.RegisterLicense("MjEyMzAxNUAzMjMxMmUzMjJlMzVEaWdKUkVWVVpkd3lyZjEzanZtM3FYeW41eUxhZDRRZkpTMGxXMzgxcWRFPQ==");
         SyncfusionLicenseProvider.RegisterLicense(
-            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+            "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
 
         InitializeComponent();
 
@@ -447,10 +450,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        if (responsiveGrid.ActualWidth > 1000)
-        {
-            responsiveGrid.Columns = 3;
-        }
+        if (responsiveGrid.ActualWidth > 1000) responsiveGrid.Columns = 3;
     }
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)

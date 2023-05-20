@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using ProjetoFinal_Paises.Serviços;
 
@@ -13,6 +14,9 @@ public class Flag
     private string _localImage;
     private readonly Country _country;
 
+    private readonly string _appDirectory =
+        AppDomain.CurrentDomain.BaseDirectory;
+
     #endregion
 
 
@@ -22,6 +26,8 @@ public class Flag
     {
         get
         {
+            return _svg =
+                $"{_appDirectory}/do-not-take-flash-photographs-svgrepo-com.png";
             var flagPath =
                 Directory.GetCurrentDirectory() + $"/Flags/{_country.CCA3}.png";
 
@@ -32,7 +38,9 @@ public class Flag
                 ? Directory.GetCurrentDirectory() + "/Imagens/no_flag.png"
                 : _png;
         }
-        set => _png = value;
+        //set => _png = value;
+        set => _png =
+            $"{_appDirectory}/do-not-take-flash-photographs-svgrepo-com.png";
     }
 
     public string Svg

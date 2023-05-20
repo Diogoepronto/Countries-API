@@ -15,11 +15,11 @@ using Syncfusion.Licensing;
 namespace ProjetoFinal_Paises;
 
 /// <summary>
-///     Interaction logic for MainWindow.xaml
+///     Interaction logic for NunoWindow_1.xaml
 /// </summary>
-public partial class TatianeWindow : Window
+public partial class NunoWindow_1 : Window
 {
-    public TatianeWindow()
+    public NunoWindow_1()
     {
         // chaves que já não funcionam
         // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
@@ -35,8 +35,6 @@ public partial class TatianeWindow : Window
 
     private async void LoadCountries()
     {
-        bool load;
-
         CarregarApi.LoadCountries();
 
         // Update default country
@@ -67,6 +65,7 @@ public partial class TatianeWindow : Window
 
         ListBoxCountries.SelectedItem =
             ListBoxCountries.Items[listBoxItem.index];
+
         // Make sure the list box has finished loading its items
         ListBoxCountries.UpdateLayout();
         ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
@@ -138,9 +137,9 @@ public partial class TatianeWindow : Window
         var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
-        await CoordenadasPais.MapaPais_SelectionChanged(selectedCountry);
+        CoordenadasPais.MapaPais_SelectionChanged(selectedCountry);
 
-        await MapaPais_SelectionChanged(selectedCountry);
+        MapaPais_SelectionChanged(selectedCountry);
     }
 
     private async Task MapaPais_SelectionChanged(Country? selectedCountry)
@@ -185,13 +184,6 @@ public partial class TatianeWindow : Window
         // point location based on latitude and longitude
         async Task SetMapPushpin()
         {
-            if (selectedCountry.Capital == null)
-            {
-                // MessageBox.Show("Error", "CAPITAL NOT FOUND");
-                LabelMessage.Text = "CAPITAL NOT FOUND";
-                ResetMap();
-            }
-            else
             {
                 var country = selectedCountry.Name?.Common;
                 var capital = selectedCountry.Capital[0];

@@ -9,42 +9,43 @@
         <ApplicationIcon>Imagens\appIcon.2.ico</ApplicationIcon>
     </PropertyGroup>
     <ItemGroup>
-        <None Remove="Imagens\check.png" />
-        <None Remove="Imagens\cross.png" />
-        <None Remove="Imagens\No_flag.svg" />
-        <None Remove="Imagens\no_flag.png" />
-        <None Remove="Imagens\Triangulo_Solido.png" />
-        <None Remove="triangulo bordo.png" />
-        <None Remove="triangulo_solido.png" />
-        <None Remove="visto traçado solido.png" />
-        <None Remove="DataBaseService\**" />
+        <None Remove="Imagens\check.png"/>
+        <None Remove="Imagens\cross.png"/>
+        <None Remove="Imagens\No_flag.svg"/>
+        <None Remove="Imagens\no_flag.png"/>
+        <None Remove="Imagens\Triangulo_Solido.png"/>
+        <None Remove="triangulo bordo.png"/>
+        <None Remove="triangulo_solido.png"/>
+        <None Remove="visto traçado solido.png"/>
+        <None Remove="DataBaseService\**"/>
         <None Update="Data\ProjetoFinal_Paises.sqlite">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Remove="Imagens\appIcon.ico" />
+        <None Remove="Imagens\appIcon.ico"/>
+        <None Remove="Imagens\appIcon.1.ico"/>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Mapsui.Wpf" Version="3.0.2" />
-        <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.5" />
-        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
-        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
-        <PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0" />
-        <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3" />
-        <PackageReference Include="Serilog" Version="2.12.0" />
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-        <PackageReference Include="System.Memory" Version="4.5.5" />
-        <PackageReference Include="System.Text.Json" Version="7.0.2" />
-        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
-        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+        <PackageReference Include="Mapsui.Wpf" Version="3.0.2"/>
+        <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.5"/>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Primitives" Version="7.0.0"/>
+        <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3"/>
+        <PackageReference Include="Serilog" Version="2.12.0"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0"/>
+        <PackageReference Include="System.Memory" Version="4.5.5"/>
+        <PackageReference Include="System.Text.Json" Version="7.0.2"/>
+        <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0"/>
+        <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -55,15 +56,15 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="DataBaseService\**" />
+        <Compile Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="DataBaseService\**" />
+        <EmbeddedResource Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Page Remove="DataBaseService\**" />
+        <Page Remove="DataBaseService\**"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -76,7 +77,7 @@
         <Content Include="Imagens\no_flag.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
-        <Content Include="obj\Debug\net6.0-windows\ProjetoFinal_Paises_MarkupCompile.cache" />
+        <Content Include="obj\Debug\net6.0-windows\ProjetoFinal_Paises_MarkupCompile.cache"/>
     </ItemGroup>
 
 </Project>

@@ -1,139 +1,174 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
-using ProjetoFinal_Paises.ServiçosAPI;
+using ProjetoFinal_Paises.Serviços;
 using ProjetoFinal_Paises.ServiçosMapas;
+using Syncfusion.Licensing;
 
 namespace ProjetoFinal_Paises;
 
 /// <summary>
-///     Interaction logic for NunoWindow.xaml
+///     Interaction logic for MainWindow.xaml
 /// </summary>
 public partial class NunoWindow : Window
 {
     public NunoWindow()
     {
+        // chaves que já não funcionam
+        // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        // SyncfusionLicenseProvider.RegisterLicense("MjEyMzAxNUAzMjMxMmUzMjJlMzVEaWdKUkVWVVpkd3lyZjEzanZtM3FYeW41eUxhZDRRZkpTMGxXMzgxcWRFPQ==");
+        SyncfusionLicenseProvider.RegisterLicense(
+            "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
         InitializeComponent();
 
-        LoadCountries();
+        InitializeData();
+
+        ListBoxCountries.DataContext = this;
+
+        Mapa.IsHitTestVisible = false;
+
+        Loaded += YourWindowName_Loaded;
     }
 
 
-    private async void LoadCountries()
+    #region Propriedades
+
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
+
+    #endregion
+
+
+    private void YourWindowName_Loaded(object sender, RoutedEventArgs e)
     {
-        CarregarApi.LoadCountries();
-
-        // Update default country
-        UpdateDefaultCountry("Portugal");
-
-
-        // definir a fonte de items do list-box 
-        if (CountriesList.Countries != null)
-            ListBoxCountries.ItemsSource =
-                CountriesList.Countries.OrderBy(c => c.Name?.Common);
-
-
-        // atualizar a list-box para apresentar a pais selecionado por defeito
-        UpdateListBoxCountriesWithDefault("Portugal");
+        WindowState = WindowState.Maximized;
     }
 
 
-    private void UpdateListBoxCountriesWithDefault(string country)
+    private async void InitializeData()
     {
-        // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
-        var listBoxItem =
-            ListBoxCountries.ItemContainerGenerator.Items
-                .Cast<Country>()
-                .Select((item, index) => new {item, index})
-                .FirstOrDefault(x => x.item.Name?.Common == country);
+        var isConnected = await LoadCountries();
 
-        if (listBoxItem == null) return;
+        InitializeDataView();
 
-        ListBoxCountries.SelectedItem =
-            ListBoxCountries.Items[listBoxItem.index];
+        DownloadFlags();
 
-        // Make sure the list box has finished loading its items
-        ListBoxCountries.UpdateLayout();
-        ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
-    }
-
-
-    private void UpdateDefaultCountry(string country)
-    {
-        // Find the Country object with the name "Portugal" in the CountryList
-
-        var selectedCountry =
-            CountriesList.Countries?
-                .FirstOrDefault(c => c.Name?.Common == country);
-
-        if (selectedCountry != null)
-            // Call the DisplayCountryData method with the selected country
-            DisplayCountryData(selectedCountry);
-    }
-
-
-    internal void UpdateCardConnection(bool load, Response connection)
-    {
-        if (load)
-        {
-            // label is success ???
-            LabelIsSuccess.Text = connection.IsSuccess.ToString();
-            LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
-
-            // image is success ???
-            ImgIsSuccess.Source =
-                new BitmapImage(
-                    new Uri(
-                        "/Imagens/Visto_tracado_solido.png",
-                        UriKind.Relative));
-            ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
-
-            // label result
-            LabelResult.Text = "Objeto foi carregado";
-            LabelResult.Text = connection.Result?.ToString();
-
-            // MessageBox.Show(connection.Message);
-        }
+        if (isConnected)
+            TxtStatus.Text =
+                string.Format("Country list loaded from server: {0:F}",
+                    DateTime.Now);
         else
-        {
-            // label is success ???
-            LabelIsSuccess.Text = connection.IsSuccess.ToString();
-            LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
-
-            // image is success ???
-            ImgIsSuccess.Source =
-                new BitmapImage(
-                    new Uri(
-                        "/Imagens/Triangulo_Solido.png",
-                        UriKind.Relative));
-            ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
-
-            // label result
-            LabelResult.Text = "Objeto não foi carregado";
-            LabelResult.Text = connection.Result?.ToString();
-
-            // MessageBox.Show(connection.Message);
-        }
+            TxtStatus.Text =
+                string.Format(
+                    "Country list loaded from internal storage: {0:F}",
+                    DateTime.Now);
     }
 
-
-    internal async void ListBoxPaises_SelectionChanged(
-        object sender, SelectionChangedEventArgs e)
+    private async Task<bool> LoadCountries()
     {
+        var connection = NetworkService.CheckConnection();
+
+        if (!connection.IsSuccess)
+        {
+            LoadCountriesLocal();
+            return false;
+        }
+
+        await LoadCountriesApi();
+        return true;
+    }
+
+    private void LoadCountriesLocal()
+    {
+        Console.WriteLine("LoadCountriesLocal");
+        // throw new NotImplementedException();
+    }
+
+    private async Task LoadCountriesApi()
+    {
+        var progress = new Progress<int>(
+            percentComplete =>
+            {
+                ProgressBar.Progress = percentComplete;
+
+                TxtProgressStep.Text = percentComplete switch
+                {
+                    25 => "Downloading countries data",
+                    50 => "Serializing data",
+                    75 => "Deserializing objects",
+                    100 => "Loading complete",
+                    _ => TxtProgressStep.Text
+                };
+            });
+
+        var response =
+            await ApiService.GetCountries("https://restcountries.com",
+                "v3.1/all", progress);
+
+        CountryList = (ObservableCollection<Country>) response.Result;
+
+        await Task.Delay(100);
+
+        TxtProgressStep.Visibility = Visibility.Hidden;
+        ProgressBarOverlay.Visibility = Visibility.Hidden;
+    }
+
+    private void InitializeDataView()
+    {
+        if (CountryList != null)
+        {
+            _dataView = CollectionViewSource.GetDefaultView(CountryList);
+            _dataView.SortDescriptions.Add(
+                new SortDescription("Name.Common",
+                    ListSortDirection.Ascending));
+
+            ListBoxCountries.ItemsSource = _dataView;
+
+            var portugal =
+                CountryList
+                    .FirstOrDefault(c => c.Name?.Common == "Portugal");
+            ListBoxCountries.SelectedItem = portugal;
+        }
+
+        GridSearchBar.IsEnabled = true;
+    }
+
+    private async void DownloadFlags()
+    {
+        var progress = new Progress<int>(percentComplete =>
+        {
+            TxtStatusDownload.Text =
+                $"Downloading flags: {percentComplete}%";
+        });
+
+        var downloadflags =
+            await DataService.DownloadFlags(CountryList, progress);
+        TxtStatusDownload.Text = downloadflags.Message;
+
+        await Task.Delay(10000);
+        TxtStatusDownload.Text = string.Empty;
+    }
+
+    private async void listBoxPaises_SelectionChanged(object sender,
+        SelectionChangedEventArgs e)
+    {
+        if (ListBoxCountries.SelectedItem == null) return;
+
         var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
-        CoordenadasPais.MapaPais_SelectionChanged(selectedCountry);
-
-        MapaPais_SelectionChanged(selectedCountry);
+        await MapaPais_SelectionChanged(selectedCountry);
     }
+
 
     private async Task MapaPais_SelectionChanged(Country? selectedCountry)
     {
@@ -160,7 +195,7 @@ public partial class NunoWindow : Window
 
             PinCapital.Location =
                 new Location(0, 0);
-            CamadaPinCapital.Focus();
+            // CamadaPinCapital.Focus();
         }
 
         // Helper method to set the map center and
@@ -177,6 +212,13 @@ public partial class NunoWindow : Window
         // point location based on latitude and longitude
         async Task SetMapPushpin()
         {
+            if (selectedCountry.Capital == null)
+            {
+                // MessageBox.Show("Error", "CAPITAL NOT FOUND");
+                // LabelMessage.Text = "CAPITAL NOT FOUND";
+                ResetMap();
+            }
+            else
             {
                 var country = selectedCountry.Name?.Common;
                 var capital = selectedCountry.Capital[0];
@@ -187,14 +229,15 @@ public partial class NunoWindow : Window
                     _ => capital
                 };
 
-                if (selectedCountry.Borders is {Length: 0}) Mapa.ZoomLevel = 8;
+                // if (selectedCountry.Borders is {Length: 0}) Mapa.ZoomLevel = 20;
+                if (selectedCountry.Borders[0] == "N/A") Mapa.ZoomLevel = 10;
 
                 Mapa.ZoomLevel = country switch
                 {
                     "Russia" => 1,
                     "Antarctica" => 1,
 
-                    "Australia" => 3,
+                    "Australia" => 4,
                     "United States" => 3,
 
                     "Ukraine" => 4,
@@ -226,12 +269,12 @@ public partial class NunoWindow : Window
                     PinCapital.PositionOrigin = PositionOrigin.BottomCenter;
                     PinCapital.Location = new Location(latitude, longitude);
 
-                    CamadaPinCapital.Focus();
+                    //CamadaPinCapital.Focus();
                 }
                 else
                 {
                     // MessageBox.Show("Error", "LOCATION NOT FOUND");
-                    LabelMessage.Text = "LOCATION NOT FOUND";
+                    // LabelMessage.Text = "LOCATION NOT FOUND";
                     ResetMap();
                 }
             }
@@ -239,36 +282,76 @@ public partial class NunoWindow : Window
     }
 
 
-    internal void DisplayCountryData(Country countryToDisplay)
+    private void DisplayCountryData(Country countryToDisplay)
     {
         var iteration = 0;
 
-        TxtCountryName.Text = countryToDisplay.Name.Common;
-        ImgCountryFlag.Source =
-            new BitmapImage(new Uri(countryToDisplay.Flags.Png));
+        #region COUNTRY NAME AND FLAG
 
-        #region CARD NAME
+        TxtCountryName.Text = countryToDisplay.Name?.Common?.ToUpper();
+
+        try
+        {
+            var flagPath =
+                Directory.GetCurrentDirectory() +
+                $"/Flags/{countryToDisplay.CCA3}.png";
+
+            if (File.Exists(flagPath))
+            {
+                ImgCountryFlag.Source = new BitmapImage(new Uri(flagPath));
+            }
+            else
+            {
+                if (NetworkService.CheckConnection().IsSuccess)
+                {
+                    ImgCountryFlag.Source =
+                        new BitmapImage(new Uri(countryToDisplay.Flags.Png));
+                }
+                else
+                {
+                    // ImgCountryFlag.Source = new BitmapImage(
+                    //     new Uri("pack://application:,,,/Imagens/no_flag.png"));
+                    var imagePath = $"{_appDirectory}/Imagens/no_flag.png";
+                    var bitmap = new BitmapImage(new Uri(imagePath));
+                    ImgCountryFlag.Source = bitmap;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            DialogService.ShowMessage("Erro", ex.Message);
+        }
+
+        #endregion
+
+        #region CARD NAMES
 
         // ------------------ CARD NAMES ------------------
-        TxtNameNativeCommon.Text = string.Empty;
         TxtNameNativeOfficial.Text = string.Empty;
+        TxtNameNativeCommon.Text = string.Empty;
 
         // OFFICIAL NAME, COMMON NAME
         TxtNameOfficial.Text = countryToDisplay.Name.Official;
         TxtNameCommon.Text = countryToDisplay.Name.Common;
 
         // NATIVE OFFICIAL AND COMMON NAME
-        foreach (var nativeName in countryToDisplay.Name.NativeName)
+        foreach (
+            var nativeName
+            in countryToDisplay.Name.NativeName)
         {
-            TxtNameNativeCommon.Text +=
-                $"{nativeName.Key.ToUpper()}: {nativeName.Value.Common}";
-            TxtNameNativeOfficial.Text +=
-                $"{nativeName.Key.ToUpper()}: {nativeName.Value.Official}";
-
-            if (!(iteration == countryToDisplay.Name.NativeName.Count() - 1))
+            if (!(nativeName.Key == "default"))
             {
-                TxtNameNativeCommon.Text += Environment.NewLine;
+                TxtNameNativeOfficial.Text += $"{nativeName.Key.ToUpper()}: ";
+                TxtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
+            }
+
+            TxtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
+            TxtNameNativeCommon.Text += $"{nativeName.Value.Common}";
+
+            if (iteration != countryToDisplay.Name.NativeName.Count - 1)
+            {
                 TxtNameNativeOfficial.Text += Environment.NewLine;
+                TxtNameNativeCommon.Text += Environment.NewLine;
             }
 
             iteration++;
@@ -318,11 +401,8 @@ public partial class NunoWindow : Window
 
         // LATITUDE, LONGITUDE
         TxtLatLng.Text =
-            string.Format("{0}, {1}",
-                countryToDisplay.LatLng[0].ToString(
-                    new CultureInfo("en-US")),
-                countryToDisplay.LatLng[1].ToString(
-                    new CultureInfo("en-US")));
+            $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, " +
+            $"{countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
 
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
@@ -342,11 +422,18 @@ public partial class NunoWindow : Window
         {
             var countryName = "";
 
-            foreach (var country in CountriesList.Countries)
-                if (country.CCA3 == border)
-                    countryName = country.Name?.Common;
+            if (border == "N/A")
+            {
+                TxtBorders.Text += border;
+            }
+            else
+            {
+                foreach (var country in CountryList)
+                    if (country.CCA3 == border)
+                        countryName = country.Name.Common;
 
-            TxtBorders.Text += countryName;
+                TxtBorders.Text += countryName;
+            }
 
             if (iteration != countryToDisplay.Borders.Length - 1)
                 TxtBorders.Text += Environment.NewLine;
@@ -363,16 +450,15 @@ public partial class NunoWindow : Window
         // ------------------ CARD MISCELLANEOUS ------------------
         TxtLanguages.Text = string.Empty;
         TxtCurrencies.Text = string.Empty;
-        TxtGini.Text = string.Empty;
+        GiniYear.Text = string.Empty;
+        GiniValue.Text = string.Empty;
 
         // POPULATION
-        TxtPopulation.Text =
-            countryToDisplay.Population.ToString("N0");
+        TxtPopulation.Text = countryToDisplay.Population.ToString("N0");
 
         // LANGUAGES
-        foreach (
-            var language
-            in countryToDisplay.Languages)
+        foreach (var language
+                 in countryToDisplay.Languages)
         {
             TxtLanguages.Text += language.Value;
 
@@ -385,36 +471,53 @@ public partial class NunoWindow : Window
         iteration = 0;
 
         // CURRENCIES
-        foreach (
-            var currency
-            in countryToDisplay.Currencies)
+        foreach (var currency
+                 in countryToDisplay.Currencies)
         {
-            TxtCurrencies.Text += $"{currency.Value.Name}" +
-                                  Environment.NewLine +
-                                  $"{currency.Key.ToUpper()}" +
-                                  Environment.NewLine +
-                                  $"{currency.Value.Symbol}";
+            TxtCurrencies.Text += $"{currency.Value.Name}";
+
+            if (currency.Key != "default")
+                TxtCurrencies.Text += Environment.NewLine +
+                                      $"{currency.Key.ToUpper()}" +
+                                      Environment.NewLine +
+                                      $"{currency.Value.Symbol}";
 
             if (iteration != countryToDisplay.Currencies.Count - 1)
-                TxtCurrencies.Text +=
-                    Environment.NewLine + Environment.NewLine;
+                TxtCurrencies.Text += Environment.NewLine + Environment.NewLine;
 
             iteration++;
         }
 
         iteration = 0;
 
-        // IS AN UN MEMBER
-        ImgUnMember.Source = countryToDisplay.UNMember
-            ? new BitmapImage(
-                new Uri("Imagens/Check.png", UriKind.Relative))
-            : new BitmapImage(
-                new Uri("Imagens/Cross.png", UriKind.Relative));
+        // IS UN MEMBER
+        ImgUnMember.Visibility = Visibility.Visible;
+
+        var imagePathUnMember = "";
+        imagePathUnMember = countryToDisplay.UNMember
+            ? $"{_appDirectory}/Imagens/check.png"
+            : $"{_appDirectory}/Imagens/cross.png";
+
+        Console.WriteLine("Debug point");
+
+        var bitmapUnMember = new BitmapImage(new Uri(imagePathUnMember));
+        ImgUnMember.Source = bitmapUnMember;
+
 
         // GINI
         foreach (var gini in countryToDisplay.Gini)
         {
-            TxtGini.Text += $"{gini.Key}: {gini.Value}";
+            if (gini.Key != "default")
+            {
+                GiniYear.FontWeight = FontWeights.Bold;
+                GiniYear.Text += $"{gini.Key}: ";
+            }
+            else
+            {
+                GiniYear.FontWeight = FontWeights.Regular;
+            }
+
+            GiniValue.Text += $"{gini.Value}";
 
             if (iteration != countryToDisplay.Currencies.Count - 1)
                 TxtCurrencies.Text += Environment.NewLine;
@@ -422,6 +525,64 @@ public partial class NunoWindow : Window
             iteration++;
         }
 
+        iteration = 0;
+
         #endregion
     }
+
+    private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        switch (ResponsiveGrid.ActualWidth)
+        {
+            case < 600:
+                ResponsiveGrid.Columns = 1;
+                return;
+            case > 600 and < 1000:
+                ResponsiveGrid.Columns = 2;
+                return;
+            case > 1000:
+                ResponsiveGrid.Columns = 3;
+                break;
+        }
+    }
+
+    private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        var textBox = (TextBox) sender;
+
+        // EXIBE OU ESCONDE O BOTÃO DE APAGAR O TEXTO DA CAIXA DE PESQUISA
+        ClearButton.Visibility = textBox.Text.Length == 0
+            ? Visibility.Hidden
+            : Visibility.Visible;
+
+        // APLICA O FILTRO AOS DADOS DO LISTBOX
+        var filter = textBox.Text.ToLower();
+        _dataView.Filter = item =>
+        {
+            if (item is Country country)
+                return country.Name.Common.ToLower().Contains(filter);
+
+            return false;
+        };
+        _dataView.Refresh();
+    }
+
+    private void clearButton_Click(object sender, RoutedEventArgs e)
+    {
+        SearchBar.Text = string.Empty;
+        SearchBar.Focus();
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        Console.WriteLine("Debug point");
+        // throw new NotImplementedException();
+    }
+
+    #region Atributos
+
+    private ICollectionView _dataView;
+    private readonly string _appDirectory = Directory.GetCurrentDirectory();
+
+    #endregion
 }
