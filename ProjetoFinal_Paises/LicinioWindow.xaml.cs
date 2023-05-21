@@ -10,8 +10,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
+using ProjetoFinal_Paises.ServiçosMapas;
 using Syncfusion.Licensing;
 
 namespace ProjetoFinal_Paises;
@@ -19,17 +21,9 @@ namespace ProjetoFinal_Paises;
 /// <summary>
 ///     Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class LicinioWindow : Window
 {
-    private readonly ApiService _apiService;
-
-    private readonly DataService _dataService;
-
-    private ICollectionView _dataView;
-    private DialogService _dialogService;
-    private NetworkService _networkService;
-
-    public MainWindow()
+    public LicinioWindow()
     {
         // chaves que já não funcionam
         // Diogo
@@ -37,6 +31,7 @@ public partial class MainWindow : Window
         // Nuno
         SyncfusionLicenseProvider.RegisterLicense(
             "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
+
         InitializeComponent();
 
         _apiService = new ApiService();
@@ -44,15 +39,12 @@ public partial class MainWindow : Window
         _networkService = new NetworkService();
         _dialogService = new DialogService();
 
-        NetworkService.AvailabilityChanged +=
-            DoAvailabilityChanged;
+        NetworkService.AvailabilityChanged += DoAvailabilityChanged;
 
         InitializeData();
 
         listBoxCountries.DataContext = this;
     }
-
-    public ObservableCollection<Country> CountryList { get; set; } = new();
 
     #region INITIALIZE APPLICATION
 
@@ -120,8 +112,150 @@ public partial class MainWindow : Window
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        MessageBox.Show(NetworkService.IsNetworkAvailable().ToString());
+        MessageBox.Show(
+            NetworkService.IsNetworkAvailable().ToString());
     }
+
+
+    #region MapasRegion
+
+    private async Task MostrarMapaPais_Selecionado(Country? selectedCountry)
+    {
+        Mapa.Mode = new AerialMode(true);
+        if (selectedCountry != null && selectedCountry.LatLng.Length < 2)
+        {
+            MessageBox.Show("Error", "LOCATION NOT FOUND");
+            ResetMap();
+        }
+        else
+        {
+            var latitude = selectedCountry.LatLng[0];
+            var longitude = selectedCountry.LatLng[1];
+            SetMapLocation(latitude, longitude);
+            await SetMapPushpin();
+        }
+
+        // Helper method to reset the map center and point location to (0, 0)
+        void ResetMap()
+        {
+            Mapa.Center =
+                new Location(0, 0);
+            Mapa.ZoomLevel = 20;
+
+            PinCapital.Location =
+                new Location(0, 0);
+            // CamadaPinCapital.Focus();
+        }
+
+        // Helper method to set the map center and
+        // point location based on latitude and longitude
+        void SetMapLocation(double latitude, double longitude)
+        {
+            Mapa.Center =
+                new Location(latitude, longitude);
+            Mapa.ZoomLevel = 5;
+        }
+
+
+        // Helper method to set the map center and
+        // point location based on latitude and longitude
+        async Task SetMapPushpin()
+        {
+            if (selectedCountry.Capital == null)
+            {
+                // MessageBox.Show("Error", "CAPITAL NOT FOUND");
+                // LabelMessage.Text = "CAPITAL NOT FOUND";
+                ResetMap();
+            }
+            else
+            {
+                var country = selectedCountry.Name?.Common;
+                var capital = selectedCountry.Capital[0];
+
+                capital = capital switch
+                {
+                    "Washington DC" => "Washington",
+                    "Washington, D.C." => "Washington",
+                    _ => capital
+                };
+
+                // if (selectedCountry.Borders is {Length: 0}) Mapa.ZoomLevel = 20;
+                if (selectedCountry.Borders[0] == "N/A") Mapa.ZoomLevel = 10;
+                Mapa.ZoomLevel = country switch
+                {
+                    "Russia" => 2,
+                    "Antarctica" => 2,
+                    "United States Minor Outlying Islands" => 2,
+
+                    "Australia" => 4,
+                    "United States" => 4,
+                    "Brazil" => 4,
+                    "Ukraine" => 4,
+
+                    "Malaysia" => 5,
+
+                    "Madagascar" => 6,
+
+                    "Vanuatu" => 7,
+                    "Tuvalu" => 7,
+                    "Solomon Island" => 7,
+                    "Timor-Leste" => 7,
+
+                    "Cyprus" => 8,
+                    "Liechtenstein" => 8,
+                    "Luxembourg" => 8,
+                    "Vatican City" => 8,
+
+                    "Andorra" => 9,
+
+                    _ => Mapa.ZoomLevel
+                };
+
+
+                var location =
+                    await CoordenadasCapital.GetLocationFromAddress(
+                        country, capital);
+
+                // var latitude = location.Result.Point.Latitude;
+                // var longitude = location.Result.Point.Longitude;
+                var latitude = location.Point.Latitude;
+                var longitude = location.Point.Longitude;
+
+                if (latitude != 0 || longitude != 0)
+                {
+                    // Define a origem do posicionamento
+                    // para a parte inferior do pino
+                    PinCapital.PositionOrigin = PositionOrigin.BottomCenter;
+                    PinCapital.Location = new Location(latitude, longitude);
+
+                    //CamadaPinCapital.Focus();
+                }
+                else
+                {
+                    // MessageBox.Show("Error", "LOCATION NOT FOUND");
+                    // LabelMessage.Text = "LOCATION NOT FOUND";
+                    ResetMap();
+                }
+            }
+        }
+    }
+
+    #endregion
+
+    #region Atributos
+
+    private readonly ApiService _apiService;
+    private readonly DataService _dataService;
+
+    private ICollectionView _dataView;
+
+    private DialogService _dialogService;
+    private NetworkService _networkService;
+
+
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
+
+    #endregion
 
     #region LOAD COUNTRY DATA
 
@@ -175,14 +309,16 @@ public partial class MainWindow : Window
         });
 
         var response =
-            await _apiService.GetCountries("https://restcountries.com",
+            await _apiService.GetCountries(
+                "https://restcountries.com",
                 "v3.1/all", progress);
 
         CountryList = (ObservableCollection<Country>) response.Result;
 
         foreach (var country in CountryList)
-            country.Flags.LocalImage = Directory.GetCurrentDirectory() +
-                                       @"/Flags/" + $"{country.CCA3}.png";
+            country.Flags.LocalImage =
+                Directory.GetCurrentDirectory() +
+                @"/Flags/" + $"{country.CCA3}.png";
 
         await Task.Delay(100);
         txtProgressStep.Visibility = Visibility.Hidden;
@@ -194,6 +330,7 @@ public partial class MainWindow : Window
 
     #endregion
 
+
     #region DISPLAY COUNTRY DATA
 
     public void DisplayCountryData(Country countryToDisplay)
@@ -202,6 +339,8 @@ public partial class MainWindow : Window
         DisplayCountryNames(countryToDisplay);
         DisplayCountryGeography(countryToDisplay);
         DisplayCountryMisc(countryToDisplay);
+
+        MostrarMapaPais_Selecionado(countryToDisplay);
     }
 
     public void DisplayCountryHeader(Country countryToDisplay)
@@ -432,10 +571,7 @@ public partial class MainWindow : Window
             return;
         }
 
-        if (responsiveGrid.ActualWidth > 1000)
-        {
-            responsiveGrid.Columns = 3;
-        }
+        if (responsiveGrid.ActualWidth > 1000) responsiveGrid.Columns = 3;
     }
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)

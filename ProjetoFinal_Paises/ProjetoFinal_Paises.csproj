@@ -1,47 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-    <PackageIcon>appIcon.png</PackageIcon>
-    <ApplicationIcon>Imagens\appIcon.ico</ApplicationIcon>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <PackageIcon>appIcon.png</PackageIcon>
+        <ApplicationIcon>Imagens\appIcon.ico</ApplicationIcon>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Imagens\check.png" />
-    <None Remove="Imagens\cross.png" />
-    <None Remove="Imagens\no_flag.png" />
-    <None Remove="Imagens\No_flag.svg" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Remove="Imagens\check.png"/>
+        <None Remove="Imagens\cross.png"/>
+        <None Remove="Imagens\no_flag.png"/>
+        <None Remove="Imagens\No_flag.svg"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Imagens\appIcon.ico" />
-  </ItemGroup>
+    <ItemGroup>
+        <Content Include="Imagens\appIcon.ico"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Mapsui.Wpf" Version="3.0.2" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.5" />
-</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Mapsui.Wpf" Version="3.0.2"/>
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5"/>
+        <PackageReference Include="Microsoft.Maps.MapControl.WPF" Version="1.0.0.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
+        <PackageReference Include="syncfusion.ui.wpf.net" Version="21.2.5"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Imagens\check.png">
-      <CopyToOutputDirectory></CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Imagens\cross.png" />
-    <Resource Include="Imagens\no_flag.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+    <ItemGroup>
+        <Resource Include="Imagens\check.png">
+            <CopyToOutputDirectory></CopyToOutputDirectory>
+        </Resource>
+        <Resource Include="Imagens\cross.png"/>
+        <Resource Include="Imagens\no_flag.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Resource>
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Imagens\appIcon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+    <ItemGroup>
+        <None Update="Imagens\appIcon.png">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="ServiçosMapas\"/>
+    </ItemGroup>
 
 </Project>

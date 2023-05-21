@@ -4,14 +4,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-    x:Class="ProjetoFinal_Paises.MainWindow"
+    xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+    x:Class="ProjetoFinal_Paises.LicinioWindow"
     mc:Ignorable="d"
 
     Title="Countries API"
-    Height="750"
-    MinHeight="600"
-    Width="1400"
-    MinWidth="800"
+    Height="900" MinHeight="800"
+    Width="1400" MinWidth="1200"
     WindowStartupLocation="CenterScreen">
 
     <!--#region CUSTOM STYLES -->
@@ -106,34 +105,6 @@
             <!--#endregion-->
 
             <!--#region CUSTOM SCROLLBAR -->
-            <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate>
-                            <Grid x:Name="Grid">
-                                <Rectangle HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           Width="Auto"
-                                           Height="Auto"
-                                           Fill="Transparent" />
-                                <Border x:Name="Rectangle1"
-                                        CornerRadius="4"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        Width="Auto"
-                                        Height="Auto"
-                                        Background="{TemplateBinding Background}" />
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="Tag" Value="Horizontal">
-                                    <Setter TargetName="Rectangle1" Property="Width" Value="Auto" />
-                                    <Setter TargetName="Rectangle1" Property="Height" Value="7" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
 
             <!--SCROLLBARS-->
             <!--#endregion-->
@@ -157,9 +128,12 @@
         </Grid.RowDefinitions>
 
         <!--PROGRESS BAR-->
-        <Border x:Name="progressBarOverlay" Grid.ColumnSpan="4" Grid.RowSpan="3" Panel.ZIndex="10"
-                Background="#EEFFFFFF">
-            <syncfusion:SfCircularProgressBar x:Name="progressBar" Width="300" GapWidth="-1">
+        <Border
+            x:Name="progressBarOverlay"
+            Grid.ColumnSpan="4" Grid.RowSpan="3"
+            Panel.ZIndex="10" Background="#EEFFFFFF">
+            <syncfusion:SfCircularProgressBar
+                x:Name="progressBar" Width="500" GapWidth="10">
                 <syncfusion:SfCircularProgressBar.ProgressColor>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF56CCF2" />
@@ -179,20 +153,20 @@
                    FontSize="48"
                    Foreground="#FF007CEE" />
 
-        <!--DEBBUG BUTTON-->
+        <!--DEBUG BUTTON-->
         <Button Grid.Column="1"
                 Grid.Row="0"
-                Content="Debbug" Click="Button_Click" />
+                Visibility="Hidden"
+                Content="Debug" Click="Button_Click" />
 
         <!--STATUS MESSAGES-->
         <TextBlock x:Name="txtStatusDownload"
-                   Grid.Row="3"
+                   Grid.Row="2"
                    Grid.Column="1"
-                   Grid.ColumnSpan="4"
                    Text="" Foreground="#FF999999" />
 
         <TextBlock x:Name="txtStatus"
-                   Grid.Row="3"
+                   Grid.Row="2"
                    Grid.Column="2"
                    Text=""
                    HorizontalAlignment="Right"
@@ -292,6 +266,7 @@
         <Grid Grid.Row="1" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="300" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -750,10 +725,35 @@
                         <!--#endregion-->
 
                     </UniformGrid>
-
                 </Grid>
             </ScrollViewer>
             <!--#endregion-->
+
+
+            <!--MAP-->
+            <wpf:Map x:Name="Mapa"
+                     CredentialsProvider="Ah2YxOU7WcRMNc8vZWItHIF5IkHh4ITmlykZoq76-rHAIUG47QTpLU_VFSmDDtOI"
+                     ZoomLevel="10"
+                     Grid.Column="0"
+                     Grid.Row="1"
+                     Margin="10,0,0,0">
+
+                <!-- The map mode defines the appearance of the map. -->
+                <wpf:Map.Mode>
+                    <wpf:AerialMode />
+                </wpf:Map.Mode>
+
+                <!-- The map layer contains the push-pin. -->
+
+                <wpf:Pushpin x:Name="PinCapital"
+                             PositionOrigin="BottomCenter"
+                             BorderThickness="0"
+                             BorderBrush="Black" />
+
+            </wpf:Map>
+            <!--MAP END-->
+
+
         </Grid>
         <!--#endregion-->
 
