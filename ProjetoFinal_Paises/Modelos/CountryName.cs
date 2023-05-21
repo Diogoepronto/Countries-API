@@ -1,45 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Modelos;
 
 public class CountryName
 {
     private string _common;
+    private Dictionary<string, NativeName> _nativeName = new();
     private string _official;
-    private Dictionary<string, NativeName> _nativeName = new Dictionary<string, NativeName>();
 
-    public string Common 
+    public string Common
     {
         get
         {
             if (_common == null || _common.Length == 0)
                 return "N/A";
 
-           return _common;
+            return _common;
         }
-        set
-        {
-            _common = value;
-        }
+        set => _common = value;
     }
+
     public string Official
     {
-        get 
+        get
         {
             if (_official == null || _official.Length == 0)
                 return "N/A";
 
-            return _official; 
+            return _official;
         }
-        set
-        {
-            _official = value;
-        }
+        set => _official = value;
     }
+
     public Dictionary<string, NativeName> NativeName
     {
         get
@@ -50,9 +43,6 @@ public class CountryName
             return _nativeName;
         }
 
-        set
-        {
-            _nativeName = value;
-        }
+        set => _nativeName = value;
     }
 }
