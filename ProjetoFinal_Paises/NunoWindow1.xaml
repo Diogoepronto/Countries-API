@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     x:Class="ProjetoFinal_Paises.NunoWindow1"
     mc:Ignorable="d"
@@ -120,8 +119,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="10" />
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
@@ -150,17 +150,18 @@
                    Foreground="#FF999999" />
 
 
-        <TextBlock x:Name="txtProgressStep"
+        <TextBlock x:Name="txtStatus"
                    Grid.Row="6"
                    Grid.Column="3"
-                   Text="Text Progress Steps"
+                   Text="Text Status"
                    HorizontalAlignment="Right"
                    Foreground="#FF999999" />
 
-        <TextBlock x:Name="txtStatus"
+
+        <TextBlock x:Name="txtProgressStep"
                    Grid.Row="6"
-                   Grid.Column="4"
-                   Text="Text Status"
+                   Grid.Column="5"
+                   Text="Text Progress Steps"
                    HorizontalAlignment="Right"
                    Foreground="#FF999999" />
 
@@ -168,7 +169,7 @@
         <!--#region MAIN COLUMN LEFT -->
         <Grid
             Grid.Row="1" Grid.RowSpan="5"
-            Grid.Column="4">
+            Grid.Column="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -178,7 +179,7 @@
             <Grid x:Name="gridSearchBar" Grid.Row="0" IsEnabled="False">
                 <TextBox x:Name="searchBar"
                          VerticalAlignment="Center"
-                         Margin="2,0,18,0"
+                         Margin="5,0,5,0"
                          Padding="10, 5, 10, 5"
                          TextChanged="searchBar_TextChanged"
                          Background="{x:Null}" TabIndex="1" />
@@ -261,7 +262,7 @@
         <!--#region MAIN COLUMN RIGHT -->
         <Grid
             Grid.Row="1" Grid.RowSpan="5"
-            Grid.Column="2">
+            Grid.Column="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -286,7 +287,7 @@
                            FontSize="32"
                            TextWrapping="Wrap"
                            VerticalAlignment="Center"
-                           HorizontalAlignment="Left" />
+                           HorizontalAlignment="Left" FontFamily="Bauhaus 93" />
 
                 <!--FLAG-->
                 <Border Grid.Row="0"
@@ -736,7 +737,8 @@
         <!--MAP-->
         <wpf:Map x:Name="Mapa"
                  CredentialsProvider="hhXgFJIZwqvbGUNzsrDs~gfgYwPMyg_wPShO7u4TKmA~AtB5wLCH5ZkGCykOvIOx0baWma52p88Up5pUwtRvwiIBTO01YoO-tSpAvNGLld9x"
-                 ZoomLevel="10"
+                 ZoomLevel="6"
+                 Center="39.3999,-8.2245"
                  Grid.Column="1"
                  Grid.Row="1" Grid.RowSpan="3">
 

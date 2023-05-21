@@ -48,7 +48,7 @@ public partial class MainWindow : Window
         listBoxCountries.DataContext = this;
     }
 
-    public ObservableCollection<Country> CountryList { get; set; } = new();
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
 
     #region INITIALIZE APPLICATION
 

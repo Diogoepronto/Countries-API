@@ -52,7 +52,7 @@ public partial class NunoWindow3 : Window
     // private DialogService _dialogService;
     // private NetworkService _networkService;
 
-    public ObservableCollection<Country> CountryList { get; set; } = new();
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
 
     #region INITIALIZE APPLICATION
 

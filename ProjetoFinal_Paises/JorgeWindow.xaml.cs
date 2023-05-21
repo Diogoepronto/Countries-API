@@ -254,7 +254,7 @@ public partial class JorgeWindow : Window
     private NetworkService _networkService;
 
 
-    public ObservableCollection<Country> CountryList { get; set; } = new();
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
 
     #endregion
 

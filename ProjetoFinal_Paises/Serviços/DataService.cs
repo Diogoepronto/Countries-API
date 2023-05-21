@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -211,7 +212,17 @@ public class DataService
         var numExcluir = arquivos.Length - 10;
 
         // Exclui os arquivos mais antigos
-        for (var i = 0; i < numExcluir; i++) File.Delete(arquivos[i]);
+        for (var i = 0; i < numExcluir; i++)
+            try
+            {
+                // Will not overwrite if the destination file already exists.
+                File.Delete(arquivos[i]);
+            }
+            catch (IOException copyError)
+            {
+                // Catch exception if the file was already copied.
+                Console.WriteLine(copyError.Message);
+            }
     }
 
     private static void CopiarFicheiroExistente()
@@ -222,13 +233,24 @@ public class DataService
         var newFileName =
             $"{Caminho}{FicheiroDb}_{DateTime.Now:yyyyMMddHHmmss}{Extensao}";
 
-        // File.Copy(oldFileName, newFileName);
-        File.Copy(oldFileName, newFileName, true);
-
+        try
+        {
+            // Will not overwrite if the destination file already exists.
+            // File.Copy(oldFileName, newFileName, true);
+            File.Copy(
+                oldFileName,
+                newFileName,
+                true);
+        }
+        catch (IOException copyError)
+        {
+            // Catch exception if the file was already copied.
+            Console.WriteLine(copyError.Message);
+        }
     }
 
 
-    public static Response SaveData(ObservableCollection<Country> countries)
+    public static Response SaveData(ObservableCollection<Country>? countries)
     {
         if (countries == null)
             return new Response
@@ -322,17 +344,22 @@ public class DataService
                     sqliteDataReader = command.ExecuteReader();
 
                     // variavel para guardar os dados lidos da base de dados
-                    var result = "[";
-                    while (sqliteDataReader.Read())
-                        result += new string(
-                            (string) sqliteDataReader["json_data"] + ",");
-                    result += "]";
+                    // var result = "[";
+                    // while (sqliteDataReader.Read())
+                    //     result += new string(
+                    //         (string) sqliteDataReader["json_data"] + ",");
+                    // result += "]";
 
+                    // variável para guardar os dados lidos da base de dados
+                    var result = new List<string>();
+                    while (sqliteDataReader.Read())
+                        result.Add((string) sqliteDataReader["json_data"]);
+                    var jsonString = "[" + string.Join(",", result) + "]";
 
                     connection.Close();
                     connection.Dispose();
 
-                    if (result.Length < 5)
+                    if (jsonString.Length < 5)
                     {
                         Log.Information(
                             "No data found in " +
@@ -353,7 +380,7 @@ public class DataService
                         JsonConvert
                             .DeserializeObject<
                                 ObservableCollection<Country>>(
-                                result);
+                                jsonString);
 
                     return new Response
                     {

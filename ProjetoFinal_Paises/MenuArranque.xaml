@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-    xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     x:Class="ProjetoFinal_Paises.MenuArranque"
     mc:Ignorable="d"
 
@@ -18,38 +17,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <!--#region CUSTOM CLEAR BUTTON -->
-            <Style TargetType="Button" x:Key="ClearSearchButton">
-                <Setter Property="OverridesDefaultStyle" Value="True" />
-                <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="Foreground" Value="#FFE32227" />
-
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="Border"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Background="{TemplateBinding Background}"
-                                    CornerRadius="20"
-                                    SnapsToDevicePixels="true">
-                                <ContentPresenter x:Name="MyContentPresenter"
-                                                  Content="{TemplateBinding Content}"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center" />
-                            </Border>
-
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="BorderBrush"
-                                            TargetName="Border"
-                                            Value="#FFE32227" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
             <!--#endregion-->
 
 
@@ -171,7 +138,7 @@
                    Text="TxtStatusDownload"
                    Foreground="#FF999999" />
 
-        
+
         <TextBlock x:Name="TxtStatus"
                    Grid.Row="2"
                    Grid.Column="3"

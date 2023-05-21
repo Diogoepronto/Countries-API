@@ -42,21 +42,40 @@ public partial class NunoWindow1 : Window
         NetworkService.AvailabilityChanged +=
             DoAvailabilityChanged;
 
-        BootLoader();
+        // BootLoader();
+        ShowMenuArranque(); // Chama o método para exibir a janela MenuArranque
+        // ShowMenuArranque();
 
         InitializeData();
 
         listBoxCountries.DataContext = this;
     }
 
-    private void BootLoader()
+
+    private async void ShowMenuArranque()
     {
-        MenuArranque menuArranque = new();
+        var menuArranque = new MenuArranque();
+        menuArranque.Closed += MenuArranque_Closed;
+
+        // Oculta a janela atual (NunoWindow1)
         Hide();
-        menuArranque.ShowDialog();
-        // menuArranque.Close();
-        ShowDialog();
+        menuArranque.Show();
+
+        // Aguarda a conclusão das tarefas na janela MenuArranque
+        // await menuArranque.WaitForCompletion();
+
+        Show(); // Exibe novamente a janela NunoWindow1
+        menuArranque.Close(); // Fecha a janela MenuArranque
     }
+
+
+    private async void MenuArranque_Closed(object sender, EventArgs e)
+    {
+        await Task.Delay(2000); // Aguarda 2 segundos (2000 milissegundos)
+        Show(); // Exibe novamente a janela NunoWindow1
+        (sender as Window)?.Close(); // Fecha a janela MenuArranque
+    }
+
 
     #region INITIALIZE APPLICATION
 
@@ -68,14 +87,9 @@ public partial class NunoWindow1 : Window
 
         DownloadFlags();
 
-        if (isConnected)
-            txtStatus.Text =
-                string.Format(
-                    $"Country list loaded from server: {DateTime.Now:g}");
-        else
-            txtStatus.Text =
-                string.Format(
-                    $"Country list loaded from internal storage: {DateTime.Now:g}");
+        txtStatus.Text = string.Format(isConnected
+            ? $"Country list loaded from server: {DateTime.Now:g}"
+            : $"Country list loaded from internal storage: {DateTime.Now:g}");
     }
 
     #endregion
@@ -85,8 +99,9 @@ public partial class NunoWindow1 : Window
     private void InitializeDataView()
     {
         _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(new SortDescription("Name.Common",
-            ListSortDirection.Ascending));
+        _dataView.SortDescriptions.Add(
+            new SortDescription("Name.Common",
+                ListSortDirection.Ascending));
 
         listBoxCountries.ItemsSource = _dataView;
 
@@ -265,7 +280,7 @@ public partial class NunoWindow1 : Window
     private NetworkService _networkService;
 
 
-    public ObservableCollection<Country> CountryList { get; set; } = new();
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
 
     #endregion
 
@@ -300,8 +315,8 @@ public partial class NunoWindow1 : Window
     {
         var progress = new Progress<int>(percentComplete =>
         {
-            // progressBar.Progress = percentComplete;
-        
+            // txtProgressStep.Text = percentComplete;
+            txtProgressStep.Text = $"{percentComplete}%";
             txtProgressStep.Text = percentComplete switch
             {
                 25 => "Downloading countries data",

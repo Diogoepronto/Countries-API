@@ -24,7 +24,7 @@ public partial class JanelaInicial : Window
         JorgeWindow jorgeWindow = new();
         Hide();
         jorgeWindow.ShowDialog();
-        jorgeWindow.Close();
+        // jorgeWindow.Close();
         ShowDialog();
     }
 
@@ -33,7 +33,7 @@ public partial class JanelaInicial : Window
         TatianeWindow tatianeWindow = new();
         Hide();
         tatianeWindow.ShowDialog();
-        tatianeWindow.Close();
+        // tatianeWindow.Close();
         ShowDialog();
     }
 
@@ -51,7 +51,7 @@ public partial class JanelaInicial : Window
         LicinioWindow licinioWindow = new();
         Hide();
         licinioWindow.ShowDialog();
-        licinioWindow.Close();
+        // licinioWindow.Close();
         ShowDialog();
     }
 
@@ -60,7 +60,7 @@ public partial class JanelaInicial : Window
         NunoWindow1 nunoWindow1 = new();
         Hide();
         nunoWindow1.ShowDialog();
-        nunoWindow1.Close();
+        // nunoWindow1.Close();
         ShowDialog();
     }
 
@@ -69,7 +69,7 @@ public partial class JanelaInicial : Window
         NunoWindow2 nunoWindow2 = new();
         Hide();
         nunoWindow2.ShowDialog();
-        nunoWindow2.Close();
+        // nunoWindow2.Close();
         ShowDialog();
     }
 
@@ -78,7 +78,7 @@ public partial class JanelaInicial : Window
         NunoWindow3 nunoWindow3 = new();
         Hide();
         nunoWindow3.ShowDialog();
-        nunoWindow3.Close();
+        // nunoWindow3.Close();
         ShowDialog();
     }
 
@@ -91,17 +91,18 @@ public partial class JanelaInicial : Window
         MainWindow mainWindow = new();
         Hide();
         mainWindow.ShowDialog();
-        mainWindow.Close();
+        // mainWindow.Close();
         ShowDialog();
     }
 
 
     private void ButtonMainWindow2_OnClick(object sender, RoutedEventArgs e)
     {
-        MenuArranque menuArranque = new();
+        // MenuArranque menuArranque = new();
+        MenuArranque menuArranque = new("Nuno");
         Hide();
         menuArranque.ShowDialog();
-        menuArranque.Close();
+        // menuArranque.Close();
         ShowDialog();
     }
 }
