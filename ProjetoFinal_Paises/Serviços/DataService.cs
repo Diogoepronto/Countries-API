@@ -222,7 +222,9 @@ public class DataService
         var newFileName =
             $"{Caminho}{FicheiroDb}_{DateTime.Now:yyyyMMddHHmmss}{Extensao}";
 
-        File.Copy(oldFileName, newFileName);
+        // File.Copy(oldFileName, newFileName);
+        File.Copy(oldFileName, newFileName, true);
+
     }
 
 
@@ -236,8 +238,10 @@ public class DataService
                 Result = null
             };
 
-        Log.ForContext<DataService>().Information("DataInsertion");
-        Log.Information("Inserindo dados na tabela Country_Json...");
+        Log.ForContext<DataService>().Information(
+            "DataInsertion");
+        Log.Information(
+            "Inserindo dados na tabela Country_Json...");
         var count = 0;
 
         try

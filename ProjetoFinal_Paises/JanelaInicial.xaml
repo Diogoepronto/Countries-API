@@ -56,7 +56,8 @@
                 VerticalAlignment="Top" Width="100"
                 Click="ButtonMainWindow1_OnClick" />
 
-        <Button x:Name="buttonMainWindow2" Content="Janela Main 2"
+        <Button x:Name="buttonMenuArranque"
+                Content="Janela Menu Arranque"
                 HorizontalAlignment="Left" Height="38"
                 Margin="623,280,0,0"
                 VerticalAlignment="Top" Width="100"

@@ -8,33 +8,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-symbolic-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-flash-photographs-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-photographs-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.1.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/missing-image-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/not-available-circle-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (1).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (2).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (3).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unblock-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-aeroplane-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com (1).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-internet-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-location-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-maps-and-location-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-search-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-shipping-and-delivery-svgrepo-com.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-world-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/appIcon.2.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/6771594_earth_globe_map_world_icon.ico" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.ico" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/globe.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-symbolic-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/action-unavailable-symbolic-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-flash-photographs-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-flash-photographs-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-photographs-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/do-not-take-photographs-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/missing-image-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/missing-image-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/not-available-circle-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/not-available-circle-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (1).svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (1).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (2).svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (2).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (3).svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com (3).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unavailable-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unblock-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/unblock-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-aeroplane-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-aeroplane-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com (1).svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com (1).svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-global-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-internet-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-internet-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-location-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-location-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-maps-and-location-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-maps-and-location-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-search-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-search-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-shipping-and-delivery-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-shipping-and-delivery-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-world-svgrepo-com.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/worldwide-world-svgrepo-com.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,15 +55,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/338efc8c78ffd1de56cecc4647ebd34d18f958c8a0963d89a12b9ea90a4ae/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea95343b9387b73062a9b61b7538f826c54ce3529632b4472ba4494044d23/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/40d9c6632ca3993dcb82583ffa755fbbed8ad19f1b37a7654b7ffaff24b6c/Uri.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4138e5aef0caa29695feada628cd62fde03efda596e63275b9e7f8d27c7398b2/XamlWriter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -70,19 +66,16 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ff6e15065aca4366778dbe1a1b71b9164dea3534b71e1795c33fd6f159f52/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b26c3ab2885ae1e2397c50e3e6819ad88ed89adf3f8ee61523986ef3a4fbcf/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b6f38579d53ac41e10383ded5e9159339cd0ffd18fb4d756faea93154ba/Window.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c1da7b6c7c71a954fe3eb2531c6476711b3e6d93a8d76795386d326bb9dbc/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fa9a244a677f598313c8a51657303a8c5b25759eb04ec7ad72ac8a84e5cfb41/XamlObjectWriter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/Serviços/ApiService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/nunov/RiderProjects/ProjetoFinal_Paises/ProjetoFinal_Paises/ServiçosMapas/CoordenadasPais.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/App.g.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/JorgeWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/ProjetoFinal_Paises/obj/Debug/net6.0-windows/TatianeWindow.g.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
@@ -206,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684590926961</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="mais autualizações e bugs fix">
+      <created>1684623769222</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1684623769223</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,37 +232,8 @@
     <MESSAGE value="falta alterar cores e verificar alguns pais e o uso do pushpin" />
     <MESSAGE value="- adicionei as bandeiras dentro do ProjetoFinal_Paises.csproj, e configurei para serem copiadas para a compilação e assim ficarem disponiveis.&#10;- Criei uma janela inicial para abrir as outras janelas" />
     <MESSAGE value="pequenos ajustes dos nomes dos metodos e variaveis" />
-    <option name="LAST_COMMIT_MESSAGE" value="pequenos ajustes dos nomes dos metodos e variaveis" />
+    <MESSAGE value="mais autualizações e bugs fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="mais autualizações e bugs fix" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs</url>
-          <line>343</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="343" containingFunctionPresentation="Method 'DisplayCountryData'" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs</url>
-          <line>124</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="124" containingFunctionPresentation="Method 'MostrarMapaPais_Selecionado'" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs</url>
-          <line>164</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\JorgeWindow.xaml.cs" initialLine="164" containingFunctionPresentation="Local function 'SetMapPushpin'" />
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs</url>
-          <line>263</line>
-          <properties documentPath="C:\Users\_Hu5h\Desktop\Cinel\CSharp\Projetos\WPFCountriesAPIgithub\ProjetoFinal_Paises\ProjetoFinal_Paises\NunoWindow1.xaml.cs" initialLine="263" containingFunctionPresentation="Method 'LoadCountries'" />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

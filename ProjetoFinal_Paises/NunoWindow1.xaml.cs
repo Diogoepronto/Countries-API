@@ -42,9 +42,20 @@ public partial class NunoWindow1 : Window
         NetworkService.AvailabilityChanged +=
             DoAvailabilityChanged;
 
+        BootLoader();
+
         InitializeData();
 
         listBoxCountries.DataContext = this;
+    }
+
+    private void BootLoader()
+    {
+        MenuArranque menuArranque = new();
+        Hide();
+        menuArranque.ShowDialog();
+        // menuArranque.Close();
+        ShowDialog();
     }
 
     #region INITIALIZE APPLICATION
@@ -278,36 +289,27 @@ public partial class NunoWindow1 : Window
         CountryList =
             (ObservableCollection<Country>) DataService.ReadData().Result;
 
-        progressBar.Progress = 100;
         txtProgressStep.Text = "Loading complete";
 
         Thread.Sleep(100);
 
         txtProgressStep.Visibility = Visibility.Hidden;
-        progressBarOverlay.Visibility = Visibility.Hidden;
     }
 
     private async Task LoadCountriesApi()
     {
         var progress = new Progress<int>(percentComplete =>
         {
-            progressBar.Progress = percentComplete;
-
-            switch (percentComplete)
+            // progressBar.Progress = percentComplete;
+        
+            txtProgressStep.Text = percentComplete switch
             {
-                case 25:
-                    txtProgressStep.Text = "Downloading countries data";
-                    break;
-                case 50:
-                    txtProgressStep.Text = "Serializing data";
-                    break;
-                case 75:
-                    txtProgressStep.Text = "Deserializing objects";
-                    break;
-                case 100:
-                    txtProgressStep.Text = "Loading complete";
-                    break;
-            }
+                25 => "Downloading countries data",
+                50 => "Serializing data",
+                75 => "Deserializing objects",
+                100 => "Loading complete",
+                _ => txtProgressStep.Text
+            };
         });
 
         var response =
@@ -323,8 +325,7 @@ public partial class NunoWindow1 : Window
                 @"/Flags/" + $"{country.CCA3}.png";
 
         await Task.Delay(100);
-        txtProgressStep.Visibility = Visibility.Hidden;
-        progressBarOverlay.Visibility = Visibility.Hidden;
+        // txtProgressStep.Visibility = Visibility.Hidden;
 
         DataService.DeleteData();
         DataService.SaveData(CountryList);
