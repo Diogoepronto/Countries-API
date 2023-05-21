@@ -19,8 +19,13 @@ public partial class MenuArranque : Window
 {
     public MenuArranque()
     {
+        // chaves que já não funcionam
+        // Diogo
+        // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        // Nuno
         SyncfusionLicenseProvider.RegisterLicense(
-            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+            "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
+
 
         InitializeComponent();
 
@@ -29,69 +34,43 @@ public partial class MenuArranque : Window
         _networkService = new NetworkService();
         _dialogService = new DialogService();
 
-        completionSource = new TaskCompletionSource<bool>();
-        // Restante da inicialização da janela MenuArranque
-
-        NetworkService.AvailabilityChanged +=
-            DoAvailabilityChanged;
+        NetworkService.AvailabilityChanged += DoAvailabilityChanged;
 
         InitializeData();
-    }
-
-
-    public MenuArranque(string janela)
-    {
-        SyncfusionLicenseProvider.RegisterLicense(
-            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
-
-        InitializeComponent();
-
-        _apiService = new ApiService();
-        _dataService = new DataService();
-        _networkService = new NetworkService();
-        _dialogService = new DialogService();
-
-        // NetworkService.AvailabilityChanged += DoAvailabilityChanged;
-
-        // Realize as tarefas assíncronas
-        // await Task.WhenAll(InitializeData());
-        InitializeData();
-
-        // Após a conclusão das tarefas, abra a janela NunoWindow1
-        NunoWindow1 nunoWindow1 = new NunoWindow1();
-        nunoWindow1.Show();
-
-        // Feche a janela MenuArranque
-        Close();
     }
 
 
     #region INITIALIZE APPLICATION
 
-    private void InitializeData()
+    public async Task InitializeData()
     {
-        bool isConnected = LoadCountries();
+        var isConnected = await LoadCountries();
 
         InitializeDataView();
 
         DownloadFlags();
 
-        TxtStatus.Text =
-            string.Format(
-                $"Country list loaded from server: " +
-                $"{DateTime.Now:g}");
+        txtStatus.Text = string.Format(isConnected
+            ? $"Country list loaded from server: {DateTime.Now:g}"
+            : $"Country list loaded from internal storage: {DateTime.Now:g}");
 
+
+        // Aguarde 2 segundo(s)
+        Thread.Sleep(2000);
         Close();
     }
 
     #endregion
 
-
     #region INITIALIZE UI
 
     private void InitializeDataView()
     {
-        _dataView = CollectionViewSource.GetDefaultView(CountryList);
+        _dataView =
+            CollectionViewSource.GetDefaultView(
+                CountryList ??
+                new ObservableCollection<Country>());
+
         _dataView.SortDescriptions.Add(
             new SortDescription("Name.Common",
                 ListSortDirection.Ascending));
@@ -107,35 +86,115 @@ public partial class MenuArranque : Window
 
     #endregion
 
-
     #region MANAGE LOCAL DATA
 
-    private void DownloadFlags()
+    private async void DownloadFlags()
     {
         var progress = new Progress<int>(percentComplete =>
         {
-            TxtStatusDownload.Text =
+            txtStatusDownload.Text =
                 $"Downloading flags: {percentComplete}%";
         });
 
         var downloadflags =
-            _dataService.DownloadFlags(CountryList, progress);
+            await _dataService.DownloadFlags(CountryList, progress);
 
-        TxtStatusDownload.Text = downloadflags.Result.Message;
+        txtStatusDownload.Text = downloadflags.Message;
 
         _dataView.Refresh();
 
-        Task.Delay(8000);
-        TxtStatusDownload.Text = string.Empty;
+        await Task.Delay(8000);
+        txtStatusDownload.Text = string.Empty;
+    }
+
+    #endregion
+
+    #region Propriedades
+
+    private readonly ApiService _apiService;
+    private readonly DataService _dataService;
+    private DialogService _dialogService;
+    private NetworkService _networkService;
+
+    private ICollectionView? _dataView;
+
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
+
+    #endregion
+
+    #region LOAD COUNTRY DATA
+
+    private async Task<bool> LoadCountries()
+    {
+        if (!NetworkService.IsNetworkAvailable())
+        {
+            LoadCountriesLocal();
+            return false;
+        }
+
+        await LoadCountriesApi();
+        return true;
+    }
+
+    private void LoadCountriesLocal()
+    {
+        CountryList =
+            (ObservableCollection<Country>) DataService.ReadData().Result;
+
+        progressBar.Progress = 100;
+        txtProgressStep.Text = "Loading complete";
+
+        Thread.Sleep(100);
+
+        txtProgressStep.Visibility = Visibility.Hidden;
+        progressBarOverlay.Visibility = Visibility.Hidden;
+    }
+
+    private async Task LoadCountriesApi()
+    {
+        var progress = new Progress<int>(percentComplete =>
+        {
+            progressBar.Progress = percentComplete;
+
+            txtProgressStep.Text = percentComplete switch
+            {
+                25 => "Downloading countries data",
+                50 => "Serializing data",
+                75 => "Deserializing objects",
+                100 => "Loading complete",
+                _ => txtProgressStep.Text
+            };
+        });
+
+        var response =
+            await _apiService.GetCountries(
+                "https://restcountries.com",
+                "v3.1/all", progress);
+
+        CountryList = (ObservableCollection<Country>) response.Result;
+
+        foreach (var country in CountryList)
+            country.Flags.LocalImage =
+                Directory.GetCurrentDirectory() +
+                @"/Flags/" + $"{country.CCA3}.png";
+
+        await Task.Delay(100);
+        txtProgressStep.Visibility = Visibility.Hidden;
+        progressBarOverlay.Visibility = Visibility.Hidden;
+
+        DataService.DeleteData();
+        DataService.SaveData(CountryList);
     }
 
     #endregion
 
 
+    #region NETWORK_CHECKING_METHOD
+
     // NETWORK CHECKING METHOD
 
-    private void DoAvailabilityChanged(
-        object sender, NetworkStatusChangedArgs e)
+    private void DoAvailabilityChanged(object sender,
+        NetworkStatusChangedArgs e)
     {
         ReportAvailability();
     }
@@ -152,97 +211,15 @@ public partial class MenuArranque : Window
             flagsDownloaded.Length != CountryList.Count)
             Dispatcher.Invoke(() =>
             {
-                TxtStatusDownload.Text = string.Empty;
+                txtStatusDownload.Text = string.Empty;
 
                 DownloadFlags();
             });
         else
             Dispatcher.Invoke(() =>
             {
-                TxtStatusDownload.Text = "No internet connection";
+                txtStatusDownload.Text = "No internet connection";
             });
-    }
-
-    #region Atributos
-
-    private ObservableCollection<Country>? CountryList { get; set; } = new();
-
-    private readonly ApiService _apiService;
-    private readonly DataService _dataService;
-
-    private DialogService _dialogService;
-    private NetworkService _networkService;
-
-    private ICollectionView _dataView;
-
-    private readonly TaskCompletionSource<bool> completionSource;
-
-    #endregion
-
-
-    #region LOAD COUNTRY DATA
-
-    private bool LoadCountries()
-    {
-        if (!NetworkService.IsNetworkAvailable())
-        {
-            LoadCountriesLocal();
-            return false;
-        }
-
-        LoadCountriesApi();
-        return true;
-    }
-
-    private void LoadCountriesLocal()
-    {
-        CountryList =
-            (ObservableCollection<Country>)
-            DataService.ReadData().Result;
-
-        ProgressBar.Progress = 100;
-        TxtProgressStep.Text = "Loading complete";
-
-        Thread.Sleep(100);
-
-        TxtProgressStep.Visibility = Visibility.Hidden;
-        ProgressBarOverlay.Visibility = Visibility.Hidden;
-    }
-
-    private void LoadCountriesApi()
-    {
-        var progress = new Progress<int>(percentComplete =>
-        {
-            ProgressBar.Progress = percentComplete;
-
-            TxtProgressStep.Text = percentComplete switch
-            {
-                25 => "Downloading countries data",
-                50 => "Serializing data",
-                75 => "Deserializing objects",
-                100 => "Loading complete",
-                _ => TxtProgressStep.Text
-            };
-        });
-
-        var response =
-            _apiService.GetCountries(
-                "https://restcountries.com",
-                "v3.1/all", progress);
-
-        CountryList = (ObservableCollection<Country>) response.Result.Result;
-
-        foreach (var country in CountryList)
-            country.Flags.LocalImage =
-                Directory.GetCurrentDirectory() +
-                @"/Flags/" + $"{country.CCA3}.png";
-
-        Task.Delay(100);
-        TxtProgressStep.Visibility = Visibility.Hidden;
-        ProgressBarOverlay.Visibility = Visibility.Hidden;
-
-        DataService.DeleteData();
-        DataService.SaveData(CountryList);
     }
 
     #endregion

@@ -17,6 +17,8 @@
     <Window.Background>
         <SolidColorBrush Color="White" />
     </Window.Background>
+
+
     <Grid x:Name="ListaDePaises">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="Esquerda" Width="20" />
@@ -564,7 +566,7 @@
                     <TextBlock Text="Is Success"
                                FontWeight="Bold"
                                FontSize="14"
-                               MinWidth="130" />
+                               MinWidth="100" />
 
                     <Image x:Name="ImgIsSuccess"
                            Source="/Imagens/Visto_tracado_solido.png"
@@ -587,7 +589,7 @@
                     <TextBlock Text="Message"
                                FontWeight="Bold"
                                FontSize="14"
-                               MinWidth="130" />
+                               MinWidth="100" />
 
                     <TextBlock x:Name="LabelMessage"
                                FontSize="14"
@@ -596,14 +598,14 @@
                 </StackPanel>
 
                 <!--RESULT-->
-                <StackPanel Margin="5"
+                <StackPanel Margin="0,5,0,5"
                             HorizontalAlignment="Left"
                             Orientation="Horizontal">
 
                     <TextBlock Text="Result"
                                FontWeight="Bold"
                                FontSize="14"
-                               MinWidth="130" />
+                               MinWidth="100" />
 
                     <TextBlock x:Name="LabelResult"
                                FontSize="14"

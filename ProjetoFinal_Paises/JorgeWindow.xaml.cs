@@ -122,7 +122,7 @@ public partial class JorgeWindow : Window
 
     private async Task MostrarMapaPais_Selecionado(Country? selectedCountry)
     {
-        Mapa.Mode = new AerialMode(true);
+        // Mapa.Mode = new AerialMode(true);
         if (selectedCountry != null && selectedCountry.LatLng.Length < 2)
         {
             MessageBox.Show("Error", "LOCATION NOT FOUND");
@@ -135,29 +135,29 @@ public partial class JorgeWindow : Window
             SetMapLocation(latitude, longitude);
             await SetMapPushpin();
         }
-
+    
         // Helper method to reset the map center and point location to (0, 0)
         void ResetMap()
         {
-            Mapa.Center =
-                new Location(0, 0);
-            Mapa.ZoomLevel = 20;
-
-            PinCapital.Location =
-                new Location(0, 0);
+            // Mapa.Center =
+            //     new Location(0, 0);
+            // Mapa.ZoomLevel = 20;
+            //
+            // PinCapital.Location =
+            //     new Location(0, 0);
             // CamadaPinCapital.Focus();
         }
-
+    
         // Helper method to set the map center and
         // point location based on latitude and longitude
         void SetMapLocation(double latitude, double longitude)
         {
-            Mapa.Center =
-                new Location(latitude, longitude);
-            Mapa.ZoomLevel = 5;
+            // Mapa.Center =
+            //     new Location(latitude, longitude);
+            // Mapa.ZoomLevel = 5;
         }
-
-
+    
+    
         // Helper method to set the map center and
         // point location based on latitude and longitude
         async Task SetMapPushpin()
@@ -172,63 +172,63 @@ public partial class JorgeWindow : Window
             {
                 var country = selectedCountry.Name?.Common;
                 var capital = selectedCountry.Capital[0];
-
+    
                 capital = capital switch
                 {
                     "Washington DC" => "Washington",
                     "Washington, D.C." => "Washington",
                     _ => capital
                 };
-
+    
                 // if (selectedCountry.Borders is {Length: 0}) Mapa.ZoomLevel = 20;
-                if (selectedCountry.Borders[0] == "N/A") Mapa.ZoomLevel = 10;
-                Mapa.ZoomLevel = country switch
-                {
-                    "Russia" => 2,
-                    "Antarctica" => 2,
-                    "United States Minor Outlying Islands" => 2,
-
-                    "Australia" => 4,
-                    "United States" => 4,
-                    "Brazil" => 4,
-                    "Ukraine" => 4,
-
-                    "Malaysia" => 5,
-
-                    "Madagascar" => 6,
-
-                    "Vanuatu" => 7,
-                    "Tuvalu" => 7,
-                    "Solomon Island" => 7,
-                    "Timor-Leste" => 7,
-
-                    "Cyprus" => 8,
-                    "Liechtenstein" => 8,
-                    "Luxembourg" => 8,
-                    "Vatican City" => 8,
-
-                    "Andorra" => 9,
-
-                    _ => Mapa.ZoomLevel
-                };
-
-
+                // if (selectedCountry.Borders[0] == "N/A") Mapa.ZoomLevel = 10;
+                // Mapa.ZoomLevel = country switch
+                // {
+                //     "Russia" => 2,
+                //     "Antarctica" => 2,
+                //     "United States Minor Outlying Islands" => 2,
+                //
+                //     "Australia" => 4,
+                //     "United States" => 4,
+                //     "Brazil" => 4,
+                //     "Ukraine" => 4,
+                //
+                //     "Malaysia" => 5,
+                //
+                //     "Madagascar" => 6,
+                //
+                //     "Vanuatu" => 7,
+                //     "Tuvalu" => 7,
+                //     "Solomon Island" => 7,
+                //     "Timor-Leste" => 7,
+                //
+                //     "Cyprus" => 8,
+                //     "Liechtenstein" => 8,
+                //     "Luxembourg" => 8,
+                //     "Vatican City" => 8,
+                //
+                //     "Andorra" => 9,
+                //
+                //     _ => Mapa.ZoomLevel
+                // };
+    
+    
                 var location =
                     await CoordenadasCapital.GetLocationFromAddress(
                         country, capital);
-
+    
                 // var latitude = location.Result.Point.Latitude;
                 // var longitude = location.Result.Point.Longitude;
                 var latitude = location.Point.Latitude;
                 var longitude = location.Point.Longitude;
-
+    
                 if (latitude != 0 || longitude != 0)
                 {
                     // Define a origem do posicionamento
                     // para a parte inferior do pino
-                    PinCapital.PositionOrigin = PositionOrigin.BottomCenter;
-                    PinCapital.Location = new Location(latitude, longitude);
-
+                    // PinCapital.PositionOrigin = PositionOrigin.BottomCenter;
+                    // PinCapital.Location = new Location(latitude, longitude);
+    
                     //CamadaPinCapital.Focus();
                 }
                 else

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
@@ -41,10 +42,6 @@ public partial class NunoWindow1 : Window
 
         NetworkService.AvailabilityChanged +=
             DoAvailabilityChanged;
-
-        // BootLoader();
-        ShowMenuArranque(); // Chama o método para exibir a janela MenuArranque
-        // ShowMenuArranque();
 
         InitializeData();
 
@@ -90,6 +87,10 @@ public partial class NunoWindow1 : Window
         txtStatus.Text = string.Format(isConnected
             ? $"Country list loaded from server: {DateTime.Now:g}"
             : $"Country list loaded from internal storage: {DateTime.Now:g}");
+
+        UpdateCardConnection(
+            CountriesList.Countries != null,
+            NetworkService.IsNetworkAvailable());
     }
 
     #endregion
@@ -103,11 +104,17 @@ public partial class NunoWindow1 : Window
             new SortDescription("Name.Common",
                 ListSortDirection.Ascending));
 
+
+        // Limpe a coleção Items antes de definir ItemsSource
+        listBoxCountries.Items.Clear();
         listBoxCountries.ItemsSource = _dataView;
+
 
         var portugal =
             CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
         listBoxCountries.SelectedItem = portugal;
+
+        DefineDefaultCountry();
 
         gridSearchBar.IsEnabled = true;
     }
@@ -269,6 +276,51 @@ public partial class NunoWindow1 : Window
 
     #endregion
 
+
+    internal void UpdateCardConnection(bool load, bool connection)
+    {
+        if (load)
+        {
+            // label is success ???
+            LabelIsSuccess.Text = "Os dados da API foram carregados...";
+            LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
+
+            // image is success ???
+            ImgIsSuccess.Source =
+                new BitmapImage(
+                    new Uri(
+                        "/Imagens/Visto_tracado_solido.png",
+                        UriKind.Relative));
+            ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
+
+            // label result
+            LabelResult.Text = "Objeto (API) foi carregado...";
+            LabelResult.Text = connection.ToString();
+
+            // MessageBox.Show(connection.Message);
+        }
+        else
+        {
+            // label is success ???
+            LabelIsSuccess.Text = "Os dados da API NÃO foram carregados...";
+            LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
+
+            // image is success ???
+            ImgIsSuccess.Source =
+                new BitmapImage(
+                    new Uri(
+                        "/Imagens/Triangulo_Solido.png",
+                        UriKind.Relative));
+            ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
+
+            // label result
+            LabelResult.Text = "Objeto NÃO foi carregado...";
+            LabelResult.Text = connection.ToString();
+
+            // MessageBox.Show(connection.Message);
+        }
+    }
+
     #region Atributos
 
     private readonly ApiService _apiService;
@@ -358,7 +410,14 @@ public partial class NunoWindow1 : Window
         DisplayCountryGeography(countryToDisplay);
         DisplayCountryMisc(countryToDisplay);
 
+        DisplayFlagToolTip(countryToDisplay);
+        
         MostrarMapaPais_Selecionado(countryToDisplay);
+    }
+
+    private void DisplayFlagToolTip(Country countryToDisplay)
+    {
+        imgCountryFlag.ToolTip = countryToDisplay.Flags.Alt;
     }
 
     public void DisplayCountryHeader(Country countryToDisplay)
@@ -648,6 +707,55 @@ public partial class NunoWindow1 : Window
             {
                 txtStatusDownload.Text = "No internet connection";
             });
+    }
+
+    #endregion
+
+
+    #region DefaultCountry
+
+    private void DefineDefaultCountry()
+    {
+        // Update default country
+        UpdateDefaultCountry("Portugal");
+
+
+        // atualizar a list-box para apresentar a pais selecionado por defeito
+        UpdateListBoxCountriesWithDefault("Portugal");
+    }
+
+
+    private void UpdateDefaultCountry(string country)
+    {
+        // Find the Country object with the name "Portugal" in the CountryList
+
+        var selectedCountry =
+            CountriesList.Countries?
+                .FirstOrDefault(c => c.Name?.Common == country);
+
+        if (selectedCountry != null)
+            // Call the DisplayCountryData method with the selected country
+            DisplayCountryData(selectedCountry);
+    }
+
+
+    private void UpdateListBoxCountriesWithDefault(string country)
+    {
+        // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
+        var listBoxItem =
+            listBoxCountries.ItemContainerGenerator.Items
+                .Cast<Country>()
+                .Select((item, index) => new {item, index})
+                .FirstOrDefault(x => x.item.Name?.Common == country);
+
+        if (listBoxItem == null) return;
+
+        listBoxCountries.SelectedItem =
+            listBoxCountries.Items[listBoxItem.index];
+
+        // Make sure the list box has finished loading its items
+        listBoxCountries.UpdateLayout();
+        listBoxCountries.ScrollIntoView(listBoxCountries.SelectedItem);
     }
 
     #endregion

@@ -1,0 +1,21 @@
+  <!--MAP-->
+        <wpf:Map x:Name="Mapa"
+                 CredentialsProvider="hhXgFJIZwqvbGUNzsrDs~gfgYwPMyg_wPShO7u4TKmA~AtB5wLCH5ZkGCykOvIOx0baWma52p88Up5pUwtRvwiIBTO01YoO-tSpAvNGLld9x"
+                 ZoomLevel="10"
+                 Grid.Column="2"
+                 Grid.Row="5">
+
+            <!-- The map mode defines the appearance of the map. -->
+            <wpf:Map.Mode>
+                <wpf:AerialMode />
+            </wpf:Map.Mode>
+
+            <!-- The map layer contains the push-pin. -->
+
+            <wpf:Pushpin x:Name="PinCapital"
+                         PositionOrigin="BottomCenter"
+                         BorderThickness="0"
+                         BorderBrush="Black" />
+
+        </wpf:Map>
+        <!--MAP END-->

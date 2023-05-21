@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows;
 using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
 using ProjetoFinal_Paises.ServiçosDatabase;
@@ -11,10 +12,6 @@ namespace ProjetoFinal_Paises.ServiçosAPI;
 
 public class CarregarApi
 {
-    private readonly ApiService _apiService = new();
-    private DataService _dataService = new();
-
-
     internal async Task LoadCountries()
     {
         // zona the verificação da conexão com a net
@@ -75,9 +72,20 @@ public class CarregarApi
         //     "gini,flags,timezones,borders,languages,unMember,latlng,cca3,maps",
         //     progress);
 
+        Stopwatch stopwatch = new();
+        stopwatch.Start();
+
         var response = await _apiService.GetCountries(
             "https://restcountries.com",
             "v3.1/all", progress);
+
+        stopwatch.Stop();
+        var runtime = stopwatch.Elapsed;
+
+        Console.WriteLine("Tempo de execução: " + runtime);
+        MessageBox.Show(
+            "Tempo de execução da leitura da API: " + runtime,
+            "Leitura da API");
 
 
         // implementar a base de dados local se a api vier nula ou vazia
@@ -108,4 +116,12 @@ public class CarregarApi
 
         Console.WriteLine("Debug zone");
     }
+
+
+    #region Propriedades
+
+    private readonly ApiService _apiService = new();
+    private DataService _dataService = new();
+
+    #endregion
 }

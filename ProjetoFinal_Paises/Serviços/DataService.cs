@@ -63,7 +63,8 @@ public class DataService
         catch (Exception e)
         {
             // Obtém o nome da classe atual
-            var nomeClasse = Application.Current.MainWindow?.GetType().Name;
+            var nomeClasse =
+                Application.Current.MainWindow?.GetType().Name;
 
             _dialogService.ShowMessage(
                 "Conexão à base de dados",

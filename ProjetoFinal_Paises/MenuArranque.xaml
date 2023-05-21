@@ -101,14 +101,14 @@
         <!--PROGRESS BAR-->
 
         <Border
-            x:Name="ProgressBarOverlay"
+            x:Name="progressBarOverlay"
             Grid.Column="1" Grid.ColumnSpan="3"
             Grid.Row="1"
 
             Background="#EEFFFFFF">
 
             <syncfusion:SfCircularProgressBar
-                x:Name="ProgressBar" Width="500" GapWidth="-1">
+                x:Name="progressBar" Width="500" GapWidth="-1">
                 <syncfusion:SfCircularProgressBar.ProgressColor>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF56CCF2" />
@@ -119,7 +119,7 @@
         </Border>
 
 
-        <TextBlock x:Name="TxtProgressStep"
+        <TextBlock x:Name="txtProgressStep"
                    Grid.Column="1" Grid.ColumnSpan="3"
                    Grid.Row="1" Grid.RowSpan="2"
 
@@ -132,14 +132,14 @@
 
 
         <!--STATUS MESSAGES-->
-        <TextBlock x:Name="TxtStatusDownload"
+        <TextBlock x:Name="txtStatusDownload"
                    Grid.Row="2"
                    Grid.Column="1"
                    Text="TxtStatusDownload"
                    Foreground="#FF999999" />
 
 
-        <TextBlock x:Name="TxtStatus"
+        <TextBlock x:Name="txtStatus"
                    Grid.Row="2"
                    Grid.Column="3"
                    Text="txtStatus"

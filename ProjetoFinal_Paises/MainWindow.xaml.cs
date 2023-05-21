@@ -21,17 +21,15 @@ namespace ProjetoFinal_Paises;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly ApiService _apiService;
-
-    private readonly DataService _dataService;
-    private ICollectionView _dataView;
-    private DialogService _dialogService;
-    private NetworkService _networkService;
-
     public MainWindow()
     {
+        // chaves que já não funcionam
+        // Diogo
+        // SyncfusionLicenseProvider.RegisterLicense("MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+        // Nuno
         SyncfusionLicenseProvider.RegisterLicense(
-            "MjA2Nzc2OUAzMjMxMmUzMjJlMzNHK1UvZmc1TzlONzFJYmdPYW54QTNXZk00ZytVOGtMUmU1eldxcCtZQ21FPQ==");
+            "MjEyMzA1NEAzMjMxMmUzMjJlMzVtcEV4dGZ1Y0dJNnhtN0xNQWR1cHgxcXM3ZTFBRHZ0T21iOThpdVFoYm1RPQ==");
+
 
         InitializeComponent();
 
@@ -48,7 +46,13 @@ public partial class MainWindow : Window
         listBoxCountries.DataContext = this;
     }
 
-    public ObservableCollection<Country>? CountryList { get; set; } = new();
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            NetworkService.IsNetworkAvailable().ToString());
+    }
+
 
     #region INITIALIZE APPLICATION
 
@@ -60,25 +64,22 @@ public partial class MainWindow : Window
 
         DownloadFlags();
 
-        if (isConnected)
-            txtStatus.Text =
-                string.Format(
-                    $"Country list loaded from server: {DateTime.Now:g}");
-        else
-            txtStatus.Text =
-                string.Format(
-                    $"Country list loaded from internal storage: {DateTime.Now:g}");
+        txtStatus.Text = string.Format(isConnected
+            ? $"Country list loaded from server: {DateTime.Now:g}"
+            : $"Country list loaded from internal storage: {DateTime.Now:g}");
     }
 
     #endregion
+
 
     #region INITIALIZE UI
 
     private void InitializeDataView()
     {
         _dataView = CollectionViewSource.GetDefaultView(CountryList);
-        _dataView.SortDescriptions.Add(new SortDescription("Name.Common",
-            ListSortDirection.Ascending));
+        _dataView.SortDescriptions.Add(
+            new SortDescription("Name.Common",
+                ListSortDirection.Ascending));
 
         listBoxCountries.ItemsSource = _dataView;
 
@@ -90,6 +91,7 @@ public partial class MainWindow : Window
     }
 
     #endregion
+
 
     #region MANAGE LOCAL DATA
 
@@ -114,10 +116,20 @@ public partial class MainWindow : Window
 
     #endregion
 
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show(NetworkService.IsNetworkAvailable().ToString());
-    }
+
+    #region Propriedades
+
+    private readonly ApiService _apiService;
+    private readonly DataService _dataService;
+    private DialogService _dialogService;
+    private NetworkService _networkService;
+
+    private ICollectionView _dataView;
+
+    public ObservableCollection<Country>? CountryList { get; set; } = new();
+
+    #endregion
+
 
     #region LOAD COUNTRY DATA
 
@@ -133,6 +145,7 @@ public partial class MainWindow : Window
         return true;
     }
 
+
     private void LoadCountriesLocal()
     {
         CountryList =
@@ -147,27 +160,21 @@ public partial class MainWindow : Window
         progressBarOverlay.Visibility = Visibility.Hidden;
     }
 
+
     private async Task LoadCountriesApi()
     {
         var progress = new Progress<int>(percentComplete =>
         {
             progressBar.Progress = percentComplete;
 
-            switch (percentComplete)
+            txtProgressStep.Text = percentComplete switch
             {
-                case 25:
-                    txtProgressStep.Text = "Downloading countries data";
-                    break;
-                case 50:
-                    txtProgressStep.Text = "Serializing data";
-                    break;
-                case 75:
-                    txtProgressStep.Text = "Deserializing objects";
-                    break;
-                case 100:
-                    txtProgressStep.Text = "Loading complete";
-                    break;
-            }
+                25 => "Downloading countries data",
+                50 => "Serializing data",
+                75 => "Deserializing objects",
+                100 => "Loading complete",
+                _ => txtProgressStep.Text
+            };
         });
 
         var response =
@@ -192,6 +199,7 @@ public partial class MainWindow : Window
 
     #endregion
 
+
     #region DISPLAY COUNTRY DATA
 
     public void DisplayCountryData(Country countryToDisplay)
@@ -202,12 +210,14 @@ public partial class MainWindow : Window
         DisplayCountryMisc(countryToDisplay);
     }
 
+
     public void DisplayCountryHeader(Country countryToDisplay)
     {
         txtCountryName.Text = countryToDisplay.Name.Common.ToUpper();
         imgCountryFlag.Source =
             new BitmapImage(new Uri(countryToDisplay.Flags.FlagToDisplay));
     }
+
 
     public void DisplayCountryNames(Country countryToDisplay)
     {
@@ -241,6 +251,7 @@ public partial class MainWindow : Window
             iteration++;
         }
     }
+
 
     public void DisplayCountryGeography(Country countryToDisplay)
     {
@@ -283,7 +294,11 @@ public partial class MainWindow : Window
 
         // LATITUDE, LONGITUDE
         txtLatLng.Text =
-            $"{countryToDisplay.LatLng[0].ToString(new CultureInfo("en-US"))}, {countryToDisplay.LatLng[1].ToString(new CultureInfo("en-US"))}";
+            string.Format("{0}, {1}",
+                countryToDisplay.LatLng[0].ToString(
+                    new CultureInfo("en-US")),
+                countryToDisplay.LatLng[1].ToString(
+                    new CultureInfo("en-US")));
 
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
@@ -323,6 +338,7 @@ public partial class MainWindow : Window
         }
     }
 
+
     public void DisplayCountryMisc(Country countryToDisplay)
     {
         var iteration = 0;
@@ -349,17 +365,18 @@ public partial class MainWindow : Window
         iteration = 0;
 
         // CURRENCIES
-        foreach (var currency in countryToDisplay.Currencies)
+        foreach (var currency in
+                 countryToDisplay.Currencies)
         {
             txtCurrencies.Text += $"{currency.Value.Name}";
 
-            if (!(currency.Key == "default"))
+            if (currency.Key != "default")
                 txtCurrencies.Text += Environment.NewLine +
                                       $"{currency.Key.ToUpper()}" +
                                       Environment.NewLine +
                                       $"{currency.Value.Symbol}";
 
-            if (!(iteration == countryToDisplay.Currencies.Count() - 1))
+            if (iteration != countryToDisplay.Currencies.Count - 1)
                 txtCurrencies.Text += Environment.NewLine + Environment.NewLine;
 
             iteration++;
@@ -394,12 +411,13 @@ public partial class MainWindow : Window
 
             giniValue.Text += $"{gini.Value}";
 
-            if (!(iteration == countryToDisplay.Currencies.Count() - 1))
+            if (iteration != countryToDisplay.Currencies.Count - 1)
                 txtCurrencies.Text += Environment.NewLine;
 
             iteration++;
         }
     }
+
 
     private void listBoxPaises_SelectionChanged(object sender,
         SelectionChangedEventArgs e)
@@ -413,25 +431,25 @@ public partial class MainWindow : Window
 
     #endregion
 
+
     #region AUXILIARY METHODS
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        if (responsiveGrid.ActualWidth < 600)
+        switch (responsiveGrid.ActualWidth)
         {
-            responsiveGrid.Columns = 1;
-            return;
+            case < 600:
+                responsiveGrid.Columns = 1;
+                return;
+            case > 600 and < 1000:
+                responsiveGrid.Columns = 2;
+                return;
+            case > 1000:
+                responsiveGrid.Columns = 3;
+                break;
         }
-
-        if (responsiveGrid.ActualWidth > 600 &&
-            responsiveGrid.ActualWidth < 1000)
-        {
-            responsiveGrid.Columns = 2;
-            return;
-        }
-
-        if (responsiveGrid.ActualWidth > 1000) responsiveGrid.Columns = 3;
     }
+
 
     private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
     {
@@ -455,11 +473,15 @@ public partial class MainWindow : Window
         _dataView.Refresh();
     }
 
+
     private void clearButton_Click(object sender, RoutedEventArgs e)
     {
         searchBar.Text = string.Empty;
         searchBar.Focus();
     }
+
+
+    #region NETWORK_CHECKING_METHOD
 
     // NETWORK CHECKING METHOD
 
@@ -468,6 +490,7 @@ public partial class MainWindow : Window
     {
         ReportAvailability();
     }
+
 
     /// <summary>
     ///     Report the current network availability.
@@ -490,6 +513,8 @@ public partial class MainWindow : Window
                 txtStatusDownload.Text = "No internet connection";
             });
     }
+
+    #endregion
 
     #endregion
 }

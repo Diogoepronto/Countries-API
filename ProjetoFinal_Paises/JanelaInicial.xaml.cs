@@ -98,11 +98,15 @@ public partial class JanelaInicial : Window
 
     private void ButtonMainWindow2_OnClick(object sender, RoutedEventArgs e)
     {
-        // MenuArranque menuArranque = new();
-        MenuArranque menuArranque = new("Nuno");
+        MenuArranque menuArranque = new();
+        // MenuArranque menuArranque = new("Nuno");
         Hide();
-        menuArranque.ShowDialog();
-        // menuArranque.Close();
+
+        if (menuArranque.IsVisible) menuArranque.Close();
+        else menuArranque.ShowDialog();
+
+        if (menuArranque.IsVisible) menuArranque.Close();
+
         ShowDialog();
     }
 }

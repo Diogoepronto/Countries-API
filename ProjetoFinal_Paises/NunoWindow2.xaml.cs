@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Maps.MapControl.WPF;
 using ProjetoFinal_Paises.Modelos;
+using ProjetoFinal_Paises.Serviços;
 using ProjetoFinal_Paises.ServiçosAPI;
 using ProjetoFinal_Paises.ServiçosMapas;
 using Syncfusion.Licensing;
@@ -39,61 +40,25 @@ public partial class NunoWindow2 : Window
         var carregarApi = new CarregarApi();
         await carregarApi.LoadCountries();
 
-        // Update default country
-        UpdateDefaultCountry("Portugal");
-
 
         // definir a fonte de items do list-box 
-        if (CountriesList.Countries != null)
-            ListBoxCountries.ItemsSource =
-                CountriesList.Countries.OrderBy(c => c.Name?.Common);
+        UpdateCardConnection(
+            CountriesList.Countries != null,
+            NetworkService.IsNetworkAvailable());
 
+        ListBoxCountries.ItemsSource =
+            CountriesList.Countries.OrderBy(c => c.Name?.Common);
 
-        // atualizar a list-box para apresentar a pais selecionado por defeito
-        UpdateListBoxCountriesWithDefault("Portugal");
+        DefineDefaultCountry();
     }
 
 
-    private void UpdateListBoxCountriesWithDefault(string country)
-    {
-        // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
-        var listBoxItem =
-            ListBoxCountries.ItemContainerGenerator.Items
-                .Cast<Country>()
-                .Select((item, index) => new {item, index})
-                .FirstOrDefault(x => x.item.Name?.Common == country);
-
-        if (listBoxItem == null) return;
-
-        ListBoxCountries.SelectedItem =
-            ListBoxCountries.Items[listBoxItem.index];
-
-        // Make sure the list box has finished loading its items
-        ListBoxCountries.UpdateLayout();
-        ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
-    }
-
-
-    private void UpdateDefaultCountry(string country)
-    {
-        // Find the Country object with the name "Portugal" in the CountryList
-
-        var selectedCountry =
-            CountriesList.Countries?
-                .FirstOrDefault(c => c.Name?.Common == country);
-
-        if (selectedCountry != null)
-            // Call the DisplayCountryData method with the selected country
-            DisplayCountryData(selectedCountry);
-    }
-
-
-    internal void UpdateCardConnection(bool load, Response connection)
+    internal void UpdateCardConnection(bool load, bool connection)
     {
         if (load)
         {
             // label is success ???
-            LabelIsSuccess.Text = connection.IsSuccess.ToString();
+            LabelIsSuccess.Text = "Os dados da API foram carregados...";
             LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Green);
 
             // image is success ???
@@ -105,15 +70,15 @@ public partial class NunoWindow2 : Window
             ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
 
             // label result
-            LabelResult.Text = "Objeto foi carregado";
-            LabelResult.Text = connection.Result?.ToString();
+            LabelResult.Text = "Objeto (API) foi carregado...";
+            LabelResult.Text = connection.ToString();
 
             // MessageBox.Show(connection.Message);
         }
         else
         {
             // label is success ???
-            LabelIsSuccess.Text = connection.IsSuccess.ToString();
+            LabelIsSuccess.Text = "Os dados da API NÃO foram carregados...";
             LabelIsSuccess.Foreground = new SolidColorBrush(Colors.Red);
 
             // image is success ???
@@ -125,8 +90,8 @@ public partial class NunoWindow2 : Window
             ImgIsSuccess.Width = ImgIsSuccess.Height = 30;
 
             // label result
-            LabelResult.Text = "Objeto não foi carregado";
-            LabelResult.Text = connection.Result?.ToString();
+            LabelResult.Text = "Objeto NÃO foi carregado...";
+            LabelResult.Text = connection.ToString();
 
             // MessageBox.Show(connection.Message);
         }
@@ -433,4 +398,53 @@ public partial class NunoWindow2 : Window
 
         #endregion
     }
+
+
+    #region DefaultCountry
+
+    private void DefineDefaultCountry()
+    {
+        // Update default country
+        UpdateDefaultCountry("Portugal");
+
+
+        // atualizar a list-box para apresentar a pais selecionado por defeito
+        UpdateListBoxCountriesWithDefault("Portugal");
+    }
+
+
+    private void UpdateDefaultCountry(string country)
+    {
+        // Find the Country object with the name "Portugal" in the CountryList
+
+        var selectedCountry =
+            CountriesList.Countries?
+                .FirstOrDefault(c => c.Name?.Common == country);
+
+        if (selectedCountry != null)
+            // Call the DisplayCountryData method with the selected country
+            DisplayCountryData(selectedCountry);
+    }
+
+
+    private void UpdateListBoxCountriesWithDefault(string country)
+    {
+        // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
+        var listBoxItem =
+            ListBoxCountries.ItemContainerGenerator.Items
+                .Cast<Country>()
+                .Select((item, index) => new {item, index})
+                .FirstOrDefault(x => x.item.Name?.Common == country);
+
+        if (listBoxItem == null) return;
+
+        ListBoxCountries.SelectedItem =
+            ListBoxCountries.Items[listBoxItem.index];
+
+        // Make sure the list box has finished loading its items
+        ListBoxCountries.UpdateLayout();
+        ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
+    }
+
+    #endregion
 }

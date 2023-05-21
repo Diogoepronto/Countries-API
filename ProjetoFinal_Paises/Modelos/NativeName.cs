@@ -9,6 +9,7 @@ public class NativeName
 
     #endregion
 
+
     #region Propriedades
 
     public string Common
