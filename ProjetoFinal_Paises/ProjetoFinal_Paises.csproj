@@ -69,6 +69,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="Data\CountriesDB.sqlite">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Imagens\appIcon.1.ico" />
+        <Content Include="Imagens\appIcon.ico" />
         <Content Include="Imagens\check.png">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -129,9 +134,6 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Remove="Data\CountriesDB.sqlite" />
-        <Content Include="Data\CountriesDB.sqlite">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
         <None Remove="Data\CreateTablesScript.sql" />
         <Content Include="Data\CreateTablesScript.sql">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -8,29 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB_20230522155348.sqlite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB_20230522155349.sqlite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Imagens/IGrb.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/CodigoMapa-XAML-Jorge.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/CodigoXAMLMapa.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/LicinioWindow.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/LicinioWindow.xaml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB_20230522155348.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Data/CountriesDB_20230522155349.sqlite" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/CountryName.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Flag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataServiceDiogo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/TatianeWindow.xaml.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +73,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230522_0017",
+    "com.google.cloudcode.ide_session_index": "20230522_0021",
     "git-widget-placeholder": "Nuno",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
@@ -104,11 +91,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Project.ProjetoFinal_Paises">
-    <configuration name="Publish ProjetoFinal_Paises to folder win-x64" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" platform="Any CPU" runtime="win-x64" self_contained="true" target_folder="$USER_HOME$/Downloads/Projeto_Paises_API publicar" target_framework="net6.0-windows" uuid_high="1370922983390658672" uuid_low="-6443263747732709840" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="ProjetoFinal_Paises" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -167,6 +150,8 @@
       <workItem from="1684769276863" duration="1721000" />
       <workItem from="1684772009109" duration="170000" />
       <workItem from="1684773877293" duration="4154000" />
+      <workItem from="1684779806385" duration="160000" />
+      <workItem from="1684781467034" duration="5526000" />
     </task>
     <task id="LOCAL-00001" summary="versão beta, integrada com a branchNuno, falta corrigir alguns bugs">
       <created>1684461264504</created>
@@ -231,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684714437215</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="cometimento final">
+      <created>1684779914422</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1684779914422</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,7 +260,8 @@
     <MESSAGE value="mais autualizações e bugs fix" />
     <MESSAGE value="- Adição do tooltip a flag" />
     <MESSAGE value="- Adição de area ao card DisplayCountryGeography, mais alteração do menu de arranque, mais alteração da cores no MenuArranque.xaml, MenuArranque.xaml.cs, e do menu NunoWindow1.xaml, NunoWindow1.xaml" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Adição de area ao card DisplayCountryGeography, mais alteração do menu de arranque, mais alteração da cores no MenuArranque.xaml, MenuArranque.xaml.cs, e do menu NunoWindow1.xaml, NunoWindow1.xaml" />
+    <MESSAGE value="cometimento final" />
+    <option name="LAST_COMMIT_MESSAGE" value="cometimento final" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -306,21 +299,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs</url>
-          <line>187</line>
-          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\MenuArranque.xaml.cs" initialLine="190" containingFunctionPresentation="Method 'LoadCountriesApi'" />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs</url>
           <line>157</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\MenuArranque.xaml.cs" initialLine="159" containingFunctionPresentation="Method 'LoadCountriesLocal'" />
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs</url>
-          <line>199</line>
-          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\MenuArranque.xaml.cs" initialLine="201" containingFunctionPresentation="Method 'LoadCountriesApi'" />
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
@@ -329,16 +310,36 @@
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs</url>
-          <line>184</line>
-          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\MenuArranque.xaml.cs" initialLine="184" containingFunctionPresentation="Method 'LoadCountriesApi'" />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/ApiService.cs</url>
           <line>33</line>
           <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\Serviços\ApiService.cs" initialLine="33" containingFunctionPresentation="Method 'GetCountries'" />
           <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs</url>
+          <line>194</line>
+          <properties documentPath="C:\Users\nunov\source\repos\ProjetoFinal_Paises\ProjetoFinal_Paises\MenuArranque.xaml.cs" initialLine="194" containingFunctionPresentation="Method 'LoadCountriesApi'">
+            <startOffsets>
+              <option value="5123" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5147" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs</url>
+          <line>185</line>
+          <properties documentPath="C:\Users\nunov\source\repos\ProjetoFinal_Paises\ProjetoFinal_Paises\MenuArranque.xaml.cs" initialLine="185" containingFunctionPresentation="Method 'LoadCountriesApi'">
+            <startOffsets>
+              <option value="4915" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4938" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

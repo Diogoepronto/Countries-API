@@ -29,14 +29,18 @@ public class Flag
             // return _png =
             //     Directory.GetCurrentDirectory() + "/Imagens/" +
             //     "do-not-take-flash-photographs-svgrepo-com.png";
-            var flagPath =
-                Directory.GetCurrentDirectory() + $"/Flags/{_country.CCA3}.png";
+            // var flagPath =
+            //     Directory.GetCurrentDirectory() + $"/Flags/{_country.CCA3}.png";
+            var flagPath = $"/Flags/{_country.CCA3}.png";
 
             if (File.Exists(flagPath))
                 return flagPath;
 
+            // return string.IsNullOrEmpty(_png)
+            //     ? Directory.GetCurrentDirectory() + "/Imagens/no_flag.png"
+            //     : _png;
             return string.IsNullOrEmpty(_png)
-                ? Directory.GetCurrentDirectory() + "/Imagens/no_flag.png"
+                ? "/Imagens/no_flag.png"
                 : _png;
         }
         set => _png = value;
@@ -44,9 +48,13 @@ public class Flag
 
     public string Svg
     {
+        // get =>
+        //     string.IsNullOrEmpty(_svg)
+        //         ? Directory.GetCurrentDirectory() + "/Imagens/no-flag.svg"
+        //         : _svg;
         get =>
             string.IsNullOrEmpty(_svg)
-                ? Directory.GetCurrentDirectory() + "/Imagens/no-flag.svg"
+                ? "/Imagens/no-flag.svg"
                 : _svg;
         set => _svg = value;
     }
@@ -57,25 +65,27 @@ public class Flag
         set => _alt = value;
     }
 
-    public string LocalImage { get; set; } =
-        Directory.GetCurrentDirectory() + "/Imagens/no_flag.png";
+    // public string LocalImage { get; set; } =
+    //     Directory.GetCurrentDirectory() + "/Imagens/no_flag.png";
+    public string LocalImage { get; set; } = "/Imagens/no_flag.png";
 
     public string FlagToDisplay
     {
         get
         {
-            var flagPath =
-                Directory.GetCurrentDirectory() +
-                $"/Flags/{_country.CCA3}.png";
+            // var flagPath =
+            //     Directory.GetCurrentDirectory() +
+            //     $"/Flags/{_country.CCA3}.png";
+            var flagPath = $"/Flags/{_country.CCA3}.png";
 
             if (File.Exists(flagPath))
                 return LocalImage;
 
             if (!NetworkService.IsAvailable)
-                return Directory.GetCurrentDirectory() + "/Imagens/no_flag.png";
+                return _appDirectory + "/Imagens/no_flag.png";
 
             if (string.IsNullOrEmpty(Png))
-                return Directory.GetCurrentDirectory() + "/Imagens/no_flag.png";
+                return _appDirectory + "/Imagens/no_flag.png";
 
             return Png;
         }

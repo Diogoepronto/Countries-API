@@ -166,6 +166,8 @@ public class Country
         {
             if (_languages.Count > 1 && _languages.First().Key == "Defeito")
                 _languages.Remove("Defeito");
+            if (_languages.Count > 1 && _languages.First().Key == "Default")
+                _languages.Remove("Default");
 
             return _languages;
         }
@@ -179,6 +181,8 @@ public class Country
         {
             if (_currencies.Count > 1 && _currencies.First().Key == "Defeito")
                 _currencies.Remove("Defeito");
+            if (_currencies.Count > 1 && _currencies.First().Key == "Default")
+                _currencies.Remove("Default");
 
             return _currencies;
         }
@@ -194,6 +198,8 @@ public class Country
         {
             if (_gini.Count > 1 && _gini.First().Key == "Defeito")
                 _gini.Remove("Defeito");
+            if (_gini.Count > 1 && _gini.First().Key == "Default")
+                _gini.Remove("Default");
 
             return _gini;
         }

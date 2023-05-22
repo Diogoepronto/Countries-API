@@ -224,11 +224,11 @@
 
             <!--#region SEARCHBAR -->
             <Grid
-                x:Name="gridSearchBar"
+                x:Name="GridSearchBar"
                 Grid.Row="0"
                 IsEnabled="False">
 
-                <TextBox x:Name="searchBar"
+                <TextBox x:Name="SearchBar"
                          VerticalAlignment="Center"
                          Margin="5,0,5,0"
                          Padding="10, 5, 10, 5"
@@ -236,7 +236,7 @@
 
                          Background="{x:Null}" TabIndex="1" />
 
-                <Button x:Name="clearButton"
+                <Button x:Name="ClearButton"
                         HorizontalAlignment="Right"
                         VerticalContentAlignment="Center"
                         Content="✖️"
@@ -251,7 +251,7 @@
                         Click="ClearButton_Click" />
 
                 <TextBlock IsHitTestVisible="False"
-                           Text="Enter a country"
+                           Text="Introduza o nome de um país"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
                            Margin="16,0,0,0"
@@ -260,7 +260,7 @@
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed" />
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=searchBar}" Value="">
+                                <DataTrigger Binding="{Binding Text, ElementName=SearchBar}" Value="">
                                     <Setter Property="Visibility" Value="Visible" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -272,7 +272,7 @@
 
 
             <!--#region LIST COUNTRIES -->
-            <ListBox x:Name="listBoxCountries"
+            <ListBox x:Name="ListBoxCountries"
                      Grid.Row="1"
                      Grid.Column="0"
                      Background="Transparent"
@@ -387,12 +387,12 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <UniformGrid x:Name="responsiveGrid"
+                    <UniformGrid x:Name="ResponsiveGrid"
                                  Grid.Row="0"
                                  SizeChanged="UniformGrid_SizeChanged">
 
                         <!--#region CARD: NAMES -->
-                        <Border x:Name="cardBorderNames"
+                        <Border x:Name="CardBorderNames"
                                 BorderBrush="AliceBlue"
                                 BorderThickness="1"
                                 CornerRadius="10"
@@ -444,7 +444,7 @@
 
                                     <TextBlock Grid.Row="0"
                                                Grid.Column="1"
-                                               x:Name="txtNameOfficial"
+                                               x:Name="TxtNameOfficial"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -459,7 +459,7 @@
 
                                     <TextBlock Grid.Row="1"
                                                Grid.Column="1"
-                                               x:Name="txtNameCommon"
+                                               x:Name="TxtNameCommon"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -474,7 +474,7 @@
 
                                     <TextBlock Grid.Row="2"
                                                Grid.Column="1"
-                                               x:Name="txtNameNativeOfficial"
+                                               x:Name="TxtNameNativeOfficial"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -490,7 +490,7 @@
 
                                     <TextBlock Grid.Row="3"
                                                Grid.Column="1"
-                                               x:Name="txtNameNativeCommon"
+                                               x:Name="TxtNameNativeCommon"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -500,7 +500,7 @@
                         <!--#endregion-->
 
                         <!--#region CARD: GEOGRAPHY -->
-                        <Border x:Name="cardBorderGeography"
+                        <Border x:Name="CardBorderGeography"
                                 BorderBrush="AliceBlue"
                                 BorderThickness="1"
                                 CornerRadius="10"
@@ -556,7 +556,7 @@
 
                                     <TextBlock Grid.Row="0"
                                                Grid.Column="1"
-                                               x:Name="txtContinent"
+                                               x:Name="TxtContinent"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -571,7 +571,7 @@
 
                                     <TextBlock Grid.Row="1"
                                                Grid.Column="1"
-                                               x:Name="txtRegion"
+                                               x:Name="TxtRegion"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -586,7 +586,7 @@
 
                                     <TextBlock Grid.Row="2"
                                                Grid.Column="1"
-                                               x:Name="txtSubregion"
+                                               x:Name="TxtSubregion"
                                                FontSize="14"
                                                MinWidth="100"
                                                TextWrapping="Wrap"
@@ -602,7 +602,7 @@
 
                                     <TextBlock Grid.Row="3"
                                                Grid.Column="1"
-                                               x:Name="txtCapital"
+                                               x:Name="TxtCapital"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -617,7 +617,7 @@
 
                                     <TextBlock Grid.Row="4"
                                                Grid.Column="1"
-                                               x:Name="txtLatLng"
+                                               x:Name="TxtLatLng"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -633,7 +633,7 @@
 
                                     <TextBlock Grid.Row="5"
                                                Grid.Column="1"
-                                               x:Name="txtArea"
+                                               x:Name="TxtArea"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -648,7 +648,7 @@
 
                                     <TextBlock Grid.Row="6"
                                                Grid.Column="1"
-                                               x:Name="txtTimezones"
+                                               x:Name="TxtTimezones"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -663,7 +663,7 @@
 
                                     <TextBlock Grid.Row="7"
                                                Grid.Column="1"
-                                               x:Name="txtBorders"
+                                               x:Name="TxtBorders"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
@@ -676,7 +676,7 @@
                         <!--#endregion-->
 
                         <!--#region CARD: MISCELLANEOUS -->
-                        <Border x:Name="cardBorderMisc"
+                        <Border x:Name="CardBorderMisc"
                                 BorderBrush="AliceBlue"
                                 BorderThickness="1"
                                 CornerRadius="10"
@@ -728,7 +728,7 @@
 
                                     <TextBlock Grid.Row="0"
                                                Grid.Column="1"
-                                               x:Name="txtPopulation"
+                                               x:Name="TxtPopulation"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0, 5, 0, 5" />
@@ -743,7 +743,7 @@
 
                                     <TextBlock Grid.Row="1"
                                                Grid.Column="1"
-                                               x:Name="txtLanguages"
+                                               x:Name="TxtLanguages"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0, 5, 0, 5" />
@@ -758,7 +758,7 @@
 
                                     <TextBlock Grid.Row="2"
                                                Grid.Column="1"
-                                               x:Name="txtCurrencies"
+                                               x:Name="TxtCurrencies"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0, 5, 0, 5" />
@@ -773,7 +773,7 @@
 
                                     <Image Grid.Row="3"
                                            Grid.Column="1"
-                                           x:Name="imgUnMember"
+                                           x:Name="ImgUnMember"
                                            Source="/Imagens/check.png"
                                            Height="15"
                                            HorizontalAlignment="Left"
@@ -791,14 +791,14 @@
 
                                     <TextBlock Grid.Row="4"
                                                Grid.Column="1"
-                                               x:Name="txtGini"
+                                               x:Name="TxtGini"
                                                FontSize="14"
                                                TextWrapping="Wrap"
                                                Margin="0, 5, 0, 5">
 
                                         <TextBlock.Inlines>
-                                            <Run x:Name="giniYear" FontWeight="Bold" />
-                                            <Run x:Name="giniValue" />
+                                            <Run x:Name="GiniYear" FontWeight="Bold" />
+                                            <Run x:Name="GiniValue" />
                                         </TextBlock.Inlines>
 
                                     </TextBlock>
@@ -842,7 +842,7 @@
 
         <!-- CARD CONNECTION OLD -->
         <!--#region CARD: Connection Status -->
-        <Border x:Name="cardConnectionStatus"
+        <Border x:Name="CardConnectionStatus"
                 Grid.Column="1"
                 Grid.Row="5"
                 BorderBrush="AliceBlue"

@@ -46,7 +46,7 @@ public partial class NunoWindow1 : Window
         ShowMenuArranque();
         InitializeData();
 
-        listBoxCountries.DataContext = this;
+        ListBoxCountries.DataContext = this;
     }
 
 
@@ -96,19 +96,19 @@ public partial class NunoWindow1 : Window
 
 
             // Limpe a coleção Items antes de definir ItemsSource
-            listBoxCountries.Items.Clear();
-            listBoxCountries.ItemsSource = _dataView;
+            ListBoxCountries.Items.Clear();
+            ListBoxCountries.ItemsSource = _dataView;
 
 
             var portugal =
                 CountryList.FirstOrDefault(
                     c => c.Name.Common == "Portugal");
-            listBoxCountries.SelectedItem = portugal;
+            ListBoxCountries.SelectedItem = portugal;
         }
 
         DefineDefaultCountry("Portugal");
 
-        gridSearchBar.IsEnabled = true;
+        GridSearchBar.IsEnabled = true;
     }
 
     #endregion
@@ -504,12 +504,12 @@ public partial class NunoWindow1 : Window
     {
         var iteration = 0;
 
-        txtNameNativeOfficial.Text = string.Empty;
-        txtNameNativeCommon.Text = string.Empty;
+        TxtNameNativeOfficial.Text = string.Empty;
+        TxtNameNativeCommon.Text = string.Empty;
 
         // OFFICIAL NAME, COMMON NAME
-        txtNameOfficial.Text = countryToDisplay.Name?.Official;
-        txtNameCommon.Text = countryToDisplay.Name?.Common;
+        TxtNameOfficial.Text = countryToDisplay.Name?.Official;
+        TxtNameCommon.Text = countryToDisplay.Name?.Common;
 
         // NATIVE OFFICIAL AND COMMON NAME
         if (countryToDisplay.Name?.NativeName == null) return;
@@ -518,18 +518,18 @@ public partial class NunoWindow1 : Window
         {
             if (nativeName.Key != "default")
             {
-                txtNameNativeOfficial.Text +=
+                TxtNameNativeOfficial.Text +=
                     $"{nativeName.Key.ToUpper()}: ";
-                txtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
+                TxtNameNativeCommon.Text += $"{nativeName.Key.ToUpper()}: ";
             }
 
-            txtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
-            txtNameNativeCommon.Text += $"{nativeName.Value.Common}";
+            TxtNameNativeOfficial.Text += $"{nativeName.Value.Official}";
+            TxtNameNativeCommon.Text += $"{nativeName.Value.Common}";
 
             if (iteration != countryToDisplay.Name.NativeName.Count() - 1)
             {
-                txtNameNativeOfficial.Text += Environment.NewLine;
-                txtNameNativeCommon.Text += Environment.NewLine;
+                TxtNameNativeOfficial.Text += Environment.NewLine;
+                TxtNameNativeCommon.Text += Environment.NewLine;
             }
 
             iteration++;
@@ -540,18 +540,18 @@ public partial class NunoWindow1 : Window
     {
         var iteration = 0;
 
-        txtContinent.Text = string.Empty;
-        txtCapital.Text = string.Empty;
-        txtTimezones.Text = string.Empty;
-        txtBorders.Text = string.Empty;
+        TxtContinent.Text = string.Empty;
+        TxtCapital.Text = string.Empty;
+        TxtTimezones.Text = string.Empty;
+        TxtBorders.Text = string.Empty;
 
         // CONTINENT
         foreach (var continent in countryToDisplay.Continents)
         {
-            txtContinent.Text += continent;
+            TxtContinent.Text += continent;
 
             if (iteration != countryToDisplay.Continents.Length - 1)
-                txtContinent.Text += Environment.NewLine;
+                TxtContinent.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -559,16 +559,16 @@ public partial class NunoWindow1 : Window
         iteration = 0;
 
         // REGION, SUBREGION
-        txtRegion.Text = countryToDisplay.Region;
-        txtSubregion.Text = countryToDisplay.SubRegion;
+        TxtRegion.Text = countryToDisplay.Region;
+        TxtSubregion.Text = countryToDisplay.SubRegion;
 
         // CAPITAL
         foreach (var capital in countryToDisplay.Capital)
         {
-            txtCapital.Text += capital;
+            TxtCapital.Text += capital;
 
             if (iteration != countryToDisplay.Capital.Length - 1)
-                txtCapital.Text += Environment.NewLine;
+                TxtCapital.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -576,7 +576,7 @@ public partial class NunoWindow1 : Window
         iteration = 0;
 
         // LATITUDE, LONGITUDE
-        txtLatLng.Text =
+        TxtLatLng.Text =
             string.Format("{0}, {1}",
                 countryToDisplay.LatLng[0].ToString(
                     new CultureInfo("en-US")),
@@ -584,7 +584,7 @@ public partial class NunoWindow1 : Window
                     new CultureInfo("en-US")));
 
         // AREA
-        txtArea.Text =
+        TxtArea.Text =
             countryToDisplay.Area
                 .ToString("N",
                     new CultureInfo("en-US")) + " km²";
@@ -592,10 +592,10 @@ public partial class NunoWindow1 : Window
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
         {
-            txtTimezones.Text += timezone;
+            TxtTimezones.Text += timezone;
 
             if (iteration != countryToDisplay.Timezones.Length - 1)
-                txtTimezones.Text += Environment.NewLine;
+                TxtTimezones.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -609,7 +609,7 @@ public partial class NunoWindow1 : Window
 
             if (border == "N/A")
             {
-                txtBorders.Text += border;
+                TxtBorders.Text += border;
             }
             else
             {
@@ -618,11 +618,11 @@ public partial class NunoWindow1 : Window
                         if (country.CCA3 == border)
                             countryName = country.Name?.Common;
 
-                txtBorders.Text += countryName;
+                TxtBorders.Text += countryName;
             }
 
             if (iteration != countryToDisplay.Borders.Length - 1)
-                txtBorders.Text += Environment.NewLine;
+                TxtBorders.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -632,22 +632,22 @@ public partial class NunoWindow1 : Window
     {
         var iteration = 0;
 
-        txtLanguages.Text = string.Empty;
-        txtCurrencies.Text = string.Empty;
-        giniYear.Text = string.Empty;
-        giniValue.Text = string.Empty;
+        TxtLanguages.Text = string.Empty;
+        TxtCurrencies.Text = string.Empty;
+        GiniYear.Text = string.Empty;
+        GiniValue.Text = string.Empty;
 
         // POPULATION
-        txtPopulation.Text = countryToDisplay.Population.ToString("N0");
+        TxtPopulation.Text = countryToDisplay.Population.ToString("N0");
 
         // LANGUAGES
         foreach (var language in
                  countryToDisplay.Languages)
         {
-            txtLanguages.Text += language.Value;
+            TxtLanguages.Text += language.Value;
 
             if (iteration != countryToDisplay.Languages.Count - 1)
-                txtLanguages.Text += Environment.NewLine;
+                TxtLanguages.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -658,16 +658,16 @@ public partial class NunoWindow1 : Window
         foreach (var currency in
                  countryToDisplay.Currencies)
         {
-            txtCurrencies.Text += $"{currency.Value.Name}";
+            TxtCurrencies.Text += $"{currency.Value.Name}";
 
             if (currency.Key != "default")
-                txtCurrencies.Text += Environment.NewLine +
+                TxtCurrencies.Text += Environment.NewLine +
                                       $"{currency.Key.ToUpper()}" +
                                       Environment.NewLine +
                                       $"{currency.Value.Symbol}";
 
             if (iteration != countryToDisplay.Currencies.Count - 1)
-                txtCurrencies.Text += Environment.NewLine + Environment.NewLine;
+                TxtCurrencies.Text += Environment.NewLine + Environment.NewLine;
 
             iteration++;
         }
@@ -675,14 +675,14 @@ public partial class NunoWindow1 : Window
         iteration = 0;
 
         // IS UN MEMBER
-        imgUnMember.Visibility = Visibility.Visible;
+        ImgUnMember.Visibility = Visibility.Visible;
 
         if (countryToDisplay.UNMember)
-            imgUnMember.Source =
+            ImgUnMember.Source =
                 new BitmapImage(
                     new Uri("pack://application:,,,/Imagens/check.png"));
         else
-            imgUnMember.Source =
+            ImgUnMember.Source =
                 new BitmapImage(
                     new Uri("pack://application:,,,/Imagens/cross.png"));
 
@@ -691,18 +691,18 @@ public partial class NunoWindow1 : Window
         {
             if (!(gini.Key == "default"))
             {
-                giniYear.FontWeight = FontWeights.Bold;
-                giniYear.Text += $"{gini.Key}: ";
+                GiniYear.FontWeight = FontWeights.Bold;
+                GiniYear.Text += $"{gini.Key}: ";
             }
             else
             {
-                giniYear.FontWeight = FontWeights.Regular;
+                GiniYear.FontWeight = FontWeights.Regular;
             }
 
-            giniValue.Text += $"{gini.Value}";
+            GiniValue.Text += $"{gini.Value}";
 
             if (iteration != countryToDisplay.Currencies.Count - 1)
-                txtCurrencies.Text += Environment.NewLine;
+                TxtCurrencies.Text += Environment.NewLine;
 
             iteration++;
         }
@@ -711,9 +711,9 @@ public partial class NunoWindow1 : Window
     private void listBoxPaises_SelectionChanged(object sender,
         SelectionChangedEventArgs e)
     {
-        if (listBoxCountries.SelectedItem == null) return;
+        if (ListBoxCountries.SelectedItem == null) return;
 
-        var selectedCountry = (Country) listBoxCountries.SelectedItem;
+        var selectedCountry = (Country) ListBoxCountries.SelectedItem;
 
         DisplayCountryData(selectedCountry);
     }
@@ -724,16 +724,16 @@ public partial class NunoWindow1 : Window
 
     private void UniformGrid_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        switch (responsiveGrid.ActualWidth)
+        switch (ResponsiveGrid.ActualWidth)
         {
             case < 600:
-                responsiveGrid.Columns = 1;
+                ResponsiveGrid.Columns = 1;
                 return;
             case > 600 and < 1000:
-                responsiveGrid.Columns = 2;
+                ResponsiveGrid.Columns = 2;
                 return;
             case > 1000:
-                responsiveGrid.Columns = 3;
+                ResponsiveGrid.Columns = 3;
                 break;
         }
     }
@@ -743,7 +743,7 @@ public partial class NunoWindow1 : Window
         var textBox = (TextBox) sender;
 
         // EXIBE OU ESCONDE O BOTÃO DE APAGAR O TEXTO DA CAIXA DE PESQUISA
-        clearButton.Visibility = textBox.Text.Length == 0
+        ClearButton.Visibility = textBox.Text.Length == 0
             ? Visibility.Hidden
             : Visibility.Visible;
 
@@ -761,8 +761,8 @@ public partial class NunoWindow1 : Window
 
     private void ClearButton_Click(object sender, RoutedEventArgs e)
     {
-        searchBar.Text = string.Empty;
-        searchBar.Focus();
+        SearchBar.Text = string.Empty;
+        SearchBar.Focus();
     }
 
     // NETWORK CHECKING METHOD
@@ -829,19 +829,19 @@ public partial class NunoWindow1 : Window
     {
         // Find the ListBoxItem with the name "Portugal" in the ListBoxCountries
         var listBoxItem =
-            listBoxCountries.ItemContainerGenerator.Items
+            ListBoxCountries.ItemContainerGenerator.Items
                 .Cast<Country>()
                 .Select((item, index) => new {item, index})
                 .FirstOrDefault(x => x.item.Name?.Common == country);
 
         if (listBoxItem == null) return;
 
-        listBoxCountries.SelectedItem =
-            listBoxCountries.Items[listBoxItem.index];
+        ListBoxCountries.SelectedItem =
+            ListBoxCountries.Items[listBoxItem.index];
 
         // Make sure the list box has finished loading its items
-        listBoxCountries.UpdateLayout();
-        listBoxCountries.ScrollIntoView(listBoxCountries.SelectedItem);
+        ListBoxCountries.UpdateLayout();
+        ListBoxCountries.ScrollIntoView(ListBoxCountries.SelectedItem);
     }
 
     #endregion

@@ -43,6 +43,8 @@ public class CountryName
         {
             if (_nativeName.Count > 1 && _nativeName.First().Key == "Defeito")
                 _nativeName.Remove("Defeito");
+            if (_nativeName.Count > 1 && _nativeName.First().Key == "Default")
+                _nativeName.Remove("Default");
 
             return _nativeName;
         }
