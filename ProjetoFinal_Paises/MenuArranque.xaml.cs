@@ -56,7 +56,7 @@ public partial class MenuArranque : Window
 
 
         // Aguarde 2 segundo(s)
-        Thread.Sleep(2000);
+        Thread.Sleep(1000);
         Close();
     }
 

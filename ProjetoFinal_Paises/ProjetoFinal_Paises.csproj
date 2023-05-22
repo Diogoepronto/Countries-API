@@ -20,6 +20,9 @@
         <None Remove="DataBaseService\**" />
         <None Remove="Imagens\appIcon.ico" />
         <None Remove="Imagens\appIcon.1.ico" />
+        <None Update="Imagens\IGrb.gif">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -43,6 +46,7 @@
         <PackageReference Include="System.Text.Json" Version="7.0.2" />
         <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+        <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     </ItemGroup>
 
     <ItemGroup>

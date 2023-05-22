@@ -19,20 +19,20 @@ public class CountryName
 
     public string? Common
     {
-        get => _common.Length == 0 ? "N/A" : _common;
+        get => _common.Length == 0 ? "N/D" : _common;
         set
         {
-            if (value == null) _common = "N/A";
+            if (value == null) _common = "N/D";
             _common = value;
         }
     }
 
     public string? Official
     {
-        get => _official.Length == 0 ? "N/A" : _official;
+        get => _official.Length == 0 ? "N/D" : _official;
         set
         {
-            if (value == null) _official = "N/A";
+            if (value == null) _official = "N/D";
             _official = value;
         }
     }
@@ -41,8 +41,8 @@ public class CountryName
     {
         get
         {
-            if (_nativeName.Count > 1 && _nativeName.First().Key == "default")
-                _nativeName.Remove("default");
+            if (_nativeName.Count > 1 && _nativeName.First().Key == "Defeito")
+                _nativeName.Remove("Defeito");
 
             return _nativeName;
         }

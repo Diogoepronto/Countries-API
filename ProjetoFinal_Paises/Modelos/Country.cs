@@ -13,7 +13,7 @@ public class Country
         Name = new CountryName();
         Name.NativeName = new Dictionary<string, NativeName>
         {
-            {Default, new NativeName {Common = NoData, Official = NoData}}
+            {"Defeito", new NativeName {Common = "N/D", Official = "N/D"}}
         };
         Flags = new Flag(this);
         Continents = new string[0];
@@ -23,15 +23,15 @@ public class Country
         Borders = new string[0];
         Languages = new Dictionary<string, string>
         {
-            {Default, NoData}
+            {"Defeito", "N/D"}
         };
         Currencies = new Dictionary<string, Currency>
         {
-            {Default, new Currency {Name = NoData, Symbol = NoData}}
+            {"Defeito", new Currency {Name = "N/D", Symbol = "N/D"}}
         };
         Gini = new Dictionary<string, string>
         {
-            {Default, NoData}
+            {"Defeito", "N/D"}
         };
         Maps = new Map();
 
@@ -41,12 +41,12 @@ public class Country
 
         // Idd = new Dictionary<string, Idd>
         // {
-        //     {Default, new Idd {Root = NoData, Suffixes = new List<string>() {NoData}}}
+        //     {"Defeito", new Idd {Root = "N/D", Suffixes = new List<string>() {"N/D"}}}
         // };
         //
         // PostalCode = new Dictionary<string, PostalCode>
         // {
-        //     {Default, new PostalCode {Format = NoData, Regex = NoData}}
+        //     {"Defeito", new PostalCode {Format = "N/D", Regex = "N/D"}}
         // };
     }
 
@@ -79,7 +79,7 @@ public class Country
     #region Propriedades
 
     private const string NoData = "N/D";
-    private const string Default = "Default";
+    private const string Default = "Defeito";
 
     public CountryName? Name { get; set; }
 
@@ -88,7 +88,7 @@ public class Country
 
     public string CCA3
     {
-        get => _cca3.Length == 0 ? NoData : _cca3;
+        get => _cca3.Length == 0 ? "N/D" : _cca3;
         set => _cca3 = value;
     }
 
@@ -99,7 +99,7 @@ public class Country
         get
         {
             return _continents.Length == 0
-                ? new string[1] {NoData}
+                ? new string[1] {"N/D"}
                 : _continents;
         }
 
@@ -108,7 +108,7 @@ public class Country
 
     public string Region
     {
-        get => _region.Length == 0 ? NoData : _region;
+        get => _region.Length == 0 ? "N/D" : _region;
         set => _region = value;
     }
 
@@ -116,14 +116,9 @@ public class Country
     {
         get
         {
-            if (_subregion == null || _subregion.Length == 0)
-            {
-                return NoData;
-            }
-            else
-            {
-                return _subregion;
-            }
+            return _subregion == null || _subregion.Length == 0
+                ? "N/D"
+                : _subregion;
         }
         set => _subregion = value;
     }
@@ -133,7 +128,7 @@ public class Country
         get
         {
             return _capital.Length == 0
-                ? new string[1] {NoData}
+                ? new string[1] {"N/D"}
                 : _capital;
         }
         set => _capital = value;
@@ -146,7 +141,7 @@ public class Country
         get
         {
             return _timezones.Length == 0
-                ? new string[1] {NoData}
+                ? new string[1] {"N/D"}
                 : _timezones;
         }
 
@@ -158,7 +153,7 @@ public class Country
         get
         {
             return _borders.Length == 0
-                ? new string[1] {NoData}
+                ? new string[1] {"N/D"}
                 : _borders;
         }
 
@@ -169,8 +164,8 @@ public class Country
     {
         get
         {
-            if (_languages.Count > 1 && _languages.First().Key == Default)
-                _languages.Remove(Default);
+            if (_languages.Count > 1 && _languages.First().Key == "Defeito")
+                _languages.Remove("Defeito");
 
             return _languages;
         }
@@ -182,8 +177,8 @@ public class Country
     {
         get
         {
-            if (_currencies.Count > 1 && _currencies.First().Key == Default)
-                _currencies.Remove(Default);
+            if (_currencies.Count > 1 && _currencies.First().Key == "Defeito")
+                _currencies.Remove("Defeito");
 
             return _currencies;
         }
@@ -197,8 +192,8 @@ public class Country
     {
         get
         {
-            if (_gini.Count > 1 && _gini.First().Key == Default)
-                _gini.Remove(Default);
+            if (_gini.Count > 1 && _gini.First().Key == "Defeito")
+                _gini.Remove("Defeito");
 
             return _gini;
         }
@@ -228,8 +223,8 @@ public class Country
     // {
     //     get
     //     {
-    //         if (_idd.Count > 1 && _idd.First().Key == Default)
-    //             _currencies.Remove(Default);
+    //         if (_idd.Count > 1 && _idd.First().Key == "Defeito")
+    //             _currencies.Remove("Defeito");
     //
     //         return _idd;
     //     }
@@ -244,8 +239,8 @@ public class Country
     // {
     //     get
     //     {
-    //         if (_postalCode.Count > 1 && _postalCode.First().Key == Default)
-    //             _currencies.Remove(Default);
+    //         if (_postalCode.Count > 1 && _postalCode.First().Key == "Defeito")
+    //             _currencies.Remove("Defeito");
     //
     //         return _postalCode;
     //     }

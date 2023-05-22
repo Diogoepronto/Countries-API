@@ -215,18 +215,19 @@ public partial class NunoWindow1 : Window
 
                 _ => country switch
                 {
+                    "United States Minor Outlying Islands" => 8,
+                    
                     "Russia" => 2,
                     "Antarctica" => 2,
-                    "United States Minor Outlying Islands" => 2,
 
-                    "Australia" => 4,
-                    "United States" => 4,
-                    "Brazil" => 4,
+                    "United States" => 3,
+                    "Australia" => 3,
+                    "Brazil" => 3,
+                    
                     "Ukraine" => 4,
+                    "Malaysia" => 4,
 
-                    "Malaysia" => 5,
-
-                    "Madagascar" => 6,
+                    "Madagascar" => 5,
 
                     "Vanuatu" => 7,
                     "Tuvalu" => 7,
@@ -236,8 +237,8 @@ public partial class NunoWindow1 : Window
                     "Cyprus" => 8,
                     "Liechtenstein" => 8,
                     "Luxembourg" => 8,
-                    "Vatican City" => 8,
-
+                    
+                    "Vatican City" => 11,
                     "Andorra" => 9,
 
                     _ => Mapa.ZoomLevel

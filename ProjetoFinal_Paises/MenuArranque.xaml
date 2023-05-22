@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:gif="http://wpfanimatedgif.codeplex.com"
     x:Class="ProjetoFinal_Paises.MenuArranque"
     mc:Ignorable="d"
 
@@ -119,6 +120,7 @@
             </syncfusion:SfCircularProgressBar>
         </Border>
 
+        
 
         <TextBlock x:Name="txtProgressStep"
                    Grid.Column="1" Grid.ColumnSpan="3"
