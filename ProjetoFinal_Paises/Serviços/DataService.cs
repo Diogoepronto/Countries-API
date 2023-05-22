@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Data.Sqlite;
@@ -35,6 +36,19 @@ public class DataService
 
         CopiarFicheiroExistente();
         EliminarFicheirosExtra();
+
+
+        if (!IsFileWritable())
+        {
+            // Obtém o nome da classe atual
+            var nomeClasse =
+                Application.Current.MainWindow?.GetType().Name;
+
+            _dialogService.ShowMessage(
+                "Conexão à base de dados",
+                "Erro ao abrir a base de dados e criar " +
+                "a(s) tabela(s)\n" + nomeClasse);
+        }
 
 
         try
@@ -73,6 +87,7 @@ public class DataService
         }
     }
 
+
     public static void CriarBancoDados()
     {
         // Criar o arquivo do banco de dados se não existir
@@ -99,8 +114,17 @@ public class DataService
     }
 
 
-    public static void CriarTabela()
+    private static Response CriarTabela()
     {
+        if (!IsFileWritable())
+            return new Response
+            {
+                IsSuccess = false,
+                Message =
+                    "Erro, o ficheiro não estava disponivel para ser lido ou escito",
+                Result = null
+            };
+
         // Criar as as tabelas necessárias no arquivo do banco de dados
         using (var conexao = new SqliteConnection(ConnectionString))
         {
@@ -122,7 +146,12 @@ public class DataService
         }
 
         Console.WriteLine(
-            "O banco de dados 'countriesDB' foi criado com sucesso.");
+            $"O banco de dados {FicheiroDb} foi criado com sucesso.");
+        return new Response
+        {
+            IsSuccess = true,
+            Message = $"O banco de dados {FicheiroDb} foi criado com sucesso."
+        };
     }
 
 
@@ -261,11 +290,59 @@ public class DataService
                 Result = null
             };
 
+
+        var logger = Log.ForContext(typeof(DataService));
         Log.ForContext<DataService>().Information(
             "DataInsertion");
         Log.Information(
             "Inserindo dados na tabela Country_Json...");
         var count = 0;
+
+
+        if (!IsFileWritable())
+            return new Response
+            {
+                IsSuccess = false,
+                Message =
+                    "Erro, o ficheiro não estava disponivel para ser lido ou escito",
+                Result = null
+            };
+
+
+        try
+        {
+            using (var connection = new SqliteConnection(ConnectionString))
+            {
+                connection.Open();
+
+                // create the table if it doesn't exist
+                //Substituir este campo pelo CCA3
+                const string createTableCommand =
+                    "CREATE TABLE IF NOT EXISTS Country_Json(" +
+                    "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," +
+                    "json_data json);";
+
+                using (var command =
+                       new SqliteCommand(createTableCommand, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                connection.Close();
+                connection.Dispose();
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.Error(ex, "Erro ao criar a tabela Country_Json");
+            return new Response
+            {
+                IsSuccess = false,
+                Message = "Erro ao criar a tabela Country_Json",
+                Result = null
+            };
+        }
+
 
         try
         {
@@ -291,9 +368,13 @@ public class DataService
                             JsonConvert.SerializeObject(country));
 
                         command.ExecuteNonQuery();
+
+                        count++;
                     }
                 }
 
+                logger.Information(
+                    "Courses successfully written to file");
                 Log.Information(
                     "Inserted {Count} " +
                     "countries into the Country_Json table", count);
@@ -326,6 +407,15 @@ public class DataService
 
     public static Response? ReadData()
     {
+        if (!IsFileWritable())
+            return new Response
+            {
+                IsSuccess = false,
+                Message =
+                    "Erro, o ficheiro não estava disponivel para ser lido ou escito",
+                Result = null
+            };
+
         try
         {
             using (var connection = new SqliteConnection(ConnectionString))
@@ -344,12 +434,6 @@ public class DataService
                     // lê cada linha de registos
                     sqliteDataReader = command.ExecuteReader();
 
-                    // variavel para guardar os dados lidos da base de dados
-                    // var result = "[";
-                    // while (sqliteDataReader.Read())
-                    //     result += new string(
-                    //         (string) sqliteDataReader["json_data"] + ",");
-                    // result += "]";
 
                     // variável para guardar os dados lidos da base de dados
                     var result = new List<string>();
@@ -406,6 +490,15 @@ public class DataService
 
     public static Response DeleteData()
     {
+        if (!IsFileWritable())
+            return new Response
+            {
+                IsSuccess = false,
+                Message =
+                    "Erro, o ficheiro não estava disponivel para ser lido ou escito",
+                Result = null
+            };
+
         try
         {
             using (var connection = new SqliteConnection(ConnectionString))
@@ -444,6 +537,40 @@ public class DataService
         };
     }
 
+
+    private static bool IsFileWritable(string filePath = DbFilePath)
+    {
+        const int maxAttempts = 3;
+        const int waitTimeInSeconds = 3;
+
+        var attempts = 0;
+        while (attempts < maxAttempts)
+            try
+            {
+                using (
+                    var stream =
+                    new FileStream(
+                        filePath, FileMode.OpenOrCreate,
+                        FileAccess.Write, FileShare.None))
+                {
+                    // O arquivo está livre para escrita
+                    return true;
+                }
+            }
+            catch (IOException)
+            {
+                // O arquivo está sendo usado por outro processo,
+                // aguarde e tente novamente
+                Thread.Sleep(waitTimeInSeconds * 1000);
+                attempts++;
+            }
+
+        // O arquivo não está livre para
+        // escrita após o número máximo de tentativas
+        // return false;
+        return true;
+    }
+
     #region Attributes
 
     private static SqliteCommand _command = new();
@@ -460,12 +587,11 @@ public class DataService
     private const string Extensao = ".sqlite";
     internal const string DbFilePath = Caminho + FicheiroDb + Extensao;
 
-
     private const string FicheiroLog = "ProjetoFinal_Paises";
     internal const string LogFilePath = Caminho + FicheiroLog + ".log";
 
     internal const string ConnectionString =
-        "Data Source=" + DbFilePath;
+        "Data Source=" + DbFilePath + ";";
 
     #endregion
 }

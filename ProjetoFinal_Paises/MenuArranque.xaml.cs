@@ -42,7 +42,7 @@ public partial class MenuArranque : Window
 
     #region INITIALIZE APPLICATION
 
-    public async Task InitializeData()
+    private async Task InitializeData()
     {
         var isConnected = await LoadCountries();
 
@@ -74,14 +74,6 @@ public partial class MenuArranque : Window
         _dataView.SortDescriptions.Add(
             new SortDescription("Name.Common",
                 ListSortDirection.Ascending));
-
-        // listBoxCountries.ItemsSource = _dataView;
-
-        // var portugal =
-        //     CountryList.FirstOrDefault(c => c.Name.Common == "Portugal");
-        // listBoxCountries.SelectedItem = portugal;
-
-        // gridSearchBar.IsEnabled = true;
     }
 
     #endregion
@@ -103,7 +95,7 @@ public partial class MenuArranque : Window
 
         _dataView.Refresh();
 
-        await Task.Delay(8000);
+        await Task.Delay(2000);
         txtStatusDownload.Text = string.Empty;
     }
 
@@ -118,7 +110,7 @@ public partial class MenuArranque : Window
 
     private ICollectionView? _dataView;
 
-    public ObservableCollection<Country>? CountryList { get; set; } = new();
+    private ObservableCollection<Country>? CountryList { get; set; } = new();
 
     #endregion
 
@@ -126,20 +118,42 @@ public partial class MenuArranque : Window
 
     private async Task<bool> LoadCountries()
     {
-        if (!NetworkService.IsNetworkAvailable())
+        var resultado = NetworkService.IsNetworkAvailable();
+
+        // resultado = false;
+        if (!resultado)
         {
             LoadCountriesLocal();
-            return false;
-        }
 
-        await LoadCountriesApi();
-        return true;
+            txtStatus.Text = Information.TextoStatus =
+                $"Country list loaded from internal storage: " +
+                $"{DateTime.Now:g}";
+
+            Information.TextoIsSuccess = false.ToString();
+            Information.APIorDB = false;
+
+            return await Task.FromResult(false);
+        }
+        else
+        {
+            await LoadCountriesApi();
+            // LoadCountriesLocal();
+
+            txtStatus.Text = Information.TextoStatus =
+                $"Country list loaded from server: {DateTime.Now:g}";
+
+            Information.TextoIsSuccess = true.ToString();
+            Information.APIorDB = true;
+            
+            return await Task.FromResult(true);
+        }
     }
 
     private void LoadCountriesLocal()
     {
         CountryList =
-            (ObservableCollection<Country>) DataService.ReadData().Result;
+            DataService.ReadData()?.Result as ObservableCollection<Country>;
+        CountriesList.Countries = CountryList;
 
         progressBar.Progress = 100;
         txtProgressStep.Text = "Loading complete";
@@ -162,7 +176,7 @@ public partial class MenuArranque : Window
                 50 => "Serializing data",
                 75 => "Deserializing objects",
                 100 => "Loading complete",
-                _ => txtProgressStep.Text
+                _ => Information.TextoProgressSteps = txtProgressStep.Text
             };
         });
 
@@ -171,19 +185,23 @@ public partial class MenuArranque : Window
                 "https://restcountries.com",
                 "v3.1/all", progress);
 
-        CountryList = (ObservableCollection<Country>) response.Result;
+        CountryList = response.Result as ObservableCollection<Country>;
 
-        foreach (var country in CountryList)
-            country.Flags.LocalImage =
-                Directory.GetCurrentDirectory() +
-                @"/Flags/" + $"{country.CCA3}.png";
+        if (CountryList != null)
+        {
+            foreach (var country in CountryList)
+                country.Flags.LocalImage =
+                    Directory.GetCurrentDirectory() +
+                    @"/Flags/" + $"{country.CCA3}.png";
 
-        await Task.Delay(100);
-        txtProgressStep.Visibility = Visibility.Hidden;
-        progressBarOverlay.Visibility = Visibility.Hidden;
 
-        DataService.DeleteData();
-        DataService.SaveData(CountryList);
+            await Task.Delay(100);
+            txtProgressStep.Visibility = Visibility.Hidden;
+            progressBarOverlay.Visibility = Visibility.Hidden;
+
+            DataService.DeleteData();
+            DataService.SaveData(CountryList);
+        }
     }
 
     #endregion

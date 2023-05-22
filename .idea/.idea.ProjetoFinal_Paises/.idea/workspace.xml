@@ -8,27 +8,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70e5f5d7-f132-4a74-8f2c-9f4ea4db8b86" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/CodigoMapa-XAML-Jorge.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/BoolToVisibilityConverter.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ViewModel/SplashScreen1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ViewModel/UserControl1.xaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ViewModel/UserControl1.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/Information.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjetoFinal_Paises/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JanelaInicial.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/App.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/JorgeWindow.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MainWindow.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/MenuArranque.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/BoolToVisibilityConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/BoolToVisibilityConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/Country.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Modelos/NativeName.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow1.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/NunoWindow2.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ProjetoFinal_Paises.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/Serviços/DataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosDatabase/DatabaseCreateTables.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +37,22 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/0b5567882521e02aa3d40a7bce81b7235ccac4db588866e3498e614c3bc/CastHelpers.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/338efc8c78ffd1de56cecc4647ebd34d18f958c8a0963d89a12b9ea90a4ae/ExceptionWrapper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3d7feeea46f0a7edf6cb722578ee59fa71a0641fbdb2b3662221f519f8e9efe5/XamlReader.cs" root0="SKIP_HIGHLIGHTING" />
@@ -84,7 +93,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "com.google.cloudcode.ide_session_index": "20230521_0007",
+    "com.google.cloudcode.ide_session_index": "20230521_0008",
     "git-widget-placeholder": "BranchNuno",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
@@ -151,7 +160,7 @@
       <workItem from="1684631848991" duration="6002000" />
       <workItem from="1684667033168" duration="307000" />
       <workItem from="1684667664572" duration="4442000" />
-      <workItem from="1684673451525" duration="11698000" />
+      <workItem from="1684673451525" duration="25875000" />
     </task>
     <task id="LOCAL-00001" summary="versão beta, integrada com a branchNuno, falta corrigir alguns bugs">
       <created>1684461264504</created>
@@ -202,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684623769223</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- Adição do tooltip a flag">
+      <created>1684695404006</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1684695404006</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,7 +253,8 @@
     <MESSAGE value="- adicionei as bandeiras dentro do ProjetoFinal_Paises.csproj, e configurei para serem copiadas para a compilação e assim ficarem disponiveis.&#10;- Criei uma janela inicial para abrir as outras janelas" />
     <MESSAGE value="pequenos ajustes dos nomes dos metodos e variaveis" />
     <MESSAGE value="mais autualizações e bugs fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="mais autualizações e bugs fix" />
+    <MESSAGE value="- Adição do tooltip a flag" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Adição do tooltip a flag" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -255,19 +272,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ProjetoFinal_Paises/ServiçosAPI/CarregarAPI.cs</url>
-          <line>91</line>
-          <properties documentPath="C:\Users\nunov\RiderProjects\ProjetoFinal_Paises\ProjetoFinal_Paises\ServiçosAPI\CarregarAPI.cs" initialLine="80" containingFunctionPresentation="Method 'LoadCountriesApi'">
-            <startOffsets>
-              <option value="2775" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2803" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

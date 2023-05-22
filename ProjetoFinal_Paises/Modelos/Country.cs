@@ -195,8 +195,9 @@ public class Country
         set => _gini = value;
     }
 
-
     public Map? Maps { get; set; }
+
+    public double Area { get; set; } = 0;
 
     #endregion
 }

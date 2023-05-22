@@ -56,6 +56,7 @@
             </Style>
             <!--#endregion CUSTOM CLEAR BUTTON -->
 
+            
             <!--#region CUSTOM TEXTBOX -->
             <Style TargetType="TextBox">
                 <Setter Property="Template">
@@ -189,14 +190,14 @@
                 Content="Debug" Click="Button_Click" />
 
         <!--STATUS MESSAGES-->
-        <TextBlock x:Name="txtStatusDownload"
+        <TextBlock x:Name="TxtStatusDownload"
                    Grid.Row="6"
                    Grid.Column="1"
                    Text="Text Status Download"
                    Foreground="#FFD6D6D6" />
 
 
-        <TextBlock x:Name="txtStatus"
+        <TextBlock x:Name="TxtStatus"
                    Grid.Row="6"
                    Grid.Column="3"
                    Text="Text Status"
@@ -204,12 +205,12 @@
                    Foreground="#FFD6D6D6" />
 
 
-        <TextBlock x:Name="txtProgressStep"
+        <TextBlock x:Name="TxtProgressStep"
                    Grid.Row="6"
                    Grid.Column="5"
                    Text="Text Progress Steps"
                    HorizontalAlignment="Right"
-                   Foreground="#CC999999" />
+                   Foreground="#FFD6D6D6" />
 
 
         <!--#region MAIN COLUMN LEFT -->
@@ -325,7 +326,7 @@
             </Grid.RowDefinitions>
 
             <!--#region COLUMN HEADER: NAME AND FLAG -->
-            <Grid Grid.Row="0" Margin="20,0,0,0">
+            <Grid Grid.Row="0" Margin="10,0,10,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -336,7 +337,7 @@
                 </Grid.RowDefinitions>
 
                 <!--NAME-->
-                <TextBlock x:Name="txtCountryName"
+                <TextBlock x:Name="TxtCountryName"
                            Text="COUNTRY NAME"
                            Grid.Column="0"
                            Grid.Row="0"
@@ -353,7 +354,7 @@
                         HorizontalAlignment="Right">
 
 
-                    <Image x:Name="imgCountryFlag"
+                    <Image x:Name="ImgCountryFlag"
                            Source="/Imagens/no_flag.png"
                            Width="auto"
                            Height="150"
@@ -542,6 +543,7 @@
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
                                     <!--CONTINENT-->
@@ -620,15 +622,31 @@
                                                TextWrapping="Wrap"
                                                Margin="0,5,0,5" />
 
-                                    <!--TIMEZONES-->
+
+                                    <!-- AREA KM2 -->
                                     <TextBlock Grid.Row="5"
+                                               Grid.Column="0"
+                                               Text="Area"
+                                               FontWeight="Bold"
+                                               FontSize="14"
+                                               Margin="0,5,0,5" />
+
+                                    <TextBlock Grid.Row="5"
+                                               Grid.Column="1"
+                                               x:Name="txtArea"
+                                               FontSize="14"
+                                               TextWrapping="Wrap"
+                                               Margin="0,5,0,5" />
+
+                                    <!--TIMEZONES-->
+                                    <TextBlock Grid.Row="6"
                                                Grid.Column="0"
                                                Text="Timezones"
                                                FontWeight="Bold"
                                                FontSize="14"
                                                Margin="0,5,0,5" />
 
-                                    <TextBlock Grid.Row="5"
+                                    <TextBlock Grid.Row="6"
                                                Grid.Column="1"
                                                x:Name="txtTimezones"
                                                FontSize="14"
@@ -636,14 +654,14 @@
                                                Margin="0,5,0,5" />
 
                                     <!--LAND BORDERS-->
-                                    <TextBlock Grid.Row="6"
+                                    <TextBlock Grid.Row="7"
                                                Grid.Column="0"
                                                Text="Land Borders"
                                                FontWeight="Bold"
                                                FontSize="14"
                                                Margin="0,5,0,5" />
 
-                                    <TextBlock Grid.Row="6"
+                                    <TextBlock Grid.Row="7"
                                                Grid.Column="1"
                                                x:Name="txtBorders"
                                                FontSize="14"

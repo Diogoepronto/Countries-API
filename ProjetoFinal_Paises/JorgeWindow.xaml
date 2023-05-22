@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
-    xmlns:wpf="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
     x:Class="ProjetoFinal_Paises.JorgeWindow"
     mc:Ignorable="d"
 
@@ -749,9 +748,6 @@
 
         </Grid>
         <!--#endregion-->
-
-
-      
 
 
     </Grid>

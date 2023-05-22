@@ -36,7 +36,6 @@ public class DatabaseCreateTables
                     "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," +
                     "json_data TEXT);";
 
-
                 command = new SqliteCommand(createTableCommand, connection);
                 command.ExecuteNonQuery();
 
