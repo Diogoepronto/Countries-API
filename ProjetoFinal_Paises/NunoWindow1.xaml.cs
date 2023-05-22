@@ -16,7 +16,6 @@ using ProjetoFinal_Paises.Modelos;
 using ProjetoFinal_Paises.Serviços;
 using ProjetoFinal_Paises.ServiçosMapas;
 using Syncfusion.Licensing;
-using CultureInfo = System.Globalization.CultureInfo;
 
 namespace ProjetoFinal_Paises;
 
@@ -204,15 +203,15 @@ public partial class NunoWindow1 : Window
 
             Mapa.ZoomLevel = selectedCountry.Area switch
             {
-                < 10000 => 10,
-                < 50000 => 9,
-                < 80000 => 8,
-                < 90000 => 7,
-                < 100000 => 6,
-                < 200000 => 5,
-                < 400000 => 4,
-                < 500000 => 3,
-                < 1000000 => 2,
+                //< 10000 => 10,
+                //< 20000 => 9,
+                //< 100000 => 8,
+                //< 200000 => 7,
+                //< 300000 => 6,
+                //< 500000 => 5,
+                //< 800000 => 4,
+                //< 900000 => 3,
+                //< 1000000 => 2,
 
                 _ => country switch
                 {
@@ -345,6 +344,7 @@ public partial class NunoWindow1 : Window
             CountriesList.Countries.Count != 0)
         {
             CountryList = CountriesList.Countries;
+
             UpdateCardConnection(
                 Information.APIorDB,
                 NetworkService.IsNetworkAvailable());
@@ -368,18 +368,16 @@ public partial class NunoWindow1 : Window
 
                 return await Task.FromResult(false);
             }
-            else
-            {
-                await LoadCountriesApi();
-                // LoadCountriesLocal();
 
-                TxtStatus.Text =
-                    $"Country list loaded from server: {DateTime.Now:g}";
+            await LoadCountriesApi();
+            // LoadCountriesLocal();
 
-                UpdateCardConnection(
-                    true,
-                    NetworkService.IsNetworkAvailable());
-            }
+            TxtStatus.Text =
+                $"Country list loaded from server: {DateTime.Now:g}";
+
+            UpdateCardConnection(
+                true,
+                NetworkService.IsNetworkAvailable());
         }
 
         return await Task.FromResult(true);
@@ -417,13 +415,20 @@ public partial class NunoWindow1 : Window
 
 
         var response =
-            await _apiService.GetCountries(
+            await ApiService.GetCountries(
                 "https://restcountries.com",
                 "v3.1/all", progress);
 
 
-        if (response.Result != null)
-            CountryList = (ObservableCollection<Country>) response.Result;
+
+        if (response.IsSuccess)
+        {
+            CountriesList.Countries = CountryList =
+            response.Result as ObservableCollection<Country>;
+        }
+        else { LoadCountriesLocal(); }
+
+
 
 
         if (CountryList != null)
@@ -438,6 +443,30 @@ public partial class NunoWindow1 : Window
 
             DataService.DeleteData();
             DataService.SaveData(CountryList);
+        }
+        else 
+        {
+
+            
+            MessageBox.Show("Não há dados para mostrar", "Erro", 
+                MessageBoxButton.OK, MessageBoxImage.Error);
+
+            MessageBoxResult result =
+                MessageBox.Show("Não há dados para mostrar", "Erro", 
+                MessageBoxButton.OK, MessageBoxImage.Error);
+
+            if (result == MessageBoxResult.OK)
+            {
+                MessageBox.Show("Adeus", "Erro");
+                Close();
+            }
+            else {
+
+                MessageBox.Show("Adeus", "Erro");
+                Close();
+            }
+
+
         }
     }
 
@@ -555,8 +584,9 @@ public partial class NunoWindow1 : Window
 
         // AREA
         txtArea.Text =
-            countryToDisplay.Area.ToString(
-                "N"+"km²", new CultureInfo("en-US"));
+            countryToDisplay.Area
+                .ToString("N",
+                    new CultureInfo("en-US")) + " km²";
 
         // TIMEZONES
         foreach (var timezone in countryToDisplay.Timezones)
@@ -728,7 +758,7 @@ public partial class NunoWindow1 : Window
         _dataView.Refresh();
     }
 
-    private void clearButton_Click(object sender, RoutedEventArgs e)
+    private void ClearButton_Click(object sender, RoutedEventArgs e)
     {
         searchBar.Text = string.Empty;
         searchBar.Focus();

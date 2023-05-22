@@ -178,7 +178,7 @@ public partial class MainWindow : Window
         });
 
         var response =
-            await _apiService.GetCountries(
+            await ApiService.GetCountries(
                 "https://restcountries.com",
                 "v3.1/all", progress);
 

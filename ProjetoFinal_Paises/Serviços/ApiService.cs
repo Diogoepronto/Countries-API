@@ -9,7 +9,7 @@ namespace ProjetoFinal_Paises.Serviços;
 
 public class ApiService
 {
-    public async Task<Response> GetCountries(
+    public static async Task<Response> GetCountries(
         string urlBase, string controller, IProgress<int> progress)
     {
         // https://restcountries.com/v3.1/all?
@@ -24,8 +24,9 @@ public class ApiService
             client.BaseAddress = new Uri(urlBase);
 
             progress.Report(25);
-            var response = await client.GetAsync(controller,
-                HttpCompletionOption.ResponseHeadersRead);
+            var response =
+                await client.GetAsync(controller,
+                    HttpCompletionOption.ResponseHeadersRead);
 
             progress.Report(50);
             var result = await response.Content.ReadAsStringAsync();

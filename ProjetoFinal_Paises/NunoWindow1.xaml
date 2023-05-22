@@ -56,7 +56,7 @@
             </Style>
             <!--#endregion CUSTOM CLEAR BUTTON -->
 
-            
+
             <!--#region CUSTOM TEXTBOX -->
             <Style TargetType="TextBox">
                 <Setter Property="Template">
@@ -248,7 +248,7 @@
                         VerticalAlignment="Center"
                         Cursor="Hand"
                         TabIndex="2"
-                        Click="clearButton_Click" />
+                        Click="ClearButton_Click" />
 
                 <TextBlock IsHitTestVisible="False"
                            Text="Enter a country"

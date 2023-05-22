@@ -19,13 +19,7 @@ public class CountryName
 
     public string? Common
     {
-        get
-        {
-            if (_common == null || _common.Length == 0)
-                return "N/A";
-
-            return _common;
-        }
+        get => _common.Length == 0 ? "N/A" : _common;
         set
         {
             if (value == null) _common = "N/A";
@@ -35,13 +29,7 @@ public class CountryName
 
     public string? Official
     {
-        get
-        {
-            if (_official == null || _official.Length == 0)
-                return "N/A";
-
-            return _official;
-        }
+        get => _official.Length == 0 ? "N/A" : _official;
         set
         {
             if (value == null) _official = "N/A";

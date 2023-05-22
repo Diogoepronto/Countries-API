@@ -75,7 +75,7 @@ public class CarregarApi
         Stopwatch stopwatch = new();
         stopwatch.Start();
 
-        var response = await _apiService.GetCountries(
+        var response = await ApiService.GetCountries(
             "https://restcountries.com",
             "v3.1/all", progress);
 

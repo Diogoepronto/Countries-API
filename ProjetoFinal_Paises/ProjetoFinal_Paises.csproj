@@ -125,26 +125,25 @@
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <None Remove="Data\CountriesDB.sqlite" />
-        <Content Include="Data\CountriesDB.sqlite" />
+        <Content Include="Data\CountriesDB.sqlite">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <None Remove="Data\CreateTablesScript.sql" />
         <Content Include="Data\CreateTablesScript.sql">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <None Remove="Data\DropCreateTablesScript.sql" />
         <Content Include="Data\DropCreateTablesScript.sql">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <None Remove="Data\DropTablesScript.sql" />
         <Content Include="Data\DropTablesScript.sql">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <None Remove="Data\ProjetoFinal_Paises.sqlite" />
-        <Content Include="Data\ProjetoFinal_Paises.sqlite">
-            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-        </Content>
         <None Remove="Data\TruncateTablesScript.sql" />
         <Content Include="Data\TruncateTablesScript.sql">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <None Remove="Flags\ABW.png" />
         <Content Include="Flags\ABW.png">

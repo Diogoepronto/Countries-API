@@ -134,26 +134,23 @@ public partial class MenuArranque : Window
 
             return await Task.FromResult(false);
         }
-        else
-        {
-            await LoadCountriesApi();
-            // LoadCountriesLocal();
 
-            txtStatus.Text = Information.TextoStatus =
-                $"Country list loaded from server: {DateTime.Now:g}";
+        await LoadCountriesApi();
+        // LoadCountriesLocal();
 
-            Information.TextoIsSuccess = true.ToString();
-            Information.APIorDB = true;
-            
-            return await Task.FromResult(true);
-        }
+        txtStatus.Text = Information.TextoStatus =
+            $"Country list loaded from server: {DateTime.Now:g}";
+
+        Information.TextoIsSuccess = true.ToString();
+        Information.APIorDB = true;
+
+        return await Task.FromResult(true);
     }
 
     private void LoadCountriesLocal()
     {
-        CountryList =
+        CountriesList.Countries = CountryList =
             DataService.ReadData()?.Result as ObservableCollection<Country>;
-        CountriesList.Countries = CountryList;
 
         progressBar.Progress = 100;
         txtProgressStep.Text = "Loading complete";
@@ -181,11 +178,19 @@ public partial class MenuArranque : Window
         });
 
         var response =
-            await _apiService.GetCountries(
+            await ApiService.GetCountries(
                 "https://restcountries.com",
                 "v3.1/all", progress);
 
-        CountryList = response.Result as ObservableCollection<Country>;
+
+        if (response.IsSuccess)
+        {
+            CountriesList.Countries = CountryList =
+            response.Result as ObservableCollection<Country>;
+        }
+        else { LoadCountriesLocal(); }
+
+
 
         if (CountryList != null)
         {

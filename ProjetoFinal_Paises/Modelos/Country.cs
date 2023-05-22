@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace ProjetoFinal_Paises.Modelos;
 
@@ -12,7 +13,7 @@ public class Country
         Name = new CountryName();
         Name.NativeName = new Dictionary<string, NativeName>
         {
-            {"default", new NativeName {Common = "N/A", Official = "N/A"}}
+            {Default, new NativeName {Common = NoData, Official = NoData}}
         };
         Flags = new Flag(this);
         Continents = new string[0];
@@ -22,17 +23,31 @@ public class Country
         Borders = new string[0];
         Languages = new Dictionary<string, string>
         {
-            {"default", "N/A"}
+            {Default, NoData}
         };
         Currencies = new Dictionary<string, Currency>
         {
-            {"default", new Currency {Name = "N/A", Symbol = "N/A"}}
+            {Default, new Currency {Name = NoData, Symbol = NoData}}
         };
         Gini = new Dictionary<string, string>
         {
-            {"default", "N/A"}
+            {Default, NoData}
         };
         Maps = new Map();
+
+        Tld = new string[0];
+        CoatOfArms = new CoatOfArms();
+
+
+        // Idd = new Dictionary<string, Idd>
+        // {
+        //     {Default, new Idd {Root = NoData, Suffixes = new List<string>() {NoData}}}
+        // };
+        //
+        // PostalCode = new Dictionary<string, PostalCode>
+        // {
+        //     {Default, new PostalCode {Format = NoData, Regex = NoData}}
+        // };
     }
 
     #endregion
@@ -55,11 +70,16 @@ public class Country
     private Dictionary<string, string> _gini;
     private string _cca3;
     private Map _maps;
+    private Dictionary<string, Idd> _idd;
+    private Dictionary<string, PostalCode> _postalCode;
 
     #endregion
 
 
     #region Propriedades
+
+    private const string NoData = "N/D";
+    private const string Default = "Default";
 
     public CountryName? Name { get; set; }
 
@@ -68,13 +88,7 @@ public class Country
 
     public string CCA3
     {
-        get
-        {
-            if (_cca3 == null || _cca3.Length == 0)
-                return "N/A";
-
-            return _cca3;
-        }
+        get => _cca3.Length == 0 ? NoData : _cca3;
         set => _cca3 = value;
     }
 
@@ -84,9 +98,9 @@ public class Country
     {
         get
         {
-            if (_continents.Length == 0) return new string[1] {"N/A"};
-
-            return _continents;
+            return _continents.Length == 0
+                ? new string[1] {NoData}
+                : _continents;
         }
 
         set => _continents = value;
@@ -94,13 +108,7 @@ public class Country
 
     public string Region
     {
-        get
-        {
-            if (_region == null || _region.Length == 0)
-                return "N/A";
-
-            return _region;
-        }
+        get => _region.Length == 0 ? NoData : _region;
         set => _region = value;
     }
 
@@ -109,9 +117,13 @@ public class Country
         get
         {
             if (_subregion == null || _subregion.Length == 0)
-                return "N/A";
-
-            return _subregion;
+            {
+                return NoData;
+            }
+            else
+            {
+                return _subregion;
+            }
         }
         set => _subregion = value;
     }
@@ -120,10 +132,9 @@ public class Country
     {
         get
         {
-            if (_capital.Length == 0)
-                return new string[1] {"N/A"};
-
-            return _capital;
+            return _capital.Length == 0
+                ? new string[1] {NoData}
+                : _capital;
         }
         set => _capital = value;
     }
@@ -134,9 +145,9 @@ public class Country
     {
         get
         {
-            if (_timezones.Length == 0) return new string[1] {"N/A"};
-
-            return _timezones;
+            return _timezones.Length == 0
+                ? new string[1] {NoData}
+                : _timezones;
         }
 
         set => _timezones = value;
@@ -146,9 +157,9 @@ public class Country
     {
         get
         {
-            if (_borders.Length == 0) return new string[1] {"N/A"};
-
-            return _borders;
+            return _borders.Length == 0
+                ? new string[1] {NoData}
+                : _borders;
         }
 
         set => _borders = value;
@@ -158,8 +169,8 @@ public class Country
     {
         get
         {
-            if (_languages.Count > 1 && _languages.First().Key == "default")
-                _languages.Remove("default");
+            if (_languages.Count > 1 && _languages.First().Key == Default)
+                _languages.Remove(Default);
 
             return _languages;
         }
@@ -171,8 +182,8 @@ public class Country
     {
         get
         {
-            if (_currencies.Count > 1 && _currencies.First().Key == "default")
-                _currencies.Remove("default");
+            if (_currencies.Count > 1 && _currencies.First().Key == Default)
+                _currencies.Remove(Default);
 
             return _currencies;
         }
@@ -186,8 +197,8 @@ public class Country
     {
         get
         {
-            if (_gini.Count > 1 && _gini.First().Key == "default")
-                _gini.Remove("default");
+            if (_gini.Count > 1 && _gini.First().Key == Default)
+                _gini.Remove(Default);
 
             return _gini;
         }
@@ -198,6 +209,58 @@ public class Country
     public Map? Maps { get; set; }
 
     public double Area { get; set; } = 0;
+
+    public string CCA2 { get; set; }
+    public string CCN3 { get; set; }
+    public string CIOC { get; set; }
+    public string FIFA { get; set; }
+    public string Status { get; set; }
+    public string StartOfWeek { get; set; }
+    public string[] Tld { get; set; }
+    public bool Independent { get; set; }
+
+    public CoatOfArms CoatOfArms { get; set; }
+
+
+    // Usando o tipo do conversor 'IddConverter'
+    // [JsonConverter(typeof(IddConverter))]
+    // public Dictionary<string, Idd> Idd
+    // {
+    //     get
+    //     {
+    //         if (_idd.Count > 1 && _idd.First().Key == Default)
+    //             _currencies.Remove(Default);
+    //
+    //         return _idd;
+    //     }
+    //
+    //     set => _idd = value;
+    // }
+    //
+    //
+    //
+    // [JsonConverter(typeof(PostalCodeConverter))]
+    // public Dictionary<string, PostalCode> PostalCode
+    // {
+    //     get
+    //     {
+    //         if (_postalCode.Count > 1 && _postalCode.First().Key == Default)
+    //             _currencies.Remove(Default);
+    //
+    //         return _postalCode;
+    //     }
+    //
+    //     set => _postalCode = value;
+    // }
+
+    #endregion
+
+    #region Métodos Auxiliares
+
+    public bool IsLandlocked()
+    {
+        return Borders.Length == 0;
+    }
 
     #endregion
 }
