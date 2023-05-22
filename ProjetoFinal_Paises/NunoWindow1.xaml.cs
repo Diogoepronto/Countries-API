@@ -216,14 +216,14 @@ public partial class NunoWindow1 : Window
                 _ => country switch
                 {
                     "United States Minor Outlying Islands" => 8,
-                    
+
                     "Russia" => 2,
                     "Antarctica" => 2,
 
                     "United States" => 3,
                     "Australia" => 3,
                     "Brazil" => 3,
-                    
+
                     "Ukraine" => 4,
                     "Malaysia" => 4,
 
@@ -237,7 +237,7 @@ public partial class NunoWindow1 : Window
                     "Cyprus" => 8,
                     "Liechtenstein" => 8,
                     "Luxembourg" => 8,
-                    
+
                     "Vatican City" => 11,
                     "Andorra" => 9,
 
@@ -421,15 +421,11 @@ public partial class NunoWindow1 : Window
                 "v3.1/all", progress);
 
 
-
         if (response.IsSuccess)
-        {
             CountriesList.Countries = CountryList =
-            response.Result as ObservableCollection<Country>;
-        }
-        else { LoadCountriesLocal(); }
-
-
+                response.Result as ObservableCollection<Country>;
+        else
+            LoadCountriesLocal();
 
 
         if (CountryList != null)
@@ -445,29 +441,25 @@ public partial class NunoWindow1 : Window
             DataService.DeleteData();
             DataService.SaveData(CountryList);
         }
-        else 
+        else
         {
-
-            
-            MessageBox.Show("Não há dados para mostrar", "Erro", 
+            MessageBox.Show("Não há dados para mostrar", "Erro",
                 MessageBoxButton.OK, MessageBoxImage.Error);
 
-            MessageBoxResult result =
-                MessageBox.Show("Não há dados para mostrar", "Erro", 
-                MessageBoxButton.OK, MessageBoxImage.Error);
+            var result =
+                MessageBox.Show("Não há dados para mostrar", "Erro",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
 
             if (result == MessageBoxResult.OK)
             {
                 MessageBox.Show("Adeus", "Erro");
                 Close();
             }
-            else {
-
+            else
+            {
                 MessageBox.Show("Adeus", "Erro");
                 Close();
             }
-
-
         }
     }
 

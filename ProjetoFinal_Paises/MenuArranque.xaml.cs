@@ -184,12 +184,10 @@ public partial class MenuArranque : Window
 
 
         if (response.IsSuccess)
-        {
             CountriesList.Countries = CountryList =
-            response.Result as ObservableCollection<Country>;
-        }
-        else { LoadCountriesLocal(); }
-
+                response.Result as ObservableCollection<Country>;
+        else
+            LoadCountriesLocal();
 
 
         if (CountryList != null)

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace ProjetoFinal_Paises.Modelos;
 
@@ -48,6 +47,15 @@ public class Country
         // {
         //     {"Defeito", new PostalCode {Format = "N/D", Regex = "N/D"}}
         // };
+    }
+
+    #endregion
+
+    #region Métodos Auxiliares
+
+    public bool IsLandlocked()
+    {
+        return Borders.Length == 0;
     }
 
     #endregion
@@ -114,12 +122,10 @@ public class Country
 
     public string SubRegion
     {
-        get
-        {
-            return _subregion == null || _subregion.Length == 0
+        get =>
+            _subregion == null || _subregion.Length == 0
                 ? "N/D"
                 : _subregion;
-        }
         set => _subregion = value;
     }
 
@@ -253,15 +259,6 @@ public class Country
     //
     //     set => _postalCode = value;
     // }
-
-    #endregion
-
-    #region Métodos Auxiliares
-
-    public bool IsLandlocked()
-    {
-        return Borders.Length == 0;
-    }
 
     #endregion
 }

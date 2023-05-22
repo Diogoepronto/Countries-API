@@ -13,8 +13,7 @@ public class BoolToVisibilityConverter
         var boolValue = (bool) value;
         var inverse = false;
 
-        if (parameter != null)
-            bool.TryParse(parameter.ToString(), out inverse);
+        bool.TryParse(parameter.ToString(), out inverse);
 
         if (boolValue)
             return inverse ? Visibility.Collapsed : Visibility.Visible;
