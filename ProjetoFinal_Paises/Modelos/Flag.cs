@@ -1,10 +1,5 @@
 ﻿using ProjetoFinal_Paises.Serviços;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Modelos;
 
@@ -14,7 +9,7 @@ public class Flag
     private string _svg;
     private string _alt;
     private string _localImage;
-    private static Country _country;
+    private Country _country;
 
     public string Png 
     {

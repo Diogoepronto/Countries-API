@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ProjetoFinal_Paises/Coisinhas/Serviços
+/ProjetoFinal_Paises/Coisinhas/Modelos

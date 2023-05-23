@@ -1,13 +1,8 @@
 ﻿using ProjetoFinal_Paises.Modelos;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Serviços;
 
@@ -37,7 +32,7 @@ public class NetworkService
         }
     }
 
-    #region Network magic
+    #region NETWORK MAGIC
 
     /// <summary>
     /// Provides notification of status changes related to Internet-specific network

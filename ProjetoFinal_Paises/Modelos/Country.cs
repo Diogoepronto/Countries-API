@@ -1,32 +1,55 @@
-﻿using System;
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ProjetoFinal_Paises.Modelos;
 
 public class Country
 {
-    private Flag _flags;
     private string[] _continents;
     private string _region;
     private string _subregion;
     private string[] _capital;
-    private double[] _latLng;
+    private double _area;
     private string[] _timezones;
     private string[] _borders;
-    private int _population;
     private Dictionary<string, string> _languages;
     private Dictionary<string, Currency> _currencies;
-    private bool _unMember;
     private Dictionary<string, string> _gini;
+    private Flag _flags;
+    private string _cca2;
+    private string _ccn3;
     private string _cca3;
-    private Map _maps;
+    private string _cioc;
 
     public CountryName Name { get; set; }
+    public string CCA2
+    {
+        get
+        {
+            if (_cca2 == null || _cca2.Length == 0)
+                return "N/A";
+
+            return _cca2;
+        }
+        set
+        {
+            _cca2 = value;
+        }
+    }
+    public string CCN3
+    {
+        get
+        {
+            if (_ccn3 == null || _ccn3.Length == 0)
+                return "N/A";
+
+            return _ccn3;
+        }
+        set
+        {
+            _ccn3 = value;
+        }
+    }
     public string CCA3
     {
         get
@@ -39,6 +62,20 @@ public class Country
         set
         {
             _cca3 = value;
+        }
+    }
+    public string CIOC
+    {
+        get
+        {
+            if (_cioc == null || _cioc.Length == 0)
+                return "N/A";
+
+            return _cioc;
+        }
+        set
+        {
+            _cioc = value;
         }
     }
     public Flag Flags { get; set; }
@@ -98,6 +135,20 @@ public class Country
         set
         {
             _capital = value;
+        }
+    }
+    public double Area 
+    { 
+        get 
+        {
+            if(_area < 0)
+                return 0;
+
+            return _area;
+        }
+        set 
+        { 
+            _area = value;
         }
     }
     public double[] LatLng { get; set; }
@@ -165,6 +216,7 @@ public class Country
         }
     }
     public bool UNMember { get; set; }
+    public bool Independent { get; set; }
     public Dictionary<string, string> Gini
     {
         get

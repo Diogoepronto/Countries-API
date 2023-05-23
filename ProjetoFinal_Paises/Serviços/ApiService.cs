@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using ProjetoFinal_Paises.Modelos;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using Syncfusion.UI.Xaml.ProgressBar;
-using System.Windows;
-using Syncfusion.Data.Extensions;
-using System.IO;
 
 namespace ProjetoFinal_Paises.Serviços;
 

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Newtonsoft.Json;
@@ -49,7 +46,7 @@ public class DataService
 
             const string createTableCommand =
                 "CREATE TABLE IF NOT EXISTS Country_Json(" +
-                    "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," + //Substituir este campo pelo CCA3
+                    "Country_Cca3 varchar(5) PRIMARY KEY NOT NULL," + 
                     "json_data TEXT);";
 
             _command = new SqliteCommand(createTableCommand, _connection);
@@ -69,7 +66,7 @@ public class DataService
         }
     }
 
-    public static Response SaveData(ObservableCollection<Country> countries)
+    public Response SaveData(ObservableCollection<Country> countries)
     {
         if (countries == null)
             return new Response
@@ -176,7 +173,7 @@ public class DataService
     }
 
 
-    public static Response DeleteData()
+    public Response DeleteData()
     {
         const string sqlCommand = "DELETE FROM Country_Json;";
 
