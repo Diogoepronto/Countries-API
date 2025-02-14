@@ -171,15 +171,15 @@ public partial class MainWindow : Window
         txtProgressStep.Visibility = Visibility.Hidden;
         progressBarOverlay.Visibility = Visibility.Hidden;
 
-        MessageBox.Show("Leu a API");
+        //MessageBox.Show("Leu a API");
 
         _dataService.DeleteData();
 
-        MessageBox.Show("Apagou a BD");
+        //MessageBox.Show("Apagou a BD");
 
         _dataService.SaveData(CountryList);
 
-        MessageBox.Show("Salvou BD");
+        //MessageBox.Show("Salvou BD");
 
         return true;
     }
